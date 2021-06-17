@@ -9,9 +9,11 @@ import { FooterPlayer } from '../FooterPlayer/FooterPlayer';
 
 interface PageProps {
 	title: string;
+	previewImage?: string
 }
-export const Page: React.FC<PageProps> = ({ children, title }) => {
+export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log('image', previewImage)
   return (
     <>
 	<Head>
@@ -21,6 +23,7 @@ export const Page: React.FC<PageProps> = ({ children, title }) => {
 
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content="Radiosavta - An Online Internet Radio" />
+		{previewImage && <meta property="og:image" content={previewImage} />}
 	</Head>
       <Navbar onClose={() => setIsOpen(false)} onOpen={() => setIsOpen(true)} title={title}/>
       <div

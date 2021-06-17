@@ -34,7 +34,7 @@ const About: React.FC<{ program: any; recordedShows: any[] }> = ({
 }) => {
   return (
     <>
-      <Page title={program.name_he}>
+      <Page title={program.name_he} previewImage={getProgramImage(program)}>
         <div
           className={style.programHeader}
           style={{ backgroundImage: `url(${getProgramImage(program)})` }}
