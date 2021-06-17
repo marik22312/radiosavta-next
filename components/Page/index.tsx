@@ -28,9 +28,9 @@ export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => 
       <Navbar onClose={() => setIsOpen(false)} onOpen={() => setIsOpen(true)} title={title}/>
       <div
         style={{
-          marginRight: !isOpen
-            ? "var(--navbar-width)"
-            : "calc(215px + var(--navbar-width))",
+          marginRight: "auto",
+          width: "calc(100% - var(--navbar-width))",
+          transform: !isOpen ? "" : "translateX(-215px)"
         }}
         className={styles.pageContent}
       >
