@@ -6,8 +6,6 @@ frontend:
         - nvm install $VERSION_NODE_14
         - nvm use $VERSION_NODE_14
         - yarn install
-        - CI=true yarn test --watchAll=false
-        - yarn test
     build:
       commands:
         - yarn build
