@@ -13,6 +13,11 @@ frontend:
     start:
       commands:
         - yarn start
+    
+    artifacts:
+      baseDirectory: build
+      files:
+        - '**/*'
   cache:
     paths:
       - node_modules/**/*
