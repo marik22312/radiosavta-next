@@ -7,7 +7,7 @@ import style from "./SingleProgramPage.module.scss";
 import moment from "moment";
 
 import { Page } from "../../components/Page";
-import { RecordedShowsList } from "./components/RecordedShowsList";
+import { RecordedShowsList } from "../../components/RecordedShowsList/RecordedShowsList";
 
 import Image from "next/image";
 

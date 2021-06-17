@@ -1,6 +1,6 @@
 import React from "react";
 // import ProgramInterface from "../../../../../interfaces/Program";
-import { RecordedShowPlayer } from "../../../components/RecordedShowPlayer/RecordedShowPlayer";
+import { RecordedShowPlayer } from "../RecordedShowPlayer/RecordedShowPlayer";
 // import { RecordedShow } from "../../../../domain/RecordedShow";
 // import { useProgramById } from "../hooks/useProgramById";
 // import { useRecordedShowByProgramId } from "../hooks/useRecordedShowsByProgram";
