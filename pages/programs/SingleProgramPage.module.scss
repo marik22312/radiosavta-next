@@ -1,7 +1,7 @@
 .programHeader {
 	width: 100%;
 	  /* Create the parallax scrolling effect */
-	//   background-attachment: fixed;
+	  background-attachment: fixed;
 	  background-position: center;
 	  background-repeat: no-repeat;
 	  background-size: cover;
@@ -45,6 +45,7 @@
 		height: 100%;
 		object-fit: cover;
 		border: 10px solid var(--dark-green);
+		box-shadow: 0px -4px 10px 0px;
 	}
 }
 
@@ -60,14 +61,16 @@
 
 
 	p {
+		box-shadow: 0px -4px 10px 0px #000;
 		margin-top: 10px;
-    color: #ffffff;
-    font-size: 30px;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-    background-color: var(--dark-green);
-    padding: 10px;
-    display: block;
+		color: #ffffff;
+		font-size: 30px;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+		background-color: var(--dark-green);
+		padding: 10px;
+		display: block;
+		width: fit-content;
 	}
 }
 
@@ -89,5 +92,6 @@
 }
 
 .archiveSection {
+	box-shadow: 0px -4px 32px 12px;
 	padding-top: 30px;
 }

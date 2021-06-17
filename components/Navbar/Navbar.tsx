@@ -14,9 +14,12 @@ interface NavBarProps {
   title: string;
   onOpen(): void;
   onClose(): void;
+  width: number;
 }
 
 export const Navbar: React.FC<NavBarProps> = (props) => {
+  const navbarWidth = props.width;
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -36,10 +39,13 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
       <div
         className={styles.sidenav}
         style={{
-          width: !isOpen ? 0 : 215,
+          width: !isOpen ? 0 : navbarWidth,
         }}
       >
-        <div className={styles.menuWrapper}>
+        <div className={styles.menuWrapper}
+        style={{
+          width: navbarWidth
+        }}>
           <Link href="/">
             <a>ראשי</a>
           </Link>
@@ -56,7 +62,10 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             <a>הסיפור שלנו</a>
           </Link>
         </div>
-        <div className={styles.socialsWrapper}>
+        <div className={styles.socialsWrapper}
+        style={{
+          width: navbarWidth
+        }}>
           <a
             className={styles.socialLink}
             target="_blank"
@@ -91,8 +100,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             <div className={styles.logo}>
               <Image src={RoundLogo} width="100%" height="100%"/>
             </div>
-            <div className={styles.menuBtn + `${isOpen ? ' open' : ''}`} onClick={() => toggleMenu()}>
-              <span></span>
+            <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
               <span></span>
               <span></span>
               <span></span>

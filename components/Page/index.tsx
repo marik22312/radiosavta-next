@@ -5,7 +5,8 @@ import Head from 'next/head'
 import { Navbar } from "../Navbar/Navbar";
 
 import styles from "./Page.module.scss";
-import { FooterPlayer } from '../FooterPlayer/FooterPlayer';
+
+
 
 interface PageProps {
 	title: string;
@@ -13,6 +14,7 @@ interface PageProps {
 }
 export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navbarWidth = 215;
   console.log('image', previewImage)
   return (
     <>
@@ -25,12 +27,12 @@ export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => 
 		<meta property="og:description" content="Radiosavta - An Online Internet Radio" />
 		{previewImage && <meta property="og:image" content={previewImage} />}
 	</Head>
-      <Navbar onClose={() => setIsOpen(false)} onOpen={() => setIsOpen(true)} title={title}/>
+      <Navbar onClose={() => setIsOpen(false)} onOpen={() => setIsOpen(true)} title={title} width={navbarWidth}/>
       <div
         style={{
-          marginRight: !isOpen
-            ? "var(--navbar-width)"
-            : "calc(215px + var(--navbar-width))",
+          marginRight: "auto",
+          width: "calc(100% - var(--navbar-width))",
+          transform: (!isOpen) ? "" : `translateX(-${navbarWidth}px)`
         }}
         className={styles.pageContent}
       >
