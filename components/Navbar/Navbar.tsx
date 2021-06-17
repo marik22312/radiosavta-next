@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import RoundLogo from "../../public/assets/images/logo_round.png";
+// import RoundLogo from "../../public/assets/images/logo_round.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -90,7 +90,8 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
-              <Image src={RoundLogo} />
+				
+              <Image src={{src: "../../public/assets/images/logo_round.png", height: 200, width: 80}} />
             </div>
             <div className={styles.menuBtn + `${isOpen ? ' open' : ''}`} onClick={() => toggleMenu()}>
               <span></span>
