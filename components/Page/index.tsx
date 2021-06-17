@@ -5,9 +5,6 @@ import Head from 'next/head'
 import { Navbar } from "../Navbar/Navbar";
 
 import styles from "./Page.module.scss";
-import { FooterPlayer } from '../FooterPlayer/FooterPlayer';
-
-import {isMobile} from 'react-device-detect';
 
 
 
@@ -35,7 +32,7 @@ export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => 
         style={{
           marginRight: "auto",
           width: "calc(100% - var(--navbar-width))",
-          transform: (!isOpen && !isMobile) ? "" : `translateX(-${navbarWidth}px)`
+          transform: (!isOpen) ? "" : `translateX(-${navbarWidth}px)`
         }}
         className={styles.pageContent}
       >
