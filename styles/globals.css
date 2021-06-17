@@ -1,9 +1,16 @@
+@font-face {
+	font-family: "Alef";
+	src: url("/fonts/Alef-Bold.ttf");
+	src: url("/fonts/assets//fonts/Alef-Regular.ttf");
+}
+
 html,
 body {
+	direction: rtl;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Alef";
+  background-color: var(--banana)
 }
 
 a {
@@ -14,3 +21,27 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+	--padding-default: 15px;
+	--footerHeight: 100px;
+	--dark-green: #042901;
+	--light-green: #066600;
+	--banana: #ded15b;
+
+	--navbar-width: 100px;
+
+}
+
+.section-title {
+	margin-bottom: 25px;
+	text-align: center;
+	font-size: 30px;;
+}
+
+@media screen and (max-width: 576px) {
+	:root {
+		--navbar-width: 80px;
+	}
+}
+

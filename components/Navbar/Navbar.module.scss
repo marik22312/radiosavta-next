@@ -1,0 +1,187 @@
+.titleWrapper {
+	height: 100%;
+	width: var(--navbar-width);
+	background: var(--light-green);
+	position: fixed;
+	right: 0;
+	transition: 0.5s;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+	
+display: inline-block;
+direction: ltr;
+writing-mode: vertical-lr;
+transform: rotate(180deg);
+font-size: 42px;
+text-align: right;
+color: #ffffff;
+z-index: 9990;
+margin-right: 10px;
+box-sizing: content-box;
+width: 50px;
+padding: 10px;
+height: 100%;
+text-align: right;
+margin-top: 0;
+font-weight: normal;
+letter-spacing: 8px;
+
+@media screen and (max-width: 576px) {
+		font-size: 36px;
+}
+}
+
+/* The side navigation menu */
+.sidenav {
+	position: relative;
+	height: calc(100% - var(--footerHeight));
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	right: 0;
+	background-color: var(--dark-green); /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	a {
+		padding: 8px 32px 8px 8px;
+		text-decoration: none;
+		font-size: 25px;
+		color: var(--banana);
+		display: block;
+		transition: 0.3s;
+
+		&:hover {
+			color: #f1f1f1;
+		  }
+	  }
+
+	}
+
+	.closebtn {
+	  position: absolute;
+	  top: 0;
+	  right: 25px;
+	  font-size: 36px;
+	  margin-right: 50px;
+	}
+
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  .mainContent {
+	transition: .5s;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+  }
+
+  .navbarHead {
+	  height: 200px;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+	align-items: center;
+	max-width: 80px;
+	
+  }
+
+.menuBtn {
+	width: 60px;
+	height: 45px;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 25px;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	-o-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	cursor: pointer;
+
+	span {
+		display: block;
+		position: absolute;
+		height: 5px;
+		width: 80%;
+		background: #fff;
+		border-radius: 9px;
+		opacity: 1;
+		right: 4px;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-webkit-transition: .25s ease-in-out;
+		-moz-transition: .25s ease-in-out;
+		-o-transition: .25s ease-in-out;
+		transition: .25s ease-in-out;
+
+		&:nth-child(1) {
+			top: 0px;
+		}
+
+		&:nth-child(2),&:nth-child(3) {
+			top: 13px;
+		}
+
+		&:nth-child(4) {
+			top: 26px;
+		}
+	}
+
+	:global .open {
+			span {
+				&:nth-child(1) {
+					top: 18px;
+					width: 0%;
+					left: 50%;
+				  }
+	
+				  &:nth-child(2) {
+					-webkit-transform: rotate(45deg);
+					-moz-transform: rotate(45deg);
+					-o-transform: rotate(45deg);
+					transform: rotate(45deg);
+				  }
+	
+				  &:nth-child(3) {
+					-webkit-transform: rotate(-45deg);
+					-moz-transform: rotate(-45deg);
+					-o-transform: rotate(-45deg);
+					transform: rotate(-45deg);
+				  }
+	
+				  &:nth-child(4) {
+					top: 18px;
+					width: 0%;
+					left: 50%;
+				  }
+			}
+	}
+}
+
+.socialsWrapper {
+	position: absolute;
+    bottom: 0;
+    height: 121px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+
+	.socialLink {
+		text-align: center;
+		padding: 0;
+	}
+}
