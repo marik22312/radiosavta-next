@@ -15,7 +15,7 @@ frontend:
         - yarn start
     
   artifacts:
-    baseDirectory: build
+    baseDirectory: .next
     files:
       - '**/*'
   cache:
