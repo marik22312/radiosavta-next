@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+	z-index: 99;
 }
 .title {
 	
@@ -48,6 +49,7 @@ letter-spacing: 8px;
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	
 	> div {
 		width: var(--navbar-width);
 	}
