@@ -18,6 +18,9 @@ export const Page: React.FC<PageProps> = ({ children, title }) => {
 		<title>רדיוסבתא - {title}</title>
 		<meta name="description" content="An Internet Radio Collective, Come And Listen!" />
         <link rel="icon" href="/favicon.ico" />
+
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content="Radiosavta - An Online Internet Radio" />
 	</Head>
       <Navbar onClose={() => setIsOpen(false)} onOpen={() => setIsOpen(true)} title={title}/>
       <div
