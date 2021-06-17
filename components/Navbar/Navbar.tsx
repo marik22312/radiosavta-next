@@ -89,9 +89,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
-				
-              <Image src={RoundLogo} />
-              {/* <Image src={{src: "../../public/assets/images/logo_round.png", height: 200, width: 80}} /> */}
+              <Image src={RoundLogo} width="100%" height="100%"/>
             </div>
             <div className={styles.menuBtn + `${isOpen ? ' open' : ''}`} onClick={() => toggleMenu()}>
               <span></span>
