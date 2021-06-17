@@ -14,10 +14,11 @@ interface NavBarProps {
   title: string;
   onOpen(): void;
   onClose(): void;
+  width: number;
 }
 
 export const Navbar: React.FC<NavBarProps> = (props) => {
-  const navbarWidth = 215;
+  const navbarWidth = props.width;
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -99,8 +100,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             <div className={styles.logo}>
               <Image src={RoundLogo} width="100%" height="100%"/>
             </div>
-            <div className={styles.menuBtn + `${isOpen ? ' open' : ''}`} onClick={() => toggleMenu()}>
-              <span></span>
+            <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
               <span></span>
               <span></span>
               <span></span>
