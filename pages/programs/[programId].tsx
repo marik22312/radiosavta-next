@@ -52,7 +52,8 @@ const About: React.FC<{ program: any; recordedShows: any[] }> = ({
             <div className={style.people}>
               <div className={style.broadcasterImage}>
                 {program.users.map((u: any) => {
-                  return <img src={`${BASE_IMAGE}/${u.profile_image}`} />;
+					//@ts-expect-error
+                  return <Image key={`image-${program.id}-${u.id}`}src={`${BASE_IMAGE}/${u.profile_image}`} />;
                 })}
               </div>
             </div>
