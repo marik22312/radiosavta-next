@@ -18,7 +18,7 @@ export const Page: React.FC<PageProps> = ({ children, title, previewImage }) => 
     <>
 	<Head>
 		<title>רדיוסבתא - {title}</title>
-		<meta name="description" content="An Internet Radio Collective, Come And Listen!" />
+		<meta name="description" content="קולקטיב רדיו אינטרנט" />
         <link rel="icon" href="/favicon.ico" />
 
 		<meta property="og:title" content={title} />
