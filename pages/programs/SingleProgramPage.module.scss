@@ -56,8 +56,9 @@
 	margin-top: 100px;
 	display: flex;
     flex-direction: column;
-
+	
 	@include media-breakpoint(sm) {
+		width: 80%;
 		margin-top: 15px;
 		align-items: center;
 	}
@@ -81,8 +82,9 @@
 	width: 50%;
 	margin-top: 100px;
 	direction: ltr;
-
+	
 	@include media-breakpoint(sm) {
+		width: 80%;
 		margin-top: 15px;
 	}
 }
