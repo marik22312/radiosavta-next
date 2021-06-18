@@ -1,3 +1,5 @@
+@import '../../styles//mixins.scss';
+
 .footer {
 	direction: ltr;
     position: fixed;
@@ -12,7 +14,7 @@
     justify-content: space-evenly;
 	z-index: 999;
 
-	@media (max-width: 576px) {
+	@include media-breakpoint(sm) {
 		justify-content: space-around;
 	}
   }
@@ -32,7 +34,7 @@
 		justify-content: center;
 		align-items: center;
 		
-		@media (max-width: 576px) {
+		@include media-breakpoint(sm) {
 			border-width: 4px;
 		}
 	}
@@ -44,7 +46,7 @@
 	height: 45px;
 	margin: 0 15px;
 	
-	@media (max-width: 576px) {
+	@include media-breakpoint(sm) {
 		margin: 0 20px;
 		height: 60px;
 		width: 3px;
@@ -71,10 +73,11 @@
     background-color: rgba(0, 0, 0, 0);
     border: 2px solid #8a1c15;
     border-radius: 3px;
+	text-align: center;
 
 	opacity: 0;
 
-	transition: opacity .3s ease-in
+	transition: opacity .3s ease-in;
   }
 
   .progressBar {
@@ -167,11 +170,8 @@
 		background: #367ebd;
 	  }
 
-	  @media (max-width: 1084px) {
-		--progresBarWidth: 40%
-	}
-	  @media (max-width: 576px) {
-		display: none;
-	}
+	  @include media-breakpoint (sm) {
+		  display: none;
+	  }
   }
   

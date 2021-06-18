@@ -1,3 +1,5 @@
+@import '../../styles//mixins.scss';
+
 .programHeader {
 	width: 100%;
 	  /* Create the parallax scrolling effect */
@@ -8,7 +10,7 @@
 
 	  padding-bottom: 100px;
 
-	  @media screen and (max-width: 575px) {
+	  @include media-breakpoint(sm) {
 		padding-bottom: 50px;
 	}
 	}
@@ -21,7 +23,7 @@
 		
 		padding: 0 var(--padding-default);
 		
-		@media screen and (max-width: 575px) {
+		@include media-breakpoint(sm) {
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
@@ -35,7 +37,7 @@
 		display: flex;
 		flex-direction: row;
 
-		@media screen and (max-width: 575px) {
+		@include media-breakpoint(sm) {
 			width: 100%;
 			margin: auto;
 		}
@@ -55,8 +57,9 @@
 	display: flex;
     flex-direction: column;
 
-	@media screen and (max-width: 575px) {
+	@include media-breakpoint(sm) {
 		margin-top: 15px;
+		align-items: center;
 	}
 
 
@@ -79,7 +82,7 @@
 	margin-top: 100px;
 	direction: ltr;
 
-	@media screen and (max-width: 575px) {
+	@include media-breakpoint(sm) {
 		margin-top: 15px;
 	}
 }
