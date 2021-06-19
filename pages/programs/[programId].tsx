@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getProgramById } from "../../api/Programs.api";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
 import { GetServerSideProps } from "next";
@@ -10,6 +10,10 @@ import { Page } from "../../components/Page";
 import { RecordedShowsList } from "../../components/RecordedShowsList/RecordedShowsList";
 
 import Image from "next/image";
+import { QueryClient } from "react-query";
+import { dehydrate } from "react-query/hydration";
+import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
+import * as FLATTED from "flatted";
 
 const BASE_IMAGE_BW =
   "https://res.cloudinary.com/marik-shnitman/image/upload/e_grayscale/w_1080/v1547932540/";
@@ -28,9 +32,9 @@ const getTime = (program: any) => {
   return moment(program.programTimes[0].start_time).toDate();
 };
 
-const About: React.FC<{ program: any; recordedShows: any[] }> = ({
+const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
   program,
-  recordedShows,
+  //   recordedShows,
 }) => {
   return (
     <>
@@ -52,7 +56,12 @@ const About: React.FC<{ program: any; recordedShows: any[] }> = ({
             <div className={style.people}>
               <div className={style.broadcasterImage}>
                 {program.users.map((u: any) => {
-                  return <img key={`image-${program.id}-${u.id}`}src={`${BASE_IMAGE}/${u.profile_image}`} />;
+                  return (
+                    <img
+                      key={`image-${program.id}-${u.id}`}
+                      src={`${BASE_IMAGE}/${u.profile_image}`}
+                    />
+                  );
                 })}
               </div>
             </div>
@@ -61,7 +70,7 @@ const About: React.FC<{ program: any; recordedShows: any[] }> = ({
         <section className={style.archiveSection}>
           <h3 className="section-title">הבוידעם</h3>
           <div className={style.recordedShows}>
-            <RecordedShowsList recordedShows={recordedShows} />
+            <RecordedShowsList programId={program.id} />
           </div>
         </section>
       </Page>
@@ -69,29 +78,29 @@ const About: React.FC<{ program: any; recordedShows: any[] }> = ({
   );
 };
 
-export default About;
+export default SingleProgramPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // @ts-ignore
-  const { data } = await getProgramById(context.params.programId);
-  const {
-    data: { recordedShows, pageData },
-  } = await queryRecordedShows({
-    // @ts-ignore
-    programId: context.params.programId,
-  });
+  const queryClient = new QueryClient();
+
+  // @ts-expect-error
+  const programId: string = context.params.programId;
+
+  await queryClient.prefetchInfiniteQuery(
+    `recordedShows-progarm${programId}`,
+    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, programId })
+  );
+  const { data } = await getProgramById(programId);
 
   if (!data.program) {
     return {
       notFound: true,
     };
   }
-
   return {
     props: {
       program: data.program,
-      recordedShows,
-      recordedShowsPageData: pageData,
+      dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
     },
   };
 };

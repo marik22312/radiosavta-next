@@ -1,23 +1,29 @@
-import "@fortawesome/fontawesome-svg-core/styles.css"; 
+import React from "react";
 
-import '../styles/globals.css'
-import '../styles/reset.scss'
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
+import "../styles/globals.css";
+import "../styles/reset.scss";
 
-import { PlayerProvider } from '../providers/PlayerProvider'
+import { PlayerProvider } from "../providers/PlayerProvider";
 
-import type { AppProps } from 'next/app'
-import { FooterPlayer } from '../components/FooterPlayer/FooterPlayer'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import type { AppProps } from "next/app";
+import { FooterPlayer } from "../components/FooterPlayer/FooterPlayer";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate } from "react-query/hydration";
+import * as FLATTED from 'flatted';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return(
-	  <QueryClientProvider client={new QueryClient()}>
-	  <PlayerProvider>
-		  <Component {...pageProps} />
-		  <FooterPlayer />
-	  </PlayerProvider>
-	  </QueryClientProvider>
-		  )
-  }
-export default MyApp
+  const queryClient = React.useRef(new QueryClient());
+  return (
+    <QueryClientProvider client={queryClient.current}>
+      <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
+        <PlayerProvider>
+          <Component {...pageProps} />
+          <FooterPlayer />
+        </PlayerProvider>
+      </Hydrate>
+    </QueryClientProvider>
+  );
+}
+export default MyApp;
