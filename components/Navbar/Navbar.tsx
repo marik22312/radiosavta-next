@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import styles from "./Navbar.module.scss";
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 interface NavBarProps {
   title: string;
@@ -76,6 +77,13 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           </a>
           <a
             className={styles.socialLink}
+            href="mailto:radiosavta@gmail.com"
+			rel="noreferrer noopener"
+          >
+            <FontAwesomeIcon icon={faEnvelope} size="2x" color="white" />
+          </a>
+          <a
+            className={styles.socialLink}
             target="_blank"
             href="https://www.instagram.com/radiosavta"
 			rel="noreferrer noopener"
@@ -98,7 +106,9 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
+				<Link href="/">
               <Image src={RoundLogo} width="100%" height="100%"/>
+				</Link>
             </div>
             <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
               <span></span>
