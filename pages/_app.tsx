@@ -2,8 +2,8 @@ import React from "react";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import "../styles/globals.css";
 import "../styles/reset.scss";
+import "../styles/globals.css";
 
 import { PlayerProvider } from "../providers/PlayerProvider";
 

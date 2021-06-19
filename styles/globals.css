@@ -10,7 +10,9 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Alef";
-  background-color: var(--banana)
+  background-color: var(--banana);
+
+  font-size: 30px;
 }
 
 body {
@@ -41,7 +43,7 @@ a {
 .section-title {
 	margin-bottom: 25px;
 	text-align: center;
-	font-size: 30px;;
+	font-size: 1rem;
 }
 
 @media screen and (max-width: 576px) {

@@ -35,8 +35,8 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
 	};
   }, [handleObserver]);
 
-  if (!recordedShows?.length) {
-    return <div className="recordedShowsListWrapper"> program not found</div>;
+  if (!recordedShows?.[0]?.length) {
+    return <div className="recordedShowsListWrapper">לא מצאנו כלום בבוידעם לתכנית זו</div>;
   }
   return (
     <>
