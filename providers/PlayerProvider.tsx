@@ -31,7 +31,6 @@ export const PlayerProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!audioRef.current) {
-		console.log('Run')
       audioRef.current = new Audio("");
     }
     // const ref = audioRef.current;

@@ -10,6 +10,7 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import styles from "./Navbar.module.scss";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { BASE_IMAGE, BASE_IMAGE_ICON } from '../../config/images';
 
 interface NavBarProps {
   title: string;
@@ -107,7 +108,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
 				<Link href="/">
-              <Image src={RoundLogo} width="100%" height="100%"/>
+              <img src={`${BASE_IMAGE_ICON}radiosavta/logo_head`} width="100%" height="100%"/>
 				</Link>
             </div>
             <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>

@@ -5,7 +5,6 @@ export const usePlayerControls = () => {
   const { audioRef, setTitle, setPlayerState } = usePlayerContext();
 
   const play = (track: Track) => {
-	  console.log('Play!', track)
     setPlayerState(PlayerState.PLAYING);
     audioRef.src = track.url;
     setTitle(track.title);
