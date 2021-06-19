@@ -14,11 +14,8 @@ import { QueryClient } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import * as FLATTED from "flatted";
+import { BASE_IMAGE_BW, BASE_IMAGE } from '../../config/images';
 
-const BASE_IMAGE_BW =
-  "https://res.cloudinary.com/marik-shnitman/image/upload/e_grayscale/w_1080/v1547932540/";
-const BASE_IMAGE =
-  "https://res.cloudinary.com/marik-shnitman/image/upload/w_1080/v1547932540/";
 const getProgramImage = (program: any) => {
   return `${BASE_IMAGE_BW}/${
     program.cover_image ? program.cover_image : program.users[0].profile_image

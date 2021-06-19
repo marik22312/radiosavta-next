@@ -6,6 +6,7 @@ module.exports = withImages({
   webpack(config, options) {
     return config
   },
+  inlineImageLimit: false,
   env: {
 	  BASE_API_URL: process.env.BASE_API_URL
   }
