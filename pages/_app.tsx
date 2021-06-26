@@ -1,6 +1,7 @@
 import React from "react";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import 'keen-slider/keen-slider.min.css';
 
 import "../styles/reset.scss";
 import "../styles/globals.css";

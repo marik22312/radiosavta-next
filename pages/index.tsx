@@ -1,12 +1,88 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Page } from '../components/Page'
-import styles from '../styles/Home.module.scss'
+import { useState, useRef, useEffect } from "react";
+import { Page } from "../components/Page";
+import style from "./Home.module.scss";
 
+import cn from "classnames";
+
+import { useKeenSlider } from "keen-slider/react";
+
+const images = [
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921320/radiosavta/gallery/10.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921412/radiosavta/gallery/11.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922090/radiosavta/gallery/12.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922147/radiosavta/gallery/14.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922261/radiosavta/gallery/15.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922386/radiosavta/gallery/17.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922451/radiosavta/gallery/18.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922514/radiosavta/gallery/19.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921370/radiosavta/gallery/anotherass.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921384/radiosavta/gallery/ass.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921769/radiosavta/gallery/batya.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921329/radiosavta/gallery/berech.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921988/radiosavta/gallery/bigonyou.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921544/radiosavta/gallery/buidingmitspe.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921470/radiosavta/gallery/buildinghigher.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922579/radiosavta/gallery/cats.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921355/radiosavta/gallery/clouds.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921347/radiosavta/gallery/fox.jpg",
+  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921340/radiosavta/gallery/ibex.jpg",
+];
 export default function Home() {
+  const [pause, setPause] = useState(false);
+  const timer = useRef<any>();
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    duration: 1000,
+  });
+
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      if (!pause && slider) {
+        slider.next();
+      }
+    }, 7000);
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, [pause, slider]);
   return (
-	  <Page title="רדיוסבתא">
-		  Home
-	  </Page>
-  )
+    <Page title="רדיוסבתא">
+      <section
+        className={cn("gallery-section", style.gallerySection)}
+        style={{ direction: "ltr" }}
+      >
+        <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
+          {images.map((url, index) => {
+            return (
+              <div key={url} className="keen-slider__slide">
+                <img className={style.slideImage} src={url} alt={url} />
+              </div>
+            );
+          })}
+        </div>
+        <div className={style.homeContentWrapper}>
+          <div className={style.homeContent}>
+            <div className="logo">
+              <h2>רדיוסבתא</h2>
+              <p>קולקטיב רדיו אינטרנט</p>
+            </div>
+            <div className="player">כאן יהיה נגן</div>
+          </div>
+          <div className={style.homeContent}>
+			  <div className="agenda">
+            <h2>מה בלו&quot;ז?</h2>
+			<div>לוז יהיה פה</div>
+			  </div>
+          </div>
+        </div>
+      </section>
+	  <section className={style.latestShowsSection}>
+		  <h2>התווספו לבוידעם</h2>
+		  <div className={style.latestShowsList}>
+			  כאן תהיה רשימה של תכניות אחרונות
+		  </div>
+	  </section>
+    </Page>
+  );
 }

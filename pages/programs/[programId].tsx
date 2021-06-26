@@ -14,7 +14,7 @@ import { QueryClient } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import * as FLATTED from "flatted";
-import { BASE_IMAGE_BW, BASE_IMAGE } from '../../config/images';
+import { BASE_IMAGE_BW, BASE_IMAGE } from "../../config/images";
 
 const getProgramImage = (program: any) => {
   return `${BASE_IMAGE_BW}/${
@@ -29,39 +29,43 @@ const getTime = (program: any) => {
   return moment(program.programTimes[0].start_time).toDate();
 };
 
-const UsersList:React.FC<{users: any[]}> = (props) => {
-	
-	if (props.users.length > 1) {
-		return (
-		<div className={style.people}>
-              <div className={style.broadcasterImageMulti}>
-                {props.users.map((u: any) => {
-                  return (
-                    <img
-                      key={`image-${u.id}`}
-                      src={`${BASE_IMAGE}/${u.profile_image}`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-		)
-	}
-	return (
-		<div className={style.people}>
-              <div className={style.broadcasterImage}>
-                {props.users.map((u: any) => {
-                  return (
-                    <img
-                      key={`image-${u.id}`}
-                      src={`${BASE_IMAGE}/${u.profile_image}`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-	)
-}
+const UsersList: React.FC<{ users: any[] }> = (props) => {
+  if (props.users.length > 1) {
+    return (
+      <div className={style.people}>
+        <div className={style.broadcasterImageMulti}>
+          {props.users.map((u: any) => {
+            return (
+              <>
+                <img
+                  key={`image-${u.id}`}
+                  src={`${BASE_IMAGE}/${u.profile_image}`}
+				  alt={u.name}
+                />
+              </>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={style.people}>
+      <div className={style.broadcasterImage}>
+        {props.users.map((u: any) => {
+          return (
+            <>
+              <img
+                key={`image-${u.id}`}
+                src={`${BASE_IMAGE}/${u.profile_image}`}
+              />
+            </>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
   program,
   //   recordedShows,
@@ -81,9 +85,8 @@ const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
                 )}{" "}
                 - {program.programTimes[0].start_time}
               </p>
-              <p>{program.users.map((u: any) => u.name).join(", ")}</p>
             </div>
-            <UsersList users={program.users}/>
+            <UsersList users={program.users} />
           </div>
         </div>
         <section className={style.archiveSection}>
