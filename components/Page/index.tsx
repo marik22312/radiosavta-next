@@ -30,6 +30,12 @@ export const Page: React.FC<PageProps> = ({
           content="Radiosavta - An Online Internet Radio"
         />
         {previewImage && <meta property="og:image" content={previewImage} />}
+
+		{/* eslint-disable-next-line @next/next/no-page-custom-font */}
+		<link
+          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+          rel="stylesheet"
+        />
       </Head>
       <Navbar
         onClose={() => setIsOpen(false)}
@@ -41,7 +47,7 @@ export const Page: React.FC<PageProps> = ({
         style={{
           marginRight: "auto",
           width: "calc(100% - var(--navbar-width))",
-          transform: !isOpen ? "" : `translateX(-${navbarWidth}px)`,
+          transform: !isOpen ? "none" : `translateX(-${navbarWidth}px)`,
         }}
         className={styles.pageContent}
       >

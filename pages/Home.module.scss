@@ -1,0 +1,56 @@
+@import "../styles/mixins.scss";
+
+.gallerySection {
+	direction: ltr;
+	height: calc(100vh - var(--footerHeight) - 50px);
+	max-height: 600px;
+	position: relative;
+}
+
+.sliderWrapper {
+	max-height: 100%;
+}
+
+.slideImage {
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.homeContentWrapper {
+	direction: rtl;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	position: absolute;
+	top: 0;
+	
+	background-color: hsla(0, 0, 0, 0.5);
+
+	width:100%;
+	height: 100%;
+
+	@include media-breakpoint(sm) {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+}
+
+.homeContent {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+	height: 70%;
+	color: white;
+}
+
+.latestShowsSection {
+	padding-top: 30px;
+	text-align: center;
+}
+
+.latestShowsList {
+	padding-top: 30px;
+}
