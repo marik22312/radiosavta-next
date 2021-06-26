@@ -5,6 +5,13 @@ import style from "./Home.module.scss";
 import cn from "classnames";
 
 import { useKeenSlider } from "keen-slider/react";
+import { GetServerSideProps } from 'next';
+import { QueryClient } from 'react-query';
+import { queryRecordedShows } from '../api/RecordedShows.api';
+import { stringify } from 'flatted';
+import { dehydrate } from 'react-query/hydration';
+import { RecordedShowsListStandalone } from '../components/RecordedShowsList/RecordedShowsListStandalone';
+import { useRecordedShows } from '../hook/useRecordedShows';
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -29,7 +36,6 @@ const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921340/radiosavta/gallery/ibex.jpg",
 ];
 export default function Home() {
-  const [pause, setPause] = useState(false);
   const timer = useRef<any>();
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
@@ -38,14 +44,16 @@ export default function Home() {
 
   useEffect(() => {
     timer.current = setInterval(() => {
-      if (!pause && slider) {
+      if (slider) {
         slider.next();
       }
     }, 7000);
     return () => {
       clearInterval(timer.current);
     };
-  }, [pause, slider]);
+  }, [slider]);
+
+  const { recordedShows } = useRecordedShows();
   return (
     <Page title="רדיוסבתא">
       <section
@@ -80,9 +88,24 @@ export default function Home() {
 	  <section className={style.latestShowsSection}>
 		  <h2>התווספו לבוידעם</h2>
 		  <div className={style.latestShowsList}>
-			  כאן תהיה רשימה של תכניות אחרונות
+			  <RecordedShowsListStandalone />
 		  </div>
 	  </section>
     </Page>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const queryClient = new QueryClient();
+  
+	await queryClient.prefetchInfiniteQuery(
+	  `recordedShows-archive`,
+	  ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam })
+	);
+  
+	return {
+	  props: {
+		dehydratedState: stringify(dehydrate(queryClient)),
+	  },
+	};
+  };
