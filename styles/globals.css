@@ -9,7 +9,7 @@ body {
 	direction: rtl;
   padding: 0;
   margin: 0;
-  font-family: "Alef";
+  font-family: "Alef", sans-serif;
   background-color: var(--banana);
 
   font-size: 30px;
