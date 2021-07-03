@@ -27,8 +27,9 @@ interface NavBarProps {
 
 export const Navbar: React.FC<NavBarProps> = (props) => {
   const navbarWidth = props.width;
-  const { toggleLive } = useLivePlayer();
-  const { isPlaying} = usePLayerState();
+  const { toggleLive, isLive } = useLivePlayer();
+  const { isPlaying, isStopped, isPaused } = usePLayerState();
+  const { pause, resume } = usePlayerControls()
   const { pathname } = useRouter();
   
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,13 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   };
 
   const togglePlay = () => {
-	  toggleLive();
+	  if (isStopped || isLive) {
+		  return toggleLive();
+		}
+		if (isPaused) {
+		  return resume();
+		}
+		return pause();
   }
 
   const open = () => {

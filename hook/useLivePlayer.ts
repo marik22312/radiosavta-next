@@ -8,7 +8,7 @@ import { usePLayerState } from "./usePlayerState";
 export const useLivePlayer = () => {
   const { setTitle, audioRef } = usePlayerContext();
   const { play, stop } = usePlayerControls();
-  const [isLive, setIsLive] = useState(false);
+  const [isLive, setIsLive] = useState(audioRef?.currentSrc === LIVE_STREAM_URL);
 
   const { songTitle, refetch } = useCurrentSongTitle({
     enabled: isLive,
@@ -22,7 +22,8 @@ export const useLivePlayer = () => {
   }, [songTitle, setTitle]);
 
   const toggleLive = () => {
-    if (!isLive) {
+	  if (!isLive) {
+		console.log('Toggling')
       refetch();
       play({
         url: LIVE_STREAM_URL,
@@ -38,7 +39,7 @@ export const useLivePlayer = () => {
   };
 
   return {
-    isLive: audioRef?.currentSrc === LIVE_STREAM_URL,
+    isLive,
     toggleLive,
   };
 };

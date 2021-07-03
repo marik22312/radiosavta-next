@@ -22,5 +22,7 @@ export const usePLayerState = () => {
     title,
 	programTitle,
     isPlaying: playerState === PlayerState.PLAYING,
+	isStopped: playerState === PlayerState.STOPPED,
+	isPaused: playerState === PlayerState.PAUSED,
   };
 };

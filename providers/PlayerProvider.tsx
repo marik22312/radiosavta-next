@@ -11,6 +11,7 @@ const PlayerContext = createContext<PlayerContext | null>(null);
 export enum PlayerState {
   STOPPED = "STOPPED",
   PLAYING = "PLAYING",
+  PAUSED = 'PAUSED'
 }
 
 export interface PlayerContext {
@@ -25,7 +26,7 @@ export interface PlayerContext {
   setProgramTitle(title: string): void;
 }
 export const PlayerProvider: React.FC = ({ children }) => {
-  const audioRef = useRef<HTMLAudioElement>();
+  const [audioRef, setAudioRef] = useState<HTMLAudioElement>();
 
   const [playerState, setPlayerState] = useState(PlayerState.STOPPED);
   const [audioSrc, setAudioSrc] = useState<string>("");
@@ -33,13 +34,9 @@ export const PlayerProvider: React.FC = ({ children }) => {
   const [programTitle, setProgramTitle] = useState<string>("");
 
   useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio("");
+    if (!audioRef) {
+      setAudioRef(new Audio(""));
     }
-    // const ref = audioRef.current;
-    // return () => {
-    //   ref.src = "";
-    // };
   }, []);
 
   return (
@@ -49,7 +46,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
         setAudioSrc,
         setPlayerState,
         audioSrc,
-        audioRef: audioRef.current!,
+        audioRef: audioRef!,
         title,
         setTitle,
 		programTitle,

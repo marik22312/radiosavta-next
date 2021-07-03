@@ -13,8 +13,12 @@ export const usePlayerControls = () => {
   };
 
   const pause = () => {
-    setPlayerState(PlayerState.STOPPED);
+    setPlayerState(PlayerState.PAUSED);
     audioRef.pause();
+  };
+  const resume = () => {
+    setPlayerState(PlayerState.PLAYING);
+    audioRef.play();
   };
 
   const stop = () => {
@@ -27,5 +31,6 @@ export const usePlayerControls = () => {
     play,
     pause,
     stop,
+	resume
   };
 };
