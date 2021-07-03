@@ -88,7 +88,7 @@ export default function Home() {
       <section className={style.latestShowsSection}>
         <Image
           className={style.latestShowsBg}
-          src={GreyBg}
+          src={'https://res.cloudinary.com/marik-shnitman/image/upload/v1625318050/radiosavta/backgrounds/text1.jpg'}
           alt="Background"
           layout="fill"
           objectFit="cover"
