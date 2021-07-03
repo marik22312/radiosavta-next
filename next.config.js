@@ -6,8 +6,8 @@ module.exports = withImages({
   images: {
 	  domains: ['res.cloudinary.com']
   },
-  webpack(config, options) {
-    return config
+  webpack(config) {
+    return config;
   },
   inlineImageLimit: false,
   env: {

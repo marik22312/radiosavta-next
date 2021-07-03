@@ -2,12 +2,13 @@ import { PlayerState, usePlayerContext } from "../providers/PlayerProvider";
 import { Track } from "../domain/Player";
 
 export const usePlayerControls = () => {
-  const { audioRef, setTitle, setPlayerState } = usePlayerContext();
+  const { audioRef, setTitle, setPlayerState, setProgramTitle } = usePlayerContext();
 
   const play = (track: Track) => {
     setPlayerState(PlayerState.PLAYING);
     audioRef.src = track.url;
     setTitle(track.title);
+	setProgramTitle(track.programTitle)
     audioRef.play();
   };
 

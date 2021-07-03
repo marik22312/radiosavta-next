@@ -18,9 +18,11 @@ export interface PlayerContext {
   playerState: PlayerState;
   audioSrc: string;
   title: string;
+  programTitle: string;
   setAudioSrc(ket: string): void;
   setPlayerState(state: PlayerState): void;
   setTitle(title: string): void;
+  setProgramTitle(title: string): void;
 }
 export const PlayerProvider: React.FC = ({ children }) => {
   const audioRef = useRef<HTMLAudioElement>();
@@ -28,6 +30,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
   const [playerState, setPlayerState] = useState(PlayerState.STOPPED);
   const [audioSrc, setAudioSrc] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [programTitle, setProgramTitle] = useState<string>("");
 
   useEffect(() => {
     if (!audioRef.current) {
@@ -49,6 +52,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
         audioRef: audioRef.current!,
         title,
         setTitle,
+		programTitle,
+		setProgramTitle
       }}
     >
       {children}

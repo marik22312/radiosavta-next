@@ -6,7 +6,7 @@ import { usePlayerControls } from "./usePlayerControls";
 import { usePLayerState } from "./usePlayerState";
 
 export const useLivePlayer = () => {
-  const { setTitle } = usePlayerContext();
+  const { setTitle, audioRef } = usePlayerContext();
   const { play, stop } = usePlayerControls();
   const [isLive, setIsLive] = useState(false);
 
@@ -16,7 +16,9 @@ export const useLivePlayer = () => {
   });
 
   useEffect(() => {
-    setTitle(songTitle);
+	  if (songTitle) {
+		  setTitle(songTitle);
+	  }
   }, [songTitle, setTitle]);
 
   const toggleLive = () => {
@@ -25,6 +27,7 @@ export const useLivePlayer = () => {
       play({
         url: LIVE_STREAM_URL,
         title: songTitle || "",
+		programTitle: 'שידור חי'
       });
       setIsLive(true);
       return;
@@ -35,7 +38,7 @@ export const useLivePlayer = () => {
   };
 
   return {
-    isLive,
+    isLive: audioRef?.currentSrc === LIVE_STREAM_URL,
     toggleLive,
   };
 };
