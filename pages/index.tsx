@@ -86,14 +86,6 @@ export default function Home() {
         </div>
       </section>
       <section className={style.latestShowsSection}>
-        <Image
-          className={style.latestShowsBg}
-          src={'https://res.cloudinary.com/marik-shnitman/image/upload/v1625318050/radiosavta/backgrounds/text1.jpg'}
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
-        />
         <h2>העלאות אחרונות</h2>
         <div className={style.latestShowsList}>
           <RecordedShowsListStandalone />
