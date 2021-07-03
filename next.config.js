@@ -11,6 +11,7 @@ module.exports = withImages({
   },
   inlineImageLimit: false,
   env: {
-	  BASE_API_URL: process.env.BASE_API_URL
+	  BASE_API_URL: process.env.BASE_API_URL,
+	  NEXT_IMAGE_ALLOWED_DOMAINS: process.env.NEXT_IMAGE_ALLOWED_DOMAINS
   }
 })
