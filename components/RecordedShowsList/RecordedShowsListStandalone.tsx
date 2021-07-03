@@ -46,8 +46,8 @@ export const RecordedShowsListStandalone: React.FC<RecordedShowsListProps> = (pr
                 url={show.url}
                 name={show.name}
                 recordingDate={show.created_at}
-				programName={show.program.name_he}
-				backgroundImageUrl={`${BASE_IMAGE}/${show.program.cover_image}`}
+                programName={show.program.name_he}
+                backgroundImageUrl={`${BASE_IMAGE}/${show.program.cover_image}`}
               />
             </div>
           ));

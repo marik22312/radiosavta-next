@@ -37,7 +37,9 @@
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
+		padding: 0 var(--SPACE3);
 	}
+
 }
 
 .homeContent {
@@ -78,7 +80,7 @@
 	position: relative;
 	color: #ffffff;
 	padding: 5px 8px;
-	margin-top: var(--SPACE3);
+	margin-block: var(--SPACE3);
 }
 
 .latestShowsBg {
