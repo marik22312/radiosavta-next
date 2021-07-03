@@ -183,10 +183,23 @@ letter-spacing: 8px;
 }
 
 .playPauseButton {
-	height: 100px;
-	width: 100px;
+	--width: 150px;
+	--height: 150px;
+	
+	height: var(--height);
+	width: var(--width);
 	position: absolute;
-	bottom: calc(var(--footerHeight) - 50px);
-	right: calc(var(--navbar-width) - 50px);
+	bottom: calc(var(--footerHeight) - (var(--height) / 2));
+	right: calc(var(--navbar-width) - (var(--width) / 2));
 	cursor: pointer;
+
+	@include media-breakpoint(sm) {
+		--width: 100px;
+		--height: 100px;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
 }
