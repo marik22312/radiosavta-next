@@ -99,7 +99,7 @@ export default function Home() {
           <RecordedShowsListStandalone />
         </div>
         <p className={style.allShowsLink}>
-          <Link href="/archive">לבויעדם >></Link>
+          <Link href="/archive">לבויעדם &gt;&gt;</Link>
         </p>
       </section>
     </Page>

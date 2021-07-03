@@ -16,7 +16,9 @@ export const useLivePlayer = () => {
   });
 
   useEffect(() => {
-    setTitle(songTitle);
+	  if (songTitle) {
+		  setTitle(songTitle);
+	  }
   }, [songTitle, setTitle]);
 
   const toggleLive = () => {
@@ -25,6 +27,7 @@ export const useLivePlayer = () => {
       play({
         url: LIVE_STREAM_URL,
         title: songTitle || "",
+		programTitle: 'שידור חי'
       });
       setIsLive(true);
       return;
