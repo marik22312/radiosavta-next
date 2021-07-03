@@ -1,8 +1,4 @@
-/* @font-face {
-	font-family: "Alef";
-	src: url("/fonts/Alef-Bold.ttf");
-	src: url("/fonts/Alef-Regular.ttf");
-} */
+@import './mixins';
 
 html,
 body {
@@ -31,13 +27,26 @@ a {
 
 :root {
 	--padding-default: 15px;
-	--footerHeight: 100px;
+	--footerHeight: 150px;
 	--dark-green: #042901;
 	--light-green: #066600;
 	--banana: #ded15b;
 
-	--navbar-width: 100px;
+	--navbar-width: 200px;
 
+	--SPACE1: 15px;
+	--SPACE2: 25px;
+	--SPACE3: 50px;
+	--SPACE4: 75px;
+	--SPACE5: 100px;
+	
+	@include media-breakpoint(sm) {
+		--SPACE1: 5px;
+		--SPACE2: 10px;
+		--SPACE3: 15px;
+		--SPACE4: 20px;
+		--SPACE5: 25px;
+	}
 }
 
 .section-title {

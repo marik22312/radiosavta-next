@@ -14,7 +14,7 @@ export const useCurrentSongTitle = (opts?: UseSongTitleOptions) => {
   );
 
   return {
-    songTitle: data?.streamTitle || "Press play to tune in!",
+    songTitle: data?.streamTitle,
     refetch,
   };
 };

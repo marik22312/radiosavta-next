@@ -1,7 +1,7 @@
 @import '../../styles/mixins.scss';
 .pageContent {
 	transition: 0.5s;
-	margin-bottom: calc(var(--footerHeight) + 30px);
+	margin-bottom: var(--footerHeight);
 	
 	@include media-breakpoint(sm) {
 		transform: none !important;

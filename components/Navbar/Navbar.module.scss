@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-	z-index: 99;
+	z-index: 5000;
 }
 .title {
 	
@@ -41,10 +41,10 @@ letter-spacing: 8px;
 /* The side navigation menu */
 .sidenav {
 	position: relative;
-	height: calc(100% - var(--footerHeight));
+	height: 100%;
 	width: 0; /* 0 width - change this with JavaScript */
 	position: fixed; /* Stay in place */
-	z-index: 1; /* Stay on top */
+	z-index: 5000; /* Stay on top */
 	top: 0; /* Stay at the top */
 	right: 0;
 	background-color: var(--dark-green); /* Black*/
@@ -91,7 +91,8 @@ letter-spacing: 8px;
   }
 
   .navbarHead {
-	  height: 200px;
+	height: 200px;
+	margin-top: var(--SPACE2);
 	display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -123,7 +124,7 @@ letter-spacing: 8px;
 	span {
 		display: block;
 		position: absolute;
-		height: 5px;
+		height: 1px;
 		width: 80%;
 		background: #fff;
 		border-radius: 9px;
@@ -179,4 +180,13 @@ letter-spacing: 8px;
 		text-align: center;
 		padding: 0;
 	}
+}
+
+.playPauseButton {
+	height: 100px;
+	width: 100px;
+	position: absolute;
+	bottom: calc(var(--footerHeight) - 50px);
+	right: calc(var(--navbar-width) - 50px);
+	cursor: pointer;
 }

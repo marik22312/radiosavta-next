@@ -11,6 +11,12 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import styles from "./Navbar.module.scss";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { BASE_IMAGE, BASE_IMAGE_ICON } from '../../config/images';
+import { PlayPauseButton } from '../PlayPauseButton/PlayPauseButton';
+import { usePLayerState } from '../../hook/usePlayerState';
+import { useLivePlayer } from '../../hook/useLivePlayer';
+import { usePlayerControls } from '../../hook/usePlayerControls';
+
+import { useRouter } from 'next/router'
 
 interface NavBarProps {
   title: string;
@@ -21,12 +27,19 @@ interface NavBarProps {
 
 export const Navbar: React.FC<NavBarProps> = (props) => {
   const navbarWidth = props.width;
+  const { toggleLive } = useLivePlayer();
+  const { isPlaying} = usePLayerState();
+  const { pathname } = useRouter();
   
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     isOpen ? close() : open();
   };
+
+  const togglePlay = () => {
+	  toggleLive();
+  }
 
   const open = () => {
     setIsOpen(true);
@@ -115,18 +128,14 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
               <span></span>
               <span></span>
               <span></span>
-              {/* <button onClick={() => toggleMenu()}>
-                <FontAwesomeIcon
-                  icon={isOpen ? faTimes : faBars}
-                  size="2x"
-                  color="white"
-                /> */}
-              {/* </button> */}
             </div>
           </div>
           <div className={styles.title}>
-            <p>{props.title}</p>
+            {pathname !== '/' && <p>{props.title}</p>}
           </div>
+		  <div className={styles.playPauseButton}>
+		  <PlayPauseButton onClick={() => togglePlay()} isPlaying={isPlaying}/>
+		  </div>
         </div>
       </div>
     </>

@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import 'keen-slider/keen-slider.min.css';
 
 import "../styles/reset.scss";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 
 import { PlayerProvider } from "../providers/PlayerProvider";
 
@@ -18,12 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
   return (
     <QueryClientProvider client={queryClient.current}>
-      <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
         <PlayerProvider>
+      <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />
           <FooterPlayer />
-        </PlayerProvider>
       </Hydrate>
+        </PlayerProvider>
     </QueryClientProvider>
   );
 }

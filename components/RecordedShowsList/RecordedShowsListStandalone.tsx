@@ -4,6 +4,7 @@ import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram
 
 import style from "./RecordedShowsList.module.scss";
 import { useRecordedShows } from '../../hook/useRecordedShows';
+import { BASE_IMAGE, BASE_IMAGE_BW } from '../../config/images';
 
 interface RecordedShowsListProps {
   lazyLoad?: boolean;
@@ -45,6 +46,8 @@ export const RecordedShowsListStandalone: React.FC<RecordedShowsListProps> = (pr
                 url={show.url}
                 name={show.name}
                 recordingDate={show.created_at}
+				programName={show.program.name_he}
+				backgroundImageUrl={`${BASE_IMAGE}/${show.program.cover_image}`}
               />
             </div>
           ));

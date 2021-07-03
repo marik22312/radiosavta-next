@@ -6,7 +6,7 @@ import { usePlayerControls } from "./usePlayerControls";
 import { usePLayerState } from "./usePlayerState";
 
 export const useLivePlayer = () => {
-  const { setTitle } = usePlayerContext();
+  const { setTitle, audioRef } = usePlayerContext();
   const { play, stop } = usePlayerControls();
   const [isLive, setIsLive] = useState(false);
 
@@ -35,7 +35,7 @@ export const useLivePlayer = () => {
   };
 
   return {
-    isLive,
+    isLive: audioRef?.currentSrc === LIVE_STREAM_URL,
     toggleLive,
   };
 };

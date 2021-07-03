@@ -92,7 +92,7 @@ const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
         <section className={style.archiveSection}>
           <h3 className="section-title">הבוידעם</h3>
           <div className={style.recordedShows}>
-            <RecordedShowsList programId={program.id} />
+            <RecordedShowsList programId={program.id} programName={program.name_he}/>
           </div>
         </section>
       </Page>

@@ -3,10 +3,12 @@ import { RecordedShowPlayer } from "../RecordedShowPlayer/RecordedShowPlayer";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 
 import style from "./RecordedShowsList.module.scss";
+import ProgramsPage from '../../pages/programs';
 
 interface RecordedShowsListProps {
   programId: string;
   fetchMore?(): void;
+  programName: string;
 }
 
 export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
@@ -48,6 +50,7 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
                 url={show.url}
                 name={show.name}
                 recordingDate={show.created_at}
+				programName={props.programName}
               />
             </div>
           ));

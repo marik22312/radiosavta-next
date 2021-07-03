@@ -10,169 +10,67 @@
     background-color: var( --dark-green);
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+	align-items: center;
 	z-index: 999;
 
 	@include media-breakpoint(sm) {
-		justify-content: space-around;
+		justify-content: right;
 	}
   }
-  
-  .playButtonWrapper {
-	display: inline-flex;
-	align-items: center;
-  
-	button {
-		cursor: pointer;
-		border: 3px solid #ffffff;
-		background-color: var(--dark-green);
-		color: #ffffff;
-		font-weight: 600;
-		padding: 10px 10px;
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		
+
+  .contentWrapper {
+	  display: flex;
+	  justify-content: left;
+	  align-items: center;
+	  height: 100%;
+	  margin-left: var(--SPACE5);
+
+	  @include media-breakpoint(sm) {
+		  flex-direction: column;
+		  justify-content: center;
+		  align-items: flex-start;
+	  }
+  }
+
+  .programName {
+	  font-size: 1.2rem;
+	  color: var(--banana);
+	  font-weight: 700;
+
+	  @include media-breakpoint(sm) {
+		  font-size: 0.5rem;
+	  }
+	}
+	
+	.songTitle {
+		font-size: 1.2rem;
+		font-weight: normal;
+		color: #fff;
+		margin-right: var(--SPACE3);
+
 		@include media-breakpoint(sm) {
-			border-width: 4px;
+			font-size: 0.5rem;
 		}
 	}
+	
+	.playTime {
+		font-size: 1.2rem;
+		color: var(--banana);
+		font-weight: bold;
+		
+		@include media-breakpoint(sm) {
+			font-size: 0.5rem;
+		}
   }
   
   .horizontalDivider {
 	width: 1px;
-	background-color: #ffffff;
+	background-color: var(--banana);
 	height: 45px;
 	margin: 0 15px;
 	
 	@include media-breakpoint(sm) {
-		margin: 0 20px;
-		height: 60px;
-		width: 3px;
-		
+		display: none;
 	}
-  }
-  
-  .nowPlayingTitle {
-	font-family: 'Helvetica';
-	color: #ffffff;
-	font-weight: 700;
-	max-width: 230px;
-	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;
-	  font-size: 0.7rem;
-  }
-  
-  .liveBadge {
-	font-family: 'Helvetica';
-    color: #8a1c15;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 8px 10px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 2px solid #8a1c15;
-    border-radius: 3px;
-	text-align: center;
-
-	opacity: 0;
-
-	transition: opacity .3s ease-in;
-  }
-
-  .progressBar {
-
-	--progresBarWidth: 60%;
-
-	-webkit-appearance: none;
-    margin: 18px 15px;
-    width: var(--progresBarWidth);
-    height: 8px;
-	
-	&:focus {
-		outline: none;
-	  }
-	  &::-webkit-slider-runnable-track {
-		width: var(--progresBarWidth);
-		height: 8.4px;
-		cursor: pointer;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		background: #ffffff;
-		border-radius: 1.3px;
-		border: 0.2px solid #010101;
-	  }
-	  &::-webkit-slider-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-		-webkit-appearance: none;
-		margin-top: -14px;
-	  }
-	  &:focus::-webkit-slider-runnable-track {
-		background: #367ebd;
-	  }
-	  &::-moz-range-track {
-		width: var(--progresBarWidth);
-		height: 8.4px;
-		cursor: pointer;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		background: #ffffff;
-		border-radius: 1.3px;
-		border: 0.2px solid #010101;
-	  }
-	  &::-moz-range-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-	  }
-	  &::-ms-track {
-		width: var(--progresBarWidth);
-		height: 8.4px;
-		cursor: pointer;
-		background: transparent;
-		border-color: transparent;
-		border-width: 16px 0;
-		color: transparent;
-	  }
-	  &::-ms-fill-lower {
-		background: #2a6495;
-		border: 0.2px solid #010101;
-		border-radius: 2.6px;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-	  }
-	  &::-ms-fill-upper {
-		background: #ffffff;
-		border: 0.2px solid #010101;
-		border-radius: 2.6px;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-	  }
-	  &::-ms-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-	  }
-	  &:focus::-ms-fill-lower {
-		background: #ffffff;
-	  }
-	  &:focus::-ms-fill-upper {
-		background: #367ebd;
-	  }
-
-	  @include media-breakpoint (sm) {
-		  display: none;
-	  }
   }
   

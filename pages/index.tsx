@@ -5,13 +5,17 @@ import style from "./Home.module.scss";
 import cn from "classnames";
 
 import { useKeenSlider } from "keen-slider/react";
-import { GetServerSideProps } from 'next';
-import { QueryClient } from 'react-query';
-import { queryRecordedShows } from '../api/RecordedShows.api';
-import { stringify } from 'flatted';
-import { dehydrate } from 'react-query/hydration';
-import { RecordedShowsListStandalone } from '../components/RecordedShowsList/RecordedShowsListStandalone';
-import { useRecordedShows } from '../hook/useRecordedShows';
+import { GetServerSideProps } from "next";
+import { QueryClient } from "react-query";
+import { queryRecordedShows } from "../api/RecordedShows.api";
+import { stringify } from "flatted";
+import { dehydrate } from "react-query/hydration";
+import { RecordedShowsListStandalone } from "../components/RecordedShowsList/RecordedShowsListStandalone";
+import { useRecordedShows } from "../hook/useRecordedShows";
+import Image from "next/image";
+
+import GreyBg from "../public/assets/backgrounds/text1.jpg";
+import Link from "next/link";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -75,37 +79,44 @@ export default function Home() {
               <h2>רדיוסבתא</h2>
               <p>קולקטיב רדיו אינטרנט</p>
             </div>
-            <div className="player">כאן יהיה נגן</div>
           </div>
-          <div className={style.homeContent}>
-			  <div className="agenda">
-            <h2>מה בלו&quot;ז?</h2>
-			<div>לוז יהיה פה</div>
-			  </div>
+          <div className={cn(style.homeContent, style.quote)}>
+            <p>כשהעגלה נוסעת, כל המלונים מסתדרים בארגזים שלהם - סבא בקל</p>
           </div>
         </div>
       </section>
-	  <section className={style.latestShowsSection}>
-		  <h2>התווספו לבוידעם</h2>
-		  <div className={style.latestShowsList}>
-			  <RecordedShowsListStandalone />
-		  </div>
-	  </section>
+      <section className={style.latestShowsSection}>
+        <Image
+          className={style.latestShowsBg}
+          src={GreyBg}
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
+        <h2>העלאות אחרונות</h2>
+        <div className={style.latestShowsList}>
+          <RecordedShowsListStandalone />
+        </div>
+        <p className={style.allShowsLink}>
+          <Link href="/archive">לבויעדם >></Link>
+        </p>
+      </section>
     </Page>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const queryClient = new QueryClient();
-  
-	await queryClient.prefetchInfiniteQuery(
-	  `recordedShows-archive`,
-	  ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam })
-	);
-  
-	return {
-	  props: {
-		dehydratedState: stringify(dehydrate(queryClient)),
-	  },
-	};
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery(
+    `recordedShows-archive`,
+    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
+  );
+
+  return {
+    props: {
+      dehydratedState: stringify(dehydrate(queryClient)),
+    },
   };
+};
