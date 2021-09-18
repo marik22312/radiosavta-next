@@ -9,15 +9,11 @@ import { dehydrate } from "react-query/hydration";
 import styles from "./ArchivePage.module.scss";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
 import { useRecordedShows } from "../../hook/useRecordedShows";
-import { RecordedShowsListStandalone } from "../../components/RecordedShowsList/RecordedShowsListStandalone";
-import { RecordedShowsList } from "../../components/RecordedShowsList/RecordedShowsList";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
-import { getProgramImage } from "../../utils/program.utils";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
 import useDebounce from "../../hook/useDebouce";
 import Select from "react-select";
-import { getAllActivePrograms } from '../../api/Programs.api';
 import { usePrograms } from '../../hook/usePrograms';
 
 const ProgramsPage: React.FC = (props) => {
@@ -126,6 +122,12 @@ const ProgramsPage: React.FC = (props) => {
             /> */}
           </div>
           {recordedShows?.map((r) => {
+			  if (!r.length) {
+				  return <div className={styles.noResultsWrapper}>
+					  <h5>לא מצאנו תוכנית בבוידעם שמתאימה לחיפוש זה</h5>
+					  <p>אולי ננסה חיפוש אחר?</p>
+				  </div>
+			  }
             return r.map((show) => (
               <div key={show.id} className={styles.singleShow}>
                 <RecordedShowPlayer

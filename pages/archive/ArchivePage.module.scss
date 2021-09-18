@@ -103,3 +103,16 @@
 .dateSelect {
 	margin-right: 10px;
 }
+
+.noResultsWrapper {
+	min-height: 11rem;
+	color:#ffffff;
+	text-align: center;
+
+	padding-top: 2rem;
+	width: 100%;
+
+	& > * {
+		margin-bottom: 1rem;
+	}
+}

@@ -25,10 +25,6 @@ export const FooterPlayer: React.FC = () => {
     toggleLive();
   };
 
-  if (isStopped) {
-	  return null;
-  }
-
   return (
     <>
       <div className={styles.footer}>
