@@ -1,9 +1,10 @@
 @import '../../styles/mixins';
 
 
-.programsPage {
+.archivePage {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/v1631971111/radiosavta/backgrounds/bg_purple.jpg");
 	background-size: cover;
+	min-height: calc(100vh - var(--footerHeight));
 }
 
 .recordedShows {
@@ -44,6 +45,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+	min-height: 100%;
 }
 
 .programWrapper {
@@ -105,7 +107,6 @@
 }
 
 .noResultsWrapper {
-	min-height: 11rem;
 	color:#ffffff;
 	text-align: center;
 

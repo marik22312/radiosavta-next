@@ -63,7 +63,7 @@ const ProgramsPage: React.FC = (props) => {
   }, [handleObserver]);
   return (
     <Page title="הבוידעם">
-      <div className={styles.programsPage}>
+      <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
           <p className={styles.quote}>ברדיו יש לך שני כלים, צליל ושקט.</p>
           <div className={styles.pageTitleWrapper}>
