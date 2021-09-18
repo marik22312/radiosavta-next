@@ -1,0 +1,52 @@
+@import '../../styles/mixins';
+
+
+.programsPage {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/v1631971111/radiosavta/backgrounds/bg_purple.jpg");
+	background-size: cover;
+}
+
+.singleShow {
+	width: 47%;
+    height: 88px;
+    margin: 10px 10px;
+}
+
+.quoteSection {
+	margin-bottom:1rem;
+}
+
+.quote {
+	color: #ffffff;
+	font-size: 1rem;
+	padding-top: 1.5rem;
+	margin-right: 3rem;
+	margin-bottom: 1.5rem;
+	text-shadow: var(--shadow);
+
+	@include media-breakpoint(sm) {
+		margin-right: 1.5rem;
+	}
+}
+
+.programsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.programWrapper {
+	margin: 12px 0;
+}
+
+.pageTitleWrapper {
+	display: flex;
+	justify-content: center;
+}
+.pageTitle {
+	padding: 5px 8px;
+    display: inline;
+    background-color: var(--dark-green);
+    font-size: 1.7rem;
+	color: #ffffff;
+}
