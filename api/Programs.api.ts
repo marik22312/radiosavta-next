@@ -1,3 +1,4 @@
+import { Program } from '../domain/Program';
 import { httpClient } from "./httpClient";
 
 export interface PaginatedRequest {
@@ -7,7 +8,7 @@ export interface PaginatedRequest {
 }
 
 export const getAllActivePrograms = (opts?: PaginatedRequest) => {
-  return httpClient.get<{ activeShows: any[] }>("/v2/programs", {
+  return httpClient.get<{ activeShows: Program[] }>("/v2/programs", {
     params: {
       ...opts,
     },
@@ -15,7 +16,7 @@ export const getAllActivePrograms = (opts?: PaginatedRequest) => {
 };
 
 export const getAllArchivedPrograms = (opts?: PaginatedRequest) => {
-  return httpClient.get<{ archivedShows: any[] }>(
+  return httpClient.get<{ archivedShows: Program[] }>(
     "/v2/programs/archived",
     {
       params: {

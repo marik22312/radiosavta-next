@@ -15,19 +15,9 @@ import { dehydrate } from "react-query/hydration";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import * as FLATTED from "flatted";
 import { BASE_IMAGE_BW, BASE_IMAGE } from "../../config/images";
+import { getDayOfWeek, getProgramImage } from '../../utils/program.utils';
 
-const getProgramImage = (program: any) => {
-  return `${BASE_IMAGE_BW}/${
-    program.cover_image ? program.cover_image : program.users[0].profile_image
-  }`;
-};
 
-const getDayOfWeek = (program: any) => {
-  return moment().weekday(program.programTimes[0].day_of_week).toDate();
-};
-const getTime = (program: any) => {
-  return moment(program.programTimes[0].start_time).toDate();
-};
 
 const UsersList: React.FC<{ users: any[] }> = (props) => {
   if (props.users.length > 1) {

@@ -74,9 +74,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <Link href="/programs">
             <a>תכניות</a>
           </Link>
-          <Link href="/programs/211">
-            <a>תכנית לבדיקה</a>
-          </Link>
           <Link href="/archive">
             <a>הבוידעם</a>
           </Link>
