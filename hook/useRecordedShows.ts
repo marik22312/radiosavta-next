@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { queryRecordedShows } from "../api/RecordedShows.api";
 
-export const useRecordedShows = () => {
+export const useRecordedShows = (args?: {search?: string, programId?: number}) => {
   const queryData = useInfiniteQuery(
-    `recordedShows-archive`,
+    `recordedShows-archive${args?.search}${args?.programId}`,
 	// someCode
-    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam }),
+    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, search: args?.search || undefined, programId: args?.programId }),
     {
       getNextPageParam: (lastPage) => lastPage.data.pageData.next.page,
       refetchOnWindowFocus: false,

@@ -5,6 +5,7 @@ export const queryRecordedShows = (params?: {
   page?: number;
   limit?: number;
   programId?: number | string;
+  search?: string
 }) => {
   return httpClient.get<{ recordedShows: RecordedShow[]; pageData: any }>(
     "/v2/recorded-shows",
