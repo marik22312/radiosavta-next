@@ -51,9 +51,10 @@ const ProgramsPage: React.FC = (props) => {
 		  </div>
 	  </section>
       <section className={styles.programsList}>
+
 	  {recordedShows?.map((r) => {
-          return r.map((show) => (
-            <div key={show.id} className={styles.singleShow}>
+		  return r.map((show) => (
+			  <div key={show.id} className={styles.singleShow}>
               <RecordedShowPlayer
                 url={show.url}
                 name={show.name}
@@ -61,8 +62,8 @@ const ProgramsPage: React.FC = (props) => {
 				programName={show.program.name_he}
 				backgroundImageUrl={`${BASE_IMAGE}/${
 					show.program.cover_image ? show.program.cover_image : show.program.users[0].profile_image
-				  }`}
-              />
+				}`}
+				/>
             </div>
           ));
         })}

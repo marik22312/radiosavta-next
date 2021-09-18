@@ -6,10 +6,21 @@
 	background-size: cover;
 }
 
+.recordedShows {
+	display: flex;
+    justify-content: center;
+	flex-wrap: nowrap;
+    padding-bottom: var(--footerHeight);
+}
+
 .singleShow {
 	width: 47%;
     height: 88px;
     margin: 10px 10px;
+
+	@media screen and (max-width: 1024px) {
+		width: 90%;
+	}
 }
 
 .quoteSection {
