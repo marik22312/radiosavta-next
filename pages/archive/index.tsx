@@ -21,6 +21,11 @@ const ProgramsPage: React.FC = (props) => {
   const [selectedProgram, setSelectedProgram] = useState<number>();
 
   const debounceSearchQuery = useDebounce(searchQuery);
+
+  useEffect(() => {
+	// TODO: Log to mixpanel
+  },[debounceSearchQuery])
+
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
     search: debounceSearchQuery,
 	programId: selectedProgram
@@ -37,6 +42,7 @@ const ProgramsPage: React.FC = (props) => {
   };
 
   const onProgramChange = (id: number) => {
+	  // TODO: log to mixpanel
 	  setSelectedProgram(id)
   }
 

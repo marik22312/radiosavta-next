@@ -8,7 +8,7 @@ import "../styles/globals.scss";
 
 import { PlayerProvider } from "../providers/PlayerProvider";
 
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { FooterPlayer } from "../components/FooterPlayer/FooterPlayer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
@@ -27,4 +27,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   );
 }
+
+export function reportWebVitals({ id, name, label, value }: NextWebVitalsMetric) {
+	console.log('id',id, name, value)
+	// Use `window.gtag` if you initialized Google Analytics as this example:
+	// https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
+
+	// @ts-expect-error
+	window.gtag('event', name, {
+	  event_category:
+		label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+	  value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+	  event_label: id, // id unique to current page load
+	  non_interaction: true, // avoids affecting bounce rate.
+	})
+  }
+
 export default MyApp;
