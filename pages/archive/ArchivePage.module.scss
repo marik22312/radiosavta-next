@@ -60,4 +60,46 @@
     background-color: var(--dark-green);
     font-size: 1.7rem;
 	color: #ffffff;
+	box-shadow: var(--shadow);
+}
+
+.filterWrapper {
+	width: 97%;
+}
+
+.input {
+	height: 50px;
+	background: rgba(0, 0, 0%, 40%);
+	border: 1px solid var(--banana);
+	margin: 10px 0;
+	color: rgba(255, 255, 100%, 100%);
+	font-size: 0.8rem;
+	padding-right: 10px;
+	outline: none !important;
+	&:focus {
+		border-width: 2px;
+	}
+
+	&::placeholder {
+		color: rgba(255, 255, 100%, 75%);
+		font-size: 0.8rem;
+		padding-right: 10px;
+	}
+	
+}
+
+.searchQuery {
+	width: 100%;
+}
+
+.programSelect, .dateSelect {
+	width: calc(50% - 10px);
+}
+
+.programSelect {
+	margin-left: 10px;
+}
+
+.dateSelect {
+	margin-right: 10px;
 }

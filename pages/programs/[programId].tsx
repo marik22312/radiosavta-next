@@ -69,6 +69,7 @@ const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
         >
           <div className={style.programDetailsWrapper}>
             <div className={style.programInfo}>
+				<h1 className={style.programTime}>{program.name_he}</h1>
               <p className={style.programTime}>
                 {Intl.DateTimeFormat("he", { weekday: "long" }).format(
                   getDayOfWeek(program)

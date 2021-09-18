@@ -11,7 +11,7 @@ import { usePlayerControls } from '../../hook/usePlayerControls';
 export const FooterPlayer: React.FC = () => {
   const { isLive, toggleLive } = useLivePlayer();
   const { pause } = usePlayerControls();
-  const { title, isPlaying, programTitle } = usePLayerState();
+  const { title, isPlaying, programTitle, isStopped } = usePLayerState();
 
   //   const debouncedSetTime = (time: number) => {
   //     audioRef.current.currentTime = time;
@@ -24,6 +24,10 @@ export const FooterPlayer: React.FC = () => {
     // logPlayButtonPressed(isPlaying ? "PLAY" : "PAUSE");
     toggleLive();
   };
+
+  if (isStopped) {
+	  return null;
+  }
 
   return (
     <>

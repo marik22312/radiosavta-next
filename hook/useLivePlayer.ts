@@ -23,7 +23,6 @@ export const useLivePlayer = () => {
 
   const toggleLive = () => {
 	  if (!isLive) {
-		console.log('Toggling')
       refetch();
       play({
         url: LIVE_STREAM_URL,

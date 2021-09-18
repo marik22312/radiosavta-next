@@ -12,6 +12,8 @@
 	background-repeat: no-repeat;
     background-size: cover;
 
+	box-shadow: var(--shadow);
+
 	@include media-breakpoint(sm) {
 		width: 200px;
 	}
