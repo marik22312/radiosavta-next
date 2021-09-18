@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { usePLayerState } from '../../hook/usePlayerState';
 import { PlayPauseButton } from '../PlayPauseButton/PlayPauseButton'
+import { resourceUsage } from 'process';
+import { resourceLimits } from 'worker_threads';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -23,12 +25,15 @@ enum PlayerStates {
 export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   props
 ) => {
-	const {play, stop} = usePlayerControls();
+	const {play, pause, resume} = usePlayerControls();
 	const { isPlaying, title } = usePLayerState()
 
 const togglePlay = () => {
 	if (title === props.name) {
-		return stop()
+		if (isPlaying) {
+			return pause();
+		}
+		return resume();
 	}
 		return play({
 			title: props.name,
