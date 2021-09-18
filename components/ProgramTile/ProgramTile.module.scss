@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .programTile {
 	height: 200px;
 	width: 495px;
@@ -9,6 +11,10 @@
 
 	background-repeat: no-repeat;
     background-size: cover;
+
+	@include media-breakpoint(sm) {
+		width: 200px;
+	}
 }
 
 .topSection {
@@ -38,6 +44,11 @@
 	
 	background-repeat: no-repeat;
     background-size: cover;
+
+	@include media-breakpoint(sm) {
+		height: 50px;
+		width: 50px;
+	}
 }
 
 .bottomSection {
@@ -48,6 +59,10 @@
 
 .broadcasters {
 	height: 70px;
+
+	@include media-breakpoint(sm) {
+		height: 50px;
+	}
 }
 
 .seeProgram {

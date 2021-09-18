@@ -1,3 +1,6 @@
+@import '../../styles/mixins';
+
+
 .programsPage {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/v1631971111/radiosavta/backgrounds/bg_grey_1.jpg");
 	background-size: cover;
@@ -14,6 +17,10 @@
 	margin-right: 3rem;
 	margin-bottom: 1.5rem;
 	text-shadow: var(--shadow);
+
+	@include media-breakpoint(sm) {
+		margin-right: 1.5rem;
+	}
 }
 
 .programsList {

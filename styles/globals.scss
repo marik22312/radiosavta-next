@@ -9,6 +9,10 @@ body {
   background-color: var(--banana);
 
   font-size: 30px;
+
+  @include media-breakpoint(sm) {
+	font-size: 15px;
+}
 }
 
 body {
