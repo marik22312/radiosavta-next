@@ -18,11 +18,13 @@ const ProgramsPage: React.FC = (props) => {
   return (
     <Page title="התכניות שלנו">
 		<div className={styles.programsPage}>
-
       <section className={styles.quoteSection}>
 		  <p className={styles.quote}>
 		  הלו? זה רדיו? זוהי השאלה, מהי הפינה?
 		  </p>
+		  <div className={styles.pageTitleWrapper}>
+		  	<h1 className={styles.pageTitle}>התכניות שלנו</h1>
+		  </div>
 	  </section>
       <section className={styles.programsList}>
         {programs.map((program) => {
