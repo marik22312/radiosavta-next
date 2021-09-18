@@ -4,3 +4,5 @@ export const BASE_IMAGE =
   "https://res.cloudinary.com/marik-shnitman/image/upload/w_1080/v1547932540/";
 export const BASE_IMAGE_ICON =
   "https://res.cloudinary.com/marik-shnitman/image/upload/w_300/v1547932540/";
+export const BASE_IMAGE_AVATAR =
+  "https://res.cloudinary.com/marik-shnitman/image/upload/w_70/v1547932540/";

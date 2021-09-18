@@ -3,7 +3,7 @@ import { getAllActivePrograms, PaginatedRequest } from "../api/Programs.api";
 
 export const usePrograms = (opts?: PaginatedRequest) => {
   const { data, isLoading } = useQuery(
-    ["programs"],
+    'active-programs',
     () => getAllActivePrograms(opts),
     {
       refetchOnWindowFocus: false,
@@ -12,7 +12,7 @@ export const usePrograms = (opts?: PaginatedRequest) => {
   );
 
   return {
-    programs: data?.data.activeShows || [],
+    programs: data?.data?.activeShows || [],
     isLoading,
   };
 };
