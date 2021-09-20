@@ -33,7 +33,7 @@ export const Page: React.FC<PageProps> = ({
 
 		{/* eslint-disable-next-line @next/next/no-page-custom-font */}
 		<link
-          href="https://fonts.googleapis.com/css2?family=Alef&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Karantina&display=optional"
           rel="stylesheet"
         />
 
