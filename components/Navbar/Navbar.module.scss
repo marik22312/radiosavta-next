@@ -3,7 +3,9 @@
 .titleWrapper {
 	height: 100%;
 	width: var(--navbar-width);
-	background: var(--light-green);
+	// background: url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/cropped.jpg'), #066600;
+	background:linear-gradient(0deg, rgba(6, 102, 0, 0.9), rgba(6, 102, 0, 0.9)), url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/crop2.jpg');
+	background-size: cover;
 	position: fixed;
 	right: 0;
 	transition: 0.5s;
