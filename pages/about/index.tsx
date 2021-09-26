@@ -6,7 +6,7 @@ import cn from "classnames";
 import { Timeline } from "../../components/Timeline/Timeline";
 
 import { TeamMember } from "../../components/TeamMember/TeamMember";
-import { TeamMembersData } from "./data/team";
+import TeamMembersData from "./data/team.json";
 import { Title } from '../../components/Typography/Title';
 const AboutUsPage: React.FC = () => {
   return (
