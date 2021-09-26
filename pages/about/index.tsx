@@ -3,6 +3,7 @@ import { Page } from "../../components/Page";
 
 import styles from "./AboutPage.module.scss";
 import cn from "classnames";
+import { Timeline } from "../../components/Timeline/Timeline";
 
 const AboutUsPage: React.FC = () => {
   return (
@@ -66,8 +67,10 @@ const AboutUsPage: React.FC = () => {
 			</div>
           </div>
         </section>
-        <section>Timeline section</section>
         <section>בעלי תפקידים</section>
+        <section>
+          <Timeline />
+        </section>
       </div>
     </Page>
   );

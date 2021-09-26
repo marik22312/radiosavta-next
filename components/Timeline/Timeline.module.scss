@@ -1,0 +1,37 @@
+.timelineWrapper {
+	direction: ltr;
+	> div {
+		margin: 7rem 0;
+	}
+}
+
+.timelineText {
+	margin: 0 !important;
+	line-height: 1 !important;
+}
+
+.timelineCircle {
+	background-image: url("./icons/Play.svg");
+	background-size: contain;
+    background-position: center;
+    border: 0;
+    box-shadow: none !important;
+    top: 40px;
+}
+
+.timelineImage {
+	max-width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.timelineTitle {
+	text-decoration: underline;
+	margin-bottom: 3px;
+}
+
+.timelineImageWrapper {
+	opacity: 1 !important;
+	padding-top: 0 !important;
+	height: 380px;
+}
