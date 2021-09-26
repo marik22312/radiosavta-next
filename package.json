@@ -25,7 +25,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-query": "^3.17.1",
-    "react-select": "^4.3.1"
+    "react-select": "^4.3.1",
+    "react-vertical-timeline-component": "^3.3.3"
   },
   "devDependencies": {
     "@aws-amplify/cli": "^5.0.0",
