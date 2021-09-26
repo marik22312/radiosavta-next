@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <Link href="/archive">
             <a>הבוידעם</a>
           </Link>
-          <Link href="/">
+          <Link href="/about">
             <a>הסיפור שלנו</a>
           </Link>
         </div>

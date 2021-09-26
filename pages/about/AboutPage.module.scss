@@ -1,0 +1,78 @@
+@import '../../styles/mixins';
+
+.aboutUsPage {
+}
+
+.quoteSection {
+	margin-bottom:1rem;
+}
+
+.quote {
+	color: #ffffff;
+	font-size: 1rem;
+	padding-top: 1.5rem;
+	margin-right: 3rem;
+	margin-bottom: 1.5rem;
+	text-shadow: var(--shadow);
+
+	@include media-breakpoint(sm) {
+		margin-right: 1.5rem;
+	}
+}
+
+.pageTitleWrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.pageTitle {
+	padding: 5px 8px;
+    display: inline;
+    background-color: var(--dark-green);
+    font-size: 1.7rem;
+	color: #ffffff;
+	box-shadow: var(--shadow);
+}
+
+.section {
+	margin: 0px var(--SPACE1);
+	margin-bottom: var(--SPACE1);
+	
+	p {
+		margin-top: var(--SPACE1);	
+	}
+
+	@include media-breakpoint(md) {
+		text-align: center;
+		display: block;
+	}
+}
+
+.firstSection {
+	padding: 0px 15px;
+    display: flex;
+    flex-direction: row-reverse;
+
+	img {
+		box-shadow: var(--shadow);
+
+	}
+	
+	p {
+		align-self: center;
+	}
+
+	@include media-breakpoint(md) {
+		display: block;
+	}
+}
+
+.storyImageWrapper {
+	margin: var(--SPACE1) 0;
+	text-align: center;
+	
+	img {
+		box-shadow: var(--shadow);
+		width: 100%;
+	}
+}
