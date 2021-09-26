@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Page } from "../../components/Page";
 
 import styles from "./AboutPage.module.scss";
