@@ -1,0 +1,69 @@
+@import '../../styles/mixins';
+
+.teamMembersWrapper {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-column-gap: var(--SPACE1);
+	grid-row-gap: var(--SPACE1);
+	margin: 0 var(--SPACE1);
+	margin-top: var(--SPACE1);
+	
+		@include media-breakpoint(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+}
+
+.memberWrapper {
+	position: relative;
+}
+
+.imageWrap {
+	width: 100%;
+
+	img {
+		object-fit: cover;
+		width: 100%;
+		height: 350px;
+
+		@include media-breakpoint(md) {
+			height: 200px;
+		}
+		border: 10px solid var(--dark-green);
+	}
+}
+
+.memberInfo {
+	opacity: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	position: absolute;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+	
+	text-align: center;
+	text-shadow: var(--shadow);
+	color: #ffffff;
+	transition: opacity .2s ease-in-out;
+	border: 10px solid #ffffff;
+
+	@include media-breakpoint(md) {
+		position: static;
+		border: none;
+		opacity: 1;
+		display: block;
+		background: none;
+	}
+
+	p {
+		width: 90%;
+	}
+	&:hover {
+		opacity: 1;
+	}
+}
