@@ -5,15 +5,16 @@ import styles from "./AboutPage.module.scss";
 import cn from "classnames";
 import { Timeline } from "../../components/Timeline/Timeline";
 
+import { TeamMember } from "../../components/TeamMember/TeamMember";
+import TeamMembersData from "./data/team.json";
+import { Title } from '../../components/Typography/Title';
 const AboutUsPage: React.FC = () => {
   return (
     <Page title="הסיפור של סבתא">
       <div className={styles.aboutUsPage}>
         <section className={styles.quoteSection}>
           <p className={styles.quote}>הלו? זה רדיו? זוהי השאלה, מהי הפינה?</p>
-          <div className={styles.pageTitleWrapper}>
-            <h1 className={styles.pageTitle}>סיפורי סבתא</h1>
-          </div>
+          <Title as='h1'>סיפורי סבתא</Title>
         </section>
         <section className={styles.storySection}>
           <div className="storyWrapper">
@@ -36,41 +37,51 @@ const AboutUsPage: React.FC = () => {
                 משדר מוזיקה איכותית ללא פשרות והרבה כבוד לסבים והסבתות, חיבור
                 לשורשים ולרוח המדברית.
               </p>
-			  <p>
-              בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע"י תושבי מצפה רמון.
-              עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את מצפה רמון אך לא
-              את רדיו-סבתא, והחלו שידורים מבתי חלק מהשדרנים בנוסף לשידור החי
-              מהאולפן.</p>
+              <p>
+                בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע"י תושבי מצפה
+                רמון. עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את מצפה
+                רמון אך לא את רדיו-סבתא, והחלו שידורים מבתי חלק מהשדרנים בנוסף
+                לשידור החי מהאולפן.
+              </p>
             </div>
-			<div className={cn(styles.thirdSection, styles.section)}>
-            <p> בשנת 2020 עם פרוץ משבר הקורונה התחנה עברה לשידור אינטרנטי
-              ללא אולפן מרכזי אלא ממספר נקודות שידור ברחבי ישראל, מרמת הגולן, תל
-              אביב, באר שבע, אשלים, מדרשת בן גוריון ומצפה רמון. נכון לאוקטובר
-              2020 התחנה מתפקדת למעשה כקולקטיב שבו מתחלקים החברים בזמני השידור
-              בערבים.
-            </p>
-			</div>
-			<div className={cn(styles.fourthSection, styles.section)}>
-            <p>
-              המודל הכלכלי של רדיו סבתא נשען בעיקר על כספי תומכים חופשיים, דרך
-              פלטפורמת פטריון. כדי שהתחנה תוכל לשדר באופן בר קיימא, הציפייה
-              מהחברים בקולקטיב לעשות מנוי לתרומה חודשית בשיעור של 5$ שמאפשר
-              תשלום על הוצאות התפעול השוטפות והמשך הצטיידות ומיתוג.{" "}
-            </p>
-			<div className={styles.storyImageWrapper}>
-              <img
-                src="http://lorempixel.com/1920/400/people/team-image-here/"
-                alt="Our team image"
-                className={styles.backgroundImage}
-              />
+            <div className={cn(styles.thirdSection, styles.section)}>
+              <p>
+                {" "}
+                בשנת 2020 עם פרוץ משבר הקורונה התחנה עברה לשידור אינטרנטי ללא
+                אולפן מרכזי אלא ממספר נקודות שידור ברחבי ישראל, מרמת הגולן, תל
+                אביב, באר שבע, אשלים, מדרשת בן גוריון ומצפה רמון. נכון לאוקטובר
+                2020 התחנה מתפקדת למעשה כקולקטיב שבו מתחלקים החברים בזמני השידור
+                בערבים.
+              </p>
             </div>
-			</div>
+            <div className={cn(styles.fourthSection, styles.section)}>
+              <p>
+                המודל הכלכלי של רדיו סבתא נשען בעיקר על כספי תומכים חופשיים, דרך
+                פלטפורמת פטריון. כדי שהתחנה תוכל לשדר באופן בר קיימא, הציפייה
+                מהחברים בקולקטיב לעשות מנוי לתרומה חודשית בשיעור של 5$ שמאפשר
+                תשלום על הוצאות התפעול השוטפות והמשך הצטיידות ומיתוג.{" "}
+              </p>
+              <div className={styles.storyImageWrapper}>
+                <img
+                  src="http://lorempixel.com/1920/400/people/team-image-here/"
+                  alt="Our team image"
+                  className={styles.backgroundImage}
+                />
+              </div>
+            </div>
           </div>
         </section>
-        <section>בעלי תפקידים</section>
+        <section className={styles.teamSection}>
+			<Title as="h2">בעלי תפקידים</Title>
+          <div className={styles.teamMembersWrapper}>
+            {TeamMembersData.map((member) => {
+              return <TeamMember {...member} key={`member-${member.name}`} />;
+            })}
+          </div>
+        </section>
         <section>
           <Timeline />
-        </section>
+		  </section>
       </div>
     </Page>
   );

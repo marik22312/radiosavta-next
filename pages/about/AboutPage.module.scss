@@ -21,20 +21,6 @@
 	}
 }
 
-.pageTitleWrapper {
-	display: flex;
-	justify-content: center;
-}
-
-.pageTitle {
-	padding: 5px 8px;
-    display: inline;
-    background-color: var(--dark-green);
-    font-size: 1.7rem;
-	color: #ffffff;
-	box-shadow: var(--shadow);
-}
-
 .section {
 	margin: 0px var(--SPACE1);
 	margin-bottom: var(--SPACE1);
@@ -80,4 +66,18 @@
 		box-shadow: var(--shadow);
 		width: 100%;
 	}
+}
+
+.teamMembersWrapper {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-column-gap: var(--SPACE1);
+	grid-row-gap: var(--SPACE1);
+	margin: 0 var(--SPACE1);
+	margin-top: var(--SPACE1);
+	
+		@include media-breakpoint(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 }

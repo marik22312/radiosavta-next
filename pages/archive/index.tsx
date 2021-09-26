@@ -15,6 +15,7 @@ import cn from "classnames";
 import useDebounce from "../../hook/useDebouce";
 import Select from "react-select";
 import { usePrograms } from '../../hook/usePrograms';
+import { Title } from '../../components/Typography/Title';
 
 const ProgramsPage: React.FC = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,9 +73,7 @@ const ProgramsPage: React.FC = (props) => {
       <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
           <p className={styles.quote}>ברדיו יש לך שני כלים, צליל ושקט.</p>
-          <div className={styles.pageTitleWrapper}>
-            <h1 className={styles.pageTitle}>הבוידעם</h1>
-          </div>
+		  <Title as='h1'>הבוידעם</Title>
         </section>
         <section className={styles.programsList}>
           <div className={styles.filterWrapper}>
