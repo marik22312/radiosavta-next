@@ -11,7 +11,7 @@ import { usePrograms } from "../../hook/usePrograms";
 import { ProgramTile } from "../../components/ProgramTile/ProgramTile";
 
 import styles from './ProgramsPage.module.scss'
-import Link from 'next/link';
+import { Title } from '../../components/Typography/Title'
 
 const ProgramsPage: React.FC = (props) => {
   const { programs } = usePrograms();
@@ -22,9 +22,7 @@ const ProgramsPage: React.FC = (props) => {
 		  <p className={styles.quote}>
 		  הלו? זה רדיו? זוהי השאלה, מהי הפינה?
 		  </p>
-		  <div className={styles.pageTitleWrapper}>
-		  	<h1 className={styles.pageTitle}>התכניות שלנו</h1>
-		  </div>
+		  <Title as="h1">התכניות שלנו</Title>
 	  </section>
       <section className={styles.programsList}>
         {programs.map((program) => {

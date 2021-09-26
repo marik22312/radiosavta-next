@@ -21,19 +21,6 @@
 	}
 }
 
-.pageTitleWrapper {
-	display: flex;
-	justify-content: center;
-}
-
-.pageTitle {
-	padding: 5px 8px;
-    display: inline;
-    background-color: var(--dark-green);
-	color: #ffffff;
-	box-shadow: var(--shadow);
-}
-
 .section {
 	margin: 0px var(--SPACE1);
 	margin-bottom: var(--SPACE1);
