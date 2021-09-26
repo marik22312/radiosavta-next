@@ -55,6 +55,10 @@
 
 	img {
 		box-shadow: var(--shadow);
+		
+		@include media-breakpoint(md) {
+			max-width: 100%;
+		}
 
 	}
 	
