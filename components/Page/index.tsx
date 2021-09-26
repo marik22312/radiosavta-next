@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/google-font-display */
 import React, { useState } from "react";
 
 import Head from "next/head";
@@ -33,7 +34,7 @@ export const Page: React.FC<PageProps> = ({
 
 		{/* eslint-disable-next-line @next/next/no-page-custom-font */}
 		<link
-          href="https://fonts.googleapis.com/css2?family=Karantina&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Karantina"
           rel="stylesheet"
         />
 
