@@ -17,12 +17,14 @@
 }
 .title {
 	user-select: none;
+	font-family: "Karantina";
+	text-shadow: var(--inverted-shadow);
 	
 display: inline-block;
 direction: ltr;
 writing-mode: vertical-lr;
 transform: rotate(180deg);
-font-size: 42px;
+font-size: 1.7rem;
 text-align: right;
 color: #ffffff;
 z-index: 9990;

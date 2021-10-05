@@ -2,19 +2,35 @@
 
 .aboutUsPage {
 	font-size: 1rem;
+	padding: 0 50px;
+	background-image: url('https://res.cloudinary.com/marik-shnitman/image/upload/v1633459010/radiosavta/backgrounds/vinyl.png');
+	background-size: contain;
+	
+	@include media-breakpoint(md) {
+		padding: 0px 25px
+		
+	}
 }
 
 .quoteSection {
-	margin-bottom:1rem;
+	padding-top: 1.5rem;
+	text-align: center;
+	
+}
+
+.titleSection {
+	margin: var(--SPACE1) 0;
 }
 
 .quote {
-	color: #ffffff;
-	font-size: 1rem;
-	padding-top: 1.5rem;
-	margin-right: 3rem;
 	margin-bottom: 1.5rem;
-	text-shadow: var(--shadow);
+	display: inline;
+	    color: #ffffff;
+    font-size: 0.8rem;
+    text-shadow: var(--shadow);
+    letter-spacing: 2px;
+	background-color: rgba(4, 41, 1, 40%);
+	padding: 10px;
 
 	@include media-breakpoint(sm) {
 		margin-right: 1.5rem;
@@ -22,35 +38,55 @@
 }
 
 .section {
-	margin: 0px var(--SPACE1);
-	margin-bottom: var(--SPACE1);
+	background-color: rgba(4, 41, 1, 40%);
 	
 	p {
-		margin-top: var(--SPACE1);	
+		font-size: 0.9rem;
+		line-height: 34px;
+		color: #ffffff;
+		text-shadow: 5px 5px 4px #000000;
+		letter-spacing: 1px;
+		padding: 15px 15px;
+		padding-bottom: 0;
+		
+		@include media-breakpoint(sm) {
+			font-size: 1rem;
+		}
 	}
 
 	@include media-breakpoint(md) {
 		text-align: center;
 		display: block;
+
+		font-size: 2rem;
 	}
 }
 
 .firstSection {
-	padding: 0px 15px;
-    display: flex;
-    flex-direction: row-reverse;
 
 	img {
 		box-shadow: var(--shadow);
+    width: 600px;
+    float: left;
+    margin-right: 40px;
+	margin-bottom: var(--SPACE1);
+	max-width: 600px;
+    height: 300px;
 		
 		@include media-breakpoint(md) {
 			max-width: 100%;
+			height: auto;
+			float:none;
+			margin-right: 0;
 		}
 
 	}
 	
 	p {
 		align-self: center;
+		@include media-breakpoint(md) {
+			margin-top: var(--SPACE1);
+		}
 	}
 
 	@include media-breakpoint(md) {
@@ -59,7 +95,7 @@
 }
 
 .storyImageWrapper {
-	margin: var(--SPACE1) 0;
+	margin: var(--SPACE3) 0;
 	text-align: center;
 	
 	img {

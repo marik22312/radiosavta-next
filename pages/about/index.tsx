@@ -13,14 +13,16 @@ const AboutUsPage: React.FC = () => {
     <Page title="הסיפור של סבתא">
       <div className={styles.aboutUsPage}>
         <section className={styles.quoteSection}>
-          <p className={styles.quote}>הלו? זה רדיו? זוהי השאלה, מהי הפינה?</p>
+          <p className={styles.quote}>״כשהעגלה נוסעת המלונים מסתדרים בארגזים״, -סבא בקל</p>
+        </section>
+        <section className={styles.titleSection}>
           <Title as='h1'>סיפורי סבתא</Title>
         </section>
         <section className={styles.storySection}>
           <div className="storyWrapper">
             <div className={cn(styles.firstSection, styles.section)}>
               <img
-                src="http://lorempixel.com/700/300/people/SAVTA-YAEL/"
+                src="https://res.cloudinary.com/marik-shnitman/image/upload/v1633457839/radiosavta/gallery/berech.jpg"
                 alt="Our team image"
                 className={styles.backgroundImage}
               />
@@ -37,6 +39,8 @@ const AboutUsPage: React.FC = () => {
                 משדר מוזיקה איכותית ללא פשרות והרבה כבוד לסבים והסבתות, חיבור
                 לשורשים ולרוח המדברית.
               </p>
+			</div>
+            <div className={cn(styles.secondSection, styles.section)}>
               <p>
                 בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע"י תושבי מצפה
                 רמון. עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את מצפה
@@ -46,7 +50,6 @@ const AboutUsPage: React.FC = () => {
             </div>
             <div className={cn(styles.thirdSection, styles.section)}>
               <p>
-                {" "}
                 בשנת 2020 עם פרוץ משבר הקורונה התחנה עברה לשידור אינטרנטי ללא
                 אולפן מרכזי אלא ממספר נקודות שידור ברחבי ישראל, מרמת הגולן, תל
                 אביב, באר שבע, אשלים, מדרשת בן גוריון ומצפה רמון. נכון לאוקטובר
@@ -61,14 +64,14 @@ const AboutUsPage: React.FC = () => {
                 מהחברים בקולקטיב לעשות מנוי לתרומה חודשית בשיעור של 5$ שמאפשר
                 תשלום על הוצאות התפעול השוטפות והמשך הצטיידות ומיתוג.{" "}
               </p>
+            </div>
               <div className={styles.storyImageWrapper}>
                 <img
-                  src="http://lorempixel.com/1920/400/people/team-image-here/"
+                  src="https://res.cloudinary.com/marik-shnitman/image/upload/v1606921730/radiosavta/gallery/radiosavta3.jpg"
                   alt="Our team image"
                   className={styles.backgroundImage}
                 />
               </div>
-            </div>
           </div>
         </section>
         <section className={styles.teamSection}>
