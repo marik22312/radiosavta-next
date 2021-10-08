@@ -19,14 +19,14 @@ export const TimelineData:timelineItem[] = [
 		date: "2005 - 2003",
 		title: "כותרת 2",
 		text: "עירא מקים את ״רדיו ברסלב - מצפה רמון״ יחד עם רפאל חליבה, 94 אפ.אם דרך מגבר שהותאם לשידור ברדיוס של 3.6 ק״מ כדי לא לעורר רשויות",
-		img: "http://lorempixel.com/1920/400/people/team-image-here/"
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/radioBreslev"
 	},
 	{
 		id: "2",
 		date: "2004",
 		title: "",
 		text: "ציפי נולדת, סבתא יעל גונבת אותה ואת כל המשפחה אליה הביתה. עירא וסבתא בקנוניה משותפת",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/savta_take"
 	},
 	{
 		id: "3",
@@ -40,14 +40,14 @@ export const TimelineData:timelineItem[] = [
 		date: "2010",
 		title: "",
 		text: "דיבורים על שידור רדיו אינטרנטי מהסלון של סבתא. לא צולחים את הבעיות הטכניות",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/technical"
 	},
 	{
 		id: "5",
 		date: "2014-2012",
 		title: "",
 		text: "המוזיקה לא מפסיקה לנגן (לא כולל שבת) - מסיבות רגאי בחמישי אצל יעל בסלון",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/dontstop"
 	},
 	{
 		id: "6",
@@ -68,6 +68,13 @@ export const TimelineData:timelineItem[] = [
 		date: "25.1.2014",
 		title: "",
 		text: "עולים לאוויר כפסקול לעילוי נשמתה וכניסוי אמנותי לראות מה ילד יום. מעבר לאתר radionomy",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/newstation"
+	},
+	{
+		id: "8",
+		date: "03.2020",
+		title: "עידן חדש",
+		text: "רדיוסבתא עובתר להיות הרדיו המבוזר הראשון",
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/v1633711103/radiosavta/assets/timeline/newstation"
 	}
 ]

@@ -83,6 +83,7 @@ const AboutUsPage: React.FC = () => {
           </div>
         </section>
         <section>
+			<Title as="h2">השתלשלות האירועים</Title>
           <Timeline />
 		  </section>
       </div>
