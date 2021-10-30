@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
@@ -20,4 +22,20 @@
 
 .details {
 	padding: var(--SPACE1);
+
+	h5 {
+		font-size: 1.5rem;
+
+		@include media-breakpoint(sm) {
+			font-size: 1.5rem;
+		}
+	}
+	
+	p {
+		font-size: 1rem;
+
+		@include media-breakpoint(sm) {
+			font-size: 1rem;
+		}
+	}
 }
