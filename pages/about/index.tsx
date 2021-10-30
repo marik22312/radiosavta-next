@@ -4,6 +4,7 @@ import { Page } from "../../components/Page";
 import styles from "./AboutPage.module.scss";
 import cn from "classnames";
 import { Timeline } from "../../components/Timeline/Timeline";
+import { TimeLine as TimeLineV2 } from "../../components/Timeline/TimelineV2";
 
 import { TeamMember } from "../../components/TeamMember/TeamMember";
 import TeamMembersData from "./data/team.json";
@@ -82,8 +83,13 @@ const AboutUsPage: React.FC = () => {
             })}
           </div>
         </section>
-        <section>
+        {/* <section>
+			<Title as="h2">השתלשלות האירועים</Title>
           <Timeline />
+		  </section> */}
+        <section>
+			<Title as="h2">השתלשלות האירועים</Title>
+          <TimeLineV2 />
 		  </section>
       </div>
     </Page>

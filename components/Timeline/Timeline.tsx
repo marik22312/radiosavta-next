@@ -19,7 +19,7 @@ export const Timeline: React.FC<any> = () => {
 					iconClassName={styles.timelineCircle}
 					date=""
 				>
-					<div className="rtl">
+					<div className={cn("rtl", styles.timeLineItemWrapper)}>
 						<h3 className={styles.timelineTitle}>{timelineItem.title}</h3>
 						<span>{timelineItem.date}</span>
 						<br />
