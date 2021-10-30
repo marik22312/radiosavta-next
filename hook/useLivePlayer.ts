@@ -14,7 +14,10 @@ export const useLivePlayer = () => {
     enabled: isLive,
     refetchInterval: 10000,
   });
-
+  
+  useEffect(() => {
+	setIsLive(audioRef?.currentSrc === LIVE_STREAM_URL)
+  },[audioRef.currentSrc])
   useEffect(() => {
 	  if (songTitle) {
 		  setTitle(songTitle);

@@ -33,7 +33,7 @@ export const TimelineData:timelineItem[] = [
 		date: "2009",
 		title: "",
 		text: "סבתא יעל שומעת לראשונה את יעקב מילר",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/c_thumb,w_500/v1635617470/radiosavta/assets/timeline/jacob_miller"
 	},
 	{
 		id: "4",
@@ -54,7 +54,7 @@ export const TimelineData:timelineItem[] = [
 		date: "ד׳ חשון תשע״ה  28.10.2014",
 		title: "סבתא יעל קרן עוזבת את המימד שלנו.",
 		text: "אמא לארבע בנות ואחד עשר נכדים ונכדות ילדי מצפה רמון. ת.נ.צ.ב.ה",
-		img: ""
+		img: "https://res.cloudinary.com/marik-shnitman/image/upload/c_thumb,w_500/v1635617470/radiosavta/assets/timeline/savta_yael"
 	},
 	{
 		id: "7",

@@ -139,9 +139,16 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           </div>
 		  <div className={styles.playPauseButton}>
 		  <PlayPauseButton onClick={() => togglePlay()} isPlaying={isPlaying}/>
+			  {isPlaying && !isLive ? <BackToLive onClick={() => toggleLive()}/> : null}
 		  </div>
         </div>
       </div>
     </>
   );
 };
+
+const BackToLive: React.FC<{onClick?: () => void}> = (props) => {
+	return (
+		<div className={styles.backToLive} onClick={props.onClick}>בחזרה לשידור חי</div>
+	)
+}
