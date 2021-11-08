@@ -137,8 +137,8 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <div className={styles.title}>
             {pathname !== '/' && <p>{props.title}</p>}
           </div>
-		  <div className={styles.playPauseButton}>
-		  <PlayPauseButton onClick={() => togglePlay()} isPlaying={isPlaying}/>
+		  <div className={styles.playPauseButton} onClick={() => togglePlay()}>
+		  <PlayPauseButton isPlaying={isPlaying}/>
 			  {isPlaying && !isLive ? <BackToLive onClick={() => toggleLive()}/> : null}
 		  </div>
         </div>
