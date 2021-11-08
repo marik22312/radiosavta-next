@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { LIVE_STREAM_URL } from "../config/stream";
-import { PlayerState, usePlayerContext } from "../providers/PlayerProvider";
+import { usePlayerContext } from "../providers/PlayerProvider";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "./usePlayerControls";
-import { usePLayerState } from "./usePlayerState";
 
 export const useLivePlayer = () => {
   const { setTitle, audioRef } = usePlayerContext();
   const { play, stop } = usePlayerControls();
-  const [isLive, setIsLive] = useState(audioRef?.currentSrc === LIVE_STREAM_URL);
+  const [isLive, setIsLive] = useState(audioRef?.src === LIVE_STREAM_URL);
 
   const { songTitle, refetch } = useCurrentSongTitle({
     enabled: isLive,
@@ -16,8 +15,8 @@ export const useLivePlayer = () => {
   });
   
   useEffect(() => {
-	setIsLive(audioRef?.currentSrc === LIVE_STREAM_URL)
-  },[audioRef.currentSrc])
+		setIsLive(audioRef?.src === LIVE_STREAM_URL)
+  },[audioRef, audioRef?.src])
   useEffect(() => {
 	  if (songTitle) {
 		  setTitle(songTitle);

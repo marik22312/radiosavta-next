@@ -201,6 +201,9 @@ letter-spacing: 8px;
 	@include media-breakpoint(sm) {
 		--width: 100px;
 		--height: 100px;
+
+		display: flex;
+		flex-direction: column-reverse;
 	}
 
 	img {

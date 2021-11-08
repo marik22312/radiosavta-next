@@ -12,10 +12,6 @@
     flex-direction: row;
 	align-items: center;
 	z-index: 999;
-
-	@include media-breakpoint(sm) {
-		justify-content: right;
-	}
   }
 
   .contentWrapper {
