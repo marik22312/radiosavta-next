@@ -1,21 +1,14 @@
 @import '../../styles/mixins';
 
-.teamMembersWrapper {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	grid-column-gap: var(--SPACE1);
-	grid-row-gap: var(--SPACE1);
-	margin: 0 var(--SPACE1);
-	margin-top: var(--SPACE1);
-	
-		@include media-breakpoint(sm) {
-			grid-template-columns: repeat(2, 1fr);
-		}
-}
-
 .memberWrapper {
 	position: relative;
+
+	width: calc(33% - var(--SPACE1));
+	
+	@include media-breakpoint(md) {
+		
+		width: calc(50% - var(--SPACE1));
+	}
 }
 
 .imageWrap {
@@ -58,6 +51,12 @@
 		opacity: 1;
 		display: block;
 		background: none;
+
+		height: unset;
+
+		margin-bottom: var(--SPACE1);
+		background-color: rgba(4, 41, 1, 40%);
+		padding: var(--SPACE1)
 	}
 
 	p {

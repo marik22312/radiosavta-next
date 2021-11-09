@@ -10,6 +10,7 @@ import { usePLayerState } from '../../hook/usePlayerState';
 import { PlayPauseButton } from '../PlayPauseButton/PlayPauseButton'
 import { resourceUsage } from 'process';
 import { resourceLimits } from 'worker_threads';
+import { shallowEqualObjects } from 'react-query/types/core/utils';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -31,10 +32,16 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
 const togglePlay = () => {
 	if (title === props.name) {
 		if (isPlaying) {
+			// TODO Add log of pause recorded show
+			// 1. show name
+			// 2. program title
 			return pause();
 		}
 		return resume();
 	}
+	// TODO Add log of play recorded show
+	// 1. show name
+	// 2. program title
 		return play({
 			title: props.name,
 			url: props.url,

@@ -34,9 +34,18 @@ export const PlayerProvider: React.FC = ({ children }) => {
   const [programTitle, setProgramTitle] = useState<string>("");
 
   useEffect(() => {
+	  const audio = new Audio("");
     if (!audioRef) {
-      setAudioRef(new Audio(""));
-    }
+      	setAudioRef(audio);
+		audio.addEventListener('canplaythrough', () => {
+			// console.log('Can play')
+			// TODO: Add log w/ timing
+		})
+	  }
+
+	  return () => {
+		audio.removeEventListener('canplaythrough', () => {})
+	  }
   }, []);
 
   return (
