@@ -2,7 +2,6 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from "react";
 
@@ -35,18 +34,34 @@ export const PlayerProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
 	  const audio = new Audio("");
+
+	//   const handleCanPlay = (e: any) => {
+	// 	  console.log('Can play', e)
+	//   }
+	//   const handleLoadStart = (e: any) => {
+	// 	  console.log('loadStart', audio?.src)
+	//   }
+	//   const handleLoadedData = (e: any) => {
+	// 	  console.log('loadedData')
+	//   }
+	//   const handleError = () => {
+	// 	  console.log('OnError')
+	//   }
     if (!audioRef) {
       	setAudioRef(audio);
-		audio.addEventListener('canplaythrough', () => {
-			// console.log('Can play')
-			// TODO: Add log w/ timing
-		})
+		// audio.addEventListener('canplay', handleCanPlay)
+		// audio.addEventListener('loadstart', handleLoadStart)
+		// audio.addEventListener('loadeddata', handleLoadedData)
+		// audio.addEventListener('error', handleError)
 	  }
 
 	  return () => {
-		audio.removeEventListener('canplaythrough', () => {})
+		// audio.removeEventListener('canplay', handleCanPlay)
+		// audio.removeEventListener('loadstart', handleLoadStart)
+		// audio.removeEventListener('loadeddata', handleLoadedData)
+		// audio.removeEventListener('error', handleError)
 	  }
-  }, []);
+  }, [audioRef]);
 
   return (
     <PlayerContext.Provider
