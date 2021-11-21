@@ -39,7 +39,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   };
 
   const togglePlay = () => {
-    if(!isLoading) {
       if (isStopped || isLive) {
         return toggleLive();
       }
@@ -47,7 +46,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         return resume();
       }
       return pause();
-    }
   }
 
   const open = () => {
@@ -140,7 +138,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             {pathname !== '/' && <p>{props.title}</p>}
           </div>
 		  <div className={styles.playPauseButton} onClick={() => togglePlay()}>
-		  <PlayPauseButton isPlaying={isPlaying} isLoading={isLoading}/>
+		  <PlayPauseButton isPlaying={isPlaying} isLoading={isLoading} displayLoader/>
 			  {isPlaying && !isLive ? <BackToLive onClick={() => toggleLive()}/> : null}
 		  </div>
         </div>

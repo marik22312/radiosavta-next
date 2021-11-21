@@ -1,12 +1,18 @@
+import {useEffect} from 'react';
 import { PlayerState, usePlayerContext } from "../providers/PlayerProvider";
 import { Track } from "../domain/Player";
 
 export const usePlayerControls = () => {
   const { audioRef, setTitle, setPlayerState, setProgramTitle } = usePlayerContext();
 
-  audioRef?.addEventListener("canplay",() => {
-    setPlayerState(PlayerState.PLAYING)
-  });
+  useEffect(() => {
+		  audioRef?.addEventListener("canplay",() => {
+			  setPlayerState(PlayerState.PLAYING)
+			});
+	  return () => {
+			  audioRef?.removeEventListener('canplay', () => null)
+	  }
+  }, [])
 
   const play = (track: Track) => {
     setPlayerState(PlayerState.LOADING);
