@@ -1,9 +1,9 @@
 @import '../../styles/mixins.scss';
 
 .programTile {
-	height: 200px;
-	width: 495px;
-	border: 5px solid var(--dark-green);
+	width: 100%;
+	height: 100%;
+	border: 10px solid var(--dark-green);
 	display: flex;
 	flex-wrap: wrap;
     flex-direction: column;
@@ -13,10 +13,6 @@
     background-size: cover;
 
 	box-shadow: var(--shadow);
-
-	@include media-breakpoint(sm) {
-		width: 200px;
-	}
 }
 
 .topSection {
@@ -28,14 +24,21 @@
 .title {
 	padding: 5px 8px;
 	display: inline-block;
-	font-size: 1rem;
 	background-color: var(--dark-green);
+	@include media-breakpoint(sm) {
+		font-size: 1.5rem;
+	}
 }
 .time {
 	padding: 5px 8px;
 	display: inline;
 	background-color: var(--dark-green);
 	font-size: 0.8rem;
+	@include media-breakpoint(sm) {
+		font-size: 1.2rem;
+	}
+	
+
 }
 
 .user {
@@ -73,4 +76,8 @@
     background-color: var(--dark-green);
     font-size: 0.8rem;
 	color: #ffffff;
+
+	@include media-breakpoint(sm) {
+		font-size: 1.2em;
+	}
 }
