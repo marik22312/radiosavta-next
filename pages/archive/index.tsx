@@ -14,8 +14,13 @@ import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
 import useDebounce from "../../hook/useDebouce";
 import Select from "react-select";
-import { usePrograms } from '../../hook/usePrograms';
-import { Title } from '../../components/Typography/Title';
+import { usePrograms } from "../../hook/usePrograms";
+import { Title } from "../../components/Typography/Title";
+import {
+  logFilterByRecordedShow,
+  logSearchRecordedShow,
+  logResetFilterByProgram
+} from "../../api/Mixpanel.api";
 
 const ProgramsPage: React.FC = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,28 +29,37 @@ const ProgramsPage: React.FC = (props) => {
   const debounceSearchQuery = useDebounce(searchQuery);
 
   useEffect(() => {
-	// TODO: Log to mixpanel
-  },[debounceSearchQuery])
+    if (debounceSearchQuery) {
+      logSearchRecordedShow(debounceSearchQuery);
+    }
+  }, [debounceSearchQuery]);
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
     search: debounceSearchQuery,
-	programId: selectedProgram
+    programId: selectedProgram,
   });
   const { programs } = usePrograms();
 
-  const options = [{label: 'כל התכניות', value: undefined},...programs.map((program) => ({
-	  label: program.name_he,
-	  value: program.id,
-  }))]
+  const options = [
+    { label: "כל התכניות", value: undefined },
+    ...programs.map((program) => ({
+      label: program.name_he,
+      value: program.id,
+    })),
+  ];
 
   const onSearchChange = (e: any) => {
     setSearchQuery(e.target.value);
   };
 
   const onProgramChange = (id: number) => {
-	  // TODO: log to mixpanel
-	  setSelectedProgram(id)
-  }
+    if (id) {
+      logFilterByRecordedShow(id);
+    } else {
+		logResetFilterByProgram()
+	}
+    setSelectedProgram(id);
+  };
 
   const loader = useRef(null);
 
@@ -73,7 +87,7 @@ const ProgramsPage: React.FC = (props) => {
       <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
           <p className={styles.quote}>ברדיו יש לך שני כלים, צליל ושקט.</p>
-		  <Title as='h1'>הבוידעם</Title>
+          <Title as="h1">הבוידעם</Title>
         </section>
         <section className={styles.programsList}>
           <div className={styles.filterWrapper}>
@@ -86,19 +100,19 @@ const ProgramsPage: React.FC = (props) => {
             />
             <Select
               options={options}
-			  placeholder="סינון לפי תכנית"
-			  // @ts-ignore
-			  onChange={(value) => onProgramChange(value!.value)}
+              placeholder="סינון לפי תכנית"
+              // @ts-ignore
+              onChange={(value) => onProgramChange(value!.value)}
               styles={{
                 container: (provided: any) => ({
                   ...provided,
-				  display: 'inline-block',
+                  display: "inline-block",
                   border: "1px solid var(--banana)",
                   width: `calc(50% - 10px)`,
                   marginLeft: "10px",
                   height: "50px",
                   fontSize: "0.8rem",
-				  outline: 'none !important'
+                  outline: "none !important",
                 }),
                 control: (provided: any) => ({
                   ...provided,
@@ -109,15 +123,15 @@ const ProgramsPage: React.FC = (props) => {
                   backgroundColor: "rgba(0, 0, 0, 40%)",
                 }),
                 placeholder: (provided: any) => ({
-					...provided,
+                  ...provided,
                   color: "rgba(255, 255, 255, 75%)",
                   fontSize: "0.8rem",
                   paddingRight: "10px",
                 }),
-				singleValue: (provided: any) => ({
-					...provided,
-					color: '#ffffff'
-				})
+                singleValue: (provided: any) => ({
+                  ...provided,
+                  color: "#ffffff",
+                }),
               }}
             />
             {/* <input
@@ -127,12 +141,14 @@ const ProgramsPage: React.FC = (props) => {
             /> */}
           </div>
           {recordedShows?.map((r) => {
-			  if (!r.length) {
-				  return <div className={styles.noResultsWrapper}>
-					  <h5>לא מצאנו תוכנית בבוידעם שמתאימה לחיפוש זה</h5>
-					  <p>אולי ננסה חיפוש אחר?</p>
-				  </div>
-			  }
+            if (!r.length) {
+              return (
+                <div className={styles.noResultsWrapper}>
+                  <h5>לא מצאנו תוכנית בבוידעם שמתאימה לחיפוש זה</h5>
+                  <p>אולי ננסה חיפוש אחר?</p>
+                </div>
+              );
+            }
             return r.map((show) => (
               <div key={show.id} className={styles.singleShow}>
                 <RecordedShowPlayer
@@ -140,6 +156,7 @@ const ProgramsPage: React.FC = (props) => {
                   name={show.name}
                   recordingDate={show.created_at}
                   programName={show.program.name_he}
+				  source={'ARCHIVE'}
                   backgroundImageUrl={`${BASE_IMAGE}/${
                     show.program.cover_image
                       ? show.program.cover_image

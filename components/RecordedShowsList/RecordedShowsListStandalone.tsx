@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { RecordedShowPlayer } from "../RecordedShowPlayer/RecordedShowPlayer";
-import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 
 import style from "./RecordedShowsList.module.scss";
 import { useRecordedShows } from '../../hook/useRecordedShows';
@@ -43,6 +42,7 @@ export const RecordedShowsListStandalone: React.FC<RecordedShowsListProps> = (pr
           return r.map((show) => (
             <div key={show.id} className={style.singleShow}>
               <RecordedShowPlayer
+			  source="HOMEPAGE"
                 url={show.url}
                 name={show.name}
                 recordingDate={show.created_at}

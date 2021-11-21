@@ -1,29 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styles from "./FooterPlayer.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { useLivePlayer } from "../../hook/useLivePlayer";
 import { usePLayerState } from "../../hook/usePlayerState";
-import { usePlayerControls } from '../../hook/usePlayerControls';
-// import { logPlayButtonPressed } from "../../api/Mixpanel.api";
 
 export const FooterPlayer: React.FC = () => {
-  const { isLive, toggleLive } = useLivePlayer();
-  const { pause } = usePlayerControls();
-  const { title, isPlaying, programTitle, isStopped } = usePLayerState();
-
-  //   const debouncedSetTime = (time: number) => {
-  //     audioRef.current.currentTime = time;
-  //   };
-
-  const logAndTogglePlayer = () => {
-	  if (isPlaying) {
-		return pause();
-	  }
-    // logPlayButtonPressed(isPlaying ? "PLAY" : "PAUSE");
-    toggleLive();
-  };
+  const { isLive} = useLivePlayer();
+  const { title,  programTitle} = usePLayerState();
 
   return (
     <>
