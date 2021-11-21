@@ -20,6 +20,7 @@
     "flatted": "^3.1.1",
     "keen-slider": "^5.5.1",
     "lodash": "^4.17.21",
+    "mixpanel-browser": "^2.42.0",
     "moment": "^2.29.1",
     "next": "11.0.0",
     "next-images": "^1.8.1",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@aws-amplify/cli": "^5.0.0",
     "@types/lodash": "^4.14.173",
+    "@types/mixpanel-browser": "^2.35.7",
     "@types/react": "17.0.11",
     "@types/react-select": "^4.0.17",
     "eslint": "7.28.0",
