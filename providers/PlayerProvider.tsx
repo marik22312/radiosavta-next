@@ -10,7 +10,8 @@ const PlayerContext = createContext<PlayerContext | null>(null);
 export enum PlayerState {
   STOPPED = "STOPPED",
   PLAYING = "PLAYING",
-  PAUSED = 'PAUSED'
+  PAUSED = "PAUSED",
+  LOADING = "LOADING"
 }
 
 export interface PlayerContext {
@@ -73,8 +74,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
         audioRef: audioRef!,
         title,
         setTitle,
-		programTitle,
-		setProgramTitle
+        programTitle,
+        setProgramTitle
       }}
     >
       {children}

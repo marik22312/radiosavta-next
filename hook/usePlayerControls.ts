@@ -4,11 +4,15 @@ import { Track } from "../domain/Player";
 export const usePlayerControls = () => {
   const { audioRef, setTitle, setPlayerState, setProgramTitle } = usePlayerContext();
 
+  audioRef?.addEventListener("canplay",() => {
+    setPlayerState(PlayerState.PLAYING)
+  });
+
   const play = (track: Track) => {
-    setPlayerState(PlayerState.PLAYING);
+    setPlayerState(PlayerState.LOADING);
     audioRef.src = track.url;
     setTitle(track.title);
-	setProgramTitle(track.programTitle)
+    setProgramTitle(track.programTitle)
     audioRef.play();
   };
 
@@ -31,6 +35,6 @@ export const usePlayerControls = () => {
     play,
     pause,
     stop,
-	resume
+	  resume
   };
 };
