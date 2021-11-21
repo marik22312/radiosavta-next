@@ -5,7 +5,7 @@ import Pause from "./Button/Pause.svg";
 import LoadingAnimated from "./Button/LoadingAnimated.svg";
 import styles from './PlayPauseButton.module.scss';
 
-export const PlayPauseButton: React.FC<{isPlaying: boolean; isLoading: boolean, displayLoader?: boolean, onClick:() => void}> = (props) => {
+export const PlayPauseButton: React.FC<{isPlaying?: boolean; isLoading?: boolean, displayLoader?: boolean, onClick?:() => void}> = (props) => {
   if(props.isLoading && props.displayLoader) {
     return <img src={LoadingAnimated} alt="test" width={150} height={150} className={styles.loadingCircle}/>;
   }
