@@ -13,11 +13,14 @@ import { FooterPlayer } from "../components/FooterPlayer/FooterPlayer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import * as FLATTED from 'flatted';
+import NextNProgress from "nextjs-progressbar";
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
   return (
     <QueryClientProvider client={queryClient.current}>
+		<NextNProgress color="#ded15b"/>
         <PlayerProvider>
       <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />

@@ -24,11 +24,18 @@
 }
 
 .programsList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+	@include media-breakpoint(md) {
+		grid-template-columns: 1fr 1fr;
+	}
+	@include media-breakpoint(sm) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .programWrapper {
-	margin: 12px 0;
+	aspect-ratio: 16 / 9;
+	margin: 5px;
 }
