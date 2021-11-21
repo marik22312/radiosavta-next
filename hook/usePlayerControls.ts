@@ -1,14 +1,24 @@
+import {useEffect} from 'react';
 import { PlayerState, usePlayerContext } from "../providers/PlayerProvider";
 import { Track } from "../domain/Player";
 
 export const usePlayerControls = () => {
   const { audioRef, setTitle, setPlayerState, setProgramTitle } = usePlayerContext();
 
+  useEffect(() => {
+		  audioRef?.addEventListener("canplay",() => {
+			  setPlayerState(PlayerState.PLAYING)
+			});
+	  return () => {
+			  audioRef?.removeEventListener('canplay', () => null)
+	  }
+  }, [])
+
   const play = (track: Track) => {
-    setPlayerState(PlayerState.PLAYING);
+    setPlayerState(PlayerState.LOADING);
     audioRef.src = track.url;
     setTitle(track.title);
-	setProgramTitle(track.programTitle)
+    setProgramTitle(track.programTitle)
     audioRef.play();
   };
 
@@ -31,6 +41,6 @@ export const usePlayerControls = () => {
     play,
     pause,
     stop,
-	resume
+	  resume
   };
 };

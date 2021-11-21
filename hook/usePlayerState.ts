@@ -20,9 +20,10 @@ export const usePLayerState = () => {
 
   return {
     title,
-	programTitle,
+	  programTitle,
     isPlaying: playerState === PlayerState.PLAYING,
-	isStopped: playerState === PlayerState.STOPPED,
-	isPaused: playerState === PlayerState.PAUSED,
+	  isStopped: playerState === PlayerState.STOPPED,
+	  isPaused: playerState === PlayerState.PAUSED,
+    isLoading: playerState === PlayerState.LOADING,
   };
 };
