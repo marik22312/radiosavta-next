@@ -94,7 +94,10 @@
 .programsList {
 	position: relative;
 	text-align: center;
-	background-size: cover;
+	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/v1637700618/radiosavta/assets/vectors/vinyls.png");
+    background-size: 11%;
+    background-position: center;
+    background-attachment: fixed;
 
 	h2 {
 		position: inherit;
