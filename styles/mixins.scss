@@ -14,4 +14,9 @@ $grid-breakpoints-md: 1320px;
             @content;
         }
     }
+    @else if $media==lg {
+        @media only screen and (min-width: $grid-breakpoints-md) {
+            @content;
+        }
+    }
 }

@@ -44,6 +44,7 @@
 		font-weight: normal;
 		color: #fff;
 		margin-right: var(--SPACE3);
+		text-transform: capitalize;
 
 		@include media-breakpoint(sm) {
 			font-size: 0.5rem;
