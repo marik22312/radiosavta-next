@@ -16,6 +16,9 @@ import Image from "next/image";
 
 import GreyBg from "../public/assets/backgrounds/text1.jpg";
 import Link from "next/link";
+import { usePrograms } from "../hook/usePrograms";
+import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
+import { getAllActivePrograms } from "../api/Programs.api";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -57,6 +60,8 @@ export default function Home() {
     };
   }, [slider]);
 
+  const { programs } = usePrograms({ limit: 3, rand: true });
+
   const { recordedShows } = useRecordedShows();
   return (
     <Page title="רדיוסבתא">
@@ -94,9 +99,20 @@ export default function Home() {
           <Link href="/archive">לבויעדם &gt;&gt;</Link>
         </p>
       </section>
+      <section className={style.programsList}>
+        <h2>תוכניות</h2>
+        <div className={style.programsListWrapper}>
+          <ProgramsListStandalone programs={programs} />
+        </div>
+        <p className={style.allShowsLink}>
+          <Link href="/programs">לכל התוכניות &gt;&gt;</Link>
+        </p>
+      </section>
     </Page>
   );
 }
+
+
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
@@ -104,6 +120,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   await queryClient.prefetchInfiniteQuery(
     `recordedShows-archive`,
     ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
+  );
+
+  await queryClient.prefetchInfiniteQuery(
+    `active-programs`,
+    () => getAllActivePrograms({ limit: 3, rand: true })
   );
 
   return {

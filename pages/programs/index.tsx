@@ -12,6 +12,7 @@ import { ProgramTile } from "../../components/ProgramTile/ProgramTile";
 
 import styles from './ProgramsPage.module.scss'
 import { Title } from '../../components/Typography/Title'
+import { ProgramsListStandalone } from "../../components/ProgramsList/ProgramsListStandalone";
 
 const ProgramsPage: React.FC = (props) => {
   const { programs } = usePrograms();
@@ -19,20 +20,12 @@ const ProgramsPage: React.FC = (props) => {
     <Page title="התכניות שלנו">
 		<div className={styles.programsPage}>
       <section className={styles.quoteSection}>
-		  <p className={styles.quote}>
-		  הלו? זה רדיו? זוהי השאלה, מהי הפינה?
-		  </p>
-		  <Title as="h1">התכניות שלנו</Title>
-	  </section>
-      <section className={styles.programsList}>
-        {programs.map((program) => {
-			return (
-				<div key={program.id} className={styles.programWrapper}>
-              		<ProgramTile program={program} />
-            </div>
-          );
-        })}
+        <p className={styles.quote}>
+        הלו? זה רדיו? זוהי השאלה, מהי הפינה?
+        </p>
+        <Title as="h1">התכניות שלנו</Title>
       </section>
+        <ProgramsListStandalone programs={programs} />
 		</div>
     </Page>
   );

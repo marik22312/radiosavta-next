@@ -1,18 +1,15 @@
+$gap: 10px;
 .recordedShowsListWrapper {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 90%;
-	
-	@media screen and (max-width: 1024px) {
-		width: 100%;
-	}
+	gap: $gap;
+	width: 100%;
 }
 
 .singleShow {
 	width: calc(33% - 20px);
     margin: 10px 10px;
-
 	@media screen and (max-width: 1024px) {
 		width: 100%;
 		height: auto;
