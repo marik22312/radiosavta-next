@@ -9,11 +9,11 @@ $gap: 10px;
 }
 
 .singleShow {
-	flex-basis: calc( 50% - $gap );
-    height: 88px;
+	width: calc(33% - 20px);
+    margin: 10px 10px;
 
 	@media screen and (max-width: 1024px) {
-		width: 90%;
-		flex-basis: 90%;
+		width: 100%;
+		height: auto;
 	}
 }
