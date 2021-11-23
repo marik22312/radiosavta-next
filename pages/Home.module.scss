@@ -75,7 +75,10 @@
 	padding-top: 30px;
 	display: flex;
 	justify-content: center;
+	width: 90%;
+	margin: auto;
 }
+
 .allShowsLink {
 	display: inline-block;
 	background-color: var(--light-green);
@@ -87,4 +90,26 @@
 
 .latestShowsBg {
 	z-index: 0;
+}
+
+
+.programsList {
+	position: relative;
+	text-align: center;
+	background-size: cover;
+
+	h2 {
+		position: inherit;
+		background-color: var(--light-green);
+		display: inline-block;
+		color: #ffffff;
+		padding: 5px 8px;
+		z-index: 1;
+		margin-bottom: 30px;
+	}
+}
+
+.programsListWrapper {
+	width: 90%;
+	margin: auto;
 }

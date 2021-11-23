@@ -16,6 +16,8 @@ import Image from "next/image";
 
 import GreyBg from "../public/assets/backgrounds/text1.jpg";
 import Link from "next/link";
+import { usePrograms } from "../hook/usePrograms";
+import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -57,6 +59,8 @@ export default function Home() {
     };
   }, [slider]);
 
+  const { programs } = usePrograms({limit: 3, rand: true});
+
   const { recordedShows } = useRecordedShows();
   return (
     <Page title="רדיוסבתא">
@@ -92,6 +96,15 @@ export default function Home() {
         </div>
         <p className={style.allShowsLink}>
           <Link href="/archive">לבויעדם &gt;&gt;</Link>
+        </p>
+      </section>
+      <section className={style.programsList}>
+        <h2>תוכניות</h2>
+        <div className={style.programsListWrapper}>
+          <ProgramsListStandalone programs={programs} />
+        </div>
+        <p className={style.allShowsLink}>
+          <Link href="/programs">לכל התוכניות &gt;&gt;</Link>
         </p>
       </section>
     </Page>
