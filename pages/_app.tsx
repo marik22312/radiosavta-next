@@ -15,6 +15,7 @@ import { Hydrate } from "react-query/hydration";
 import * as FLATTED from 'flatted';
 import NextNProgress from "nextjs-progressbar";
 import { useRouter } from "next/router";
+import { Footer } from '../components/Footer/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <PlayerProvider>
       <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />
+		  <Footer/>
           <FooterPlayer />
         </Hydrate>
       </PlayerProvider>

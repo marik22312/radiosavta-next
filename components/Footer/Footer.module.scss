@@ -1,0 +1,28 @@
+.footer {
+	direction: rtl;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-around;
+    align-items: center;
+    padding-right: var(--navbar-width);
+
+	margin-bottom: var(--footerHeight);
+	height: 200px;
+	background-color: var(--light-dark-green);
+}
+
+.logoColumnWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: white;
+}
+.logoWrapper{
+	width: 50px;
+}
+
+.logoText {
+	p {
+		font-size: 0.7rem;
+	}
+}
