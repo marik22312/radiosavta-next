@@ -10,7 +10,7 @@ interface RecordedShowsListProps {
 }
 
 export const RecordedShowsListStandalone: React.FC<RecordedShowsListProps> = (props) => {
-  const { recordedShows, fetchNext, hasNextPage } = useRecordedShows();
+  const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({limit: 3});
   const loader = useRef(null);
 
   const handleObserver = useCallback((entries) => {

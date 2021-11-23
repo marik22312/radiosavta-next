@@ -49,8 +49,10 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   return (
     <div
       className={style.RecordedShowPlayer}
-      style={{ backgroundImage: `url(${props.backgroundImageUrl})` }}
     >
+      <div className={style.imageWrapper} style={{ backgroundImage: `url(${props.backgroundImageUrl})` }}>
+        <img src={props.backgroundImageUrl} className={style.programImg} alt="" />
+      </div>
       <div className={style.titleWrapper}>
         <h5
           className={style.RecordedShowTitle}

@@ -10,11 +10,11 @@
 }
 
 .singleShow {
-	width: 47%;
-    height: 88px;
+	width: calc(33% - 20px);
     margin: 10px 10px;
 
 	@media screen and (max-width: 1024px) {
-		width: 90%;
+		width: 100%;
+		height: auto;
 	}
 }
