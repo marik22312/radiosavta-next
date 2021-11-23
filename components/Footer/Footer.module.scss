@@ -1,0 +1,69 @@
+@import '../../styles/mixins';
+
+.footer {
+	direction: rtl;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+    align-items: center;
+	padding: var(--SPACE1) 0;
+    padding-right: var(--navbar-width);
+
+	margin-bottom: var(--footerHeight);
+	background-color: var(--light-dark-green);
+
+	> div {
+		margin: var(--SPACE3) 0;
+	}
+
+	@include media-breakpoint(sm) {
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		text-align: center;
+	}
+}
+
+.logoColumnWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: white;
+}
+.logoWrapper{
+	width: 50px;
+
+	@include media-breakpoint(sm) {
+		margin: auto;
+	}
+}
+
+.logoText {
+
+	p {
+		font-size: 0.7rem;
+	}
+}
+
+.socialIcon {
+	margin: 5px;
+}
+
+.socialIconsWrapper {
+	text-align: center;
+
+}
+
+.socialsText {
+	color: #ffffff;
+	font-size: 0.7rem;
+	margin-top: 5px;
+}
+
+.acumLogo {
+	width: 100px;
+
+	@include media-breakpoint(sm) {
+		width: 75px;
+	}
+}

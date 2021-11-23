@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 $gap: 10px;
 .recordedShowsListWrapper {
 	display: flex;
@@ -10,7 +12,8 @@ $gap: 10px;
 .singleShow {
 	width: calc(33% - 20px);
     margin: 10px 10px;
-	@media screen and (max-width: 1024px) {
+
+	@include media-breakpoint(sm) {
 		width: 100%;
 		height: auto;
 	}
