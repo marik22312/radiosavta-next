@@ -4,8 +4,11 @@ $gap: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: $gap;
-	width: 100%;
+	width: 90%;
+
+	@media screen and (max-width: 1024px) {
+		width: 100%;
+	}
 }
 
 .singleShow {
