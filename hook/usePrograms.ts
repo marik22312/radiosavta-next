@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
-import { PaginatedRequest, queryActivePrograms } from "../api/Programs.api";
+import { PaginatedRequest, getAllActivePrograms } from "../api/Programs.api";
 
 export const usePrograms = (opts?: PaginatedRequest) => {
+  
   const { data, isLoading } = useQuery(
     'active-programs',
-    () => queryActivePrograms(opts),
+    () => getAllActivePrograms(opts),
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,

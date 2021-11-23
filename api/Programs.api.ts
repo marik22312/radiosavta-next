@@ -15,17 +15,6 @@ export const getAllActivePrograms = (opts?: PaginatedRequest) => {
   });
 };
 
-export const queryActivePrograms = (params?: {
-  limit?: number;
-  rand?: boolean;
-}) => {
-  return httpClient.get<{ activeShows: Program[] }>("/v2/programs", {
-    params: {
-      ...params,
-    },
-  });
-};
-
 export const getAllArchivedPrograms = (opts?: PaginatedRequest) => {
   return httpClient.get<{ archivedShows: Program[] }>(
     "/v2/programs/archived",

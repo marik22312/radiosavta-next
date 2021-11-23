@@ -18,6 +18,7 @@ import GreyBg from "../public/assets/backgrounds/text1.jpg";
 import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
 import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
+import { getAllActivePrograms } from "../api/Programs.api";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -59,7 +60,7 @@ export default function Home() {
     };
   }, [slider]);
 
-  const { programs } = usePrograms({limit: 3, rand: true});
+  const { programs } = usePrograms({ limit: 3, rand: true });
 
   const { recordedShows } = useRecordedShows();
   return (
@@ -111,12 +112,19 @@ export default function Home() {
   );
 }
 
+
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery(
     `recordedShows-archive`,
     ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
+  );
+
+  await queryClient.prefetchInfiniteQuery(
+    `active-programs`,
+    () => getAllActivePrograms({ limit: 3, rand: true })
   );
 
   return {
