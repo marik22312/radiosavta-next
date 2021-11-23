@@ -66,14 +66,15 @@ const ProgramsPage: React.FC = (props) => {
   const handleObserver = useCallback((entries) => {
     const target = entries[0];
     if (target.isIntersecting && hasNextPage) {
+		console.log('Fetchnext')
       fetchNext();
     }
-  }, []);
+  }, [hasNextPage]);
 
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: "20px",
+      rootMargin: "40px",
       threshold: 0,
     };
     const observer = new IntersectionObserver(handleObserver, option);
