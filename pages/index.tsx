@@ -12,13 +12,13 @@ import { stringify } from "flatted";
 import { dehydrate } from "react-query/hydration";
 import { RecordedShowsListStandalone } from "../components/RecordedShowsList/RecordedShowsListStandalone";
 import { useRecordedShows } from "../hook/useRecordedShows";
-import Image from "next/image";
 
-import GreyBg from "../public/assets/backgrounds/text1.jpg";
 import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
 import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
 import { getAllActivePrograms } from "../api/Programs.api";
+import dynamic from "next/dynamic";
+import { Carousel } from "react-responsive-carousel";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -65,7 +65,7 @@ export default function Home() {
   const { recordedShows } = useRecordedShows();
   return (
     <Page title="רדיוסבתא">
-      <section
+      {/* <section
         className={cn("gallery-section", style.gallerySection)}
         style={{ direction: "ltr" }}
       >
@@ -89,7 +89,8 @@ export default function Home() {
             <p>כשהעגלה נוסעת, כל המלונים מסתדרים בארגזים שלהם - סבא בקל</p>
           </div>
         </div>
-      </section>
+      </section> */}
+      <AboutSection />
       <section className={style.latestShowsSection}>
         <h2>העלאות אחרונות</h2>
         <div className={style.latestShowsList}>
@@ -112,8 +113,6 @@ export default function Home() {
   );
 }
 
-
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
@@ -122,9 +121,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
   );
 
-  await queryClient.prefetchInfiniteQuery(
-    `active-programs`,
-    () => getAllActivePrograms({ limit: 3, rand: true })
+  await queryClient.prefetchInfiniteQuery(`active-programs`, () =>
+    getAllActivePrograms({ limit: 3, rand: true })
   );
 
   return {
@@ -132,4 +130,40 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       dehydratedState: stringify(dehydrate(queryClient)),
     },
   };
+};
+
+export const AboutSection: React.FC = () => {
+  return (
+    <section className={style.aboutUsSection}>
+      <div className={style.aboutUsPane}>
+        <div className={style.logoWrapper}>
+          <h1>רדיוסבתא</h1>
+          <h2>קולקטיב רדיו אינטרנטי</h2>
+        </div>
+        <div className={style.aboutUsTextWrapper}>
+          <p className={style.aboutUsText}>
+            קולקטיב 'רדיו סבתא' נוסד בשנת 2015 כתחנת רדיו אינטרנטי במצפה רמון.
+            התחנה נוסדה ע"י עירא דיין, במטרה להנציח את (סבתא) יעל קרן, חותנתו של
+            עירא
+          </p>
+          <p className={style.aboutUsText}>
+            עירא ביקש לשמר בפעילות התחנה את האוירה החמה והמארחת שהיתה בסלון של
+            סבתא, שהיתה מלווה תמיד במוזיקה משובחת בשלל סגנונות. הרדיו משדר
+            מוזיקה איכותית ללא פשרות והרבה כבוד לסבים והסבתות
+          </p>
+        </div>
+      </div>
+      <div className={style.galleryPane}>
+	  <Carousel showArrows={true} onChange={() => console.log('thumb')} onClickItem={() => console.log('item')} onClickThumb={() => console.log('ClickThub')}>
+            {images.map((url, index) => {
+              return (
+                <div key={url} className={style.aboutUsSliderImage}>
+                    <img src={url} alt="Gallery image"/>
+                </div>
+              );
+            })}
+        </Carousel>
+      </div>
+    </section>
+  );
 };

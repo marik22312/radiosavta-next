@@ -114,3 +114,42 @@
 	width: 90%;
 	margin: auto;
 }
+
+/** About us section */
+.aboutUsSection {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+
+	height: calc(100vh - var(--footerHeight) - 100px);
+	max-height: 1000px;
+	color: #ffffff;
+}
+.aboutUsPane {
+	grid-area: 1 / 2 / 2 / 3;
+	text-shadow: var(--shadow);
+	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/w_600/v1637768906/radiosavta/backgrounds/pub40_BW.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+	padding: var(--SPACE2);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.logoWrapper {
+}
+.aboutUsTextWrapper {
+	font-size: 0.7rem;
+}
+.aboutUsText {}
+.aboutUsText {}
+.galleryPane {
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+.aboutUsSliderImage {
+	max-width: 100%;
+}

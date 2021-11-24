@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "keen-slider/keen-slider.min.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 import "../styles/reset.scss";
 import "../styles/globals.scss";
