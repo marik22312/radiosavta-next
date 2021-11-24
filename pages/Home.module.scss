@@ -117,18 +117,16 @@
 
 /** About us section */
 .aboutUsSection {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-
+	display: flex;
 	height: calc(100vh - var(--footerHeight) - 100px);
 	max-height: 1000px;
 	color: #ffffff;
+	@include media-breakpoint(sm) {
+		flex-direction: column;
+	}
 }
 .aboutUsPane {
-	grid-area: 1 / 2 / 2 / 3;
+	flex-basis: 50%;
 	text-shadow: var(--shadow);
 	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/w_600/v1637768906/radiosavta/backgrounds/pub40_BW.jpg");
 	background-size: cover;
@@ -147,7 +145,10 @@
 .aboutUsText {}
 .aboutUsText {}
 .galleryPane {
-	grid-area: 1 / 1 / 2 / 2;
+	flex-basis: 50%;
+	@include media-breakpoint(sm) {
+		max-height: 360px;
+	}
 }
 
 .aboutUsSliderImage {
