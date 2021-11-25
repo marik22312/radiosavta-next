@@ -28,37 +28,22 @@ const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922147/radiosavta/gallery/14.jpg",
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922261/radiosavta/gallery/15.jpg",
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922386/radiosavta/gallery/17.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922451/radiosavta/gallery/18.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922514/radiosavta/gallery/19.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921370/radiosavta/gallery/anotherass.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921384/radiosavta/gallery/ass.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921769/radiosavta/gallery/batya.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921329/radiosavta/gallery/berech.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921988/radiosavta/gallery/bigonyou.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921544/radiosavta/gallery/buidingmitspe.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921470/radiosavta/gallery/buildinghigher.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922579/radiosavta/gallery/cats.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921355/radiosavta/gallery/clouds.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921347/radiosavta/gallery/fox.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921340/radiosavta/gallery/ibex.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922451/radiosavta/gallery/18.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922514/radiosavta/gallery/19.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921370/radiosavta/gallery/anotherass.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921384/radiosavta/gallery/ass.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921769/radiosavta/gallery/batya.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921329/radiosavta/gallery/berech.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921988/radiosavta/gallery/bigonyou.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921544/radiosavta/gallery/buidingmitspe.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921470/radiosavta/gallery/buildinghigher.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922579/radiosavta/gallery/cats.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921355/radiosavta/gallery/clouds.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921347/radiosavta/gallery/fox.jpg",
+//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921340/radiosavta/gallery/ibex.jpg",
 ];
 export default function Home() {
-  const timer = useRef<any>();
-  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    duration: 1000,
-  });
-
-  useEffect(() => {
-    timer.current = setInterval(() => {
-      if (slider) {
-        slider.next();
-      }
-    }, 7000);
-    return () => {
-      clearInterval(timer.current);
-    };
-  }, [slider]);
+  
 
   const { programs } = usePrograms({ limit: 3, rand: true });
 
@@ -133,6 +118,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export const AboutSection: React.FC = () => {
+	const timer = useRef<any>();
+	const [currentSlide, setCurrentSlide] = useState(0);
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    duration: 1000,
+	slideChanged(s) {
+		setCurrentSlide(s.details().relativeSlide)
+	  },
+  });
+
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      if (slider) {
+        slider.next();
+      }
+    }, 7000);
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, [slider]);
+
   return (
     <section className={style.aboutUsSection}>
       <div className={style.aboutUsPane}>
@@ -154,16 +160,77 @@ export const AboutSection: React.FC = () => {
         </div>
       </div>
       <div className={style.galleryPane}>
-	  <Carousel showArrows={true} onChange={() => console.log('thumb')} onClickItem={() => console.log('item')} onClickThumb={() => console.log('ClickThub')}>
-            {images.map((url, index) => {
-              return (
-                <div key={url} className={style.aboutUsSliderImage}>
-                    <img src={url} alt="Gallery image"/>
-                </div>
-              );
-            })}
-        </Carousel>
+	  <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
+          {images.map((url, index) => {
+            return (
+              <div key={url} className="keen-slider__slide">
+                <img className={style.slideImage} src={url} alt={url} />
+              </div>
+            );
+          })}
+        </div>
+		{slider && (
+          <>
+            <ArrowLeft
+              onClick={(e) => e.stopPropagation() || slider.prev()}
+              disabled={currentSlide === 0}
+            />
+            <ArrowRight
+              onClick={(e) => e.stopPropagation() || slider.next()}
+              disabled={currentSlide === slider.details().size - 1}
+            />
+          </>
+        )}
+	  {slider && (
+        <div className={style.dots}>
+          {[...Array(slider.details().size).keys()].map((idx) => {
+			  const activeClass = currentSlide === idx ? style.activeDot : ""
+            return (
+              <button
+                key={idx}
+                onClick={() => {
+                  slider.moveToSlideRelative(idx)
+                }}
+				className={cn(style.dot, activeClass)}
+              />
+            )
+          })}
+        </div>
+      )}
       </div>
     </section>
   );
 };
+
+interface GalleryArrowProps {
+	onClick: (e: any) => void;
+	disabled: boolean;
+}
+
+const ArrowLeft: React.FC<GalleryArrowProps> = (props) => {
+	const disabeld = props.disabled ? " arrowDisabled" : ""
+	return (
+	  <svg
+		onClick={props.onClick}
+		className={cn(style.arrow, style.arrowLeft, disabeld)}
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 24 24"
+	  >
+		<path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+	  </svg>
+	)
+  }
+  
+  const ArrowRight: React.FC<GalleryArrowProps> = (props) => {
+	const disabeld = props.disabled ? " arrowDisabled" : ""
+	return (
+	  <svg
+		onClick={props.onClick}
+		className={cn(style.arrow, style.arrowRight, disabeld)}
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 24 24"
+	  >
+		<path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+	  </svg>
+	)
+  }
