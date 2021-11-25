@@ -106,8 +106,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
   );
 
-  await queryClient.prefetchInfiniteQuery(`active-programs`, () =>
-    getAllActivePrograms({ limit: 3, rand: true })
+  await queryClient.prefetchQuery(
+    'active-programs',
+    () => getAllActivePrograms({ limit: 3, rand: true })
   );
 
   return {
