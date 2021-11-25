@@ -84,3 +84,26 @@ h2 {
 	font-size: 1.2rem;
 }
 
+.carousel-root {
+	position: relative;
+	.carousel.carousel-slider {
+		max-height: 695px;
+		padding-bottom: 95px;
+		.slide img {
+			max-height: 600px;
+			@include media-breakpoint(sm) {
+				max-height: 250px;
+			}
+		}
+	}
+	.carousel:not(.carousel-slider) {
+		position: absolute;
+		bottom: 0;
+		.thumb {
+			max-height: 60px;
+		}
+	}
+	.control-dots {
+		display: none;
+	}
+}

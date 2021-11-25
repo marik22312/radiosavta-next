@@ -114,3 +114,131 @@
 	width: 90%;
 	margin: auto;
 }
+
+/** About us section */
+.aboutUsSection {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	
+	height: calc(100vh - var(--footerHeight) - 100px);
+	max-height: 1000px;
+	color: #ffffff;
+	
+	@include media-breakpoint(sm) {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(2, 1fr);
+		max-height: unset;
+		height: auto;
+		
+	}
+}
+.aboutUsPane {
+	grid-area: 1 / 1 / 2 / 2;
+	flex-basis: 50%;
+	text-shadow: var(--shadow);
+	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/w_600/v1637768906/radiosavta/backgrounds/pub40_BW.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+	padding: var(--SPACE2);
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	@include media-breakpoint(sm) {
+		grid-area: 1 / 1 / 2 / 2; 
+	}
+}
+.logoWrapper {
+	@include media-breakpoint(sm) {
+		text-align: center;
+	}
+}
+.aboutUsTextWrapper {
+	font-size: 0.7rem;
+
+	@include media-breakpoint(sm) {
+		text-align: center;
+		font-size: 1rem;
+		padding-left: var(--SPACE3);
+		padding-right: var(--SPACE3);
+	}
+
+	p {
+		@include media-breakpoint(sm) {
+			margin-top: var(--SPACE3);
+		}
+	}
+}
+.aboutUsText {}
+.aboutUsText {}
+.galleryPane {
+	grid-area: 1 / 2 / 2 / 3;
+	direction: ltr;
+	position: relative;
+	@include media-breakpoint(sm) {
+		grid-area: 2 / 1 / 3 / 2;
+	}
+}
+
+.aboutUsSliderImage {
+	max-width: 100%;
+}
+
+.carousel {
+	max-height: 100%;
+}
+
+.arrow {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	fill: #fff;
+	cursor: pointer;
+  }
+  
+  .arrowLeft {
+	left: 5px;
+  }
+  
+  .arrowRight {
+	left: auto;
+	right: 5px;
+  }
+  
+  .arrowDisabled {
+	fill: rgba(255, 255, 255, 0.5);
+  }
+
+  .dots {
+	padding: 10px 0;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+  }
+  
+  .dot {
+	border: none;
+	width: 10px;
+	height: 10px;
+	background: #c5c5c5;
+	border-radius: 50%;
+	margin: 0 5px;
+	padding: 5px;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	  }
+
+}
+	.activeDot {
+		background: var(--light-green);
+	}
+  
