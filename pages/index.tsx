@@ -17,8 +17,6 @@ import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
 import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
 import { getAllActivePrograms } from "../api/Programs.api";
-import dynamic from "next/dynamic";
-import { Carousel } from "react-responsive-carousel";
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -28,19 +26,6 @@ const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922147/radiosavta/gallery/14.jpg",
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922261/radiosavta/gallery/15.jpg",
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922386/radiosavta/gallery/17.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922451/radiosavta/gallery/18.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922514/radiosavta/gallery/19.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921370/radiosavta/gallery/anotherass.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921384/radiosavta/gallery/ass.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921769/radiosavta/gallery/batya.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921329/radiosavta/gallery/berech.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921988/radiosavta/gallery/bigonyou.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921544/radiosavta/gallery/buidingmitspe.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921470/radiosavta/gallery/buildinghigher.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922579/radiosavta/gallery/cats.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921355/radiosavta/gallery/clouds.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921347/radiosavta/gallery/fox.jpg",
-//   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921340/radiosavta/gallery/ibex.jpg",
 ];
 export default function Home() {
   
