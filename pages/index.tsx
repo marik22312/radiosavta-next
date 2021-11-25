@@ -34,32 +34,7 @@ export default function Home() {
 
   const { recordedShows } = useRecordedShows();
   return (
-    <Page title="רדיוסבתא">
-      {/* <section
-        className={cn("gallery-section", style.gallerySection)}
-        style={{ direction: "ltr" }}
-      >
-        <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
-          {images.map((url, index) => {
-            return (
-              <div key={url} className="keen-slider__slide">
-                <img className={style.slideImage} src={url} alt={url} />
-              </div>
-            );
-          })}
-        </div>
-        <div className={style.homeContentWrapper}>
-          <div className={style.homeContent}>
-            <div className="logo">
-              <h2>רדיוסבתא</h2>
-              <p>קולקטיב רדיו אינטרנט</p>
-            </div>
-          </div>
-          <div className={cn(style.homeContent, style.quote)}>
-            <p>כשהעגלה נוסעת, כל המלונים מסתדרים בארגזים שלהם - סבא בקל</p>
-          </div>
-        </div>
-      </section> */}
+    <Page title="ראשי">
       <AboutSection />
       <section className={style.latestShowsSection}>
         <h2>העלאות אחרונות</h2>
