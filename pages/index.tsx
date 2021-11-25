@@ -148,8 +148,8 @@ export const AboutSection: React.FC = () => {
         </div>
         <div className={style.aboutUsTextWrapper}>
           <p className={style.aboutUsText}>
-            קולקטיב 'רדיו סבתא' נוסד בשנת 2015 כתחנת רדיו אינטרנטי במצפה רמון.
-            התחנה נוסדה ע"י עירא דיין, במטרה להנציח את (סבתא) יעל קרן, חותנתו של
+            קולקטיב &apos;רדיו סבתא&apos; נוסד בשנת 2015 כתחנת רדיו אינטרנטי במצפה רמון.
+            התחנה נוסדה ע&quot;י עירא דיין, במטרה להנציח את (סבתא) יעל קרן, חותנתו של
             עירא
           </p>
           <p className={style.aboutUsText}>
