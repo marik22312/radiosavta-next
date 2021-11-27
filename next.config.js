@@ -1,19 +1,43 @@
 const withImages = require('next-images')
 
-module.exports = withImages({
-  reactStrictMode: true,
-  webpack5: false,
-  images: {
-	  domains: ['res.cloudinary.com']
-  },
-  webpack(config) {
-    return config;
-  },
-  inlineImageLimit: false,
-  env: {
-	  BASE_API_URL: process.env.BASE_API_URL,
-	  NEXT_IMAGE_ALLOWED_DOMAINS: process.env.NEXT_IMAGE_ALLOWED_DOMAINS,
-	  NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
-	  MIXPANEL_API_KEY: process.env.MIXPANEL_API_KEY
-  }
-})
+// This file sets a custom webpack configuration to use your Next.js app
+// with Sentry.
+// https://nextjs.org/docs/api-reference/next.config.js/introduction
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+
+const { withSentryConfig } = require('@sentry/nextjs');
+
+const moduleExports = withImages({
+	reactStrictMode: true,
+	webpack5: false,
+	images: {
+		domains: ['res.cloudinary.com']
+	},
+	webpack(config) {
+	  return config;
+	},
+	inlineImageLimit: false,
+	env: {
+		BASE_API_URL: process.env.BASE_API_URL,
+		NEXT_IMAGE_ALLOWED_DOMAINS: process.env.NEXT_IMAGE_ALLOWED_DOMAINS,
+		NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
+		MIXPANEL_API_KEY: process.env.MIXPANEL_API_KEY,
+		NEXT_PUBLIC_SENTRY_DSN: process.env.SENTRY_DSN
+	}
+  })
+
+const sentryWebpackPluginOptions = {
+  // Additional config options for the Sentry Webpack plugin. Keep in mind that
+  // the following options are set automatically, and overriding them is not
+  // recommended:
+  //   release, url, org, project, authToken, configFile, stripPrefix,
+  //   urlPrefix, include, ignore
+
+  silent: true, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+};
+
+// Make sure adding Sentry options is the last code to run before exporting, to
+// ensure that your source maps include changes from all other Webpack plugins
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
