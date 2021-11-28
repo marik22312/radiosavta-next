@@ -79,7 +79,7 @@ const ProgramsPage: React.FC = (props) => {
     updateSearchQuery({ searchQuery: router.query.searchQuery, programId: id });
   };
 
-  const loader = useRef(null);
+  const loader = useRef<Element | null>(null);
 
   const handleObserver = useCallback(
     (entries) => {
@@ -189,6 +189,7 @@ const ProgramsPage: React.FC = (props) => {
               </div>
             ));
           })}
+		{/* @ts-ignore-error */}
           <div ref={loader} />
         </section>
       </div>
