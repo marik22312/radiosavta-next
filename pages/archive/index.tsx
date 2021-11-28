@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import * as FLATTED from "flatted";
 import { QueryClient } from "react-query";
@@ -12,49 +12,25 @@ import { useRecordedShows } from "../../hook/useRecordedShows";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
-import useDebounce from "../../hook/useDebouce";
 import Select from "react-select";
 import { usePrograms } from "../../hook/usePrograms";
 import { Title } from "../../components/Typography/Title";
 import {
   logFilterByRecordedShow,
   logSearchRecordedShow,
-  logResetFilterByProgram
+  logResetFilterByProgram,
 } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
 
-const ProgramsPage: React.FC = (props) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProgram, setSelectedProgram] = useState<number>();
 
-  const debounceSearchQuery = useDebounce(searchQuery);
+const ProgramsPage: React.FC = (props) => {
   const router = useRouter();
 
-  useEffect(() => {
-    if (debounceSearchQuery) {
-      logSearchRecordedShow(debounceSearchQuery);
-    }
-  }, [debounceSearchQuery]);
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    if (router.query) {
-      const search = Array.isArray(router.query) ? router.query[0] : router.query
-      let searchParams = new URLSearchParams(search);
-      const data = searchParams.get("search");
-      if(data) {
-        setSearchQuery(data);
-      }
-      const programId = searchParams.get("programId");
-      if(programId) {
-        setSelectedProgram(parseInt(programId))
-      }
-    }
-  }, []);
-
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
-    search: debounceSearchQuery,
-    programId: selectedProgram,
+    search: router.query.searchQuery as string,
+    programId: router.query.programId
+      ? parseInt(router.query.programId as string)
+      : undefined,
   });
   const { programs } = usePrograms();
 
@@ -66,29 +42,55 @@ const ProgramsPage: React.FC = (props) => {
     })),
   ];
 
-  const onSearchChange = (e: any) => {
-    setSearchQuery(e.target.value);
-    router.push({ pathname: '/archive', query: { search: searchQuery } });
-  };
+  const updateSearchQuery = useCallback(
+    ({ programId, searchQuery }: any) => {
+      const query: any = {};
+
+      if (programId) {
+        query.programId = programId;
+      }
+      if (searchQuery) {
+        query.searchQuery = searchQuery;
+      }
+      router.push({ pathname: "/archive", query }, undefined, {
+        shallow: true,
+      });
+    },
+    [router]
+  );
+
+  const onSearchChange = useCallback(
+    (e) => {
+      const searchQuery = e.target.value;
+	  if (searchQuery) {
+		  logSearchRecordedShow(searchQuery)
+	  }
+      updateSearchQuery({ searchQuery, programId: router.query.programId });
+    },
+    [router.query.programId, updateSearchQuery]
+  );
 
   const onProgramChange = (id: number) => {
     if (id) {
       logFilterByRecordedShow(id);
     } else {
-		logResetFilterByProgram()
-	}
-    setSelectedProgram(id);
+      logResetFilterByProgram();
+    }
+    updateSearchQuery({ searchQuery: router.query.searchQuery, programId: id });
   };
 
   const loader = useRef(null);
 
-  const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting && hasNextPage) {
-		console.log('Fetchnext')
-      fetchNext();
-    }
-  }, [hasNextPage]);
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting && hasNextPage) {
+        console.log("Fetchnext");
+        fetchNext();
+      }
+    },
+    [hasNextPage]
+  );
 
   useEffect(() => {
     const option = {
@@ -101,6 +103,7 @@ const ProgramsPage: React.FC = (props) => {
       observer.observe(loader.current);
     }
   }, [handleObserver]);
+
   return (
     <Page title="הבוידעם">
       <div className={styles.archivePage}>
@@ -114,11 +117,12 @@ const ProgramsPage: React.FC = (props) => {
               className={cn(styles.input, styles.searchQuery)}
               autoComplete="off"
               placeholder="חיפוש לפי שם ההקלטה"
-              value={searchQuery}
+              value={router.query.searchQuery || ""}
               onChange={onSearchChange}
             />
             <Select
               options={options}
+              value={options.find((o) => o.value == router.query.programId)}
               placeholder="סינון לפי תכנית"
               // @ts-ignore
               onChange={(value) => onProgramChange(value!.value)}
@@ -175,7 +179,7 @@ const ProgramsPage: React.FC = (props) => {
                   name={show.name}
                   recordingDate={show.created_at}
                   programName={show.program.name_he}
-				  source={'ARCHIVE'}
+                  source={"ARCHIVE"}
                   backgroundImageUrl={`${BASE_IMAGE}/${
                     show.program.cover_image
                       ? show.program.cover_image
