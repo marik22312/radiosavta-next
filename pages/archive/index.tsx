@@ -46,6 +46,14 @@ const ProgramsPage: React.FC = (props) => {
         setSearchQuery(data);
       }
     }
+    if(router.query.programId) {
+      const programId = Array.isArray(router.query) ? router.query[0] : router.query
+      let searchParams = new URLSearchParams(programId);
+      const data = searchParams.get("programId");
+      if(data) {
+        setSelectedProgram(parseInt(data));
+      }
+    }
   }, []);
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
@@ -63,8 +71,8 @@ const ProgramsPage: React.FC = (props) => {
   ];
 
   const onSearchChange = (e: any) => {
-    router.push({ pathname: '/archive', query: { search: searchQuery } });
     setSearchQuery(e.target.value);
+    router.push({ pathname: '/archive', query: { search: searchQuery } });
   };
 
   const onProgramChange = (id: number) => {
