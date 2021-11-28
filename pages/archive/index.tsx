@@ -38,20 +38,16 @@ const ProgramsPage: React.FC = (props) => {
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (router.query.search) {
+    if (router.query) {
       const search = Array.isArray(router.query) ? router.query[0] : router.query
       let searchParams = new URLSearchParams(search);
       const data = searchParams.get("search");
       if(data) {
         setSearchQuery(data);
       }
-    }
-    if(router.query.programId) {
-      const programId = Array.isArray(router.query) ? router.query[0] : router.query
-      let searchParams = new URLSearchParams(programId);
-      const data = searchParams.get("programId");
-      if(data) {
-        setSelectedProgram(parseInt(data));
+      const programId = searchParams.get("programId");
+      if(programId) {
+        setSelectedProgram(parseInt(programId))
       }
     }
   }, []);
