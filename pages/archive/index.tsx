@@ -21,18 +21,32 @@ import {
   logSearchRecordedShow,
   logResetFilterByProgram
 } from "../../api/Mixpanel.api";
+import { useRouter } from "next/router";
 
 const ProgramsPage: React.FC = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProgram, setSelectedProgram] = useState<number>();
 
   const debounceSearchQuery = useDebounce(searchQuery);
+  const router = useRouter();
 
   useEffect(() => {
     if (debounceSearchQuery) {
       logSearchRecordedShow(debounceSearchQuery);
     }
   }, [debounceSearchQuery]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (router.query.search) {
+      const search = Array.isArray(router.query) ? router.query[0] : router.query
+      let searchParams = new URLSearchParams(search);
+      const data = searchParams.get("search");
+      if(data) {
+        setSearchQuery(data);
+      }
+    }
+  }, []);
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
     search: debounceSearchQuery,
@@ -49,6 +63,7 @@ const ProgramsPage: React.FC = (props) => {
   ];
 
   const onSearchChange = (e: any) => {
+    router.push({ pathname: '/archive', query: { search: searchQuery } });
     setSearchQuery(e.target.value);
   };
 
@@ -79,7 +94,6 @@ const ProgramsPage: React.FC = (props) => {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) {
-      // @ts-expect-error
       observer.observe(loader.current);
     }
   }, [handleObserver]);
