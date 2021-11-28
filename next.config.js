@@ -13,7 +13,7 @@ const moduleExports = withImages({
 	images: {
 		domains: ['res.cloudinary.com']
 	},
-	target: 'experimental-serverless-trace ',
+	target: 'experimental-serverless-trace',
 	webpack(config) {
 	  return config;
 	},
