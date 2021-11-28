@@ -37,6 +37,9 @@
 	@include media-breakpoint(sm) {
 		font-size: 1.2rem;
 	}
+	@include media-breakpoint(xs) {
+		font-size: 1rem;
+	}
 	
 
 }
