@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import * as FLATTED from "flatted";
 import { QueryClient } from "react-query";
@@ -12,31 +12,25 @@ import { useRecordedShows } from "../../hook/useRecordedShows";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
-import useDebounce from "../../hook/useDebouce";
 import Select from "react-select";
 import { usePrograms } from "../../hook/usePrograms";
 import { Title } from "../../components/Typography/Title";
 import {
   logFilterByRecordedShow,
   logSearchRecordedShow,
-  logResetFilterByProgram
+  logResetFilterByProgram,
 } from "../../api/Mixpanel.api";
+import { useRouter } from "next/router";
+
 
 const ProgramsPage: React.FC = (props) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProgram, setSelectedProgram] = useState<number>();
-
-  const debounceSearchQuery = useDebounce(searchQuery);
-
-  useEffect(() => {
-    if (debounceSearchQuery) {
-      logSearchRecordedShow(debounceSearchQuery);
-    }
-  }, [debounceSearchQuery]);
+  const router = useRouter();
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
-    search: debounceSearchQuery,
-    programId: selectedProgram,
+    search: router.query.searchQuery as string,
+    programId: router.query.programId
+      ? parseInt(router.query.programId as string)
+      : undefined,
   });
   const { programs } = usePrograms();
 
@@ -48,28 +42,55 @@ const ProgramsPage: React.FC = (props) => {
     })),
   ];
 
-  const onSearchChange = (e: any) => {
-    setSearchQuery(e.target.value);
-  };
+  const updateSearchQuery = useCallback(
+    ({ programId, searchQuery }: any) => {
+      const query: any = {};
+
+      if (programId) {
+        query.programId = programId;
+      }
+      if (searchQuery) {
+        query.searchQuery = searchQuery;
+      }
+      router.push({ pathname: "/archive", query }, undefined, {
+        shallow: true,
+      });
+    },
+    [router]
+  );
+
+  const onSearchChange = useCallback(
+    (e) => {
+      const searchQuery = e.target.value;
+	  if (searchQuery) {
+		  logSearchRecordedShow(searchQuery)
+	  }
+      updateSearchQuery({ searchQuery, programId: router.query.programId });
+    },
+    [router.query.programId, updateSearchQuery]
+  );
 
   const onProgramChange = (id: number) => {
     if (id) {
       logFilterByRecordedShow(id);
     } else {
-		logResetFilterByProgram()
-	}
-    setSelectedProgram(id);
+      logResetFilterByProgram();
+    }
+    updateSearchQuery({ searchQuery: router.query.searchQuery, programId: id });
   };
 
-  const loader = useRef(null);
+  const loader = useRef<Element | null>(null);
 
-  const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting && hasNextPage) {
-		console.log('Fetchnext')
-      fetchNext();
-    }
-  }, [hasNextPage]);
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting && hasNextPage) {
+        console.log("Fetchnext");
+        fetchNext();
+      }
+    },
+    [hasNextPage]
+  );
 
   useEffect(() => {
     const option = {
@@ -79,10 +100,10 @@ const ProgramsPage: React.FC = (props) => {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) {
-      // @ts-expect-error
       observer.observe(loader.current);
     }
   }, [handleObserver]);
+
   return (
     <Page title="הבוידעם">
       <div className={styles.archivePage}>
@@ -96,11 +117,12 @@ const ProgramsPage: React.FC = (props) => {
               className={cn(styles.input, styles.searchQuery)}
               autoComplete="off"
               placeholder="חיפוש לפי שם ההקלטה"
-              value={searchQuery}
+              value={router.query.searchQuery || ""}
               onChange={onSearchChange}
             />
             <Select
               options={options}
+              value={options.find((o) => o.value == router.query.programId)}
               placeholder="סינון לפי תכנית"
               // @ts-ignore
               onChange={(value) => onProgramChange(value!.value)}
@@ -157,7 +179,7 @@ const ProgramsPage: React.FC = (props) => {
                   name={show.name}
                   recordingDate={show.created_at}
                   programName={show.program.name_he}
-				  source={'ARCHIVE'}
+                  source={"ARCHIVE"}
                   backgroundImageUrl={`${BASE_IMAGE}/${
                     show.program.cover_image
                       ? show.program.cover_image
@@ -167,6 +189,7 @@ const ProgramsPage: React.FC = (props) => {
               </div>
             ));
           })}
+		{/* @ts-ignore-error */}
           <div ref={loader} />
         </section>
       </div>
