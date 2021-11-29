@@ -30,7 +30,7 @@ export const ProgramTile: React.FC<{ program: Program }> = ({ program }) => {
           })}
         </div>
         <div className={styles.seeProgram}>
-			<Link href={`/programs/${program.id}`}>
+			<Link href={`/archive?programId=${program.id}`}>
 			<a>עבור לתוכנית</a>
 			</Link>
 		</div>
