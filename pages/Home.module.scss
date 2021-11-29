@@ -159,6 +159,7 @@
 .aboutUsTextWrapper {
 	font-size: 0.7rem;
 
+	margin: var(--SPACE3) 0;
 	@include media-breakpoint(sm) {
 		text-align: center;
 		font-size: 1rem;
