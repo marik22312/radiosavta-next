@@ -13,7 +13,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@sentry/nextjs": "^6.15.0",
     "@svgr/webpack": "^5.5.0",
     "@types/react-vertical-timeline-component": "^3.0.1",
     "axios": "^0.21.1",
