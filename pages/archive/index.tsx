@@ -8,7 +8,7 @@ import { dehydrate } from "react-query/hydration";
 
 import styles from "./ArchivePage.module.scss";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
-import { useRecordedShows } from "../../hook/useRecordedShows";
+import { prefetchRecordedShows, useRecordedShows } from "../../hook/useRecordedShows";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
@@ -200,16 +200,15 @@ const ProgramsPage: React.FC = (props) => {
 export default ProgramsPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchInfiniteQuery(
-    `recordedShows-archive`,
-    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam })
-  );
-
-  return {
-    props: {
-      dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
-    },
+	const queryClient = new QueryClient();
+	const searchQuery = context.query.searchQuery as string;
+	const programId = context.query.programId ? parseInt(context.query.programId as string) : undefined;
+  
+	await prefetchRecordedShows(queryClient, { search: searchQuery, programId})
+  
+	return {
+	  props: {
+		dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
+	  },
+	};
   };
-};
