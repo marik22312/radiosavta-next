@@ -17,6 +17,7 @@ import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
 import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListStandalone";
 import { getAllActivePrograms } from "../api/Programs.api";
+import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
 const images = [
   "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
@@ -32,7 +33,6 @@ export default function Home() {
 
   const { programs } = usePrograms({ limit: 3, rand: true });
 
-  const { recordedShows } = useRecordedShows();
   return (
     <Page title="ראשי">
       <AboutSection />
@@ -61,10 +61,7 @@ export default function Home() {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(
-    `recordedShows-archive`,
-    ({ pageParam = 1 }) => queryRecordedShows({ page: pageParam, limit: 8 })
-  );
+  await prefetchLatestRecordedShows(queryClient, {limit: 3});
 
   await queryClient.prefetchQuery(
     'active-programs',
