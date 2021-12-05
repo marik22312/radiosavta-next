@@ -106,7 +106,7 @@ export const AboutSection: React.FC = () => {
         </div>
         <div className={style.aboutUsTextWrapper}>
           <p className={style.aboutUsText}>
-            כשהעגלה נוסעת, כל המלונים מסתדרים באגזים - סבא בקל
+            כשהעגלה נוסעת, כל המלונים מסתדרים בארגזים שלהם - סבא בקל
           </p>
         </div>
       </div>
