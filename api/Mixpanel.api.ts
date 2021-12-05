@@ -1,6 +1,7 @@
 import mixpanel from "mixpanel-browser";
 import moment from "moment";
 import { Track } from '../domain/Player';
+import { Program } from '../domain/Program';
 
 const log = (event: string, opts: any) => {
   if (process.env.NODE_ENV !== "production") {
@@ -43,3 +44,22 @@ export const logResetFilterByProgram = () => {
     showId: 'ALL',
   });
 };
+export const logOpenProgram = ({programId}:{programId: number}) => {
+  log("programs.openProgram", {
+    programId,
+  });
+};
+
+export const logNavbarOpen = () => {
+	log("navbar.open", {});
+}
+export const logNavbarClose = () => {
+	log("navbar.close", {});
+}
+
+export const logNavbarNavigation = (url: string) => {
+	log('navbar.navigateTo', {
+		url: url
+	})
+}
+

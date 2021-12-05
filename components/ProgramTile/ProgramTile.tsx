@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from "react";
+import { logOpenProgram } from '../../api/Mixpanel.api';
 import { BASE_IMAGE_AVATAR, BASE_IMAGE_ICON } from '../../config/images';
 import { Program } from "../../domain/Program";
 import { getDayOfWeek } from "../../utils/program.utils";
@@ -31,7 +32,7 @@ export const ProgramTile: React.FC<{ program: Program }> = ({ program }) => {
         </div>
         <div className={styles.seeProgram}>
 			<Link href={`/archive?programId=${program.id}`}>
-			<a>עבור לתוכנית</a>
+				<a onClick={() => logOpenProgram({programId:program.id})}>עבור לתוכנית</a>
 			</Link>
 		</div>
       </div>

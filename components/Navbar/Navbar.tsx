@@ -17,13 +17,21 @@ import { useLivePlayer } from '../../hook/useLivePlayer';
 import { usePlayerControls } from '../../hook/usePlayerControls';
 
 import { useRouter } from 'next/router'
-import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
+import { logNavbarClose, logFooterPlayerPlay, logNavbarOpen, logNavbarNavigation } from '../../api/Mixpanel.api';
 
 interface NavBarProps {
   title: string;
   onOpen(): void;
   onClose(): void;
   width: number;
+}
+
+const MenuItem: React.FC<{url: string; title: string;}> = (props) => {
+	return (
+		<Link href={props.url}>
+		<a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
+	  </Link>
+	)
 }
 
 export const Navbar: React.FC<NavBarProps> = (props) => {
@@ -36,7 +44,14 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    isOpen ? close() : open();
+	  if (isOpen)  {
+		  logNavbarClose();
+		  close();
+		return;
+	  }
+
+	  logNavbarOpen();
+	  return open();
   };
 
   const togglePlay = () => {
@@ -74,18 +89,10 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         style={{
           width: navbarWidth
         }}>
-          <Link href="/">
-            <a>ראשי</a>
-          </Link>
-          <Link href="/programs">
-            <a>תכניות</a>
-          </Link>
-          <Link href="/archive">
-            <a>הבוידעם</a>
-          </Link>
-          <Link href="/about">
-            <a>הסיפור שלנו</a>
-          </Link>
+			<MenuItem url="/" title="ראשי"/>
+			<MenuItem url="/programs" title="תכניות"/>
+			<MenuItem url="/archive" title="הבוידעם"/>
+			<MenuItem url="/about" title="הסיפור שלנו"/>
         </div>
         <div className={styles.socialsWrapper}
         style={{
