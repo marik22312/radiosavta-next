@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 import Head from "next/head";
+import Script from "next/script";
 
 import { Navbar } from "../Navbar/Navbar";
 
@@ -20,6 +21,7 @@ export const Page: React.FC<PageProps> = ({
   const navbarWidth = 215;
   return (
     <>
+	<Script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=a87d12a175b8f' async={true}></Script>
       <Head>
         <title>רדיוסבתא - {title}</title>
         <meta name="description" content="קולקטיב רדיו אינטרנט" />
