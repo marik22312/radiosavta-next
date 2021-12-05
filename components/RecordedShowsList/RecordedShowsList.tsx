@@ -51,6 +51,7 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
                 name={show.name}
                 recordingDate={show.created_at}
 				programName={props.programName}
+				programId={show.program.id}
 				source={'PROGRAM_PAGE'}
               />
             </div>

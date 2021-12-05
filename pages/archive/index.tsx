@@ -180,6 +180,7 @@ const ProgramsPage: React.FC = (props) => {
                   recordingDate={show.created_at}
                   programName={show.program.name_he}
                   source={"ARCHIVE"}
+				  programId={show.program.id}
                   backgroundImageUrl={`${BASE_IMAGE}/${
                     show.program.cover_image
                       ? show.program.cover_image

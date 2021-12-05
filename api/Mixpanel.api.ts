@@ -20,6 +20,7 @@ export const logPlayRecordedShow = (args: {
 	programName: string;
 	showName: string;
 	source: 'HOMEPAGE' | 'PROGRAM_PAGE' | 'ARCHIVE'
+	programId: number;
 }) => {
   log("media.playRecordedShow", args);
 };

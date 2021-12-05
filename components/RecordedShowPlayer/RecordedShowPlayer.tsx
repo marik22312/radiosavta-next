@@ -12,6 +12,7 @@ export interface RecordedShowPlayerProps {
   programName: string;
   recordingDate: string;
   backgroundImageUrl?: string;
+  programId: number;
   source: 'HOMEPAGE' | 'PROGRAM_PAGE' | 'ARCHIVE';
 }
 
@@ -37,7 +38,8 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
     logPlayRecordedShow({
       programName: props.programName,
       showName: props.name,
-	  source: props.source
+	  source: props.source,
+	  programId: props.programId,
     });
     return play({
       title: props.name,
