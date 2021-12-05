@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (typeof window !== "undefined") {
       mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
     }
-  }, []);
+  });
 
   return (
     <QueryClientProvider client={queryClient.current}>

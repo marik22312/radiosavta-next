@@ -17,6 +17,7 @@ import { useLivePlayer } from '../../hook/useLivePlayer';
 import { usePlayerControls } from '../../hook/usePlayerControls';
 
 import { useRouter } from 'next/router'
+import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
 
 interface NavBarProps {
   title: string;
@@ -40,6 +41,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 
   const togglePlay = () => {
 	  if (isStopped || isLive) {
+		  logFooterPlayerPlay()
 		  return logAndToggleLive();
 		}
 		if (isPaused) {

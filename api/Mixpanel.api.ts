@@ -4,7 +4,7 @@ import { Track } from '../domain/Player';
 
 const log = (event: string, opts: any) => {
   if (process.env.NODE_ENV !== "production") {
-    console.log(`Mixpanel log: ${event}, params: ${JSON.stringify(opts)}`);
+    console.log(`Mixpanel log: ${event}, params: ${JSON.stringify(opts)}, user: ${mixpanel.get_distinct_id()}`);
     return;
   }
 
