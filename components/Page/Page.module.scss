@@ -4,6 +4,8 @@
 	
 	@include media-breakpoint(sm) {
 		transform: none !important;
-
+	}
+	@include media-breakpoint(lg) {
+		width: 100% !important;
 	}
 }
