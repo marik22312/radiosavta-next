@@ -108,8 +108,8 @@ const ProgramsPage: React.FC = (props) => {
     <Page title="הבוידעם">
       <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
-          <p className={styles.quote}>ברדיו יש לך שני כלים, צליל ושקט.</p>
           <Title as="h1">הבוידעם</Title>
+          <p className={styles.quote}>ברדיו יש לך שני כלים, צליל ושקט.</p>
         </section>
         <section className={styles.programsList}>
           <div className={styles.filterWrapper}>

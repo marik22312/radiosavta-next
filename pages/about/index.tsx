@@ -13,12 +13,12 @@ const AboutUsPage: React.FC = () => {
   return (
     <Page title="הסיפור של סבתא">
       <div className={styles.aboutUsPage}>
-        <section className={styles.quoteSection}>
-          <p className={styles.quote}>״כשהעגלה נוסעת המלונים מסתדרים בארגזים״, -סבא בקל</p>
-        </section>
         <section className={styles.titleSection}>
           <Title as='h1'>סיפורי סבתא</Title>
         </section>
+        {/* <section className={styles.quoteSection}>
+          <p className={styles.quote}>״כשהעגלה נוסעת המלונים מסתדרים בארגזים״, -סבא בקל</p>
+        </section> */}
         <section className={styles.storySection}>
           <div className="storyWrapper">
             <div className={cn(styles.firstSection, styles.section)}>
