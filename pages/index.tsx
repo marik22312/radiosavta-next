@@ -19,15 +19,8 @@ import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListS
 import { getAllActivePrograms } from "../api/Programs.api";
 import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
-const images = [
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921320/radiosavta/gallery/10.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921412/radiosavta/gallery/11.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922090/radiosavta/gallery/12.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922147/radiosavta/gallery/14.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922261/radiosavta/gallery/15.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922386/radiosavta/gallery/17.jpg",
-];
+import { filteredImages } from "../utils/getRandomImages.utils";
+
 export default function Home() {
   
 
@@ -68,12 +61,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     () => getAllActivePrograms({ limit: 3, rand: true })
   );
 
+  const imagesToShow = filteredImages;
+
   return {
     props: {
       dehydratedState: stringify(dehydrate(queryClient)),
+      imagesToShow
     },
   };
 };
+
+
 
 export const AboutSection: React.FC = () => {
 	const timer = useRef<any>();
@@ -97,6 +95,8 @@ export const AboutSection: React.FC = () => {
     };
   }, [slider]);
 
+  const [imagesToShow, SetImagesToShow] = useState<string[]>(filteredImages);
+
   return (
     <section className={style.aboutUsSection}>
       <div className={style.aboutUsPane}>
@@ -112,7 +112,7 @@ export const AboutSection: React.FC = () => {
       </div>
       <div className={style.galleryPane}>
 	  <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
-          {images.map((url, index) => {
+          {imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
                 <img className={style.slideImage} src={url} alt={url} />
