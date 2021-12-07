@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +42,16 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   const { pathname } = useRouter();
   
   const [isOpen, setIsOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    document?.addEventListener('scroll', () => {
+      setScrollPosition(window.scrollY);
+    })
+    return () => {
+      document.removeEventListener('scroll', () => {})
+    }
+  }, [])
 
   const toggleMenu = () => {
 	  if (isOpen)  {
@@ -102,14 +112,14 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             className={styles.socialLink}
             target="_blank"
             href="https://www.facebook.com/radiosavta"
-			rel="noreferrer noopener"
+		      	rel="noreferrer noopener"
           >
             <FontAwesomeIcon icon={faFacebook} size="2x" color="white" />
           </a>
           <a
             className={styles.socialLink}
             href="mailto:radiosavta@gmail.com"
-			rel="noreferrer noopener"
+			      rel="noreferrer noopener"
           >
             <FontAwesomeIcon icon={faEnvelope} size="2x" color="white" />
           </a>
@@ -117,7 +127,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             className={styles.socialLink}
             target="_blank"
             href="https://www.instagram.com/radiosavta"
-			rel="noreferrer noopener"
+			      rel="noreferrer noopener"
           >
             <FontAwesomeIcon icon={faInstagram} size="2x" color="white" />
           </a>
@@ -130,16 +140,16 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         }}
       >
         <div
-          className={styles.titleWrapper}
+          className={styles.titleWrapper + `${scrollPosition ? " " + styles.active : ''}`}
           style={{
             marginRight: !isOpen ? 0 : 215,
           }}
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
-				<Link href="/">
-              <img src={`${BASE_IMAGE_ICON}radiosavta/logo_head`} width="100%" height="100%"/>
-				</Link>
+				      <Link href="/">
+                <img src={`${BASE_IMAGE_ICON}radiosavta/logo_head`} width="100%" height="100%"/>
+				      </Link>
             </div>
             <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
               <span></span>
@@ -147,6 +157,10 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
               <span></span>
             </div>
           </div>
+          <MenuItem url="/" title="ראשי" />
+          <MenuItem url="/programs" title="תכניות" />
+          <MenuItem url="/archive" title="הבוידעם" />
+          <MenuItem url="/about" title="הסיפור שלנו" />
           <div className={styles.title}>
             {pathname !== '/' && <p>{props.title}</p>}
           </div>
