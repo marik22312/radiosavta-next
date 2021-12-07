@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
       setScrollPosition(window.scrollY);
     })
     return () => {
-      document.removeEventListener('scroll', () => {})
+      document?.removeEventListener('scroll', () => {})
     }
   }, [])
 
