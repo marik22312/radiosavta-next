@@ -19,7 +19,7 @@ import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListS
 import { getAllActivePrograms } from "../api/Programs.api";
 import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
-import { filteredImages } from "../utils/getRandomImages.utils";
+import { getFilteredImages } from "../utils/getRandomImages.utils";
 
 export default function Home() {
   
@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     () => getAllActivePrograms({ limit: 3, rand: true })
   );
 
-  const imagesToShow = filteredImages;
+  const imagesToShow = getFilteredImages();
 
   return {
     props: {
@@ -95,7 +95,7 @@ export const AboutSection: React.FC = () => {
     };
   }, [slider]);
 
-  const [imagesToShow, SetImagesToShow] = useState<string[]>(filteredImages);
+  const [imagesToShow, setImagesToShow] = useState(getFilteredImages());
 
   return (
     <section className={style.aboutUsSection}>

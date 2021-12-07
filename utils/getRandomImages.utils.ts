@@ -1,8 +1,6 @@
 import { images } from "../data/images";
+import { getRandomFrom } from "./getRandomFrom.utils";
 
-export function getRandomFrom(dataset: any[], limit: number) {
-	const shuffled = dataset.sort(() => 0.5 - Math.random());
-	return shuffled.slice(0, limit);
+export const getFilteredImages = () => {
+	return getRandomFrom(images, 7);
 }
-
-export const filteredImages = getRandomFrom(images, 7);
