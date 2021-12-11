@@ -1,8 +1,7 @@
 @import '../../styles//mixins.scss';
 
 .titleWrapper {
-	height: 100%;
-	width: var(--navbar-width);
+
 	background-size: cover;
 	position: fixed;
 	right: 0;
@@ -13,55 +12,56 @@
     align-items: center;
 	z-index: 5000;
 	transition: background-color 0.2s ease-in-out, margin-right 0.5s;
-	@include media-breakpoint(sm) {
-		background:linear-gradient(0deg, rgba(6, 102, 0, 0.9), rgba(6, 102, 0, 0.9)), url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/crop2.jpg');
-	}
-	@include media-breakpoint(lg) {
-		left: 0;
-		height: 100px;
-		width: 100%;
-		flex-direction: row;
-		justify-content: flex-start;
-		gap: var(--SPACE2);
-		a {
-			color: white;
-			position: relative;
-			padding-bottom: 5px;
-			text-shadow: var(--shadow);
-			&::before {
-				content: "";
-				position: absolute;
-    			transition: transform .5s ease;
-				left: 0;
-				bottom: 0;
-				width: 100%;
-				height: 2px;
-				background: white;
-				transform: scaleX(0);
-			}
-			&:hover::before {
-				transform: scaleX(1);
-			}
+	
+	left: 0;
+	height: 100px;
+	width: 100%;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: var(--SPACE2);
+	a {
+		color: white;
+		position: relative;
+		padding-bottom: 5px;
+		text-shadow: var(--shadow);
+		&::before {
+			content: "";
+			position: absolute;
+			transition: transform .5s ease;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 2px;
+			background: white;
+			transform: scaleX(0);
+		}
+		&:hover::before {
+			transform: scaleX(1);
 		}
 	}
-	@include media-breakpoint(sm) {
+	@include media-breakpoint(md) {
+		background:linear-gradient(0deg, rgba(6, 102, 0, 0.9), rgba(6, 102, 0, 0.9)), url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/crop2.jpg');
+		left: unset;
+		height: 100%;
+		width: var(--navbar-width);
+		flex-direction: column;
+		gap: unset;
 		a {
 			display: none;
 		}
 	}
 }
-@include media-breakpoint(lg) {
+
 	.active {
 		background-color: var(--light-dark-green);
 		box-shadow: var(--shadow);
 	}
-}
+
 .title {
 	user-select: none;
 	font-family: "Karantina";
 	text-shadow: var(--inverted-shadow);
 	
-	display: inline-block;
 	direction: ltr;
 	font-size: 1.7rem;
 	text-align: right;
@@ -74,16 +74,15 @@
 	margin: 0;
 	font-weight: normal;
 	letter-spacing: 8px;
+	display: none;
 	
 	@include media-breakpoint(sm) {
+		display: inline-block;
 		font-size: 36px;
 		transform: rotate(180deg);
 		writing-mode: vertical-lr;
 		width: 50px;
 		height: 100%;
-	}
-	@include media-breakpoint(lg) {
-		display: none;
 	}
 p {
 	line-height: revert;
@@ -143,19 +142,22 @@ p {
   }
 
   .navbarHead {
-	height: 200px;
-	margin-top: var(--SPACE2);
-	display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-	align-items: center;
-	max-width: 80px;
-
-	@include media-breakpoint(lg) {
-		flex-direction: row;
-		height: 100px;
-		margin: 0;
-		margin-inline-start: var(--SPACE2);
+	
+	  display: flex;
+	  justify-content: space-evenly;
+	  
+	  align-items: center;
+	  max-width: 80px;
+	  
+	  flex-direction: row;
+	  height: 100px;
+	  margin: 0;
+	  margin-inline-start: var(--SPACE2);
+	  
+	  @include media-breakpoint(md) {
+		  flex-direction: column;
+		  height: 200px;
+		  margin-top: var(--SPACE2);
 	}
 	
   }
@@ -168,6 +170,7 @@ p {
   }
 
 .menuBtn {
+	display: none;
 	width: 60px;
 	height: 45px;
 	position: relative;
@@ -182,8 +185,8 @@ p {
 	-o-transition: .5s ease-in-out;
 	transition: .5s ease-in-out;
 	cursor: pointer;
-	@include media-breakpoint(lg) {
-		display: none;
+	@include media-breakpoint(md) {
+		display: block;
 	}
 
 	span {
@@ -248,25 +251,25 @@ p {
 }
 
 .playPauseButton {
-	--size: 150px;
 	
 	height: var(--size);
 	width: var(--size);
-	position: absolute;
 	bottom: calc(var(--footerHeight) - (var(--size) / 2));
 	right: calc(var(--navbar-width) - (var(--size) / 2));
 	cursor: pointer;
-
+	
+	--size: 125px;
+	position: fixed;
 	@include media-breakpoint(sm) {
 		--size: 100px;
-
+		
 		display: flex;
 		flex-direction: column-reverse;
 	}
-
-	@include media-breakpoint(lg) {
-		--size: 125px;
-		position: fixed;
+	
+	@include media-breakpoint(md) {
+		--size: 150px;
+		position: absolute;
 	}
 
 	img {
