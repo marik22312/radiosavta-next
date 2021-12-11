@@ -52,12 +52,10 @@
 	}
 }
 
-@include media-breakpoint(lg) {
 	.active {
 		background-color: var(--light-dark-green);
 		box-shadow: var(--shadow);
 	}
-}
 
 .title {
 	user-select: none;

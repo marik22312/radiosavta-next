@@ -73,7 +73,6 @@ export const Page: React.FC<PageProps> = ({
       <div
         style={{
           marginRight: "auto",
-          width: "calc(100% - var(--navbar-width))",
         }}
         className={styles.pageContent}
       >
