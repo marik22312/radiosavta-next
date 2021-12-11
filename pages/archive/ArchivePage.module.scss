@@ -7,8 +7,10 @@
 	min-height: calc(100vh - var(--footerHeight));
 	background-size: contain;
     background-repeat: repeat;
-	@include media-breakpoint(lg) {
-		padding-top: 4rem;
+	padding-top: 4rem;
+	
+	@include media-breakpoint(md) {
+		padding-top: 2rem;
 	}
 	@include media-breakpoint(sm) {
 		padding-top: 2rem;

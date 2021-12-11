@@ -4,10 +4,8 @@
 .programsPage {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/v1631971111/radiosavta/backgrounds/bg_grey_1.jpg");
 	background-size: cover;
-	@include media-breakpoint(lg) {
-		padding-top: 4rem;
-	}
-	@include media-breakpoint(sm) {
+	padding-top: 4rem;
+	@include media-breakpoint(md) {
 		padding-top: 2rem;
 	}
 }
