@@ -252,24 +252,24 @@ p {
 
 .playPauseButton {
 	
+	--size: 150px;
 	height: var(--size);
 	width: var(--size);
 	bottom: calc(var(--footerHeight) - (var(--size) / 2));
 	right: calc(var(--navbar-width) - (var(--size) / 2));
 	cursor: pointer;
 	
-	--size: 125px;
 	position: fixed;
+	
+	@include media-breakpoint(md) {
+		--size: 125px;
+		position: absolute;
+	}
 	@include media-breakpoint(sm) {
 		--size: 100px;
 		
 		display: flex;
 		flex-direction: column-reverse;
-	}
-	
-	@include media-breakpoint(md) {
-		--size: 150px;
-		position: absolute;
 	}
 
 	img {
