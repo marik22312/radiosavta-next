@@ -4,6 +4,10 @@
 .programsPage {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/v1631971111/radiosavta/backgrounds/bg_grey_1.jpg");
 	background-size: cover;
+	padding-top: 4rem;
+	@include media-breakpoint(md) {
+		padding-top: 2rem;
+	}
 }
 
 .quoteSection {
@@ -13,10 +17,10 @@
 .quote {
 	color: #ffffff;
 	font-size: 1rem;
-	padding-top: 1.5rem;
-	margin-right: 3rem;
 	margin-bottom: 1.5rem;
+	margin-top: var(--SPACE2);
 	text-shadow: var(--shadow);
+	text-align: center;
 
 	@include media-breakpoint(sm) {
 		margin-right: 1.5rem;

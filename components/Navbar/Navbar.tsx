@@ -27,6 +27,8 @@ interface NavBarProps {
 }
 
 const MenuItem: React.FC<{url: string; title: string;}> = (props) => {
+	const { pathname } = useRouter();
+	console.log('pathname', pathname)
 	return (
 		<Link href={props.url}>
 		<a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
@@ -95,10 +97,10 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           width: !isOpen ? 0 : navbarWidth,
         }}
       >
-        <div className={styles.menuWrapper}
-        style={{
-          width: navbarWidth
-        }}>
+        <div
+			style={{
+			width: navbarWidth
+		}}>
 			<MenuItem url="/" title="ראשי"/>
 			<MenuItem url="/programs" title="תכניות"/>
 			<MenuItem url="/archive" title="הבוידעם"/>

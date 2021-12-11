@@ -5,15 +5,18 @@
 	padding: 0 50px;
 	background-image: url('https://res.cloudinary.com/marik-shnitman/image/upload/v1633459010/radiosavta/backgrounds/vinyl.png');
 	background-size: contain;
+	padding-top: 4rem;
 	
 	@include media-breakpoint(md) {
-		padding: 0px 25px
-		
+		padding-top: 2rem;
+	}
+
+	@include media-breakpoint(sm) {
+		padding-top: 2rem;
 	}
 }
 
 .quoteSection {
-	padding-top: 1.5rem;
 	text-align: center;
 	
 }

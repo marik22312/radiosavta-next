@@ -20,10 +20,10 @@ const ProgramsPage: React.FC = (props) => {
     <Page title="התכניות שלנו">
 		<div className={styles.programsPage}>
       <section className={styles.quoteSection}>
+        <Title as="h1">התכניות שלנו</Title>
         <p className={styles.quote}>
         הלו? זה רדיו? זוהי השאלה, מהי הפינה?
         </p>
-        <Title as="h1">התכניות שלנו</Title>
       </section>
         <ProgramsListStandalone programs={programs} />
 		</div>
