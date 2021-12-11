@@ -7,6 +7,12 @@
 	min-height: calc(100vh - var(--footerHeight));
 	background-size: contain;
     background-repeat: repeat;
+	@include media-breakpoint(lg) {
+		padding-top: 4rem;
+	}
+	@include media-breakpoint(sm) {
+		padding-top: 2rem;
+	}
 
 }
 
@@ -34,10 +40,10 @@
 .quote {
 	color: #ffffff;
 	font-size: 1rem;
-	padding-top: 1.5rem;
-	margin-right: 3rem;
 	margin-bottom: 1.5rem;
 	text-shadow: var(--shadow);
+	text-align: center;
+	margin-top: var(--SPACE2);
 
 	@include media-breakpoint(sm) {
 		margin-right: 1.5rem;

@@ -8,12 +8,16 @@
 	
 	@include media-breakpoint(md) {
 		padding: 0px 25px
-		
+	}
+	@include media-breakpoint(lg) {
+		padding-top: 4rem;
+	}
+	@include media-breakpoint(sm) {
+		padding-top: 2rem;
 	}
 }
 
 .quoteSection {
-	padding-top: 1.5rem;
 	text-align: center;
 	
 }
