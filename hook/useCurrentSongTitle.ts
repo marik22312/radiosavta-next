@@ -15,6 +15,7 @@ export const useCurrentSongTitle = (opts?: UseSongTitleOptions) => {
 
   return {
     songTitle: data?.streamTitle,
+	streamer: data?.streamer || '',
     refetch,
   };
 };

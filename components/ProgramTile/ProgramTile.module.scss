@@ -34,10 +34,10 @@
 	display: inline;
 	background-color: var(--dark-green);
 	font-size: 0.8rem;
-	@include media-breakpoint(sm) {
-		font-size: 1.2rem;
+	@include media-breakpoint(md) {
+		// font-size: 1.2rem;
 	}
-	@include media-breakpoint(xs) {
+	@include media-breakpoint(sm) {
 		font-size: 1rem;
 	}
 	

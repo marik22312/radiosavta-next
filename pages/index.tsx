@@ -7,11 +7,9 @@ import cn from "classnames";
 import { useKeenSlider } from "keen-slider/react";
 import { GetServerSideProps } from "next";
 import { QueryClient } from "react-query";
-import { queryRecordedShows } from "../api/RecordedShows.api";
 import { stringify } from "flatted";
 import { dehydrate } from "react-query/hydration";
 import { RecordedShowsListStandalone } from "../components/RecordedShowsList/RecordedShowsListStandalone";
-import { useRecordedShows } from "../hook/useRecordedShows";
 
 import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
@@ -19,23 +17,16 @@ import { ProgramsListStandalone } from "../components/ProgramsList/ProgramsListS
 import { getAllActivePrograms } from "../api/Programs.api";
 import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
-const images = [
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921319/radiosavta/gallery/1.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921320/radiosavta/gallery/10.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606921412/radiosavta/gallery/11.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922090/radiosavta/gallery/12.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922147/radiosavta/gallery/14.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922261/radiosavta/gallery/15.jpg",
-  "https://res.cloudinary.com/marik-shnitman/image/upload/v1606922386/radiosavta/gallery/17.jpg",
-];
-export default function Home() {
+import { getFilteredImages } from "../utils/getRandomImages.utils";
+
+export const Home: React.FC<{imagesToShow: string[]}> = (props) => {
   
 
   const { programs } = usePrograms({ limit: 3, rand: true });
 
   return (
     <Page title="ראשי">
-      <AboutSection />
+      <AboutSection imagesToShow={props.imagesToShow}/>
       <section className={style.latestShowsSection}>
         <h2>העלאות אחרונות</h2>
         <div className={style.latestShowsList}>
@@ -58,24 +49,7 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const queryClient = new QueryClient();
-
-  await prefetchLatestRecordedShows(queryClient, {limit: 3});
-
-  await queryClient.prefetchQuery(
-    'active-programs',
-    () => getAllActivePrograms({ limit: 3, rand: true })
-  );
-
-  return {
-    props: {
-      dehydratedState: stringify(dehydrate(queryClient)),
-    },
-  };
-};
-
-export const AboutSection: React.FC = () => {
+export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
 	const timer = useRef<any>();
 	const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
@@ -112,7 +86,7 @@ export const AboutSection: React.FC = () => {
       </div>
       <div className={style.galleryPane}>
 	  <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
-          {images.map((url, index) => {
+          {props.imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
                 <img className={style.slideImage} src={url} alt={url} />
@@ -152,6 +126,29 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
+
+export default Home;
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const queryClient = new QueryClient();
+  
+	await prefetchLatestRecordedShows(queryClient, {limit: 3});
+  
+	await queryClient.prefetchQuery(
+	  'active-programs',
+	  () => getAllActivePrograms({ limit: 3, rand: true })
+	);
+  
+	const imagesToShow = getFilteredImages();
+  
+	return {
+	  props: {
+		dehydratedState: stringify(dehydrate(queryClient)),
+		imagesToShow
+	  },
+	};
+  };
 
 interface GalleryArrowProps {
 	onClick: (e: any) => void;

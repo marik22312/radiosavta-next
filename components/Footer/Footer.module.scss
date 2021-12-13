@@ -7,16 +7,17 @@
 	justify-content: space-around;
     align-items: center;
 	padding: var(--SPACE1) 0;
-    // padding-right: var(--navbar-width);
-
+	@include media-breakpoint(md) {
+    	padding-right: var(--navbar-width);
+	}
 	margin-bottom: var(--footerHeight);
 	background-color: var(--light-dark-green);
 
 	> div {
 		margin: var(--SPACE3) 0;
 	}
-
-	@include media-breakpoint(sm) {
+	
+	@include media-breakpoint(md) {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
@@ -33,7 +34,7 @@
 .logoWrapper{
 	width: 50px;
 
-	@include media-breakpoint(sm) {
+	@include media-breakpoint(md) {
 		margin: auto;
 	}
 }
@@ -63,7 +64,7 @@
 .acumLogo {
 	width: 100px;
 
-	@include media-breakpoint(sm) {
+	@include media-breakpoint(md) {
 		width: 75px;
 	}
 }
