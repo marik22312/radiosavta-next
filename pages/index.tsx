@@ -7,11 +7,9 @@ import cn from "classnames";
 import { useKeenSlider } from "keen-slider/react";
 import { GetServerSideProps } from "next";
 import { QueryClient } from "react-query";
-import { queryRecordedShows } from "../api/RecordedShows.api";
 import { stringify } from "flatted";
 import { dehydrate } from "react-query/hydration";
 import { RecordedShowsListStandalone } from "../components/RecordedShowsList/RecordedShowsListStandalone";
-import { useRecordedShows } from "../hook/useRecordedShows";
 
 import Link from "next/link";
 import { usePrograms } from "../hook/usePrograms";
