@@ -9,7 +9,7 @@ export const useLivePlayer = () => {
   const { play, stop } = usePlayerControls();
   const [isLive, setIsLive] = useState(audioRef?.src === LIVE_STREAM_URL);
 
-  const { songTitle, refetch } = useCurrentSongTitle({
+  const { songTitle, refetch, streamer } = useCurrentSongTitle({
     enabled: isLive,
     refetchInterval: 10000,
   });
@@ -41,6 +41,7 @@ export const useLivePlayer = () => {
 
   return {
     isLive,
+	streamer,
     toggleLive,
   };
 };
