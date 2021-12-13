@@ -21,14 +21,14 @@ import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
 import { getFilteredImages } from "../utils/getRandomImages.utils";
 
-export default function Home() {
+export const Home: React.FC<{imagesToShow: string[]}> = (props) => {
   
 
   const { programs } = usePrograms({ limit: 3, rand: true });
 
   return (
     <Page title="ראשי">
-      <AboutSection />
+      <AboutSection imagesToShow={props.imagesToShow}/>
       <section className={style.latestShowsSection}>
         <h2>העלאות אחרונות</h2>
         <div className={style.latestShowsList}>
@@ -51,29 +51,7 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const queryClient = new QueryClient();
-
-  await prefetchLatestRecordedShows(queryClient, {limit: 3});
-
-  await queryClient.prefetchQuery(
-    'active-programs',
-    () => getAllActivePrograms({ limit: 3, rand: true })
-  );
-
-  const imagesToShow = getFilteredImages();
-
-  return {
-    props: {
-      dehydratedState: stringify(dehydrate(queryClient)),
-      imagesToShow
-    },
-  };
-};
-
-
-
-export const AboutSection: React.FC = () => {
+export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
 	const timer = useRef<any>();
 	const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
@@ -95,8 +73,6 @@ export const AboutSection: React.FC = () => {
     };
   }, [slider]);
 
-  const [imagesToShow, setImagesToShow] = useState(getFilteredImages());
-
   return (
     <section className={style.aboutUsSection}>
       <div className={style.aboutUsPane}>
@@ -112,7 +88,7 @@ export const AboutSection: React.FC = () => {
       </div>
       <div className={style.galleryPane}>
 	  <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
-          {imagesToShow.map((url, index) => {
+          {props.imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
                 <img className={style.slideImage} src={url} alt={url} />
@@ -152,6 +128,29 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
+
+export default Home;
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const queryClient = new QueryClient();
+  
+	await prefetchLatestRecordedShows(queryClient, {limit: 3});
+  
+	await queryClient.prefetchQuery(
+	  'active-programs',
+	  () => getAllActivePrograms({ limit: 3, rand: true })
+	);
+  
+	const imagesToShow = getFilteredImages();
+  
+	return {
+	  props: {
+		dehydratedState: stringify(dehydrate(queryClient)),
+		imagesToShow
+	  },
+	};
+  };
 
 interface GalleryArrowProps {
 	onClick: (e: any) => void;
