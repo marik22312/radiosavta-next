@@ -59,6 +59,8 @@ a {
 		--SPACE4: 20px;
 		--SPACE5: 25px;
 		--footerHeight: 70px;
+	}
+	@include media-breakpoint(sm) {
 		--navbar-width: 70px;
 	}
 }
