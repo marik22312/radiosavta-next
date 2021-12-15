@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
 		<div className={styles.socialsWrapper}>
 			<div className={styles.socialIconsWrapper}>
 				<SocialIcon url={'mailto:radiosavta@gmail.com'} icon={faEnvelope}/>
-				<SocialIcon url={'https://www.instagram.com/radiosavta"'} icon={faInstagram}/>
+				<SocialIcon url={'https://www.instagram.com/radiosavta'} icon={faInstagram}/>
 				<SocialIcon url={'https://www.facebook.com/radiosavta'} icon={faFacebook}/>
 			</div>
 			<p className={styles.socialsText}>כתבו לנו | עקבו אחרינו  | שתפו אותנו</p>
