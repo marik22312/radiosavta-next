@@ -12,7 +12,7 @@ export const usePlayerControls = () => {
 	  return () => {
 			  audioRef?.removeEventListener('canplay', () => null)
 	  }
-  }, [])
+  }, [audioRef, setPlayerState])
 
   const play = (track: Track) => {
     setPlayerState(PlayerState.LOADING);
