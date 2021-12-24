@@ -26,7 +26,10 @@ export const logPlayRecordedShow = (args: {
 };
 
 export const logFooterPlayerPlay = () => {
-	log('footerPlayer.play', {})
+	log('footerPlayer.play',{})
+}
+export const logPlayLive = ({streamerName}:{streamerName: string}) => {
+	log('livePlayer.playLive', {streamerName})
 }
 
 export const logSearchRecordedShow = (searchQuery: string) => {
