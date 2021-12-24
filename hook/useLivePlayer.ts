@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { logPlayLive } from '../api/Mixpanel.api';
 import { LIVE_STREAM_URL } from "../config/stream";
 import { usePlayerContext } from "../providers/PlayerProvider";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
@@ -23,9 +24,11 @@ export const useLivePlayer = () => {
 	  }
   }, [songTitle, setTitle]);
 
-  const toggleLive = () => {
+  const toggleLive = async () => {
 	  if (!isLive) {
-      refetch();
+      const data = await refetch();
+	  const streamer = data.data?.streamer || 'NA';
+	  logPlayLive({streamerName: streamer})
       play({
         url: LIVE_STREAM_URL,
         title: songTitle || "",

@@ -28,7 +28,6 @@ interface NavBarProps {
 
 const MenuItem: React.FC<{url: string; title: string;}> = (props) => {
 	const { pathname } = useRouter();
-	console.log('pathname', pathname)
 	return (
 		<Link href={props.url}>
 		<a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
@@ -67,17 +66,18 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   };
 
   const togglePlay = () => {
+
 	  if (isStopped || isLive) {
-		  logFooterPlayerPlay()
+		logFooterPlayerPlay()
 		  return logAndToggleLive();
 		}
 		if (isPaused) {
-		  return resume();
+			return resume();
 		}
 		return pause();
-  }
-
-  const logAndToggleLive = () =>{
+	}
+	
+	const logAndToggleLive = () =>{
 	  toggleLive()
   }
 
