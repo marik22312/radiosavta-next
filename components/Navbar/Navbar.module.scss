@@ -5,7 +5,7 @@
 	background-size: cover;
 	position: fixed;
 	right: 0;
-	// transition: margin-right 0.5s;
+	transition: margin-right 0.5s;
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,10 +40,6 @@
 		}
 	}
 	@include media-breakpoint(md) {
-		background:linear-gradient(0deg, rgba(6, 102, 0, 0.9), rgba(6, 102, 0, 0.9)), url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/crop2.jpg');
-		left: unset;
-		height: 100%;
-		width: var(--navbar-width);
 		flex-direction: column;
 		gap: unset;
 		a {
@@ -103,9 +99,6 @@ p {
 	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 	
-	> div {
-		width: var(--navbar-width);
-	}
 	a {
 		padding: 8px 32px 8px 8px;
 		text-decoration: none;
@@ -155,9 +148,14 @@ p {
 	  margin-inline-start: var(--SPACE2);
 	  
 	  @include media-breakpoint(md) {
-		  flex-direction: column;
-		  height: 200px;
+		  flex-direction: row-reverse;
+		  justify-content: space-between;
 		  margin-top: var(--SPACE2);
+		  width: 100%;
+		  max-width: 100%;
+		  img {
+			  max-width: 20vw;
+		  }
 	}
 	
   }
@@ -187,6 +185,7 @@ p {
 	cursor: pointer;
 	@include media-breakpoint(md) {
 		display: block;
+		margin: auto 0;
 	}
 
 	span {
@@ -261,15 +260,14 @@ p {
 	
 	position: fixed;
 	
-	@include media-breakpoint(md) {
-		--size: 125px;
-		position: absolute;
-	}
-	@include media-breakpoint(sm) {
+	@include media-breakpoint(sm) {	
 		--size: 100px;
-		
+
 		display: flex;
 		flex-direction: column-reverse;
+		position: absolute;
+	    top: calc(100vh - 140px);
+		bottom: auto;
 	}
 
 	img {
