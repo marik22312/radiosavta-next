@@ -15,7 +15,8 @@ import { dehydrate } from "react-query/hydration";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import * as FLATTED from "flatted";
 import { BASE_IMAGE_BW, BASE_IMAGE } from "../../config/images";
-import { getDayOfWeek, getProgramImage } from '../../utils/program.utils';
+import { getDayOfWeek } from '../../utils/program.utils';
+import { programParser } from '../../parsers/Programs.parser';
 
 
 
@@ -62,14 +63,14 @@ const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
 }) => {
   return (
     <>
-      <Page title={program.name_he} previewImage={getProgramImage(program)}>
+      <Page title={programParser.name(program)} previewImage={programParser.programImage(program)}>
         <div
           className={style.programHeader}
-          style={{ backgroundImage: `url(${getProgramImage(program)})` }}
+          style={{ backgroundImage: `url(${programParser.programImage(program)})` }}
         >
           <div className={style.programDetailsWrapper}>
             <div className={style.programInfo}>
-				<h1 className={style.programTime}>{program.name_he}</h1>
+				<h1 className={style.programTime}>{programParser.name(program)}</h1>
               <p className={style.programTime}>
                 {Intl.DateTimeFormat("he", { weekday: "long" }).format(
                   getDayOfWeek(program)
@@ -83,7 +84,7 @@ const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
         <section className={style.archiveSection}>
           <h3 className="section-title">הבוידעם</h3>
           <div className={style.recordedShows}>
-            <RecordedShowsList programId={program.id} programName={program.name_he}/>
+            <RecordedShowsList programId={program.id} programName={programParser.name(program)}/>
           </div>
         </section>
       </Page>

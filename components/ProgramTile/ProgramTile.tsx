@@ -3,15 +3,16 @@ import React from "react";
 import { logOpenProgram } from '../../api/Mixpanel.api';
 import { BASE_IMAGE_AVATAR, BASE_IMAGE_ICON } from '../../config/images';
 import { Program } from "../../domain/Program";
+import { programParser } from '../../parsers/Programs.parser';
 import { getDayOfWeek } from "../../utils/program.utils";
 import styles from "./ProgramTile.module.scss";
 
 export const ProgramTile: React.FC<{ program: Program }> = ({ program }) => {
   return (
-    <div key={`program-${program.id}`} className={styles.programTile} style={{backgroundImage: `url('${BASE_IMAGE_ICON}/${program.cover_image}')`}}>
+    <div key={`program-${program.id}`} className={styles.programTile} style={{backgroundImage: `url('${programParser.programImage(program)}')`}}>
       <div className={styles.topSection}>
         <div>
-          <h3 className={styles.title}>{program.name_he}</h3>
+          <h3 className={styles.title}>{programParser.name(program)}</h3>
         </div>
         <div>
           <p className={styles.time}>
