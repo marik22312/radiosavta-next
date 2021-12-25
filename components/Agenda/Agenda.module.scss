@@ -1,0 +1,30 @@
+@import '../../styles/mixinsNew';
+
+.agendaWrapper {
+    width: 100%;
+    > div {
+        background-color: var(--dark-green);
+        transition: height 0.2s ease-in-out, font-size 0.2s ease-in-out, top 0.2s ease-in-out;
+        position: absolute;
+        right: 0;
+        left: 0;
+        text-align: center;
+        padding: 5px 0;
+        z-index: 9999;
+    }
+    p {
+        color: white;
+    }
+}
+
+.dNone {
+    font-size: 0;
+    height: 0;
+    top: 0;
+}
+
+.dFlex {
+    font-size: 1rem;
+    height: 150px;
+    top: -160px;
+}

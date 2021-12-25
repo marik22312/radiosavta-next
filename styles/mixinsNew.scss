@@ -1,0 +1,24 @@
+$grid-breakpoints-xs: 400px;
+$grid-breakpoints-sm: 768px;
+$grid-breakpoints-md: 1320px;
+
+@mixin media-breakpoint($media) {
+
+    @if $media==xs {
+        @media only screen and (min-width: $grid-breakpoints-xs) {
+            @content;
+        }
+    }
+
+    @if $media==sm {
+        @media only screen and (min-width: $grid-breakpoints-sm) {
+            @content;
+        }
+    }
+
+    @else if $media==md {
+        @media only screen and (min-width: $grid-breakpoints-md) {
+            @content;
+        }
+    }
+}
