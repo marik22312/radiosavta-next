@@ -270,12 +270,12 @@ p {
 	position: fixed;
 	
 	@include media-breakpoint(sm) {	
-		--size: 100px;
+		--size: 80px;
 
 		display: flex;
 		flex-direction: column-reverse;
 		position: absolute;
-	    top: calc(100vh - 140px);
+	    top: calc(100vh - 110px);
 		bottom: auto;
 	}
 
