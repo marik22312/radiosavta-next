@@ -20,9 +20,7 @@
 	  align-items: center;
 	  height: 100%;
 	  margin-left: var(--SPACE5);
-	//   max-width: calc(100vw - var(--navbar-width) - 70px);
-	max-width: calc(100vw - 70px);
-	width: 100%;
+	  max-width: calc(100vw - 70px);
 
 	  @include media-breakpoint(sm) {
 		  justify-content: center;
