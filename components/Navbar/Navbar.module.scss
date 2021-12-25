@@ -1,4 +1,4 @@
-@import '../../styles//mixins.scss';
+@import '../../styles/mixins.scss';
 
 .titleWrapper {
 
@@ -19,6 +19,10 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	gap: var(--SPACE2);
+	@include media-breakpoint(sm) {
+		display: block;
+		height: 80px;
+	}
 	a {
 		color: white;
 		position: relative;
@@ -143,18 +147,22 @@ p {
 	  max-width: 80px;
 	  
 	  flex-direction: row;
-	  height: 100px;
+	  height: 90px;
 	  margin: 0;
 	  margin-inline-start: var(--SPACE2);
+
+	  @include media-breakpoint(sm) {
+		  height: 80px;
+	  }
 	  
 	  @include media-breakpoint(md) {
 		  flex-direction: row-reverse;
 		  justify-content: space-between;
-		  margin-top: var(--SPACE2);
 		  width: 100%;
 		  max-width: 100%;
 		  img {
-			  max-width: 20vw;
+			  height: 60px;
+			  padding-inline-end: 15px;
 		  }
 	}
 	
@@ -163,14 +171,15 @@ p {
   .logo {
 	  cursor: pointer;
 	  @include media-breakpoint(sm) {
-		  padding: 10px;
+		  padding: 0 10px;
+		  display: flex;
 	  }
   }
 
 .menuBtn {
 	display: none;
 	width: 60px;
-	height: 45px;
+	height: 25px;
 	position: relative;
 	margin: 0 auto;
 	margin-top: 25px;
