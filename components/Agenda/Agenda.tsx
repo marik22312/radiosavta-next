@@ -13,7 +13,7 @@ export const Agenda: React.FC = () => {
 
     const schedule = useAgenda();
 
-    const timeOptions = {
+    const timeOptions: DateTimeFormatOptions = {
         hourCycle: 'h23',
         hour: '2-digit',
         minute: '2-digit'
@@ -24,7 +24,10 @@ export const Agenda: React.FC = () => {
             <button className={styles.agendaButton} onClick={() => setIsOpen(!isOpen)} ><img src={Arrow} /></button>
             <div>
                 {schedule?.data?.schedule.map((e: Schedule) => {
-                    return (<p>{e.name} - {new Intl.DateTimeFormat('en-US', timeOptions).format(e.start_timestamp)}</p>)
+                    return (
+                    <div className={styles.agendaProgram} key={e.id}>
+                        <span className={styles.programName}>{e.name}</span> - <span className={styles.programTime}>{new Intl.DateTimeFormat('en-US', timeOptions).format(e.start_timestamp)}</span>
+                    </div>)
                 })}
             </div>
         </div>
