@@ -16,18 +16,25 @@ $animationTime: 0.3s;
     max-height: calc(var(--is-agenda-open) * 75vh);
     opacity: calc(var(--is-agenda-open) * 1);
     transition: max-height ($animationTime * 2) ease-out, opacity ($animationTime * 2) ease-out;
+    margin-bottom: 30px;
+    @include media-breakpoint(md) {
+        margin-bottom: 0;
+    }
 }
 
 .agendaProgram {
-    margin: 10px clamp(1rem, 25vw, 33%);
+    margin: 10px clamp(1rem, 17vw, 20%);
     display: flex;
     justify-content: space-between;
     color: white;
     gap: 20px;
     position: relative;
+    text-align: right;
 
     > span {
         color: white;
+        display: block;
+        width: 100%;
     }
 }
 
