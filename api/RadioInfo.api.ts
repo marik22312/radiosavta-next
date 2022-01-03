@@ -1,4 +1,4 @@
-import { Schedule, ScheduleResponse } from "../domain/Schedule";
+import { ScheduleResponse } from "../domain/Schedule";
 import { httpClient } from "./httpClient";
 
 interface getStreamInfoResponse {

@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { getAgenda } from "../api/RadioInfo.api";
-// import { getCurrentSongTitle } from "../api/RadioInfo.api";
 
 export const useAgenda = () => {
   const { data, refetch } = useQuery(
