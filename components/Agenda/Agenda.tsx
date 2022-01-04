@@ -24,7 +24,7 @@ export const Agenda: React.FC = () => {
                 {data?.schedule.map((e: Schedule) => {
                     return (
                     <div className={styles.agendaProgram} key={e.id}>
-                        <span className={styles.programName}>{e.name}</span> - <span className={styles.programTime}>{new Intl.DateTimeFormat('en-US', timeOptions).format(e.start_timestamp)}</span>
+                        <span className={styles.programName}>{e.name}</span> - <span className={styles.programTime}>{new Intl.DateTimeFormat('en-US', timeOptions).format(new Date(e.start))}</span>
                     </div>)
                 })}
             </div>
