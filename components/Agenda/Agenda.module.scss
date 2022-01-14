@@ -19,8 +19,8 @@ $animationTime: 0.3s;
     overflow: hidden;
     max-height: calc(var(--is-agenda-open) * 75vh);
     opacity: calc(var(--is-agenda-open) * 1);
-    transition: max-height ($animationTime * 2) ease-out, opacity ($animationTime * 2) ease-out;
-    margin-bottom: 30px;
+    transition: max-height ($animationTime * 2) ease-out, opacity ($animationTime * 2) ease-out, margin ($animationTime) linear;
+    margin-bottom: var(--margin);
     box-shadow: 3px -3px 4px #000000;
     @include media-breakpoint(md) {
         margin-bottom: 0;
@@ -119,8 +119,10 @@ $animationTime: 0.3s;
 .closed {
     --is-agenda-open: 0;
     z-index: -1;
+    --margin: 0;
 }
 
 .open {
     --is-agenda-open: 1;
+    --margin: 40px;
 }
