@@ -1,3 +1,4 @@
+import { ScheduleResponse } from "../domain/Schedule";
 import { httpClient } from "./httpClient";
 
 interface getStreamInfoResponse {
@@ -11,3 +12,10 @@ export const getCurrentSongTitle = async () => {
   );
   return data;
 };
+
+export const getAgenda = async () => {
+  const { data } = await httpClient.get<ScheduleResponse>(
+    "/V2/schedule"
+  )
+  return data;
+}

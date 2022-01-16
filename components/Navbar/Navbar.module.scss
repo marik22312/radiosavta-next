@@ -1,11 +1,11 @@
-@import '../../styles//mixins.scss';
+@import '../../styles/mixins.scss';
 
 .titleWrapper {
 
 	background-size: cover;
 	position: fixed;
 	right: 0;
-	// transition: margin-right 0.5s;
+	transition: margin-right 0.5s;
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,6 +19,10 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	gap: var(--SPACE2);
+	@include media-breakpoint(sm) {
+		display: block;
+		height: 80px;
+	}
 	a {
 		color: white;
 		position: relative;
@@ -40,10 +44,6 @@
 		}
 	}
 	@include media-breakpoint(md) {
-		background:linear-gradient(0deg, rgba(6, 102, 0, 0.9), rgba(6, 102, 0, 0.9)), url('https://res.cloudinary.com/marik-shnitman/image/upload/v1632074716/radiosavta/backgrounds/crop2.jpg');
-		left: unset;
-		height: 100%;
-		width: var(--navbar-width);
 		flex-direction: column;
 		gap: unset;
 		a {
@@ -103,9 +103,6 @@ p {
 	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 	
-	> div {
-		width: var(--navbar-width);
-	}
 	a {
 		padding: 8px 32px 8px 8px;
 		text-decoration: none;
@@ -150,14 +147,23 @@ p {
 	  max-width: 80px;
 	  
 	  flex-direction: row;
-	  height: 100px;
+	  height: 90px;
 	  margin: 0;
 	  margin-inline-start: var(--SPACE2);
+
+	  @include media-breakpoint(sm) {
+		  height: 80px;
+	  }
 	  
 	  @include media-breakpoint(md) {
-		  flex-direction: column;
-		  height: 200px;
-		  margin-top: var(--SPACE2);
+		  flex-direction: row-reverse;
+		  justify-content: space-between;
+		  width: 100%;
+		  max-width: 100%;
+		  img {
+			  height: 60px;
+			  padding-inline-end: 15px;
+		  }
 	}
 	
   }
@@ -165,14 +171,15 @@ p {
   .logo {
 	  cursor: pointer;
 	  @include media-breakpoint(sm) {
-		  padding: 10px;
+		  padding: 0 10px;
+		  display: flex;
 	  }
   }
 
 .menuBtn {
 	display: none;
 	width: 60px;
-	height: 45px;
+	height: 25px;
 	position: relative;
 	margin: 0 auto;
 	margin-top: 25px;
@@ -187,6 +194,7 @@ p {
 	cursor: pointer;
 	@include media-breakpoint(md) {
 		display: block;
+		margin: auto 0;
 	}
 
 	span {
@@ -261,15 +269,14 @@ p {
 	
 	position: fixed;
 	
-	@include media-breakpoint(md) {
-		--size: 125px;
-		position: absolute;
-	}
-	@include media-breakpoint(sm) {
-		--size: 100px;
-		
+	@include media-breakpoint(sm) {	
+		--size: 80px;
+
 		display: flex;
 		flex-direction: column-reverse;
+		position: absolute;
+	    top: calc(100vh - (var(--footerHeight) + (var(--size) / 2) )); // bottom + footer + half the size of the button
+		bottom: auto;
 	}
 
 	img {
