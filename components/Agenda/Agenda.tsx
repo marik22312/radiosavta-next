@@ -22,6 +22,7 @@ export const Agenda: React.FC = () => {
         }
     }, [data])
 
+    // @ts-expect-error
     const timeOptions: DateTimeFormatOptions = {
         hourCycle: 'h23',
         hour: '2-digit',
