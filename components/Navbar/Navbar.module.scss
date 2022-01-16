@@ -271,12 +271,6 @@ p {
 	
 	@include media-breakpoint(sm) {	
 		--size: 80px;
-
-		display: flex;
-		flex-direction: column-reverse;
-		position: absolute;
-	    top: calc(100vh - (var(--footerHeight) + (var(--size) / 2) )); // bottom + footer + half the size of the button
-		bottom: auto;
 	}
 
 	img {
