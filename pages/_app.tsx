@@ -16,15 +16,12 @@ import * as FLATTED from 'flatted';
 import NextNProgress from "nextjs-progressbar";
 import { useRouter } from "next/router";
 import { Footer } from '../components/Footer/Footer';
+import { logWebVitals } from "../api/Mixpanel.api";
+
+mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
-  const router = useRouter();
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
-    }
-  });
 
   return (
     <QueryClientProvider client={queryClient.current}>
@@ -57,6 +54,11 @@ export function reportWebVitals({
     event_label: id, // id unique to current page load
     non_interaction: true, // avoids affecting bounce rate.
   });
+  
+  logWebVitals({
+    eventName: name,
+    value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+  })
 }
 
 export default MyApp;
