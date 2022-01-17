@@ -162,7 +162,6 @@ p {
 		  max-width: 100%;
 		  img {
 			  height: 60px;
-			  padding-inline-end: 15px;
 		  }
 	}
 	
@@ -170,6 +169,8 @@ p {
 
   .logo {
 	  cursor: pointer;
+	  flex-basis: 75px;
+	  margin-left: 15px;
 	  @include media-breakpoint(sm) {
 		  padding: 0 10px;
 		  display: flex;
