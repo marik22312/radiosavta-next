@@ -67,3 +67,9 @@ export const logNavbarNavigation = (url: string) => {
 	})
 }
 
+export const logWebVitals = ({eventName, value}:{eventName: string; value: number}) => {
+  log('system.webVitals', {
+    eventName,
+    value,
+  });
+}

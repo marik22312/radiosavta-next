@@ -7,9 +7,6 @@
 	justify-content: space-around;
     align-items: center;
 	padding: var(--SPACE1) 0;
-	@include media-breakpoint(md) {
-    	padding-right: var(--navbar-width);
-	}
 	margin-bottom: var(--footerHeight);
 	background-color: var(--light-dark-green);
 

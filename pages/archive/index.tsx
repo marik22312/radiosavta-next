@@ -21,6 +21,7 @@ import {
   logResetFilterByProgram,
 } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
+import { programParser } from '../../parsers/Programs.parser';
 
 
 const ProgramsPage: React.FC = (props) => {
@@ -37,7 +38,7 @@ const ProgramsPage: React.FC = (props) => {
   const options = [
     { label: "כל התכניות", value: undefined },
     ...programs.map((program) => ({
-      label: program.name_he,
+      label: programParser.name(program),
       value: program.id,
     })),
   ];
@@ -178,14 +179,10 @@ const ProgramsPage: React.FC = (props) => {
                   url={show.url}
                   name={show.name}
                   recordingDate={show.created_at}
-                  programName={show.program.name_he}
+                  programName={programParser.name(show.program)}
                   source={"ARCHIVE"}
 				  programId={show.program.id}
-                  backgroundImageUrl={`${BASE_IMAGE}/${
-                    show.program.cover_image
-                      ? show.program.cover_image
-                      : show.program.users[0].profile_image
-                  }`}
+                  backgroundImageUrl={programParser.programImage(show.program)}
                 />
               </div>
             ));
