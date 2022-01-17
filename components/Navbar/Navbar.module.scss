@@ -161,7 +161,6 @@ p {
 		  width: 100%;
 		  max-width: 100%;
 		}
-	
   }
 
   .logo {
@@ -170,7 +169,7 @@ p {
 	  margin-left: 15px;
 	  @media not all and (min-resolution:.001dpcm)
 	  { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
-		margin-left: 30px;
+		  margin-left: 30px;
 	  }}
 	  @include media-breakpoint(sm) {
 		  padding: 0 10px;
