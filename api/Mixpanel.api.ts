@@ -61,6 +61,10 @@ export const logNavbarClose = () => {
 	log("navbar.close", {});
 }
 
+export const logAgendaOpen = () => {
+  log("agenda.open", {});
+};
+
 export const logNavbarNavigation = (url: string) => {
 	log('navbar.navigateTo', {
 		url: url
