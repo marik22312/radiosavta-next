@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { logAgendaToggle } from "../../api/Mixpanel.api";
+import { logAgendaOpen } from "../../api/Mixpanel.api";
 import { Schedule } from "../../domain/Schedule";
 import { useAgenda } from "../../hook/useAgenda";
 import styles from './Agenda.module.scss';
@@ -24,7 +24,9 @@ export const Agenda: React.FC = () => {
     }, [data])
 
     const toggle = () => {
-        logAgendaToggle()
+        if(!isOpen) {
+            logAgendaOpen()
+        }
         setIsOpen(!isOpen)
     }
 

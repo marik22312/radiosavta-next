@@ -61,7 +61,7 @@ export const logNavbarClose = () => {
 	log("navbar.close", {});
 }
 
-export const logAgendaToggle = () => {
+export const logAgendaOpen = () => {
   log("agenda.open", {});
 };
 
