@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { logAgendaToggle } from "../../api/Mixpanel.api";
 import { Schedule } from "../../domain/Schedule";
 import { useAgenda } from "../../hook/useAgenda";
 import styles from './Agenda.module.scss';
@@ -22,6 +23,12 @@ export const Agenda: React.FC = () => {
         }
     }, [data])
 
+    const toggle = () => {
+        logAgendaToggle()
+        setIsOpen(!isOpen)
+    }
+
+
     // @ts-expect-error
     const timeOptions: DateTimeFormatOptions = {
         hourCycle: 'h23',
@@ -31,7 +38,7 @@ export const Agenda: React.FC = () => {
 
 	return (
         <div className={`${styles.agendaWrapper} ${agendaClassName}`}>
-            <button className={styles.agendaButton} onClick={() => setIsOpen(!isOpen)} ><span className={styles.toggleIcon}></span></button>
+            <button className={styles.agendaButton} onClick={() => toggle()} ><span className={styles.toggleIcon}></span></button>
             <div className={styles.agenda}>
                 <h2 className={styles.agendaTitle}>
                     מה היום?
