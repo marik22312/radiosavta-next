@@ -90,7 +90,7 @@ export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
           {props.imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
-                <Image layout="fill" src={url} alt={url} />
+                <Image layout="fill" className={style.slideImage} src={url} alt={url} />
               </div>
             );
           })}
