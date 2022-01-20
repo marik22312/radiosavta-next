@@ -20,7 +20,7 @@ const AboutUsPage: React.FC = () => {
           <div className="storyWrapper">
             <div className={cn(styles.firstSection, styles.section)}>
               <img
-                src="https://res.cloudinary.com/marik-shnitman/image/upload/v1633457839/radiosavta/gallery/berech.jpg"
+                src="https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1633457839/radiosavta/gallery/berech"
                 alt="Our team image"
                 className={styles.backgroundImage}
               />
@@ -65,7 +65,7 @@ const AboutUsPage: React.FC = () => {
             </div>
               <div className={styles.storyImageWrapper}>
                 <img
-                  src="https://res.cloudinary.com/marik-shnitman/image/upload/v1606921730/radiosavta/gallery/radiosavta3.jpg"
+                  src="https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1606921730/radiosavta/gallery/radiosavta3"
                   alt="Our team image"
                   className={styles.backgroundImage}
                 />

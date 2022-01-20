@@ -32,7 +32,7 @@ export const Page: React.FC<PageProps> = ({
           property="og:description"
           content="Radiosavta - An Online Internet Radio"
         />
-        <meta property="og:image" content={previewImage || 'https://res.cloudinary.com/marik-shnitman/image/upload/v1637258645/radiosavta/assets/ogImage.jpg'} />
+        <meta property="og:image" content={previewImage || 'https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1637258645/radiosavta/assets/ogImage.jpg'} />
 
 		{/* eslint-disable-next-line @next/next/no-page-custom-font */}
 		<link
