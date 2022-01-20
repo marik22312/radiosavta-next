@@ -18,6 +18,7 @@ import { getAllActivePrograms } from "../api/Programs.api";
 import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
 import { getFilteredImages } from "../utils/getRandomImages.utils";
+import Image from 'next/image'
 
 export const Home: React.FC<{imagesToShow: string[]}> = (props) => {
   
@@ -89,7 +90,7 @@ export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
           {props.imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
-                <img className={style.slideImage} src={url} alt={url} />
+                <Image layout="fill" src={url} alt={url} />
               </div>
             );
           })}
