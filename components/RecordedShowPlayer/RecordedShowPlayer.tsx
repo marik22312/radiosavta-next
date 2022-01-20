@@ -6,6 +6,7 @@ import { usePlayerControls } from "../../hook/usePlayerControls";
 import { usePLayerState } from "../../hook/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import { logPlayRecordedShow } from "../../api/Mixpanel.api";
+import Image from 'next/image';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -53,7 +54,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       className={style.RecordedShowPlayer}
     >
       <div className={style.imageWrapper} style={{ backgroundImage: `url(${props.backgroundImageUrl})` }}>
-        <img src={props.backgroundImageUrl} className={style.programImg} alt="" />
+        {props.backgroundImageUrl && <Image src={props.backgroundImageUrl} layout="fill" className={style.programImg} alt="" />}
       </div>
       <div className={style.titleWrapper}>
         <h5
