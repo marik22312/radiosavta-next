@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
