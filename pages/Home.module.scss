@@ -11,16 +11,6 @@
 	height: 100%;
 }
 
-.slideImage {
-	width: 100%;
-    height: 100%;
-    object-fit: cover;
-	max-width: 100%;
-
-	@include media-breakpoint(sm) {
-
-	}
-}
 
 .homeContentWrapper {
 	direction: rtl;
@@ -150,6 +140,7 @@
 	justify-content: space-around;
 	@include media-breakpoint(sm) {
 		grid-area: 1 / 1 / 2 / 2; 
+		height: 400px;
 	}
 	@include media-breakpoint(lg) {
 		font-size: 25px;
