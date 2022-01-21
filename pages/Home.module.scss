@@ -126,6 +126,15 @@
 		
 	}
 }
+
+.slideImageWrapper {  
+	img {
+	  object-fit: cover;
+	  width: 100% !important;
+	  position: relative !important;
+	  height: unset !important;
+	}
+}
 .aboutUsPane {
 	grid-area: 1 / 1 / 2 / 2;
 	flex-basis: 50%;
