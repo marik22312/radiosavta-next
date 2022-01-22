@@ -106,34 +106,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 			<MenuItem url="/archive" title="הבוידעם"/>
 			<MenuItem url="/about" title="הסיפור שלנו"/>
         </div>
-        <div className={styles.socialsWrapper}
-        style={{
-          width: navbarWidth
-        }}>
-          {/* <a
-            className={styles.socialLink}
-            target="_blank"
-            href="https://www.facebook.com/radiosavta"
-		      	rel="noreferrer noopener"
-          >
-            <FontAwesomeIcon icon={faFacebook} size="2x" color="white" />
-          </a>
-          <a
-            className={styles.socialLink}
-            href="mailto:radiosavta@gmail.com"
-			      rel="noreferrer noopener"
-          >
-            <FontAwesomeIcon icon={faEnvelope} size="2x" color="white" />
-          </a>
-          <a
-            className={styles.socialLink}
-            target="_blank"
-            href="https://www.instagram.com/radiosavta"
-			      rel="noreferrer noopener"
-          >
-            <FontAwesomeIcon icon={faInstagram} size="2x" color="white" />
-          </a> */}
-        </div>
+ 
       </div>
       <div
         className={styles.mainContent}
