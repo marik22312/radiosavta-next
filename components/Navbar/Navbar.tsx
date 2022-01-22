@@ -110,7 +110,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         style={{
           width: navbarWidth
         }}>
-          <a
+          {/* <a
             className={styles.socialLink}
             target="_blank"
             href="https://www.facebook.com/radiosavta"
@@ -132,7 +132,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 			      rel="noreferrer noopener"
           >
             <FontAwesomeIcon icon={faInstagram} size="2x" color="white" />
-          </a>
+          </a> */}
         </div>
       </div>
       <div

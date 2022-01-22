@@ -24,11 +24,12 @@
 	  max-width: calc(100vw - 70px);
 
 	  @include media-breakpoint(sm) {
-		  justify-content: center;
+		  justify-content: flex-start;
+		  flex-wrap: wrap;
 		  align-items: center;
 		//   max-width: 100%;
 		  padding: 0 10px;
-		  gap: 10px;
+		  gap: 0 10px;
 	  }
   }
 
@@ -48,9 +49,18 @@
 		color: #fff;
 		margin-right: var(--SPACE3);
 		text-transform: capitalize;
+		
+		max-width: calc(100vw - 800px);
+		text-overflow:ellipsis;
+		white-space:nowrap;
+		overflow:hidden;
+		display:block;
 
 		@include media-breakpoint(sm) {
 			font-size: 0.5rem;
+			min-width: 100%;
+			max-width: calc(100vw - 280px);
+			margin-top: -35px;
 		}
 	}
 	
