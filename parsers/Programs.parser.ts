@@ -3,12 +3,7 @@ import { Program } from '../domain/Program';
 
 class ProgramParser {
 	public programImage(program: Program): string {
-		try {
 			return `${BASE_IMAGE_ICON}/${program.cover_image || program.users?.[0]?.profile_image}` || '';
-		} catch (error) {
-			console.log(error);
-			return ''	
-		}
 		}
 
 	public name(program: Program): string {
