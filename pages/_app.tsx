@@ -14,8 +14,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import * as FLATTED from 'flatted';
 import NextNProgress from "nextjs-progressbar";
-import { useRouter } from "next/router";
-import { Footer } from '../components/Footer/Footer';
 import { logWebVitals } from "../api/Mixpanel.api";
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
@@ -29,7 +27,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <PlayerProvider>
       <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />
-		  <Footer/>
           <FooterPlayer />
         </Hydrate>
       </PlayerProvider>

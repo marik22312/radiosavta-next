@@ -7,6 +7,7 @@ import Script from "next/script";
 import { Navbar } from "../Navbar/Navbar";
 
 import styles from "./Page.module.scss";
+import { Footer } from "../Footer/Footer";
 
 interface PageProps {
   title: string;
@@ -72,11 +73,12 @@ export const Page: React.FC<PageProps> = ({
       />
       <div
         style={{
-          marginRight: "auto",
+          marginRight: isOpen ? navbarWidth : 0,
         }}
         className={styles.pageContent}
       >
         {children}
+        <Footer />
       </div>
     </>
   );
