@@ -3,8 +3,13 @@ import { Program } from '../domain/Program';
 
 class ProgramParser {
 	public programImage(program: Program): string {
-		return `${BASE_IMAGE_ICON}/${program.cover_image || program.users[0].profile_image}`;
-	}
+		try {
+			return `${BASE_IMAGE_ICON}/${program.cover_image || program.users?.[0]?.profile_image}` || '';
+		} catch (error) {
+			console.log(error);
+			return ''	
+		}
+		}
 
 	public name(program: Program): string {
 		return program.name_he || program.name_en
