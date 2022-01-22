@@ -116,9 +116,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
       >
         <div
           className={styles.titleWrapper + `${scrollPosition ? " " + styles.active : ''}`}
-          style={{
-            marginRight: !isOpen ? 0 : 215,
-          }}
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
@@ -126,7 +123,9 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
                 <img src={`${BASE_IMAGE_ICON}radiosavta/logo_head`} width="100%" height="100%"/>
 				      </Link>
             </div>
-            <div className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
+            <div style={{
+            marginRight: !isOpen ? 0 : 215,
+          }} className={styles.menuBtn + `${isOpen ? " " + styles.open : ''}`} onClick={() => toggleMenu()}>
               <span></span>
               <span></span>
               <span></span>
@@ -136,9 +135,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <MenuItem url="/programs" title="תכניות" />
           <MenuItem url="/archive" title="הבוידעם" />
           <MenuItem url="/about" title="הסיפור שלנו" />
-          <div className={styles.title}>
-            {pathname !== '/' && <p>{props.title}</p>}
-          </div>
 		  <div className={styles.playPauseButton} onClick={() => togglePlay()}>
 		  <PlayPauseButton isPlaying={isPlaying} isLoading={isLoading} displayLoader/>
 			  {isPlaying && !isLive ? <BackToLive onClick={() => logAndToggleLive()}/> : null}

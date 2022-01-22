@@ -72,13 +72,12 @@ export const Page: React.FC<PageProps> = ({
         width={navbarWidth}
       />
       <div
-        style={{
-          marginRight: isOpen ? navbarWidth : 0,
-        }}
         className={styles.pageContent}
       >
-        {children}
-        <Footer />
+        <div className={styles.pageWrapper}>
+          {children}
+          <Footer />
+        </div>
       </div>
     </>
   );
