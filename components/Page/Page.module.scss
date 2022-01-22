@@ -1,9 +1,5 @@
 @import '../../styles/mixins.scss';
-.pageContent {
-	transition: 0.5s;
-	width: 100% !important;
+.pageContent > div {
+	transition: all 0.5s ease-in-out;
 	
-	@include media-breakpoint(sm) {
-		transform: none !important;
-	}
 }
