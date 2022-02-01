@@ -73,6 +73,7 @@
 
 .pateronCta {
   margin-top: var(--SPACE5);
+  font-size: 1.2rem;
   h3 {
     margin-bottom: var(--SPACE1);
   }
@@ -102,6 +103,8 @@
   padding-bottom: var(--SPACE5);
   color: #ffffff;
 
+  font-size: 1.2rem;
+
   @include media-breakpoint(md) {
     background-color: unset;
     padding-top: unset;
@@ -113,6 +116,17 @@
   @include media-breakpoint(lg) {
 	  margin-top: unset;
   }
+}
+
+.joinButton {
+	background: var(--light-green);
+	border: 4px solid #DED15B;
+	padding: 10px 20px;
+    color: #ffffff;
+    box-shadow: var(--shadow);
+
+	outline: 1px black;
+	font-size: 0.7rem;
 }
 
 .teamSection {

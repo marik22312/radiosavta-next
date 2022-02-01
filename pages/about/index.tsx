@@ -58,8 +58,7 @@ const AboutUsPage = () => {
           </div>
           <div className={style.stickyWrapper}>
             <div className={style.pateronCta}>
-              <h3>אוהבים רדיו?</h3>
-              <p>תמכו בנו!</p>
+              <h3>עזרו לנו להפיץ מוזיקה טובה</h3>
               <Link href="https://www.patreon.com/radiosavta/" passHref={true}>
                 <a target="_blank" rel="noopener">
                   <Image
@@ -72,8 +71,8 @@ const AboutUsPage = () => {
               </Link>
             </div>
             <div className={classNames(style.joinCta, 'show-md')}>
-              <h3>נשמע מעניין?</h3>
-              <p>טקסט וכפתור הצטרפות</p>
+              <h3>אוהבים רדיו?</h3>
+			  <button onClick={() => alert('בקרוב')} className={style.joinButton}>הצטרפו אלינו</button>
             </div>
           </div>
           <div className={style.radioImage}>
@@ -83,10 +82,10 @@ const AboutUsPage = () => {
               alt="Radisoavta vibe image"
             />
           </div>
-          <div className={classNames(style.joinCta, 'hide-md')}>
-            <h3>נשמע מעניין?</h3>
-            <p>הצטרפו עכשיו</p>
-          </div>
+		  <div className={classNames(style.joinCta, 'hide-md')}>
+              <h3>אוהבים רדיו?</h3>
+			  <button onClick={() => alert('בקרוב')} className={style.joinButton}>הצטרפו אלינו</button>
+            </div>
         </div>
         <div className={style.teamSection}>
           <div className={style.teamSectionTitle}>
