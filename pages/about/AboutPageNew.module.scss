@@ -66,7 +66,7 @@
 	@include media-breakpoint(md) {
 		top: 100px;
 		position: sticky;
-		margin-bottom: calc(530px + var(--footerHeight) + 150px);
+		margin-bottom: calc(530px + var(--footerHeight) + 240px);
 		grid-area: 1/2/1/2;
 	}
 }

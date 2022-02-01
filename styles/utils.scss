@@ -1,14 +1,14 @@
-@import "./mixinsNew";
+@import "./mixins";
 
 .hide-md {
-	display: block;
-	@include media-breakpoint(md) {
-		display: none;
-	}
-}
-.show-md {
 	display: none;
 	@include media-breakpoint(md) {
 		display: block;
+	}
+}
+.show-md {
+	display: block;
+	@include media-breakpoint(md) {
+		display: none;
 	}
 }
