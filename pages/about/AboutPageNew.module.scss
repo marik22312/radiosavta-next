@@ -39,27 +39,42 @@
     background-color: var(--dark-green);
     display: inline-block;
     padding: var(--SPACE1) var(--SPACE2);
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 .aboutUsText {
-  margin: 0 var(--SPACE5);
+  margin: auto;
   margin-top: var(--SPACE5);
+  text-align: center;
+  @include media-breakpoint(md) {
+	  width: 75%;
+
+  }
 
   p {
     margin-top: var(--SPACE2);
+	font-size: 0.8rem;
+	line-height: 1.1;
+
+	@include media-breakpoint(md) {
+		font-size: 1.4rem;
+	}
   }
 }
+
+.stickyWrapper {
+	@include media-breakpoint(md) {
+		top: 100px;
+		position: sticky;
+		margin-bottom: calc(530px + var(--footerHeight) + 150px);
+		grid-area: 1/2/1/2;
+	}
+}
+
 .pateronCta {
   margin-top: var(--SPACE5);
   h3 {
     margin-bottom: var(--SPACE1);
-  }
-  @include media-breakpoint(md) {
-    grid-area: 1 / 2 / 2 / 3;
-    position: sticky;
-    top: 30vh;
-    margin-bottom: 1100px;
   }
 }
 
@@ -69,7 +84,7 @@
   margin-top: var(--SPACE5);
 
   @include media-breakpoint(md) {
-    grid-area: 3 / 1 / 4 / 3;
+    grid-area: 3/1/3/3;
     height: 530px;
   }
 
@@ -93,10 +108,6 @@
     padding-bottom: unset;
     color: unset;
     margin-top: var(--SPACE5);
-
-    grid-area: 2 / 2 / 3 / 3;
-    position: sticky;
-    top: 60vh;
   }
 
   @include media-breakpoint(lg) {

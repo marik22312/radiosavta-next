@@ -8,6 +8,7 @@ import style from "./AboutPageNew.module.scss";
 import BecomeAPateronButton from "./assets/become_a_patron_button@2x.png";
 import TeamMembersData from "./data/team.json";
 import { TeamMember } from "../../components/TeamMember/TeamMember";
+import classNames from 'classnames';
 
 const AboutUsPage = () => {
   return (
@@ -24,9 +25,9 @@ const AboutUsPage = () => {
             </div>
             <div className={style.aboutUsText}>
               <p>
-                קולקטיב &apos;רדיו סבתא&apos; נוסד בשנת 2015 כתחנת רדיו אינטרנטי במצפה
-                רמון. התחנה נוסדה ע&quot;י עירא דיין, במטרה להנציח את (סבתא) יעל קרן,
-                חותנתו של עירא
+                קולקטיב &apos;רדיו סבתא&apos; נוסד בשנת 2015 כתחנת רדיו אינטרנטי
+                במצפה רמון. התחנה נוסדה ע&quot;י עירא דיין, במטרה להנציח את
+                (סבתא) יעל קרן, חותנתו של עירא
               </p>
               <p>
                 עירא ביקש לשמר בפעילות התחנה את האוירה החמה והמארחת שהיתה בסלון
@@ -35,10 +36,10 @@ const AboutUsPage = () => {
                 לשורשים ולרוח המדברית.
               </p>
               <p>
-                בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע&quot;י תושבי מצפה
-                רמון. עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את מצפה
-                רמון אך לא את רדיו-סבתא, והחלו שידורים מבתי חלק מהשדרנים בנוסף
-                לשידור החי מהאולפן.
+                בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע&quot;י תושבי
+                מצפה רמון. עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את
+                מצפה רמון אך לא את רדיו-סבתא, והחלו שידורים מבתי חלק מהשדרנים
+                בנוסף לשידור החי מהאולפן.
               </p>
               <p>
                 בשנת 2020 עם פרוץ משבר הקורונה התחנה עברה לשידור אינטרנטי ללא
@@ -55,18 +56,25 @@ const AboutUsPage = () => {
               </p>
             </div>
           </div>
-          <div className={style.pateronCta}>
-            <h3>תמכו באנו והפכו לפטרונים!</h3>
-            <Link href="https://www.patreon.com/radiosavta/" passHref={true}>
-              <a target="_blank" rel="noopener">
-                <Image
-                  src={BecomeAPateronButton}
-                  alt="Become a Pateron"
-                  height={40}
-                  width={160}
-                />
-              </a>
-            </Link>
+          <div className={style.stickyWrapper}>
+            <div className={style.pateronCta}>
+              <h3>אוהבים רדיו?</h3>
+              <p>תמכו בנו!</p>
+              <Link href="https://www.patreon.com/radiosavta/" passHref={true}>
+                <a target="_blank" rel="noopener">
+                  <Image
+                    src={BecomeAPateronButton}
+                    alt="Become a Pateron"
+                    height={40}
+                    width={160}
+                  />
+                </a>
+              </Link>
+            </div>
+            <div className={classNames(style.joinCta, 'show-md')}>
+              <h3>נשמע מעניין?</h3>
+              <p>טקסט וכפתור הצטרפות</p>
+            </div>
           </div>
           <div className={style.radioImage}>
             <Image
@@ -75,7 +83,7 @@ const AboutUsPage = () => {
               alt="Radisoavta vibe image"
             />
           </div>
-          <div className={style.joinCta}>
+          <div className={classNames(style.joinCta, 'hide-md')}>
             <h3>נשמע מעניין?</h3>
             <p>הצטרפו עכשיו</p>
           </div>
