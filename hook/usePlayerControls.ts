@@ -37,10 +37,38 @@ export const usePlayerControls = () => {
     audioRef.src = "";
   };
 
+  const handlePlayerTimeChange = () => {
+    const durationTime = audioRef.duration;
+    const time = audioRef.currentTime;
+    return { time, durationTime };
+  }
+
+  const handlePlayerChange = (value: number) => {
+    audioRef.currentTime = value;
+    handlePlayerTimeChange();
+  }
+
   return {
     play,
     pause,
     stop,
-	  resume
+	  resume,
+    handlePlayerTimeChange,
+    handlePlayerChange,
   };
+};
+
+const padZero = (v: any) => (v < 10 ? "0" + v : v);
+
+const secondsToTime = (t: any) => {
+	return (
+	  // @ts-expect-error
+    padZero(parseInt((t / (60 * 60)) % 24)) +
+    ":" +
+    // @ts-expect-error
+    padZero(parseInt((t / 60) % 60)) +
+    ":" +
+    // @ts-expect-error
+    padZero(parseInt(t % 60))
+  );
 };
