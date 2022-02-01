@@ -105,6 +105,10 @@
 
   font-size: 1.2rem;
 
+  h3 {
+	margin-bottom: var(--SPACE2);
+  }
+
   @include media-breakpoint(md) {
     background-color: unset;
     padding-top: unset;
