@@ -39,11 +39,13 @@
 	justify-content: space-around;
 
 	
-	text-align: center;
+	text-align: center !important;
 	text-shadow: var(--shadow);
 	color: #ffffff;
 	transition: opacity .2s ease-in-out;
 	border: 10px solid #ffffff;
+
+	font-size: 1rem;
 
 	@include media-breakpoint(md) {
 		position: static;
@@ -56,11 +58,12 @@
 
 		margin-bottom: var(--SPACE1);
 		background-color: rgba(4, 41, 1, 40%);
-		padding: var(--SPACE1)
+		padding: var(--SPACE1);
+		padding-top: 0;
 	}
 
 	p {
-		width: 90%;
+		font-size: 0.8rem;
 	}
 	&:hover {
 		opacity: 1;

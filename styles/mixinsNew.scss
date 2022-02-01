@@ -1,6 +1,7 @@
 $grid-breakpoints-xs: 400px;
 $grid-breakpoints-sm: 768px;
 $grid-breakpoints-md: 1320px;
+$grid-breakpoints-lg: 1700px;
 
 @mixin media-breakpoint($media) {
 
@@ -18,6 +19,11 @@ $grid-breakpoints-md: 1320px;
 
     @else if $media==md {
         @media only screen and (min-width: $grid-breakpoints-md) {
+            @content;
+        }
+    }
+    @else if $media==lg {
+        @media only screen and (min-width: $grid-breakpoints-lg) {
             @content;
         }
     }
