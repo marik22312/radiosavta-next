@@ -10,6 +10,8 @@ import TeamMembersData from "./data/team.json";
 import { TeamMember } from "../../components/TeamMember/TeamMember";
 import classNames from "classnames";
 
+const CONTACT_NUMBER = process.env.CONTACT_NUMBER;
+
 const AboutUsPage = () => {
   return (
     <Page title="הסיפור של סבתא">
@@ -103,9 +105,14 @@ const JoinCta: React.FC<JoinCtaProps> = (props) => {
   return (
     <div className={classNames(style.joinCta, props.className)}>
       <h3>אוהבים רדיו?</h3>
-      <button onClick={() => alert("בקרוב")} className={style.joinButton}>
-        הצטרפו אלינו
-      </button>
+      <Link
+        href={`https://wa.me/${CONTACT_NUMBER}?text=%D7%94%D7%99%D7%99!%0A%D7%A4%D7%95%D7%A0%D7%94%20%D7%90%D7%9C%D7%99%D7%99%D7%9A%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%9C%D7%92%D7%91%D7%99%20%D7%A9%D7%99%D7%93%D7%95%D7%A8%20%D7%91%D7%A8%D7%93%D7%99%D7%95%D7%A1%D7%91%D7%AA%D7%90`}
+        passHref
+      >
+        <a target="_blank" className={style.joinButton}>
+          הצטרפו אלינו
+        </a>
+      </Link>
     </div>
   );
 };
