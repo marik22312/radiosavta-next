@@ -8,7 +8,7 @@ import style from "./AboutPageNew.module.scss";
 import BecomeAPateronButton from "./assets/become_a_patron_button@2x.png";
 import TeamMembersData from "./data/team.json";
 import { TeamMember } from "../../components/TeamMember/TeamMember";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 const AboutUsPage = () => {
   return (
@@ -70,10 +70,7 @@ const AboutUsPage = () => {
                 </a>
               </Link>
             </div>
-            <div className={classNames(style.joinCta, 'show-md')}>
-              <h3>אוהבים רדיו?</h3>
-			  <button onClick={() => alert('בקרוב')} className={style.joinButton}>הצטרפו אלינו</button>
-            </div>
+            <JoinCta className="show-md" />
           </div>
           <div className={style.radioImage}>
             <Image
@@ -82,10 +79,7 @@ const AboutUsPage = () => {
               alt="Radisoavta vibe image"
             />
           </div>
-		  <div className={classNames(style.joinCta, 'hide-md')}>
-              <h3>אוהבים רדיו?</h3>
-			  <button onClick={() => alert('בקרוב')} className={style.joinButton}>הצטרפו אלינו</button>
-            </div>
+          <JoinCta className={"hide-md"} />
         </div>
         <div className={style.teamSection}>
           <div className={style.teamSectionTitle}>
@@ -99,6 +93,20 @@ const AboutUsPage = () => {
         </div>
       </div>
     </Page>
+  );
+};
+
+interface JoinCtaProps {
+  className: string;
+}
+const JoinCta: React.FC<JoinCtaProps> = (props) => {
+  return (
+    <div className={classNames(style.joinCta, props.className)}>
+      <h3>אוהבים רדיו?</h3>
+      <button onClick={() => alert("בקרוב")} className={style.joinButton}>
+        הצטרפו אלינו
+      </button>
+    </div>
   );
 };
 

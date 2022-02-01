@@ -52,6 +52,7 @@
   }
 
   p {
+	margin: 0 var(--SPACE4);
     margin-top: var(--SPACE2);
 	font-size: 0.8rem;
 	line-height: 1.1;
@@ -121,17 +122,26 @@
 .joinButton {
 	background: var(--light-green);
 	border: 4px solid #DED15B;
-	padding: 10px 20px;
+	padding: 5px 10px;
     color: #ffffff;
     box-shadow: var(--shadow);
-
+	margin-top: var(--SPACE2);
+	
 	outline: 1px black;
 	font-size: 0.7rem;
+	
+	@include media-breakpoint(md) {
+		margin-top: var(--SPACE1);
+		padding: 10px 20px;
+	}
 }
 
 .teamSection {
-  padding: var(--SPACE3) 0;
+  padding: var(--SPACE3) var(--SPACE3);
   background-color: var(--dark-green);
+  @include media-breakpoint(md) {
+	  padding: var(--SPACE3) 0;
+  }
 }
 
 .teamSectionTitle {
