@@ -1,0 +1,146 @@
+@import "../../styles/mixinsNew";
+
+.pageWrapper {
+  font-size: 1rem;
+  padding-top: 4rem;
+}
+
+.aboutUsSection {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  @include media-breakpoint(md) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+}
+
+.titleAndAbout {
+  grid-area: 1 / 1 / 3 / 2;
+}
+.title {
+  color: #ffffff;
+
+  h1 {
+    background-color: var(--dark-green);
+    display: inline-block;
+    padding: var(--SPACE1) var(--SPACE2);
+    font-size: 2rem;
+  }
+}
+.aboutUsText {
+  margin: auto;
+  margin-top: var(--SPACE5);
+  text-align: center;
+  @include media-breakpoint(md) {
+    width: 75%;
+  }
+
+  p {
+    margin: 0 var(--SPACE4);
+    margin-top: var(--SPACE2);
+    font-size: 0.8rem;
+    line-height: 1.1;
+
+    @include media-breakpoint(md) {
+      font-size: 1rem;
+    }
+  }
+}
+
+.stickyWrapper {
+  @include media-breakpoint(md) {
+    top: 100px;
+    position: sticky;
+    margin-bottom: calc(530px + var(--footerHeight) + 240px);
+    grid-area: 1/2/1/2;
+  }
+}
+
+.pateronCta {
+  margin-top: var(--SPACE5);
+  font-size: 1.2rem;
+  h3 {
+    margin-bottom: var(--SPACE1);
+  }
+}
+
+.radioImage {
+  height: 200px;
+  position: relative;
+  margin-top: var(--SPACE5);
+
+  @include media-breakpoint(md) {
+    grid-area: 3/1/3/3;
+    height: 530px;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+}
+
+.joinCta {
+  background-color: var(--dark-green);
+  padding-top: var(--SPACE5);
+  padding-bottom: var(--SPACE5);
+  color: #ffffff;
+
+  font-size: 1.2rem;
+
+  h3 {
+	margin-bottom: var(--SPACE2);
+  }
+
+  @include media-breakpoint(md) {
+    background-color: unset;
+    padding-top: unset;
+    padding-bottom: unset;
+    color: unset;
+    margin-top: var(--SPACE5);
+  }
+}
+
+.joinButton {
+  background: var(--light-green);
+  border: 4px solid #ded15b;
+  padding: 5px 10px;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+  margin-top: var(--SPACE2);
+
+  outline: 1px black;
+  font-size: 0.7rem;
+
+  @include media-breakpoint(md) {
+    margin-top: var(--SPACE1);
+    padding: 10px 20px;
+  }
+}
+
+.teamSection {
+  padding: var(--SPACE3);
+  background-color: var(--dark-green);
+  @include media-breakpoint(md) {
+    padding-inline: 0;
+  }
+}
+
+.teamSectionTitle {
+  text-align: center;
+  color: #ffffff;
+}
+.teamMembersWrapper {
+  margin-top: var(--SPACE2);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
