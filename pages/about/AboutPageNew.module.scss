@@ -3,10 +3,6 @@
 .pageWrapper {
   font-size: 1rem;
   padding-top: 4rem;
-
-  @include media-breakpoint(md) {
-    padding-top: 4rem;
-  }
 }
 
 .aboutUsSection {
@@ -14,13 +10,7 @@
   flex-direction: column;
   text-align: center;
 
-  background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/v1643729419/radiosavta/backgrounds/about_mobile_desktop.png");
-  background-repeat: no-repeat;
-  background-position-y: calc(var(--navbar-width) - 60px);
-
   @include media-breakpoint(md) {
-    background-attachment: fixed;
-    background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/v1643729581/radiosavta/backgrounds/about_background_deskyop.png");
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 100px 1fr;
@@ -116,10 +106,6 @@
     color: unset;
     margin-top: var(--SPACE5);
   }
-
-  @include media-breakpoint(lg) {
-    margin-top: unset;
-  }
 }
 
 .joinButton {
@@ -140,10 +126,10 @@
 }
 
 .teamSection {
-  padding: var(--SPACE3) var(--SPACE3);
+  padding: var(--SPACE3);
   background-color: var(--dark-green);
   @include media-breakpoint(md) {
-    padding: var(--SPACE3) 0;
+    padding-inline: 0;
   }
 }
 
