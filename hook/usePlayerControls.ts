@@ -39,8 +39,8 @@ export const usePlayerControls = () => {
 
   const handlePlayerTimeChange = () => {
     const durationTime = audioRef.duration;
-    const time = audioRef.currentTime;
-    return { time, durationTime };
+    const currentTime = audioRef.currentTime;
+    return { currentTime, durationTime };
   }
 
   const handlePlayerChange = (value: number) => {
