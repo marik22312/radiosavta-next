@@ -19,11 +19,13 @@ export interface PlayerContext {
   audioRef: HTMLAudioElement;
   playerState: PlayerState;
   audioSrc: string;
+  currentTime: number;
   title: string;
   programTitle: string;
   animationRef: ReturnType<typeof useRef>
   seekerRef: ReturnType<typeof useRef>
   setAudioSrc(ket: string): void;
+  setCurrentTime(ket: number): void;
   setPlayerState(state: PlayerState): void;
   setTitle(title: string): void;
   setProgramTitle(title: string): void;
@@ -37,6 +39,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
   const [audioSrc, setAudioSrc] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [programTitle, setProgramTitle] = useState<string>("");
+	const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
 	  const audio = new Audio("");
@@ -59,7 +62,9 @@ export const PlayerProvider: React.FC = ({ children }) => {
         programTitle,
         setProgramTitle,
 		animationRef,
-		seekerRef
+		seekerRef,
+		currentTime,
+setCurrentTime
       }}
     >
       {children}

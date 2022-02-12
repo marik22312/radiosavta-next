@@ -1,5 +1,6 @@
 import { usePlayerControls } from "../../hook/usePlayerControls";
 import styles from "./Seeker.module.scss";
+import {Range, getTrackBackground} from 'react-range'
 
 export const Seeker: React.FC = () => {
   const { handlePlayerChange, seekerRef, currentTime, durationTime } =
@@ -9,7 +10,7 @@ export const Seeker: React.FC = () => {
     ? `${(currentTime / durationTime) * 100}%`
     : "0%";
   const trackStyling = `
-      -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #042901), color-stop(${currentPercentage}, #042901))
+      -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, var(--banana)), color-stop(${currentPercentage}, var(--dark-green)))
     `;
 
   const handleSeekerChange = (e: any) => {
@@ -25,7 +26,7 @@ export const Seeker: React.FC = () => {
       max={durationTime}
       className={styles.seeker}
       style={{ background: trackStyling, direction: "ltr" }}
-      onChange={(e) => handleSeekerChange(e)}
+      onChange={handleSeekerChange}
     />
   );
 };

@@ -44,7 +44,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
     });
     return play({
       title: props.name,
-      url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      url: props.url,
       programTitle: props.programName,
     });
   };

@@ -142,7 +142,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 			  {isPlaying && !isLive ? <BackToLive onClick={() => logAndToggleLive()}/> : null}
 		  </div>
         </div>
-        {isPlaying && !isLive ? <Seeker /> : null}
+        {((isPlaying || isPaused) && !isLive) ? <Seeker /> : null}
       </div>
     </>
   );
