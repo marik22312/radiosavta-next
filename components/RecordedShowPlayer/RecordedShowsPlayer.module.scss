@@ -241,8 +241,13 @@
   background-color: var(--dark-green);
   color: white;
 
-  padding: var(--SPACE3);
+  padding: var(--SPACE1);
   border: none;
+  
+  @include media-breakpoint(md) {
+	  padding: var(--SPACE3);
+
+  }
 }
 
 .shareModal {
