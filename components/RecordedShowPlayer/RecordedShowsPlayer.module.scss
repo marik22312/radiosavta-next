@@ -232,3 +232,15 @@
     margin-right: 15px;
 	color: #ffffff;
   }
+
+.shareButtonWrapper {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+	background-color: var(--dark-green);
+	color: white;
+
+	padding: var(--SPACE3);
+	border: none;
+}
