@@ -54,8 +54,9 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   };
 
   const onShare = async () => {
+	  const url = new URL(window.location.href)
 	  const shareData = {
-		  url: `${window.location.hostname}/archive?showId=${props.showId}`,
+		  url: `${url.origin}/archive?showId=${props.showId}`,
 		  text: `[${Intl.DateTimeFormat("he").format(new Date(props.recordingDate))}] ${props.programName} - ${props.name}`
 	  }
 	if(navigator?.canShare?.(shareData) && navigator.share) {
