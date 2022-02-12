@@ -15,31 +15,11 @@ import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import Modal from "react-modal";
 import {
-  EmailShareButton,
   FacebookIcon,
-  FacebookMessengerShareButton,
   FacebookShareButton,
-  HatenaShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
   WhatsappIcon,
   WhatsappShareButton,
-  WorkplaceShareButton,
 } from "react-share";
-import { Title } from "../Typography/Title";
-import { programParser } from "../../parsers/Programs.parser";
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -61,16 +41,10 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   const togglePlay = () => {
     if (title === props.name) {
       if (isPlaying) {
-        // TODO Add log of pause recorded show
-        // 1. show name
-        // 2. program title
         return pause();
       }
       return resume();
     }
-    // TODO Add log of play recorded show
-    // 1. show name
-    // 2. program title
     logPlayRecordedShow({
       programName: props.programName,
       showName: props.name,
@@ -176,7 +150,6 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   );
 };
 
-// Modal.setAppElement('#yourAppElement');
 
 interface ShareType {
   FACEBOOK: "FACEBOOK";
