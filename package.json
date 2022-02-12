@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@svgr/webpack": "^5.5.0",
+    "@types/react-modal": "^3.13.1",
     "@types/react-vertical-timeline-component": "^3.0.1",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
@@ -30,8 +31,10 @@
     "nextjs-progressbar": "^0.0.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-modal": "^3.14.4",
     "react-query": "^3.17.1",
     "react-select": "^4.3.1",
+    "react-share": "^4.4.0",
     "react-vertical-timeline-component": "^3.3.3"
   },
   "devDependencies": {
