@@ -53,10 +53,11 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   };
 
   const onShare = async () => {
-	if(navigator?.canShare?.() && navigator.share) {
-		return navigator.share({
-			url: 'https://www.google.com'
-		})
+	  const shareData = {
+		  url: 'https://www.google.com'
+	  }
+	if(navigator?.canShare?.(shareData) && navigator.share) {
+		return navigator.share(shareData)
 	}
 
 	return alert('Can Share!')
