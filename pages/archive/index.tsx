@@ -8,7 +8,10 @@ import { dehydrate } from "react-query/hydration";
 
 import styles from "./ArchivePage.module.scss";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
-import { prefetchRecordedShows, useRecordedShows } from "../../hook/useRecordedShows";
+import {
+  prefetchRecordedShows,
+  useRecordedShows,
+} from "../../hook/useRecordedShows";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
@@ -21,8 +24,7 @@ import {
   logResetFilterByProgram,
 } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
-import { programParser } from '../../parsers/Programs.parser';
-
+import { programParser } from "../../parsers/Programs.parser";
 
 const ProgramsPage: React.FC = (props) => {
   const router = useRouter();
@@ -63,9 +65,9 @@ const ProgramsPage: React.FC = (props) => {
   const onSearchChange = useCallback(
     (e) => {
       const searchQuery = e.target.value;
-	  if (searchQuery) {
-		  logSearchRecordedShow(searchQuery)
-	  }
+      if (searchQuery) {
+        logSearchRecordedShow(searchQuery);
+      }
       updateSearchQuery({ searchQuery, programId: router.query.programId });
     },
     [router.query.programId, updateSearchQuery]
@@ -176,18 +178,19 @@ const ProgramsPage: React.FC = (props) => {
             return r.map((show) => (
               <div key={show.id} className={styles.singleShow}>
                 <RecordedShowPlayer
+                  showId={show.id}
                   url={show.url}
                   name={show.name}
                   recordingDate={show.created_at}
                   programName={programParser.name(show.program)}
                   source={"ARCHIVE"}
-				  programId={show.program.id}
+                  programId={show.program.id}
                   backgroundImageUrl={programParser.programImage(show.program)}
                 />
               </div>
             ));
           })}
-		{/* @ts-ignore-error */}
+          {/* @ts-ignore-error */}
           <div ref={loader} />
         </section>
       </div>
@@ -198,15 +201,17 @@ const ProgramsPage: React.FC = (props) => {
 export default ProgramsPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const queryClient = new QueryClient();
-	const searchQuery = context.query.searchQuery as string;
-	const programId = context.query.programId ? parseInt(context.query.programId as string) : undefined;
-  
-	await prefetchRecordedShows(queryClient, { search: searchQuery, programId})
-  
-	return {
-	  props: {
-		dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
-	  },
-	};
+  const queryClient = new QueryClient();
+  const searchQuery = context.query.searchQuery as string;
+  const programId = context.query.programId
+    ? parseInt(context.query.programId as string)
+    : undefined;
+
+  await prefetchRecordedShows(queryClient, { search: searchQuery, programId });
+
+  return {
+    props: {
+      dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
+    },
   };
+};

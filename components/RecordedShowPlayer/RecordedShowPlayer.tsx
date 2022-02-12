@@ -18,6 +18,7 @@ export interface RecordedShowPlayerProps {
   backgroundImageUrl?: string;
   programId: number;
   source: 'HOMEPAGE' | 'PROGRAM_PAGE' | 'ARCHIVE';
+  showId: string | number;
 }
 
 export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
@@ -54,8 +55,8 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
 
   const onShare = async () => {
 	  const shareData = {
-		  url: 'https://www.google.com',
-		  text: `[${Intl.DateTimeFormat("he").format(new Date(props.recordingDate))}] ${props.programName} - ${props.programName}`
+		  url: `${window.location.hostname}/archive?showId=${props.showId}`,
+		  text: `[${Intl.DateTimeFormat("he").format(new Date(props.recordingDate))}] ${props.programName} - ${props.name}`
 	  }
 	if(navigator?.canShare?.(shareData) && navigator.share) {
 		return navigator.share(shareData)
