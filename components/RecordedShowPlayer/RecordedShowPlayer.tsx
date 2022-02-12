@@ -9,6 +9,7 @@ import { logPlayRecordedShow } from "../../api/Mixpanel.api";
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -86,7 +87,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
         />
       </div>
 	  <button className={style.shareButtonWrapper} onClick={onShare}>
-        <FontAwesomeIcon icon={faShareAlt} size="2x" color="white" />
+        <FontAwesomeIcon icon={(faShareAlt as IconDefinition)} size="2x" color="white" />
       </button>
     </div>
   );

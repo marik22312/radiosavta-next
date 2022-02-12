@@ -32,7 +32,6 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) {
-		// @ts-expect-error
 		observer.observe(loader.current)
 	};
   }, [handleObserver]);
