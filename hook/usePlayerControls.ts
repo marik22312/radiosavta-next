@@ -3,7 +3,7 @@ import { PlayerState, usePlayerContext } from "../providers/PlayerProvider";
 import { Track } from "../domain/Player";
 
 export const usePlayerControls = () => {
-  const { audioRef, setTitle, setPlayerState, setProgramTitle } = usePlayerContext();
+  const { audioRef, setTitle, setPlayerState, setProgramTitle, animationRef, seekerRef } = usePlayerContext();
 
   useEffect(() => {
 		  audioRef?.addEventListener("canplay",() => {
@@ -14,19 +14,29 @@ export const usePlayerControls = () => {
 	  }
   }, [audioRef, setPlayerState])
 
+  const whilePlaying = () => {
+	  animationRef.current = requestAnimationFrame(whilePlaying);
+	  if (seekerRef.current) {
+		  (seekerRef.current as any).value = audioRef.currentTime;
+	  }
+  }
+
   const play = (track: Track) => {
     setPlayerState(PlayerState.LOADING);
     audioRef.src = track.url;
     setTitle(track.title);
     setProgramTitle(track.programTitle)
     audioRef.play();
-  };
+	animationRef.current = requestAnimationFrame(whilePlaying)
+};
 
-  const pause = () => {
-    setPlayerState(PlayerState.PAUSED);
+const pause = () => {
+	setPlayerState(PlayerState.PAUSED);
     audioRef.pause();
-  };
-  const resume = () => {
+	cancelAnimationFrame((animationRef.current as any))
+};
+const resume = () => {
+	animationRef.current = requestAnimationFrame(whilePlaying)
     setPlayerState(PlayerState.PLAYING);
     audioRef.play();
   };
@@ -35,6 +45,7 @@ export const usePlayerControls = () => {
     setPlayerState(PlayerState.STOPPED);
     audioRef.pause();
     audioRef.src = "";
+	cancelAnimationFrame((animationRef.current as any))
   };
 
   const handlePlayerTimeChange = () => {
@@ -54,7 +65,9 @@ export const usePlayerControls = () => {
 	  resume,
     handlePlayerTimeChange,
     handlePlayerChange,
-    audioRef
+	seekerRef,
+	durationTime: audioRef?.duration,
+    currentTime: audioRef?.currentTime,
   };
 };
 

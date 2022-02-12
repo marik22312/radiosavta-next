@@ -86,7 +86,6 @@ const ProgramsPage: React.FC = (props) => {
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && hasNextPage) {
-        console.log("Fetchnext");
         fetchNext();
       }
     },

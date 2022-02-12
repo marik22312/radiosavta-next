@@ -9,8 +9,6 @@ export const FooterPlayer: React.FC = () => {
   const { isLive, streamer } = useLivePlayer();
   const { title,  programTitle} = usePLayerState();
 
-  console.log(title, programTitle);
-
   return (
     <>
       <div className={styles.footer}>
