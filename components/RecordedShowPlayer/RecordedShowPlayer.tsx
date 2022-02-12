@@ -7,6 +7,8 @@ import { usePLayerState } from "../../hook/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import { logPlayRecordedShow } from "../../api/Mixpanel.api";
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -49,6 +51,16 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
     });
   };
 
+  const onShare = async () => {
+	if(navigator?.canShare?.() && navigator.share) {
+		return navigator.share({
+			url: 'https://www.google.com'
+		})
+	}
+
+	return alert('Can Share!')
+  }
+  
   return (
     <div
       className={style.RecordedShowPlayer}
@@ -73,6 +85,9 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
           isPlaying={isPlaying && title === props.name}
         />
       </div>
+	  <button className={style.shareButtonWrapper} onClick={onShare}>
+        <FontAwesomeIcon icon={faShareAlt} size="2x" color="white" />
+      </button>
     </div>
   );
 };
