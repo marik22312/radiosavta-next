@@ -31,6 +31,7 @@ const ProgramsPage: React.FC = (props) => {
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
     search: router.query.searchQuery as string,
+    showId: router.query.showId as string,
     programId: router.query.programId
       ? parseInt(router.query.programId as string)
       : undefined,
@@ -107,8 +108,26 @@ const ProgramsPage: React.FC = (props) => {
     }
   }, [handleObserver]);
 
+  const getPageTitle = () => {
+	if (router.query.showId && recordedShows?.length && recordedShows[0].length) {
+		const programName = programParser.name(recordedShows[0][0].program);
+		const showName = recordedShows[0][0].name;
+
+		return  `האזינו ל${programName} - ${showName}`
+	}
+
+	return "הבוידעם"
+  }
+  const getPageImage = () => {
+	if (router.query.showId && recordedShows?.length && recordedShows[0].length) {
+		const programImage = programParser.programImage(recordedShows[0][0].program);
+
+		return  programImage
+	}
+  }
+
   return (
-    <Page title="הבוידעם">
+    <Page title={getPageTitle()} previewImage={getPageImage()}>
       <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
           <Title as="h1">הבוידעם</Title>
@@ -204,10 +223,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
   const searchQuery = context.query.searchQuery as string;
   const programId = context.query.programId
-    ? parseInt(context.query.programId as string)
-    : undefined;
+  ? parseInt(context.query.programId as string)
+  : undefined;
+  const showId = context.query.showId as string;
 
-  await prefetchRecordedShows(queryClient, { search: searchQuery, programId });
+  await prefetchRecordedShows(queryClient, { search: searchQuery, programId, showId });
 
   return {
     props: {
