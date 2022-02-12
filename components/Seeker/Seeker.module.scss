@@ -1,16 +1,23 @@
+@import '../../styles/mixinsNew.scss';
+
 .seeker {
+  direction: ltr;
   position: fixed;
-  bottom: 150px;
+  bottom: 70px;
   left: 0;
-  right: calc(var(--navbar-width) - (var(--size) / 2));
+  right: calc(var(--navbar-width) + (var(--play-button-width) / 2) - 4px);
   width: 100%;
   z-index: 99999;
   background-color: var(--light-green);
   -webkit-appearance: none;
+  @include media-breakpoint(md) {
+    bottom: 150px;
+  }
   &::-webkit-slider-runnable-track {
     height: 14px;
-    -webkit-appearance: none;
-    color: var(--light-green);
+    // -webkit-appearance: none;
+    // color: var(--dark-green);
+    // background-color: var(--dark-green);
     margin-top: -1px;
   }
   &::-webkit-slider-thumb {

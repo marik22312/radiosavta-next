@@ -51,6 +51,8 @@ a {
 	--SPACE3: 50px;
 	--SPACE4: 75px;
 	--SPACE5: 100px;
+
+	--play-button-width: 150px;
 	
 	@include media-breakpoint(sm) {
 		--SPACE1: 5px;
@@ -59,9 +61,8 @@ a {
 		--SPACE4: 20px;
 		--SPACE5: 25px;
 		--footerHeight: 70px;
-	}
-	@include media-breakpoint(sm) {
 		--navbar-width: 70px;
+		--play-button-width: 80px;
 	}
 }
 
