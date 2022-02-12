@@ -86,7 +86,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
         const shareRes = await navigator.share(shareData);
         logClickShare("NATIVE");
         return shareRes;
-      } catch (error) {
+      } catch (error: any) {
         console.error("Navigation failed", error.message);
       }
     }
