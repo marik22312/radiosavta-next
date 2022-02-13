@@ -23,7 +23,7 @@ export const Agenda: React.FC = () => {
         }
     }, [data])
 
-    const toggle = () => {
+           const toggle = () => {
         if(!isOpen) {
             logAgendaOpen()
         }
