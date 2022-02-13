@@ -3,7 +3,7 @@ import { RecordedShowPlayer } from "../RecordedShowPlayer/RecordedShowPlayer";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 
 import style from "./RecordedShowsList.module.scss";
-import ProgramsPage from '../../pages/programs';
+import ProgramsPage from "../../pages/programs";
 
 interface RecordedShowsListProps {
   programId: string;
@@ -32,13 +32,16 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) {
-		// @ts-expect-error
-		observer.observe(loader.current)
-	};
+      observer.observe(loader.current);
+    }
   }, [handleObserver]);
 
   if (!recordedShows?.[0]?.length) {
-    return <div className="recordedShowsListWrapper">לא מצאנו כלום בבוידעם לתכנית זו</div>;
+    return (
+      <div className="recordedShowsListWrapper">
+        לא מצאנו כלום בבוידעם לתכנית זו
+      </div>
+    );
   }
   return (
     <>
@@ -50,9 +53,10 @@ export const RecordedShowsList: React.FC<RecordedShowsListProps> = (props) => {
                 url={show.url}
                 name={show.name}
                 recordingDate={show.created_at}
-				programName={props.programName}
-				programId={show.program.id}
-				source={'PROGRAM_PAGE'}
+                programName={props.programName}
+                programId={show.program.id}
+                source={"PROGRAM_PAGE"}
+                showId={show.id}
               />
             </div>
           ));

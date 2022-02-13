@@ -77,3 +77,14 @@ export const logWebVitals = ({eventName, value}:{eventName: string; value: numbe
     value,
   });
 }
+
+export const logShareRecordedShow = (args: {
+	programName: string;
+	showName: string;
+	source: "HOMEPAGE" | "PROGRAM_PAGE" | "ARCHIVE";
+	programId: number;
+	showId: number;
+	type: "NATIVE" | "CUSTOM"
+}) => {
+	log('recordedShows.share', args)
+}
