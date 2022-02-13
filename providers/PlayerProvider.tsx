@@ -2,6 +2,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -18,49 +19,33 @@ export interface PlayerContext {
   audioRef: HTMLAudioElement;
   playerState: PlayerState;
   audioSrc: string;
+  currentTime: number;
   title: string;
   programTitle: string;
+  animationRef: ReturnType<typeof useRef>
+  seekerRef: ReturnType<typeof useRef>
   setAudioSrc(ket: string): void;
+  setCurrentTime(ket: number): void;
   setPlayerState(state: PlayerState): void;
   setTitle(title: string): void;
   setProgramTitle(title: string): void;
 }
 export const PlayerProvider: React.FC = ({ children }) => {
   const [audioRef, setAudioRef] = useState<HTMLAudioElement>();
+  const animationRef = useRef<any>();
+  const seekerRef = useRef<any>();
 
   const [playerState, setPlayerState] = useState(PlayerState.STOPPED);
   const [audioSrc, setAudioSrc] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [programTitle, setProgramTitle] = useState<string>("");
+	const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
 	  const audio = new Audio("");
 
-	//   const handleCanPlay = (e: any) => {
-	// 	  console.log('Can play', e)
-	//   }
-	//   const handleLoadStart = (e: any) => {
-	// 	  console.log('loadStart', audio?.src)
-	//   }
-	//   const handleLoadedData = (e: any) => {
-	// 	  console.log('loadedData')
-	//   }
-	//   const handleError = () => {
-	// 	  console.log('OnError')
-	//   }
     if (!audioRef) {
       	setAudioRef(audio);
-		// audio.addEventListener('canplay', handleCanPlay)
-		// audio.addEventListener('loadstart', handleLoadStart)
-		// audio.addEventListener('loadeddata', handleLoadedData)
-		// audio.addEventListener('error', handleError)
-	  }
-
-	  return () => {
-		// audio.removeEventListener('canplay', handleCanPlay)
-		// audio.removeEventListener('loadstart', handleLoadStart)
-		// audio.removeEventListener('loadeddata', handleLoadedData)
-		// audio.removeEventListener('error', handleError)
 	  }
   }, [audioRef]);
 
@@ -75,7 +60,11 @@ export const PlayerProvider: React.FC = ({ children }) => {
         title,
         setTitle,
         programTitle,
-        setProgramTitle
+        setProgramTitle,
+		animationRef,
+		seekerRef,
+		currentTime,
+setCurrentTime
       }}
     >
       {children}
