@@ -5,8 +5,7 @@
   position: fixed;
   bottom: 70px;
   left: 0;
-  right: calc(var(--navbar-width) + (var(--play-button-width) / 2) - 4px);
-  width: 100%;
+  width: calc(100vw - var(--navbar-width) - (var(--play-button-width) / 2));
   z-index: 99999;
   background-color: var(--light-green);
   -webkit-appearance: none;
