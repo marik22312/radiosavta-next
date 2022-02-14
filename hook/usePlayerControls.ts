@@ -16,10 +16,15 @@ export const usePlayerControls = () => {
 
   useEffect(() => {
     audioRef?.addEventListener("canplay", () => {
-      setPlayerState(PlayerState.PLAYING);
+        setPlayerState(PlayerState.PLAYING);
+    });
+
+    audioRef?.addEventListener("ended", () => {
+      setPlayerState(PlayerState.PAUSED);
     });
     return () => {
       audioRef?.removeEventListener("canplay", () => null);
+      audioRef?.removeEventListener("ended", () => null);
     };
   }, [audioRef, setPlayerState]);
 
