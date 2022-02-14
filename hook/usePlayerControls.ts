@@ -18,8 +18,13 @@ export const usePlayerControls = () => {
     audioRef?.addEventListener("canplay", () => {
       setPlayerState(PlayerState.PLAYING);
     });
+
+	audioRef?.addEventListener('ended', () => {
+		setPlayerState(PlayerState.PAUSED);
+	})
     return () => {
       audioRef?.removeEventListener("canplay", () => null);
+      audioRef?.removeEventListener("ended", () => null);
     };
   }, [audioRef, setPlayerState]);
 
