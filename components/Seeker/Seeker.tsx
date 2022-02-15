@@ -9,7 +9,7 @@ export const Seeker: React.FC = () => {
     ? `${(currentTime / durationTime) * 100}%`
     : "0%";
   const trackStyling = ` 
-      -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, var(--banana)), color-stop(${currentPercentage}, var(--dark-green)))
+      -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, var(--banana)), color-stop(${currentPercentage}, var(--light-green)))
     `;
 
   const handleSeekerChange = (e: any) => {
