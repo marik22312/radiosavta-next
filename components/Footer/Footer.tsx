@@ -1,4 +1,5 @@
-import { faFacebook, faInstagram, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faFacebook, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from 'react';
@@ -21,9 +22,9 @@ export const Footer: React.FC = () => {
 			</div>
 		<div className={styles.socialsWrapper}>
 			<div className={styles.socialIconsWrapper}>
-				<SocialIcon url={'mailto:radiosavta@gmail.com'} icon={faEnvelope}/>
-				<SocialIcon url={'https://www.instagram.com/radiosavta'} icon={faInstagram}/>
-				<SocialIcon url={'https://www.facebook.com/radiosavta'} icon={faFacebook}/>
+				<SocialIcon url={'mailto:radiosavta@gmail.com'} icon={(faEnvelope as IconDefinition)}/>
+				<SocialIcon url={'https://www.instagram.com/radiosavta'} icon={(faInstagram as IconDefinition)}/>
+				<SocialIcon url={'https://www.facebook.com/radiosavta'} icon={(faFacebook as IconDefinition)}/>
 			</div>
 			<p className={styles.socialsText}>כתבו לנו | עקבו אחרינו  | שתפו אותנו</p>
 		</div>
@@ -44,7 +45,7 @@ return (
             href={props.url}
 			rel="noreferrer noopener"
           >
-            <FontAwesomeIcon icon={props.icon} size="1x" color="white" />
+            <FontAwesomeIcon icon={(props.icon as IconDefinition)} size="1x" color="white" />
           </a>
 )
 }

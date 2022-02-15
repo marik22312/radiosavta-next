@@ -18,6 +18,7 @@ import { usePlayerControls } from '../../hook/usePlayerControls';
 
 import { useRouter } from 'next/router'
 import { logNavbarClose, logFooterPlayerPlay, logNavbarOpen, logNavbarNavigation } from '../../api/Mixpanel.api';
+import { Seeker } from "../Seeker/Seeker";
 
 interface NavBarProps {
   title: string;
@@ -39,9 +40,9 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
   const navbarWidth = props.width;
   const { toggleLive, isLive } = useLivePlayer();
   const { isPlaying, isStopped, isPaused, isLoading } = usePLayerState();
-  const { pause, resume } = usePlayerControls()
+  const { pause, resume, handlePlayerChange } = usePlayerControls()
   const { pathname } = useRouter();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -89,6 +90,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
     setIsOpen(false);
     props.onClose();
   };
+
   return (
     <>
       <div
@@ -140,6 +142,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 			  {isPlaying && !isLive ? <BackToLive onClick={() => logAndToggleLive()}/> : null}
 		  </div>
         </div>
+        {((isPlaying || isPaused) && !isLive) ? <Seeker /> : null}
       </div>
     </>
   );

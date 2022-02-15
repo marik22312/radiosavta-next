@@ -1,234 +1,288 @@
-@import '../../styles//mixins.scss';
+@import "../../styles//mixins.scss";
 
 .RecordedShowPlayer {
-	direction: rtl;
-	position: relative;
-	
-	width: 100%;
-	height: 100%;
-	border: 10px solid var(--dark-green);
-	border-radius: 5px;
-  
-	background-color: var(--banana);
-	display: flex;
-	flex-direction: column;
-	min-height: 300px;
-	@include media-breakpoint(lg) {
-		min-height: 400px;
-	}
+  direction: rtl;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  border: 10px solid var(--dark-green);
+  border-radius: 5px;
+
+  background-color: var(--banana);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  @include media-breakpoint(lg) {
+    min-height: 400px;
+  }
 }
 
 .imageWrapper {
-	display: flex;
-	align-items: center;
-	position: relative;
-	max-width: 100%;
-	width: 100%;
-	max-height: 100%;
-	height: 100%;
-	aspect-ratio: 1/1;
-	border-bottom: 10px solid var(--dark-green);
-	background-color: var(--banana);
-	background-size: contain;
-	@include media-breakpoint(lg) {
-		aspect-ratio: 1.5/1;
-	}
-	&::before {
-		content: "";
-		background-clip: content-box;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-image: inherit;
-		position: absolute;
-		z-index: 0;
-		width: 100%;
-		height: 100%;
-		inset: 0;
-		filter: blur(10px);
-	  }
-	  .programImg {
-		  position: relative;
-		  z-index: 0;
-		  object-fit: contain;
-		  width: 100%;
-		  max-height: 100%;
-		  height: auto;
-		  margin: auto;
-	  }
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-bottom: 10px solid var(--dark-green);
+  background-color: var(--banana);
+  background-size: contain;
+  @include media-breakpoint(lg) {
+    aspect-ratio: 1.5/1;
   }
-
-  .RecordedShowTitle {
-	margin: 0;
-	color: #ffffff;
-	font-weight: 700;
-  
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-  
-	box-sizing: border-box;
-	background-color: #000;
-	padding: 0px 5px 5px 10px;
-	letter-spacing: 2px;
-	text-align: start;
-	text-align: center;
-	display: inline-block;
-	width: auto;
-	margin: 0 auto;
-
-	white-space: break-spaces;
-		// background-color: revert;
-		// color: #000;
-  }
-  
-  .uploadedAt {
-	margin: 0;
-	color: #ffffff;
-	font-size: 0.6rem;
-  
-	box-sizing: content-box;
-	background-color: #000;
-	padding: 0px 5px 5px 10px;
-	margin: 5px auto;
-	font-size: 0.8rem;
-  }
-  
-  .controlsWrapper {
-	position: absolute;
-    width: 20%;
-    height: auto;
-    bottom: 0;
-    left: 0;
-	padding: 0 0 15px 15px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: flex-end;
-	width: 100%;
-	justify-content: center;
-
-	img {
-		max-width: 60px;
-		max-height: 60px;
-		cursor: pointer;
-		@include media-breakpoint(lg) {
-			max-width: 70px;
-			max-height: 70px;
-		}
-	}
-  }
-  
-  .titleWrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 100%;
-	min-height: 170px;
-	padding-top: 10px;
-	@include media-breakpoint(sm) {
-		min-height: 140px;
-		margin-bottom: 20px;
-	}
-  }
-
-  .playPauseBtn {
-	  background: none;
-	  border: none;
-	  margin-left: 15px;
-  }
-
-  .progressBar {
-	-webkit-appearance: none;
-	direction: ltr;
-    margin: 18px 15px;
+  &::before {
+    content: "";
+    background-clip: content-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: inherit;
+    position: absolute;
+    z-index: 0;
     width: 100%;
-    height: 8px;
-	
-	&:focus {
-		outline: none;
-	  }
-	  &::-webkit-slider-runnable-track {
-		width: 100%;
-		height: 8.4px;
-		cursor: pointer;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		background: #ffffff;
-		border-radius: 1.3px;
-		border: 0.2px solid #010101;
-	  }
-	  &::-webkit-slider-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-		-webkit-appearance: none;
-		margin-top: -14px;
-	  }
-	  &:focus::-webkit-slider-runnable-track {
-		background: #367ebd;
-	  }
-	  &::-moz-range-track {
-		width: 100%;
-		height: 8.4px;
-		cursor: pointer;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		background: #ffffff;
-		border-radius: 1.3px;
-		border: 0.2px solid #010101;
-	  }
-	  &::-moz-range-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-	  }
-	  &::-ms-track {
-		width: 100%;
-		height: 8.4px;
-		cursor: pointer;
-		background: transparent;
-		border-color: transparent;
-		border-width: 16px 0;
-		color: transparent;
-	  }
-	  &::-ms-fill-lower {
-		background: #2a6495;
-		border: 0.2px solid #010101;
-		border-radius: 2.6px;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-	  }
-	  &::-ms-fill-upper {
-		background: #ffffff;
-		border: 0.2px solid #010101;
-		border-radius: 2.6px;
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-	  }
-	  &::-ms-thumb {
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		border: 1px solid #000000;
-		height: 36px;
-		width: 16px;
-		border-radius: 3px;
-		background: #ffffff;
-		cursor: pointer;
-	  }
-	  &:focus::-ms-fill-lower {
-		background: #ffffff;
-	  }
-	  &:focus::-ms-fill-upper {
-		background: #367ebd;
-	  }
+    height: 100%;
+    inset: 0;
+    filter: blur(10px);
   }
+  .programImg {
+    position: relative;
+    z-index: 0;
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    margin: auto;
+  }
+}
 
-  .duration {
-	margin: 0;
-    margin-right: 15px;
-	color: #ffffff;
+.RecordedShowTitle {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  box-sizing: border-box;
+  background-color: #000;
+  padding: 0px 5px 5px 10px;
+  letter-spacing: 2px;
+  text-align: start;
+  text-align: center;
+  display: inline-block;
+  width: auto;
+  margin: 0 auto;
+
+  white-space: break-spaces;
+  // background-color: revert;
+  // color: #000;
+}
+
+.uploadedAt {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.6rem;
+
+  box-sizing: content-box;
+  background-color: #000;
+  padding: 0px 5px 5px 10px;
+  margin: 5px auto;
+  font-size: 0.8rem;
+}
+
+.controlsWrapper {
+  position: absolute;
+  width: 20%;
+  height: auto;
+  bottom: 0;
+  left: 0;
+  padding: 0 0 15px 15px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+
+  img {
+    max-width: 60px;
+    max-height: 60px;
+    cursor: pointer;
+    @include media-breakpoint(lg) {
+      max-width: 70px;
+      max-height: 70px;
+    }
   }
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 170px;
+  padding-top: 10px;
+  @include media-breakpoint(sm) {
+    min-height: 140px;
+    margin-bottom: 20px;
+  }
+}
+
+.playPauseBtn {
+  background: none;
+  border: none;
+  margin-left: 15px;
+}
+
+.progressBar {
+  -webkit-appearance: none;
+  direction: ltr;
+  margin: 18px 15px;
+  width: 100%;
+  height: 8px;
+
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  &::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    background: #367ebd;
+  }
+  &::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  &::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  &::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: #2a6495;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  &::-ms-fill-upper {
+    background: #ffffff;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  &::-ms-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  &:focus::-ms-fill-lower {
+    background: #ffffff;
+  }
+  &:focus::-ms-fill-upper {
+    background: #367ebd;
+  }
+}
+
+.duration {
+  margin: 0;
+  margin-right: 15px;
+  color: #ffffff;
+}
+
+.shareButtonWrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  background-color: var(--dark-green);
+  color: white;
+
+  padding: var(--SPACE1);
+  border: none;
+  
+  @include media-breakpoint(md) {
+	  padding: var(--SPACE3);
+
+  }
+}
+
+.shareModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	right: auto;
+	bottom: auto;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	border: 10px solid var(--dark-green);
+	background-color: var(--banana);
+	width: 75%;
+	max-width: 700px;
+	padding: var(--SPACE1);
+
+	@include media-breakpoint(md) {
+		width: 75%;
+	}
+}
+.shareModalContent {
+	input {
+		direction: ltr;
+	}
+
+}
+.shareModalTitle {
+	margin-bottom: var(--SPACE1);
+	text-align: center;
+}
+
+.shareModalSocialWrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: var(--SPACE1) 0;
+}

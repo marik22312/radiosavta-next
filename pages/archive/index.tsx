@@ -8,7 +8,10 @@ import { dehydrate } from "react-query/hydration";
 
 import styles from "./ArchivePage.module.scss";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
-import { prefetchRecordedShows, useRecordedShows } from "../../hook/useRecordedShows";
+import {
+  prefetchRecordedShows,
+  useRecordedShows,
+} from "../../hook/useRecordedShows";
 import { RecordedShowPlayer } from "../../components/RecordedShowPlayer/RecordedShowPlayer";
 import { BASE_IMAGE } from "../../config/images";
 import cn from "classnames";
@@ -21,14 +24,14 @@ import {
   logResetFilterByProgram,
 } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
-import { programParser } from '../../parsers/Programs.parser';
-
+import { programParser } from "../../parsers/Programs.parser";
 
 const ProgramsPage: React.FC = (props) => {
   const router = useRouter();
 
   const { recordedShows, fetchNext, hasNextPage } = useRecordedShows({
     search: router.query.searchQuery as string,
+    showId: router.query.showId as string,
     programId: router.query.programId
       ? parseInt(router.query.programId as string)
       : undefined,
@@ -63,9 +66,9 @@ const ProgramsPage: React.FC = (props) => {
   const onSearchChange = useCallback(
     (e) => {
       const searchQuery = e.target.value;
-	  if (searchQuery) {
-		  logSearchRecordedShow(searchQuery)
-	  }
+      if (searchQuery) {
+        logSearchRecordedShow(searchQuery);
+      }
       updateSearchQuery({ searchQuery, programId: router.query.programId });
     },
     [router.query.programId, updateSearchQuery]
@@ -86,7 +89,6 @@ const ProgramsPage: React.FC = (props) => {
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && hasNextPage) {
-        console.log("Fetchnext");
         fetchNext();
       }
     },
@@ -105,8 +107,26 @@ const ProgramsPage: React.FC = (props) => {
     }
   }, [handleObserver]);
 
+  const getPageTitle = () => {
+	if (router.query.showId && recordedShows?.length && recordedShows[0].length) {
+		const programName = programParser.name(recordedShows[0][0].program);
+		const showName = recordedShows[0][0].name;
+
+		return  `האזינו ל${programName} - ${showName}`
+	}
+
+	return "הבוידעם"
+  }
+  const getPageImage = () => {
+	if (router.query.showId && recordedShows?.length && recordedShows[0].length) {
+		const programImage = programParser.programImage(recordedShows[0][0].program);
+
+		return  programImage
+	}
+  }
+
   return (
-    <Page title="הבוידעם">
+    <Page title={getPageTitle()} previewImage={getPageImage()}>
       <div className={styles.archivePage}>
         <section className={styles.quoteSection}>
           <Title as="h1">הבוידעם</Title>
@@ -176,18 +196,19 @@ const ProgramsPage: React.FC = (props) => {
             return r.map((show) => (
               <div key={show.id} className={styles.singleShow}>
                 <RecordedShowPlayer
+                  showId={show.id}
                   url={show.url}
                   name={show.name}
                   recordingDate={show.created_at}
                   programName={programParser.name(show.program)}
                   source={"ARCHIVE"}
-				  programId={show.program.id}
+                  programId={show.program.id}
                   backgroundImageUrl={programParser.programImage(show.program)}
                 />
               </div>
             ));
           })}
-		{/* @ts-ignore-error */}
+          {/* @ts-ignore-error */}
           <div ref={loader} />
         </section>
       </div>
@@ -198,15 +219,18 @@ const ProgramsPage: React.FC = (props) => {
 export default ProgramsPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const queryClient = new QueryClient();
-	const searchQuery = context.query.searchQuery as string;
-	const programId = context.query.programId ? parseInt(context.query.programId as string) : undefined;
-  
-	await prefetchRecordedShows(queryClient, { search: searchQuery, programId})
-  
-	return {
-	  props: {
-		dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
-	  },
-	};
+  const queryClient = new QueryClient();
+  const searchQuery = context.query.searchQuery as string;
+  const programId = context.query.programId
+  ? parseInt(context.query.programId as string)
+  : undefined;
+  const showId = context.query.showId as string;
+
+  await prefetchRecordedShows(queryClient, { search: searchQuery, programId, showId });
+
+  return {
+    props: {
+      dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
+    },
   };
+};
