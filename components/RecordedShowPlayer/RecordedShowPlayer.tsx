@@ -24,7 +24,6 @@ export interface RecordedShowPlayerProps {
   url: string;
   name: string;
   programName: string;
-  recordingDate: string;
   backgroundImageUrl?: string;
   programId: number;
   source: "HOMEPAGE" | "PROGRAM_PAGE" | "ARCHIVE";
@@ -77,9 +76,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
     const url = new URL(window.location.href);
     const shareData = {
       url: `${url.origin}/archive?showId=${props.showId}`,
-      text: `[${Intl.DateTimeFormat("he").format(
-        new Date(props.recordingDate)
-      )}] ${props.programName} - ${props.name}`,
+      text: `${props.programName} - ${props.name}`,
     };
     if (navigator?.canShare?.(shareData) && navigator.share) {
       try {
@@ -117,9 +114,6 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
         >
           {props.name}
         </h5>
-        <p data-testid="recorded-show-date" className={style.uploadedAt}>
-          {Intl.DateTimeFormat("he").format(new Date(props.recordingDate))}
-        </p>
       </div>
       <div className={style.controlsWrapper}>
         <PlayPauseButton

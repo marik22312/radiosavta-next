@@ -34,7 +34,6 @@ export const RecordedShowsListStandalone: React.FC<RecordedShowsListProps> = (
               showId={show.id}
               url={show.url}
               name={show.name}
-              recordingDate={show.created_at}
               programName={programParser.name(show.program)}
               programId={show.program.id}
               backgroundImageUrl={programParser.programImage(show.program)}
