@@ -199,7 +199,6 @@ const ProgramsPage: React.FC = (props) => {
                   showId={show.id}
                   url={show.url}
                   name={show.name}
-                  recordingDate={show.created_at}
                   programName={programParser.name(show.program)}
                   source={"ARCHIVE"}
                   programId={show.program.id}
