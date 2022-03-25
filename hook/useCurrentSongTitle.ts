@@ -1,9 +1,10 @@
 import { useQuery } from "react-query";
-import { getCurrentSongTitle } from "../api/RadioInfo.api";
+import { getCurrentSongTitle, GetStreamInfoResponse } from "../api/RadioInfo.api";
 
 interface UseSongTitleOptions {
   enabled?: boolean;
   refetchInterval?: number;
+  onSuccess?: (data: GetStreamInfoResponse) => void;
 }
 export const useCurrentSongTitle = (opts?: UseSongTitleOptions) => {
   const { data, refetch } = useQuery(
