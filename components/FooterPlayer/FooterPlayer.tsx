@@ -14,7 +14,7 @@ export const FooterPlayer: React.FC = () => {
       <div className={styles.footer}>
         <Agenda />
         <div className={styles.contentWrapper}>
-          <p className={styles.programName}>{isLive ? `שידור חי ${'| '+ streamer}` : programTitle}</p>
+          <p className={styles.programName}>{isLive ? `שידור חי ${streamer}` : programTitle}</p>
           <div className={styles.horizontalDivider} />
           <p className={styles.songTitle} title={title}>{title}</p>
         </div>
