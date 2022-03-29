@@ -68,6 +68,8 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 
   const togglePlay = () => {
 
+		return
+
 	  if (isStopped || isLive) {
 		logFooterPlayerPlay()
 		  return logAndToggleLive();
