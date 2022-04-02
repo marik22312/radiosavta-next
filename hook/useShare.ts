@@ -10,15 +10,16 @@ export const useShare = (opts: {
     if (typeof window === "undefined") {
       return null;
     }
-    if (navigator?.canShare?.(shareData) && navigator.share) {
+    
+	if (navigator?.canShare?.(shareData) && navigator.share) {
       try {
         await navigator.share(shareData);
         return opts.onSuccess();
       } catch (error: any) {
         return opts.onError();
-	}
-}
-	return opts.onError();
+      }
+    }
+    return opts.onError();
   };
 
   return {
