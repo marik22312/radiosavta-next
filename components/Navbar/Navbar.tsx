@@ -139,7 +139,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           <MenuItem url="/about" title="הסיפור שלנו" />
 		  <div className={styles.playPauseButton} onClick={() => togglePlay()}>
 		  <PlayPauseButton isPlaying={isPlaying} isLoading={isLoading} displayLoader/>
-			  {isPlaying && !isLive ? <BackToLive onClick={() => logAndToggleLive()}/> : null}
 		  </div>
         </div>
         {((isPlaying || isPaused) && !isLive) ? <Seeker /> : null}
