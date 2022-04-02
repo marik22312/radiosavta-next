@@ -10,7 +10,7 @@
   flex-direction: column;
   text-align: center;
 
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 100px 1fr;
@@ -36,7 +36,7 @@
   margin: auto;
   margin-top: var(--SPACE5);
   text-align: center;
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     width: 75%;
   }
 
@@ -46,14 +46,14 @@
     font-size: 0.8rem;
     line-height: 1.1;
 
-    @include media-breakpoint(md) {
+    @include media-breakpointNew(md) {
       font-size: 1rem;
     }
   }
 }
 
 .stickyWrapper {
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     top: 100px;
     position: sticky;
     margin-bottom: calc(530px + var(--footerHeight) + 240px);
@@ -74,7 +74,7 @@
   position: relative;
   margin-top: var(--SPACE5);
 
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     grid-area: 3/1/3/3;
     height: 530px;
   }
@@ -99,7 +99,7 @@
 	margin-bottom: var(--SPACE2);
   }
 
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     background-color: unset;
     padding-top: unset;
     padding-bottom: unset;
@@ -119,7 +119,7 @@
   outline: 1px black;
   font-size: 0.7rem;
 
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     margin-top: var(--SPACE1);
     padding: 10px 20px;
   }
@@ -128,7 +128,7 @@
 .teamSection {
   padding: var(--SPACE3);
   background-color: var(--dark-green);
-  @include media-breakpoint(md) {
+  @include media-breakpointNew(md) {
     padding-inline: 0;
   }
 }

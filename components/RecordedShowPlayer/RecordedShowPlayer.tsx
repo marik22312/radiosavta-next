@@ -1,25 +1,19 @@
 import React, { useState } from "react";
-import style from "./RecordedShowsPlayer.module.scss";
+import { ShareModal } from '../ShareModal/ShareModal';
 
 import { usePlayerControls } from "../../hook/usePlayerControls";
 
 import { usePLayerState } from "../../hook/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import {
-  logPlayRecordedShow,
-  logShareRecordedShow,
+	logPlayRecordedShow,
+	logShareRecordedShow,
 } from "../../api/Mixpanel.api";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import Modal from "react-modal";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
+import style from "./RecordedShowsPlayer.module.scss";
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -54,6 +48,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       title: props.name,
       url: props.url,
       programTitle: props.programName,
+	  trackId: props.showId,
     });
   };
 
@@ -145,45 +140,3 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
 };
 
 
-interface ShareType {
-  FACEBOOK: "FACEBOOK";
-  WHATSAPP: "WHATSAPP";
-}
-interface ShareModalProps {
-  isOpen: boolean;
-  title: string;
-  shareableTitle: string;
-  url: string;
-  onRequestClose?: () => void;
-  onBeforeSave?: (type: ShareType) => void;
-}
-const ShareModal: React.FC<ShareModalProps> = (props) => {
-  return (
-    <div>
-      <Modal
-        className={style.shareModal}
-        isOpen={props.isOpen}
-        onRequestClose={props.onRequestClose}
-        contentLabel="Example Modal"
-      >
-        <div className={style.shareModalContent}>
-          <h3 className={style.shareModalTitle}>{props.title}</h3>
-          <div className={style.shareModalSocialWrapper}>
-            <FacebookShareButton url={props.url} quote={props.shareableTitle}>
-              <FacebookIcon size={40} />
-            </FacebookShareButton>
-            <WhatsappShareButton url={props.url} title={props.shareableTitle}>
-              <WhatsappIcon size={40} />
-            </WhatsappShareButton>
-          </div>
-          <input
-            readOnly
-            type="url"
-            value={props.url}
-            style={{ width: "100%", height: "40px", fontSize: "1rem" }}
-          />
-        </div>
-      </Modal>
-    </div>
-  );
-};

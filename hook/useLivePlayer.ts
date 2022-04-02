@@ -28,7 +28,8 @@ export const useLivePlayer = () => {
       play({
         url: LIVE_STREAM_URL,
         title: songTitle || "",
-		programTitle: 'שידור חי'
+		programTitle: 'שידור חי',
+		trackId: 'LIVE'
       });
       setIsLive(true);
       return;

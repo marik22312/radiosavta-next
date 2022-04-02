@@ -12,6 +12,7 @@ export const usePlayerControls = () => {
     seekerRef,
     setCurrentTime,
     currentTime,
+	setTrackId
   } = usePlayerContext();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export const usePlayerControls = () => {
     audioRef.src = track.url;
     setTitle(track.title);
     setProgramTitle(track.programTitle);
+	setTrackId(track.trackId);
     audioRef.play();
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
