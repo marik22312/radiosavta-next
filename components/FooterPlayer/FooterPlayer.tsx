@@ -6,43 +6,41 @@ import { usePLayerState } from "../../hook/usePlayerState";
 import { Agenda } from "../Agenda/Agenda";
 import { ShareModal } from '../ShareModal/ShareModal';
 import { logShareRecordedShow } from '../../api/Mixpanel.api';
+import { useShare } from '../../hook/useShare';
 
 export const FooterPlayer: React.FC = () => {
   const { isLive, streamer } = useLivePlayer();
   const { title,  programTitle, trackId} = usePLayerState();
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false)
-
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  
+  const onShareSuccess = () => {
+	  logClickShare("NATIVE");
+	}
+	const onShareFailed = () => {
+		logClickShare('CUSTOM');
+		setIsShareModalOpen(true);
+	}
+	
+	const {share} = useShare({
+		onSuccess: onShareSuccess,
+		onError: onShareFailed
+	});
   const logClickShare = (type: "NATIVE" | "CUSTOM") => {
     logShareRecordedShow({
-      programName: title,
-      showName: programTitle,
+      programName: programTitle,
+      showName: title,
       showId: trackId as number,
       source: 'FOOTER_PLAYER',
       type,
     });
   };
   const onShare = async () => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
     const url = new URL(window.location.href);
     const shareData = {
       url: `${url.origin}/archive?showId=${trackId}`,
       text: `${title} - ${programTitle}`,
     };
-    if (navigator?.canShare?.(shareData) && navigator.share) {
-      try {
-        const shareRes = await navigator.share(shareData);
-        logClickShare("NATIVE");
-        return shareRes;
-      } catch (error: any) {
-        console.error("Navigation failed", error.message);
-      }
-    }
-
-    logClickShare("CUSTOM");
-    return setIsShareModalOpen(true);
+	await share(shareData);
   };
 
   return (

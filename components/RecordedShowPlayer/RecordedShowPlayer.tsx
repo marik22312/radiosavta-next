@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import style from "./RecordedShowsPlayer.module.scss";
+import { useShare } from '../../hook/useShare';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -30,6 +31,19 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   const { play, pause, resume } = usePlayerControls();
   const { isPlaying, title } = usePLayerState();
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  const onShareSuccess = () => {
+	logClickShare("NATIVE");
+  }
+  const onShareFailed = () => {
+	  logClickShare('CUSTOM');
+	  setIsShareModalOpen(true);
+  }
+
+  const {share} = useShare({
+	  onSuccess: onShareSuccess,
+	  onError: onShareFailed
+  });
 
   const togglePlay = () => {
     if (title === props.name) {
@@ -73,18 +87,8 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       url: `${url.origin}/archive?showId=${props.showId}`,
       text: `${props.programName} - ${props.name}`,
     };
-    if (navigator?.canShare?.(shareData) && navigator.share) {
-      try {
-        const shareRes = await navigator.share(shareData);
-        logClickShare("NATIVE");
-        return shareRes;
-      } catch (error: any) {
-        console.error("Navigation failed", error.message);
-      }
-    }
 
-    logClickShare("CUSTOM");
-    return setIsShareModalOpen(true);
+	await share(shareData);
   };
 
   return (
