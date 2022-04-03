@@ -265,7 +265,7 @@ p {
 
 .playPauseButton {
 	
-	--size: 150px;
+	--size: var(--play-button-width);
 	height: var(--size);
 	width: var(--size);
 	bottom: calc(var(--footerHeight) - (var(--size) / 2));
@@ -273,10 +273,6 @@ p {
 	cursor: pointer;
 	
 	position: fixed;
-	
-	@include media-breakpoint(sm) {	
-		--size: 80px;
-	}
 
 	img {
 		width: 100%;

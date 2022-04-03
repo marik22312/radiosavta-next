@@ -75,45 +75,47 @@ $animationTime: 0.3s;
 
 .agendaButton {
     margin-inline-start: 0.5rem;
-    display: inline-block;
-    background: #042901;
+    display: flex;
     transform: translateY(calc((1 - var(--is-agenda-open)) * -100%));
     position: absolute;
     transition: transform $animationTime;
-    outline: 0;
+
+}
+
+
+.toggleIcon {
+	cursor: pointer;
+	direction: rtl;
+	background: #042901;
+	margin-right: 5px;
+    font-size: 1rem;
+    height: 1.5em;
+    padding-bottom: 0.3em;
+    display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    transition: transform $animationTime;
+	max-width: 50px;
+
+	outline: 0;
     border: 0;
     &:focus, &:active {
         border: 0;
         outline: 0;
     }
-}
 
-.toggleIcon {
-    font-size: 2rem;
-    width: 1em;
-    height: 1em;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    align-items: center;
-    justify-items: center;
-    transform: rotate(calc(var(--is-agenda-open) * -315deg));
-    transition: transform $animationTime;
-  
-    &:before,
-    &:after {
-      grid-column: 1;
-      grid-row: 1;
-      height: 0.5em;
-      width: 2px;
-      background: #fff;
-      content: "";
-      display: block;
-      transition: transform ($animationTime * 2);
-    }
-    &:after {
-      transform: rotate(calc((0.5 - var(--is-agenda-open)) * 540deg));
-    }
+
+	span {
+		width: 100%;
+		color: #fff;
+		font-size: 0.4rem;
+		text-align: center;
+
+		@include media-breakpoint(md) {
+			display: none;
+		}
+	}
 }
 
 .closed {

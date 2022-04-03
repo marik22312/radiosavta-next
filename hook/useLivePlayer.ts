@@ -13,16 +13,12 @@ export const useLivePlayer = () => {
   const { songTitle, refetch, streamer } = useCurrentSongTitle({
     enabled: isLive,
     refetchInterval: 10000,
+	onSuccess: (data) => setTitle(data.streamTitle),
   });
   
   useEffect(() => {
 		setIsLive(audioRef?.src === LIVE_STREAM_URL)
   },[audioRef, audioRef?.src])
-  useEffect(() => {
-	  if (songTitle) {
-		  setTitle(songTitle);
-	  }
-  }, [songTitle, setTitle]);
 
   const toggleLive = async () => {
 	  if (!isLive) {
@@ -32,7 +28,8 @@ export const useLivePlayer = () => {
       play({
         url: LIVE_STREAM_URL,
         title: songTitle || "",
-		programTitle: 'שידור חי'
+		programTitle: 'שידור חי',
+		trackId: 'LIVE'
       });
       setIsLive(true);
       return;
