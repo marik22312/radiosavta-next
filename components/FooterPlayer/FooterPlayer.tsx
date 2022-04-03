@@ -3,15 +3,18 @@ import React, { useState } from "react";
 import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
 import { usePLayerState } from "../../hook/usePlayerState";
-import { Agenda } from "../Agenda/Agenda";
 import { ShareModal } from "../ShareModal/ShareModal";
 import { logShareRecordedShow } from "../../api/Mixpanel.api";
 import { useShare } from "../../hook/useShare";
+import { FullScreenPlayer } from "./FullScreenPlayer/FullScreenPlayer";
+import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 
 export const FooterPlayer: React.FC = () => {
-  const { isLive, streamer } = useLivePlayer();
-  const { title, programTitle, trackId } = usePLayerState();
+  const { isLive, streamer, toggleLive } = useLivePlayer();
+  const { title, programTitle, trackId, isPlaying, isLoading } =
+    usePLayerState();
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
 
   const onShareSuccess = () => {
     logClickShare("NATIVE");
@@ -43,10 +46,25 @@ export const FooterPlayer: React.FC = () => {
     await share(shareData);
   };
 
+  const image = isLive
+    ? "http://placekitten.com/20/30"
+    : isPlaying
+    ? "https://placedog.net/20/30"
+    : "";
+
   return (
     <>
-      <div className={styles.footer}>
-        <Agenda onShare={onShare} />
+      <div
+        className={styles.footer}
+        style={{ transform: isPlayerOpen ? "translateY(-80px)" : "" }}
+      >
+        <PlayPauseButton
+          isPlaying={isPlaying}
+          isLoading={isLoading}
+          displayLoader
+          onClick={toggleLive}
+        />
+        <img src={image} alt="" />
         <div className={styles.contentWrapper}>
           <p className={styles.programName}>
             {isLive ? `שידור חי ${streamer}` : programTitle}
@@ -56,7 +74,24 @@ export const FooterPlayer: React.FC = () => {
             {title}
           </p>
         </div>
+        <div
+          className={styles.toggleFullScreen}
+          onClick={() => setIsPlayerOpen(true)}
+        >
+          ^
+        </div>
       </div>
+      <FullScreenPlayer
+        visible={isPlayerOpen}
+        isLive={isLive}
+        programTitle={title}
+        programName={programTitle}
+        onClose={() => setIsPlayerOpen(false)}
+        onBackToLive={toggleLive}
+        onShare={onShare}
+        toggleLive={toggleLive}
+        programImage={image}
+      />
       <ShareModal
         isOpen={isShareModalOpen}
         onRequestClose={() => setIsShareModalOpen(false)}

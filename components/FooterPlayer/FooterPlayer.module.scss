@@ -1,87 +1,85 @@
-@import '../../styles//mixins.scss';
+@import "../../styles/mixins.scss";
 
 .footer {
-	direction: ltr;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: var( --footerHeight);
-    background-color: var( --dark-green);
-    display: flex;
-    flex-direction: column;
-	align-items: flex-start;
-	z-index: 999;
-	box-shadow: var(--inverted-shadow);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footerHeight);
+  background-color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+  box-shadow: var(--inverted-shadow);
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100%;
+  margin-left: var(--SPACE5);
+  max-width: calc(100vw - 70px);
+
+  @include media-breakpoint(sm) {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    //   max-width: 100%;
+    padding: 0 10px;
+    gap: 0 10px;
   }
+}
 
-  .contentWrapper {
-	  display: flex;
-	  justify-content: left;
-	  align-items: center;
-	  height: 100%;
-	  margin-left: var(--SPACE5);
-	  max-width: calc(100vw - 70px);
+.programName {
+  font-size: 1.2rem;
+  color: var(--banana);
+  font-weight: 700;
 
-	  @include media-breakpoint(sm) {
-		  justify-content: flex-start;
-		  flex-wrap: wrap;
-		  align-items: center;
-		//   max-width: 100%;
-		  padding: 0 10px;
-		  gap: 0 10px;
-	  }
+  @include media-breakpoint(sm) {
+    font-size: 0.5rem;
   }
+}
 
-  .programName {
-	  font-size: 1.2rem;
-	  color: var(--banana);
-	  font-weight: 700;
+.songTitle {
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #fff;
+  margin-right: var(--SPACE3);
+  text-transform: capitalize;
 
-	  @include media-breakpoint(sm) {
-		  font-size: 0.5rem;
-	  }
-	}
-	
-	.songTitle {
-		font-size: 1.2rem;
-		font-weight: normal;
-		color: #fff;
-		margin-right: var(--SPACE3);
-		text-transform: capitalize;
-		
-		max-width: calc(100vw - 800px);
-		text-overflow:ellipsis;
-		white-space:nowrap;
-		overflow:hidden;
-		display:block;
+  max-width: calc(100vw - 800px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
 
-		@include media-breakpoint(sm) {
-			font-size: 0.5rem;
-			min-width: 100%;
-			max-width: calc(100vw - 280px);
-			margin-top: -35px;
-		}
-	}
-	
-	.playTime {
-		font-size: 1.2rem;
-		color: var(--banana);
-		font-weight: bold;
-		
-		@include media-breakpoint(sm) {
-			font-size: 0.5rem;
-		}
+  @include media-breakpoint(sm) {
+    font-size: 0.5rem;
+    min-width: 100%;
+    max-width: calc(100vw - 280px);
+    margin-top: -35px;
   }
-  
-  .horizontalDivider {
-	width: 1px;
-	background-color: var(--banana);
-	height: 45px;
-	margin: 0 15px;
-	
-	@include media-breakpoint(sm) {
-		display: none;
-	}
+}
+
+.playTime {
+  font-size: 1.2rem;
+  color: var(--banana);
+  font-weight: bold;
+
+  @include media-breakpoint(sm) {
+    font-size: 0.5rem;
   }
-  
+}
+
+.horizontalDivider {
+  width: 1px;
+  background-color: var(--banana);
+  height: 45px;
+  margin: 0 15px;
+
+  @include media-breakpoint(sm) {
+    display: none;
+  }
+}
