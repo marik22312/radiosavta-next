@@ -1,4 +1,4 @@
-@import "../../styles/mixins.scss";
+@import "../../styles/mixinsNew.scss";
 
 .footer {
   position: fixed;
@@ -12,64 +12,64 @@
   justify-content: space-between;
   z-index: 999;
   box-shadow: var(--inverted-shadow);
+  transition: transform 0.3s ease-in-out;
+  gap: var(--SPACE2);
 }
 
 .contentWrapper {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
+  padding: 0 10px;
+  gap: 0 10px;
   height: 100%;
-  margin-left: var(--SPACE5);
   max-width: calc(100vw - 70px);
 
-  @include media-breakpoint(sm) {
-    justify-content: flex-start;
-    flex-wrap: wrap;
+  @include media-breakpoint(md) {
+    justify-content: left;
     align-items: center;
-    //   max-width: 100%;
-    padding: 0 10px;
-    gap: 0 10px;
   }
 }
 
 .programName {
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   color: var(--banana);
   font-weight: 700;
 
-  @include media-breakpoint(sm) {
-    font-size: 0.5rem;
+  @include media-breakpoint(md) {
+    font-size: 1.2rem;
   }
 }
 
 .songTitle {
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   font-weight: normal;
   color: #fff;
-  margin-right: var(--SPACE3);
   text-transform: capitalize;
 
-  max-width: calc(100vw - 800px);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   display: block;
+  min-width: 100%;
+  max-width: calc(100vw - 280px);
+  margin-top: -35px;
 
-  @include media-breakpoint(sm) {
-    font-size: 0.5rem;
-    min-width: 100%;
-    max-width: calc(100vw - 280px);
-    margin-top: -35px;
+  @include media-breakpoint(md) {
+    margin-right: var(--SPACE3);
+    max-width: calc(100vw - 800px);
+    font-size: 1.2rem;
   }
 }
 
 .playTime {
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   color: var(--banana);
   font-weight: bold;
 
-  @include media-breakpoint(sm) {
-    font-size: 0.5rem;
+  @include media-breakpoint(md) {
+    font-size: 1.2rem;
   }
 }
 
@@ -78,8 +78,9 @@
   background-color: var(--banana);
   height: 45px;
   margin: 0 15px;
+  display: none;
 
-  @include media-breakpoint(sm) {
-    display: none;
+  @include media-breakpoint(md) {
+    display: block;
   }
 }

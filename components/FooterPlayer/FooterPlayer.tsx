@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 
 import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
@@ -46,18 +46,16 @@ export const FooterPlayer: React.FC = () => {
     await share(shareData);
   };
 
-  const image = isLive
-    ? "http://placekitten.com/20/30"
-    : isPlaying
-    ? "https://placedog.net/20/30"
-    : "";
+  const image = "http://placekitten.com/20/30";
+
+  const wrapperStyle: CSSProperties = {
+    transform: isPlayerOpen ? "translateY(80px)" : "",
+    transitionDelay: isPlayerOpen ? "0s" : "0.3s",
+  };
 
   return (
     <>
-      <div
-        className={styles.footer}
-        style={{ transform: isPlayerOpen ? "translateY(-80px)" : "" }}
-      >
+      <div className={styles.footer} style={wrapperStyle}>
         <PlayPauseButton
           isPlaying={isPlaying}
           isLoading={isLoading}
@@ -77,8 +75,9 @@ export const FooterPlayer: React.FC = () => {
         <div
           className={styles.toggleFullScreen}
           onClick={() => setIsPlayerOpen(true)}
+          style={{ color: "white" }}
         >
-          ^
+          Click here
         </div>
       </div>
       <FullScreenPlayer

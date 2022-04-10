@@ -21,6 +21,7 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
   const wrapperStyle: CSSProperties = {
     top: props.visible ? "0" : "100%",
     zIndex: props.visible ? "5002" : "-1",
+    transitionDelay: props.visible ? "0.3s" : "0s",
   };
 
   return (
@@ -32,50 +33,46 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
         >
           V {/* todo change to icon */}
         </button>
-        <div className={styles.fullScreenPlayer__content}>
-          <div className={styles.fullScreenPlayer__content__title}>
-            <h3 className={styles.fullScreenPLayer__title}>
-              {props.isLive ? "שידור חי" : props.programName}
-            </h3>
+        <div className={styles.fullScreenPlayer__content__title}>
+          <h3 className={styles.fullScreenPLayer__title}>
+            {props.isLive ? "שידור חי" : props.programName}
+          </h3>
 
-            <h5 className={styles.fullScreenPLayer__subtitle}>
-              {props.streamerName ? props.streamerName : props.programTitle}
-            </h5>
-          </div>
-
-          <div className={styles.fullScreenPLayer__image}>
-            <img src={props.programImage} alt={props.programTitle} />
-          </div>
-
-          <Seeker />
-
-          <div className={styles.fullScreenPlayer__buttons}>
-            <button className={styles.fullScreenPlayer__button}>
-              10S back
-            </button>
-            <PlayPauseButton />
-            <button className={styles.fullScreenPlayer__button}>
-              10S forward
-            </button>
-          </div>
-
-          <div className={styles.fullScreenPlayer__actions}>
-            <div
-              className={styles.fullScreenPlayer__share}
-              onClick={() => props.onShare()}
-            >
-              icon שיתוף
-            </div>
-            <div
-              className={styles.fullScreenPlayer__share}
-              onClick={() => props.toggleLive()}
-            >
-              icon חזרה לשידור החי
-            </div>
-          </div>
-
-          <Agenda open onShare={props.onShare} />
+          <h5 className={styles.fullScreenPLayer__subtitle}>
+            {props.streamerName ? props.streamerName : props.programTitle}
+          </h5>
         </div>
+
+        <div className={styles.fullScreenPLayer__image}>
+          <img src={props.programImage} alt={props.programTitle} />
+        </div>
+
+        <Seeker />
+
+        <div className={styles.fullScreenPlayer__buttons}>
+          <button className={styles.fullScreenPlayer__button}>10S back</button>
+          <PlayPauseButton />
+          <button className={styles.fullScreenPlayer__button}>
+            10S forward
+          </button>
+        </div>
+
+        <div className={styles.fullScreenPlayer__actions}>
+          <div
+            className={styles.fullScreenPlayer__share}
+            onClick={() => props.onShare()}
+          >
+            icon שיתוף
+          </div>
+          <div
+            className={styles.fullScreenPlayer__share}
+            onClick={() => props.toggleLive()}
+          >
+            icon חזרה לשידור החי
+          </div>
+        </div>
+
+        <Agenda open onShare={props.onShare} />
       </div>
     </div>
   );
