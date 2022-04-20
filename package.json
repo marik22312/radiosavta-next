@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write"
+  },
   "publishConfig": {
     "registry": "https://registry.yarnpkg.com"
   },
@@ -22,7 +25,9 @@
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "flatted": "^3.1.1",
+    "husky": "^7.0.4",
     "keen-slider": "^5.5.1",
+    "lint-staged": "^12.3.4",
     "lodash": "^4.17.21",
     "mixpanel-browser": "^2.42.0",
     "moment": "^2.29.1",
