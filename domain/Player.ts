@@ -4,3 +4,10 @@ export interface Track {
 	programTitle: string;
   }
   
+export interface TrackV2 {
+	artist: string;
+	title: string;
+	audioUrl: string;
+	imageUrl: string;
+  }
+  

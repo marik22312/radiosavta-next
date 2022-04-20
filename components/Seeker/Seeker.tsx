@@ -1,9 +1,17 @@
-import { usePlayerControls } from "../../hook/usePlayerControls";
+import React from "react";
+// import { usePlayerControls } from "../../hook/usePlayerControls";
 import styles from "./Seeker.module.scss";
 
-export const Seeker: React.FC = () => {
-  const { handlePlayerChange, seekerRef, currentTime, durationTime } =
-    usePlayerControls();
+// eslint-disable-next-line react/display-name
+export const Seeker = React.forwardRef<
+  any,
+  {
+    currentTime: number;
+    durationTime: number;
+    handlePlayerChange: (e: any) => void;
+  }
+>((props, ref: any) => {
+  const { handlePlayerChange, currentTime, durationTime } = props;
 
   const currentPercentage = durationTime
     ? `${(currentTime / durationTime) * 100}%`
@@ -18,7 +26,7 @@ export const Seeker: React.FC = () => {
 
   return (
     <input
-      ref={(seekerRef as any)}
+      ref={ref}
       type="range"
       min="0"
       defaultValue={0}
@@ -28,4 +36,4 @@ export const Seeker: React.FC = () => {
       onChange={handleSeekerChange}
     />
   );
-};
+});

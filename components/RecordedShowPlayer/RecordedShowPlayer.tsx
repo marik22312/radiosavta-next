@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import style from "./RecordedShowsPlayer.module.scss";
 
-import { usePlayerControls } from "../../hook/usePlayerControls";
+import {usePlayerControls as usePlayerControlsV2} from '../../providers/PlayerProvider/usePlayerControls';
 
-import { usePLayerState } from "../../hook/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import {
   logPlayRecordedShow,
@@ -20,6 +19,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { usePlayerState } from '../../providers/PlayerProvider/usePlayerState';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -33,12 +33,12 @@ export interface RecordedShowPlayerProps {
 export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   props
 ) => {
-  const { play, pause, resume } = usePlayerControls();
-  const { isPlaying, title } = usePLayerState();
+  const {playTrack, pause, resume} = usePlayerControlsV2();
+  const { isPlaying, songTitle } = usePlayerState();
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const togglePlay = () => {
-    if (title === props.name) {
+    if (songTitle === props.name) {
       if (isPlaying) {
         return pause();
       }
@@ -50,11 +50,12 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       source: props.source,
       programId: props.programId,
     });
-    return play({
-      title: props.name,
-      url: props.url,
-      programTitle: props.programName,
-    });
+	return playTrack({
+		audioUrl: props.url,
+		title: props.name,
+		artist: props.programName,
+		imageUrl: props.backgroundImageUrl || '',
+	})
   };
 
   const logClickShare = (type: "NATIVE" | "CUSTOM") => {
@@ -118,7 +119,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       <div className={style.controlsWrapper}>
         <PlayPauseButton
           onClick={() => togglePlay()}
-          isPlaying={isPlaying && title === props.name}
+          isPlaying={isPlaying && songTitle === props.name}
         />
       </div>
       <button className={style.shareButtonWrapper} onClick={onShare}>
