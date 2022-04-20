@@ -46,7 +46,6 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
 		if (audioRef.current && audioUrl) {
 		  switch (playerState) {
 			case PlayerState.LOADING:
-			  console.log("LoDINH");
 			  break;
 	
 			case PlayerState.PLAYING:
