@@ -8,6 +8,8 @@ import { logShareRecordedShow } from "../../api/Mixpanel.api";
 import { useShare } from "../../hook/useShare";
 import { FullScreenPlayer } from "./FullScreenPlayer/FullScreenPlayer";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 export const FooterPlayer: React.FC = () => {
   const { isLive, streamer, toggleLive } = useLivePlayer();
@@ -46,7 +48,7 @@ export const FooterPlayer: React.FC = () => {
     await share(shareData);
   };
 
-  const image = "http://placekitten.com/20/30";
+  const image = "http://placekitten.com/200/300";
 
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
@@ -62,7 +64,7 @@ export const FooterPlayer: React.FC = () => {
           displayLoader
           onClick={toggleLive}
         />
-        <img src={image} alt="" />
+        <img className={styles.playerImage} src={image} alt="" />
         <div className={styles.contentWrapper}>
           <p className={styles.programName}>
             {isLive ? `שידור חי ${streamer}` : programTitle}
@@ -75,9 +77,8 @@ export const FooterPlayer: React.FC = () => {
         <div
           className={styles.toggleFullScreen}
           onClick={() => setIsPlayerOpen(true)}
-          style={{ color: "white" }}
         >
-          Click here
+          <FontAwesomeIcon icon={faAngleUp as any} color="white" />
         </div>
       </div>
       <FullScreenPlayer

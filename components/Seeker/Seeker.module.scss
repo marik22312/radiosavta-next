@@ -1,12 +1,7 @@
-@import '../../styles/mixinsNew.scss';
+@import "../../styles/mixinsNew.scss";
 
 .seeker {
   direction: ltr;
-  position: fixed;
-  bottom: 70px;
-  left: 0;
-  width: calc(100vw - var(--navbar-width) - (var(--play-button-width) / 2));
-  z-index: 99999;
   background-color: var(--light-green);
   -webkit-appearance: none;
   @include media-breakpoint(md) {
@@ -18,20 +13,17 @@
   }
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    border: 1px solid var(--banana);
     border-radius: 50%;
-    background-color: var(--banana);
     cursor: pointer;
     margin-top: -12px;
 
     height: 40px;
     width: 40px;
-    border-radius: 50%;
     background-color: var(--light-green);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 2px 6px #AAA;
+    box-shadow: 0 2px 6px #aaa;
     border: 7px solid #042901;
   }
 }

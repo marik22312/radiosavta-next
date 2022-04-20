@@ -9,11 +9,11 @@
   background-color: var(--dark-green);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   z-index: 999;
   box-shadow: var(--inverted-shadow);
   transition: transform 0.3s ease-in-out;
-  gap: var(--SPACE2);
+  padding-inline: 10px;
 }
 
 .contentWrapper {
@@ -30,6 +30,10 @@
     justify-content: left;
     align-items: center;
   }
+}
+
+.playerImage {
+  max-width: 50px;
 }
 
 .programName {
