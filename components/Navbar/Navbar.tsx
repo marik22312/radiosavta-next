@@ -3,22 +3,16 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import RoundLogo from "./logo_round.png";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import styles from "./Navbar.module.scss";
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { BASE_IMAGE, BASE_IMAGE_ICON } from '../../config/images';
 import { PlayPauseButton } from '../PlayPauseButton/PlayPauseButton';
-import { usePLayerState } from '../../hook/usePlayerState';
 import { useLivePlayer } from '../../hook/useLivePlayer';
-import { usePlayerControls } from '../../hook/usePlayerControls';
 
 import { useRouter } from 'next/router'
 import { logNavbarClose, logFooterPlayerPlay, logNavbarOpen, logNavbarNavigation } from '../../api/Mixpanel.api';
-import { Seeker } from "../Seeker/Seeker";
+import { usePlayerState } from '../../providers/PlayerProvider/usePlayerState';
+import { usePlayerControls } from '../../providers/PlayerProvider/usePlayerControls';
 
 interface NavBarProps {
   title: string;
@@ -39,8 +33,8 @@ const MenuItem: React.FC<{url: string; title: string;}> = (props) => {
 export const Navbar: React.FC<NavBarProps> = (props) => {
   const navbarWidth = props.width;
   const { toggleLive, isLive } = useLivePlayer();
-  const { isPlaying, isStopped, isPaused, isLoading } = usePLayerState();
-  const { pause, resume, handlePlayerChange } = usePlayerControls()
+  const { isPlaying, isStopped, isPaused, isLoading } = usePlayerState();
+  const { pause, resume } = usePlayerControls()
   const { pathname } = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -142,7 +136,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
 			  {isPlaying && !isLive ? <BackToLive onClick={() => logAndToggleLive()}/> : null}
 		  </div>
         </div>
-        {((isPlaying || isPaused) && !isLive) ? <Seeker /> : null}
       </div>
     </>
   );
