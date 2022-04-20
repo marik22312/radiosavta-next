@@ -23,7 +23,7 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
 		  audioRef.current?.removeEventListener("canplay", () => null);
 		  audioRef.current?.removeEventListener("ended", () => null);
 		};
-	  }, [setPlayerState]);
+	  }, [audioRef, setPlayerState]);
 	
 	  useEffect(() => {
 		const whilePlaying = () => {
@@ -61,7 +61,7 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
 			  break;
 		  }
 		}
-	  }, [playerState, audioUrl]);
+	  }, [playerState, audioUrl, audioRef]);
 
 	  return {currentTime, seekerRef}
 }
