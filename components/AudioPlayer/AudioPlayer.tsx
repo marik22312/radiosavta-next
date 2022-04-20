@@ -3,7 +3,7 @@ import { useLivePlayer } from '../../hook/useLivePlayer';
 import { PlayerState } from "../../providers/PlayerProvider/PlayerProviderV2";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
-import { Seeker } from "../Seeker/Seeker";
+import { Seeker } from "./Seeker/Seeker";
 
 export const AduioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
