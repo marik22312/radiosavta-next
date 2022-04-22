@@ -59,7 +59,9 @@ export const FooterPlayer: React.FC = () => {
         </div>
       </div>
       <FullScreenPlayer
-        onShare={() => {}}
+        onShare={
+          () => {} // TODO add share function
+        }
         visible={isPlayerOpen}
         isLive={isLive}
         programTitle={songTitle}

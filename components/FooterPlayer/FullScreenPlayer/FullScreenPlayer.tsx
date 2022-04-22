@@ -5,7 +5,6 @@ import React, { CSSProperties } from "react";
 import {
   faAngleDown,
   faBroadcastTower,
-  faFastForward,
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -82,6 +81,7 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
             <div className={styles.fullScreenPlayer__buttons}>
               <button className={styles.fullScreenPlayer__button}>
                 <FontAwesomeIcon
+                  // TODO change to actual icon
                   icon={faArrowCircleRight as any}
                   size="1x"
                   style={{
@@ -93,6 +93,7 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
               <PlayPauseButton />
               <button className={styles.fullScreenPlayer__button}>
                 <FontAwesomeIcon
+                  // TODO change to actual icon
                   icon={faArrowCircleLeft as any}
                   size="1x"
                   style={{
