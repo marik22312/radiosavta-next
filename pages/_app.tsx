@@ -29,7 +29,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     import('react-facebook-pixel')
       .then((x) => x.default)
       .then((ReactPixel) => {
-		  console.log('ID', FB_PIXEL_ID)
         ReactPixel.init(FB_PIXEL_ID!)
         ReactPixel.pageView()
 
