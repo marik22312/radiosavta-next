@@ -1,6 +1,8 @@
 import React from 'react'
 import Head  from 'next/head'
 
+const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
+
 export const FacebookPixel: React.FC = () => 
   <React.Fragment>
     <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s)
@@ -11,11 +13,11 @@ export const FacebookPixel: React.FC = () =>
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '289238525071295');
+      fbq('init', '${FB_PIXEL_ID}');
       fbq('track', 'PageView');` }}
     />
     <noscript dangerouslySetInnerHTML={{ __html: `<img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=289238525071295&ev=PageView&noscript=1" />` }}
+      src="https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1" />` }}
     />
   </React.Fragment>
 
