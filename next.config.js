@@ -16,5 +16,6 @@ module.exports = withImages({
 		NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 		MIXPANEL_API_KEY: process.env.MIXPANEL_API_KEY,
 		CONTACT_NUMBER: process.env.CONTACT_NUMBER,
+		FB_PIXEL_ID: process.env.FB_PIXEL_ID,
 	}
   })
