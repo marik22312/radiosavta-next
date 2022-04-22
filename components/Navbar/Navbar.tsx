@@ -4,9 +4,7 @@ import Link from "next/link";
 
 import styles from "./Navbar.module.scss";
 import { BASE_IMAGE_ICON } from "../../config/images";
-import { usePLayerState } from "../../hook/usePlayerState";
 import { useLivePlayer } from "../../hook/useLivePlayer";
-import { usePlayerControls } from "../../hook/usePlayerControls";
 
 import { useRouter } from "next/router";
 import {
@@ -15,6 +13,8 @@ import {
   logNavbarOpen,
   logNavbarNavigation,
 } from "../../api/Mixpanel.api";
+import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
+import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 
 interface NavBarProps {
   title: string;
@@ -24,7 +24,6 @@ interface NavBarProps {
 }
 
 const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
-  const { pathname } = useRouter();
   return (
     <Link href={props.url}>
       <a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
@@ -35,7 +34,7 @@ const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
 export const Navbar: React.FC<NavBarProps> = (props) => {
   const navbarWidth = props.width;
   const { toggleLive, isLive } = useLivePlayer();
-  const { isStopped, isPaused } = usePLayerState();
+  const { isStopped, isPaused } = usePlayerState();
   const { pause, resume } = usePlayerControls();
 
   const [isOpen, setIsOpen] = useState(false);

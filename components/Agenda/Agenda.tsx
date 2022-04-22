@@ -10,7 +10,6 @@ import { logAgendaOpen } from "../../api/Mixpanel.api";
 import { Schedule } from "../../domain/Schedule";
 import { useAgenda } from "../../hook/useAgenda";
 import { useLivePlayer } from "../../hook/useLivePlayer";
-import { usePLayerState } from "../../hook/usePlayerState";
 import styles from "./Agenda.module.scss";
 
 export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
@@ -20,11 +19,14 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
 
   const [schedule, setSchedule] = useState<Schedule[]>([]);
 
-  const agendaClassName = isOpen ? styles.open : styles.closed;
+  const agendaClassName = props.open
+    ? styles.show
+    : isOpen
+    ? styles.open
+    : styles.closed;
 
   const { data } = useAgenda();
   const { isLive, toggleLive } = useLivePlayer();
-  const { isStopped } = usePLayerState();
 
   useEffect(() => {
     if (data?.schedule) {
@@ -52,39 +54,41 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
   return (
     <>
       <div className={`${styles.agendaWrapper} ${agendaClassName}`}>
-        <div className={styles.agendaButton}>
-          <button
-            className={styles.toggleIcon}
-            onClick={() => toggle()}
-            title="מה בלוז"
-          >
-            <FontAwesomeIcon
-              icon={isOpen ? faCalendarMinus : (faCalendarPlus as any)}
-              color="white"
-            />
-            <span>מה בלו&quot;ז?</span>
-          </button>
-          {!isLive && !isStopped && (
+        {!props.open && (
+          <div className={styles.agendaButton}>
             <button
               className={styles.toggleIcon}
-              onClick={() => props.onShare()}
-              title="חזרה לשידור החי"
+              onClick={() => toggle()}
+              title="מה בלוז"
             >
-              <FontAwesomeIcon icon={faShareAlt as any} color="white" />
-              <span>שיתוף</span>
+              <FontAwesomeIcon
+                icon={isOpen ? faCalendarMinus : (faCalendarPlus as any)}
+                color="white"
+              />
+              <span>מה בלו&quot;ז?</span>
             </button>
-          )}
-          {!isLive && !isStopped && (
-            <button
-              className={styles.toggleIcon}
-              onClick={() => toggleLive()}
-              title="חזרה לשידור החי"
-            >
-              <FontAwesomeIcon icon={faBroadcastTower as any} color="white" />
-              <span>חזרה לשידור חי</span>
-            </button>
-          )}
-        </div>
+            {!isLive && (
+              <button
+                className={styles.toggleIcon}
+                onClick={() => props.onShare()}
+                title="חזרה לשידור החי"
+              >
+                <FontAwesomeIcon icon={faShareAlt as any} color="white" />
+                <span>שיתוף</span>
+              </button>
+            )}
+            {!isLive && (
+              <button
+                className={styles.toggleIcon}
+                onClick={() => toggleLive()}
+                title="חזרה לשידור החי"
+              >
+                <FontAwesomeIcon icon={faBroadcastTower as any} color="white" />
+                <span>חזרה לשידור חי</span>
+              </button>
+            )}
+          </div>
+        )}
         <div className={styles.agenda}>
           <h2 className={styles.agendaTitle}>מה היום?</h2>
           {schedule.map((e) => {

@@ -1,35 +1,37 @@
 import { useEffect, useState } from "react";
-import { logPlayLive } from '../api/Mixpanel.api';
+import { logPlayLive } from "../api/Mixpanel.api";
 import { LIVE_STREAM_URL } from "../config/stream";
-import { usePlayerContext } from "../providers/PlayerProvider";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
-import { usePlayerControls } from "./usePlayerControls";
+import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
+import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
+import { useAudio } from "../providers/PlayerProvider/useAudio";
 
 export const useLivePlayer = () => {
-  const { setTitle, audioRef } = usePlayerContext();
-  const { play, stop } = usePlayerControls();
-  const [isLive, setIsLive] = useState(audioRef?.src === LIVE_STREAM_URL);
+  const { playTrack, stop } = usePlayerControls();
+  const { audioUrl } = usePlayerState();
+  const { setSongTitle } = useAudio();
+  const [isLive, setIsLive] = useState(audioUrl === LIVE_STREAM_URL);
 
   const { songTitle, refetch, streamer } = useCurrentSongTitle({
     enabled: isLive,
     refetchInterval: 10000,
-	onSuccess: (data) => setTitle(data.streamTitle),
+    onSuccess: (data) => setSongTitle(data.streamTitle),
   });
-  
+
   useEffect(() => {
-		setIsLive(audioRef?.src === LIVE_STREAM_URL)
-  },[audioRef, audioRef?.src])
+    setIsLive(audioUrl === LIVE_STREAM_URL);
+  }, [audioUrl]);
 
   const toggleLive = async () => {
-	  if (!isLive) {
+    if (!isLive) {
       const data = await refetch();
-	  const streamer = data.data?.streamer || 'NA';
-	  logPlayLive({streamerName: streamer})
-      play({
-        url: LIVE_STREAM_URL,
+      const streamer = data.data?.streamer || "NA";
+      logPlayLive({ streamerName: streamer });
+      playTrack({
+        audioUrl: LIVE_STREAM_URL,
         title: songTitle || "",
-		programTitle: 'שידור חי',
-		trackId: 'LIVE'
+        artist: "שידור חי",
+        imageUrl: "",
       });
       setIsLive(true);
       return;
@@ -41,7 +43,7 @@ export const useLivePlayer = () => {
 
   return {
     isLive,
-	streamer,
+    streamer,
     toggleLive,
   };
 };

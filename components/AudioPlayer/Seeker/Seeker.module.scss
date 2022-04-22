@@ -1,9 +1,19 @@
-@import "../../styles/mixinsNew.scss";
+@import "../../../styles/mixinsNew.scss";
+
+.seekerWrapper {
+  display: flex;
+  align-items: center;
+  color: var(--banana);
+  flex-direction: row-reverse;
+  gap: 10px;
+  padding-inline: 10px;
+}
 
 .seeker {
   direction: ltr;
   background-color: var(--light-green);
   -webkit-appearance: none;
+  width: 100%;
   @include media-breakpoint(md) {
     bottom: 150px;
   }
