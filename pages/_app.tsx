@@ -15,12 +15,29 @@ import { Hydrate } from "react-query/hydration";
 import * as FLATTED from 'flatted';
 import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
-import { PixelHeader } from '../components/Pixel/Pixel';
+import {useRouter} from 'next/router'
+const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
+
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
+  const router = useRouter()
+
+  useEffect(() => {
+    import('react-facebook-pixel')
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+		  console.log('ID', FB_PIXEL_ID)
+        ReactPixel.init(FB_PIXEL_ID!)
+        ReactPixel.pageView()
+
+        router.events.on('routeChangeComplete', () => {
+          ReactPixel.pageView()
+        })
+      })
+  }, [router.events])
 
   return (
     <QueryClientProvider client={queryClient.current}>
@@ -29,7 +46,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />
           <FooterPlayer />
-		  <PixelHeader />
         </Hydrate>
       </PlayerProvider>
     </QueryClientProvider>
