@@ -15,6 +15,7 @@ import { Hydrate } from "react-query/hydration";
 import * as FLATTED from 'flatted';
 import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
+import { PixelHeader } from '../components/Pixel/Pixel';
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)}>
           <Component {...pageProps} />
           <FooterPlayer />
+		  <PixelHeader />
         </Hydrate>
       </PlayerProvider>
     </QueryClientProvider>
