@@ -20,11 +20,6 @@ import { useLivePlayer } from '../../../hook/useLivePlayer';
 
 interface FullScreenPlayerProps {
   visible: boolean;
-  isLive: boolean;
-  programTitle?: string;
-  programName?: string;
-  streamerName?: string;
-  programImage: string;
   onClose: any;
   onShare: () => void;
   onBackToLive: () => void;
@@ -39,8 +34,8 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
   };
 
   const {isLive, toggleLive} = useLivePlayer()
-  const {isPlaying, isPaused, isStopped} = usePlayerState();
-  const {pause, resume} = usePlayerControls()
+  const {isPlaying, isPaused, isStopped, songTitle, artist, imageUrl} = usePlayerState();
+  const {pause, resume} = usePlayerControls();
 
   const togglePlay = () => {
     if (isStopped || isLive) {
@@ -74,8 +69,8 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
               </button>
               <button
                 className={styles.fullScreenPlayer__share}
-                onClick={() => props.toggleLive()}
-				disabled={props.isLive}
+                onClick={toggleLive}
+				disabled={isLive}
               >
                   <>
                     <FontAwesomeIcon
@@ -86,22 +81,22 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
               </button>
             </div>
             <h3 className={styles.fullScreenPLayer__title}>
-              {props.isLive ? "שידור חי" : props.programName?? "כותרת"}
+              {artist}
             </h3>
 
             <h5 className={styles.fullScreenPLayer__subtitle}>
-              {props.streamerName ? props.streamerName : props.programTitle ?? "שם שיר"}
+              {songTitle}
             </h5>
 			<div className={styles.fullScreenPlayer__imageContainer}>
             <img
               className={styles.fullScreenPLayer__image}
-              src={props.programImage}
-              alt={props.programTitle}
+              src={imageUrl}
+              alt={songTitle}
 			  />
 			  </div>
             <AudioPlayer />
             <div className={styles.fullScreenPlayer__buttons}>
-              {!props.isLive && <button className={styles.fullScreenPlayer__button}>
+              {!isLive && <button className={styles.fullScreenPlayer__button}>
                 <FontAwesomeIcon
                   // TODO change to actual icon
                   icon={faForward as any}
@@ -113,7 +108,7 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
                 />
               </button>}
               <PlayPauseButton isPlaying={props.isPlaying} onClick={togglePlay}/>
-              {!props.isLive && <button className={styles.fullScreenPlayer__button}>
+              {!isLive && <button className={styles.fullScreenPlayer__button}>
                 <FontAwesomeIcon
                   // TODO change to actual icon
                   icon={faBackward as any}

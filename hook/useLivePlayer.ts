@@ -31,7 +31,7 @@ export const useLivePlayer = () => {
         audioUrl: LIVE_STREAM_URL,
         title: songTitle || "",
         artist: "שידור חי",
-        imageUrl: "",
+        imageUrl: "https://res.cloudinary.com/marik-shnitman/image/upload/v1637258645/radiosavta/assets/ogImage.jpg",
       });
       setIsLive(true);
       return;

@@ -23,7 +23,7 @@ export interface AudioContext {
 export const PlayerContext = React.createContext<AudioContext | null>(null);
 
 export const AudioPlayerProvider: React.FC = (props) => {
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string>('https://res.cloudinary.com/marik-shnitman/image/upload/v1637258645/radiosavta/assets/ogImage.jpg');
   const [songTitle, setSongTitle] = useState<string>();
   const [artist, setArtist] = useState<string>();
   const [audioUrl, setAudioUrl] = useState<string>();
