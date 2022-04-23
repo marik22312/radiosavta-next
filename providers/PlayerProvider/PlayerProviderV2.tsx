@@ -24,8 +24,8 @@ export const PlayerContext = React.createContext<AudioContext | null>(null);
 
 export const AudioPlayerProvider: React.FC = (props) => {
   const [imageUrl, setImageUrl] = useState<string>('https://res.cloudinary.com/marik-shnitman/image/upload/v1637258645/radiosavta/assets/ogImage.jpg');
-  const [songTitle, setSongTitle] = useState<string>();
-  const [artist, setArtist] = useState<string>();
+  const [songTitle, setSongTitle] = useState<string>("לחץ פליי לשידור חי");
+  const [artist, setArtist] = useState<string>("רדיוסבתא");
   const [audioUrl, setAudioUrl] = useState<string>();
   const [playerState, setPlayerState] = useState(PlayerState.STOPPED);
 

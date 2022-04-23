@@ -22,9 +22,6 @@ interface FullScreenPlayerProps {
   visible: boolean;
   onClose: any;
   onShare: () => void;
-  onBackToLive: () => void;
-  toggleLive: () => void;
-  isPlaying?: boolean;
 }
 
 export function FullScreenPlayer(props: FullScreenPlayerProps) {
@@ -107,7 +104,7 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
                   }}
                 />
               </button>}
-              <PlayPauseButton isPlaying={props.isPlaying} onClick={togglePlay}/>
+              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay}/>
               {!isLive && <button className={styles.fullScreenPlayer__button}>
                 <FontAwesomeIcon
                   // TODO change to actual icon
