@@ -1,0 +1,74 @@
+@import "../../../styles/mixinsNew.scss";
+
+.fullScreenPlayerWrapper {
+  position: fixed;
+  background: rgba(74, 74, 74, 0.4);
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  transition: top 0.3s ease-in-out, z-index 0.3s ease-in-out;
+  z-index: 5002;
+  height: 100vh;
+
+  .fullScreenPlayer {
+    flex-basis: 100%;
+    background: var(--dark-green);
+    height: 70%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .fullScreenPLayer__image {
+    max-height: 100px;
+    object-fit: contain;
+  }
+
+  .fullScreenPlayer__close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .fullScreenPlayer_content {
+    width: 100%;
+    margin-top: 5px;
+    color: var(--banana);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--SPACE2);
+  }
+
+  img {
+    max-width: 100%;
+  }
+  .fullScreenPlayer__actions {
+    border-bottom: 1px solid var(--banana);
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-block: var(--SPACE2);
+    color: white;
+  }
+  .fullScreenPlayer__buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: var(--SPACE2);
+  }
+  .fullScreenPlayer__button {
+    background: transparent;
+    width: 50px;
+    height: 50px;
+    border-width: 0px;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+  }
+}
