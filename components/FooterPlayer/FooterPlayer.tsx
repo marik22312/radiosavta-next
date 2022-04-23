@@ -32,7 +32,7 @@ export const FooterPlayer: React.FC = () => {
 
   return (
     <>
-      <AudioPlayer />
+      {/* <AudioPlayer /> */}
       <div className={styles.footer} style={wrapperStyle}>
         <PlayPauseButton
           isPlaying={isPlaying}
@@ -59,6 +59,7 @@ export const FooterPlayer: React.FC = () => {
         </div>
       </div>
       <FullScreenPlayer
+	  isPlaying={isPlaying}
         onShare={
           () => {} // TODO add share function
         }

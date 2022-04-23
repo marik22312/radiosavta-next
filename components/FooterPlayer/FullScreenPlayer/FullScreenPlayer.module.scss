@@ -1,6 +1,7 @@
 @import "../../../styles/mixinsNew.scss";
 
 .fullScreenPlayerWrapper {
+	font-size: 0.7rem;
   position: fixed;
   background: rgba(74, 74, 74, 0.4);
   right: 0;
@@ -14,7 +15,6 @@
   .fullScreenPlayer {
     flex-basis: 100%;
     background: var(--dark-green);
-    height: 70%;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -22,9 +22,17 @@
     align-items: center;
   }
 
+  .fullScreenPlayer__imageContainer {
+	  height: 100px;
+	  width: 100px;
+	  text-align: center;
+	  margin: auto;
+  }
+
   .fullScreenPLayer__image {
-    max-height: 100px;
     object-fit: contain;
+    height: 100%;
+    width: 100%;
   }
 
   .fullScreenPlayer__close {
@@ -37,7 +45,6 @@
 
   .fullScreenPlayer_content {
     width: 100%;
-    margin-top: 5px;
     color: var(--banana);
     text-align: center;
     display: flex;
@@ -53,14 +60,23 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    padding-block: var(--SPACE2);
+    padding: var(--SPACE3) 0;
     color: white;
+
+	button {
+		background: none;
+		border: none;
+		color: white;
+
+		&:disabled {
+			color: #757575;
+		}
+	}
   }
   .fullScreenPlayer__buttons {
     display: flex;
     justify-content: center;
     width: 100%;
-    gap: var(--SPACE2);
   }
   .fullScreenPlayer__button {
     background: transparent;
@@ -71,4 +87,12 @@
     color: white;
     padding: 0;
   }
+}
+
+.fullScreenPLayer__title {
+	font-size: 0.9rem;
+}
+.fullScreenPLayer__subtitle {
+	font-size: 0.8rem;
+	color: #fff;
 }

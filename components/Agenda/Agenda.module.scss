@@ -32,7 +32,6 @@ $animationTime: 0.3s;
   text-align: center;
   margin-block: 15px;
   direction: rtl;
-  font-size: 1.5rem;
   @include media-breakpoint(md) {
     max-width: 65%;
     text-align: right;
@@ -40,6 +39,7 @@ $animationTime: 0.3s;
 }
 
 .agendaProgram {
+font-size: 0.7rem;
   margin: 10px clamp(1rem, 17vw, 20%);
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,6 @@ $animationTime: 0.3s;
     color: white;
     display: block;
     width: 100%;
-    font-size: 0.85rem;
     flex-basis: 100%;
     @include media-breakpoint(md) {
       width: auto;

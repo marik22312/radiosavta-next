@@ -90,7 +90,7 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
           </div>
         )}
         <div className={styles.agenda}>
-          <h2 className={styles.agendaTitle}>מה היום?</h2>
+          <h2 className={styles.agendaTitle}>מה הלו"ז?</h2>
           {schedule.map((e) => {
             return (
               <div className={styles.agendaProgram} key={e.id}>
