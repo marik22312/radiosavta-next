@@ -62,5 +62,11 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     }
   }, [playerState, audioUrl, audioRef]);
 
-  return { currentTime, seekerRef };
+  const onSeek = (value: number) => {
+	  if (audioRef.current) {
+		  audioRef.current.currentTime = value;
+	  }
+  };
+
+  return { currentTime, seekerRef, onSeek };
 };

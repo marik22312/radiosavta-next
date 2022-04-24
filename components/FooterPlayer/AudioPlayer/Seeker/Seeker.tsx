@@ -7,10 +7,10 @@ export const Seeker = React.forwardRef<
   {
     currentTime: number;
     durationTime: number;
-    handlePlayerChange: (e: any) => void;
+    onSeek: (e: any) => void;
   }
 >(function Seeker(props, ref: any) {
-  const { handlePlayerChange, currentTime, durationTime } = props;
+  const { onSeek, currentTime, durationTime } = props;
 
   const currentPercentage = durationTime
     ? `${(currentTime / durationTime) * 100}%`
@@ -20,7 +20,7 @@ export const Seeker = React.forwardRef<
     `;
 
   const handleSeekerChange = (e: any) => {
-    handlePlayerChange(e.target.value);
+    onSeek(e.target.value);
   };
 
   return (

@@ -15,7 +15,7 @@ import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerContr
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { seekerRef, currentTime } = usePlayerBindings(audioRef);
+  const { seekerRef, currentTime, onSeek } = usePlayerBindings(audioRef);
   const {
     songTitle,
     artist,
@@ -43,9 +43,6 @@ export const FooterPlayer: React.FC = () => {
     }
   }, [imageUrl]);
 
-  const handlePlayerChange = (value: number) => {
-    audioRef.current!.currentTime = value;
-  };
 
   const togglePlay = () => {
     if (isStopped || isLive) {
@@ -86,7 +83,7 @@ export const FooterPlayer: React.FC = () => {
               ref={seekerRef}
               currentTime={currentTime}
               durationTime={audioRef.current?.duration ?? 0}
-              handlePlayerChange={handlePlayerChange}
+              onSeek={onSeek}
             />
           )}
         </div>

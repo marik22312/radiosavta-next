@@ -37,7 +37,7 @@ export const FullScreenPlayer = React.forwardRef<
     usePlayerState();
   const { pause, resume } = usePlayerControls();
   // @ts-expect-error
-  const { currentTime, seekerRef } = usePlayerBindings(ref);
+  const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
 
   const handlePlayerChange = (value: number) => {
     // @ts-expect-error
@@ -100,7 +100,7 @@ export const FullScreenPlayer = React.forwardRef<
               currentTime={currentTime}
 			  // @ts-expect-error
               durationTime={ref.current.duration}
-              handlePlayerChange={handlePlayerChange}
+              onSeek={onSeek}
             />}
             <div className={styles.fullScreenPlayer__buttons}>
               {!isLive && (
