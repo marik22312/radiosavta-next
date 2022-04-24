@@ -54,41 +54,6 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
   return (
     <>
       <div className={`${styles.agendaWrapper} ${agendaClassName}`}>
-        {!props.open && (
-          <div className={styles.agendaButton}>
-            <button
-              className={styles.toggleIcon}
-              onClick={() => toggle()}
-              title="מה בלוז"
-            >
-              <FontAwesomeIcon
-                icon={isOpen ? faCalendarMinus : (faCalendarPlus as any)}
-                color="white"
-              />
-              <span>מה בלו&quot;ז?</span>
-            </button>
-            {!isLive && (
-              <button
-                className={styles.toggleIcon}
-                onClick={() => props.onShare()}
-                title="חזרה לשידור החי"
-              >
-                <FontAwesomeIcon icon={faShareAlt as any} color="white" />
-                <span>שיתוף</span>
-              </button>
-            )}
-            {!isLive && (
-              <button
-                className={styles.toggleIcon}
-                onClick={() => toggleLive()}
-                title="חזרה לשידור החי"
-              >
-                <FontAwesomeIcon icon={faBroadcastTower as any} color="white" />
-                <span>חזרה לשידור חי</span>
-              </button>
-            )}
-          </div>
-        )}
         <div className={styles.agenda}>
           <h2 className={styles.agendaTitle}>מה הלו"ז?</h2>
           {schedule.map((e) => {

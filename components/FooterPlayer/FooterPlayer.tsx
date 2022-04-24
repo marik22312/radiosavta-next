@@ -18,6 +18,7 @@ import {
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
+import { Agenda } from '../Agenda/Agenda';
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -35,6 +36,7 @@ export const FooterPlayer: React.FC = () => {
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
+  const [isAgendaOpen, setIsAgendaOpen] = useState(false)
 
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
@@ -107,7 +109,7 @@ export const FooterPlayer: React.FC = () => {
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
-          <button>
+          <button onClick={() => setIsAgendaOpen(!isAgendaOpen)}>
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
             מה הלו"ז?
           </button>
@@ -121,6 +123,7 @@ export const FooterPlayer: React.FC = () => {
         visible={isPlayerOpen}
         onClose={() => setIsPlayerOpen(false)}
       />
+	  <Agenda onShare={() => null}/>
     </>
   );
 };

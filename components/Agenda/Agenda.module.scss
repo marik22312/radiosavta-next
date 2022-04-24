@@ -135,4 +135,8 @@ font-size: 0.7rem;
     box-shadow: unset;
     border-top: 1px solid var(--banana);
   }
+
+  @include media-breakpoint(md) {
+	  position: fixed;
+  }
 }
