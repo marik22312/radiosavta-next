@@ -1,5 +1,4 @@
 import React from "react";
-// import { usePlayerControls } from "../../hook/usePlayerControls";
 import styles from "./Seeker.module.scss";
 
 export const Seeker = React.forwardRef<

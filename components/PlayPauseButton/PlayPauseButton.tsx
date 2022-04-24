@@ -9,7 +9,7 @@ export const PlayPauseButton: React.FC<{
   isPlaying?: boolean;
   isLoading?: boolean;
   displayLoader?: boolean;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }> = (props) => {
   if (props.isLoading && props.displayLoader) {
     return (
@@ -29,7 +29,7 @@ export const PlayPauseButton: React.FC<{
         alt="test"
         width={50}
         height={50}
-        onClick={props.onClick}
+        onClick={(e) => props.onClick?.(e)}
       />
     );
   }

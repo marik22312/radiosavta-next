@@ -12,6 +12,12 @@ import { BASE_IMAGE_ICON } from "../../config/images";
 import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
 import { Seeker } from "./AudioPlayer/Seeker/Seeker";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
+import {
+  faBroadcastTower,
+  faCalendar,
+  faShareAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -25,7 +31,7 @@ export const FooterPlayer: React.FC = () => {
     isStopped,
     isPaused,
   } = usePlayerState();
-  const { playTrack, pause, resume } = usePlayerControls();
+  const { pause, resume } = usePlayerControls();
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
@@ -43,10 +49,10 @@ export const FooterPlayer: React.FC = () => {
     }
   }, [imageUrl]);
 
-
-  const togglePlay = () => {
+  const togglePlay = (e: any) => {
+	  e.stopPropagation();
     if (isStopped || isLive) {
-      //   logFooterPlayerPlay();
+        logFooterPlayerPlay();
       return toggleLive();
     }
     if (isPaused) {
@@ -59,7 +65,7 @@ export const FooterPlayer: React.FC = () => {
     <>
       <AudioPlayer ref={audioRef} />
       <div className={styles.footer} style={wrapperStyle}>
-        <div className={styles.rightSide}>
+        <div className={styles.rightSide} onClick={() => setIsPlayerOpen(true)}>
           <PlayPauseButton
             isPlaying={isPlaying}
             isLoading={isLoading}
@@ -87,17 +93,28 @@ export const FooterPlayer: React.FC = () => {
             />
           )}
         </div>
-        <div className={styles.footerActionsWrapper}>
+        <div className={styles.footerActionsWrapper} onClick={() => setIsPlayerOpen(true)}>
           <div
             className={styles.toggleFullScreen}
-            onClick={() => setIsPlayerOpen(true)}
           >
             <FontAwesomeIcon icon={faAngleUp as any} color="white" />
           </div>
+          <button onClick={toggleLive}>
+            <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
+            חזרה לשידור חי
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
+            שתף
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faCalendar as any} size="1x" />
+            מה הלו"ז?
+          </button>
         </div>
       </div>
       <FullScreenPlayer
-	  ref={audioRef}
+        ref={audioRef}
         onShare={
           () => {} // TODO add share function
         }

@@ -6,7 +6,6 @@ import {
   faAngleDown,
   faBackward,
   faBroadcastTower,
-  faFastForward,
   faForward,
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -38,11 +37,6 @@ export const FullScreenPlayer = React.forwardRef<
   const { pause, resume } = usePlayerControls();
   // @ts-expect-error
   const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
-
-  const handlePlayerChange = (value: number) => {
-    // @ts-expect-error
-    ref.current!.currentTime = value;
-  };
 
   const togglePlay = () => {
     if (isStopped || isLive) {

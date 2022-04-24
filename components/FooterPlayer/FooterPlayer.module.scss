@@ -119,6 +119,32 @@
 
 .footerActionsWrapper {
 	grid-area: 1 / 5 / 2 / 6; 
+	font-size: 0.4rem;
+	color: #fff;
+	text-align: center;
+	
+	display: flex;
+	justify-content: space-around;
+	
+	button {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		background: none;
+		border: none;
+		color: white;
+
+		&:disabled {
+			color: #757575;
+		}
+
+		@include media-breakpoint(md) {
+			display: flex;
+		}
+	}
 	@include media-breakpoint(md) {
 		grid-area: 1 / 11 / 2 / 13;
 	}
