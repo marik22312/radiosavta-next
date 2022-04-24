@@ -2,7 +2,6 @@ import React from "react";
 // import { usePlayerControls } from "../../hook/usePlayerControls";
 import styles from "./Seeker.module.scss";
 
-// eslint-disable-next-line react/display-name
 export const Seeker = React.forwardRef<
   any,
   {
@@ -10,7 +9,7 @@ export const Seeker = React.forwardRef<
     durationTime: number;
     handlePlayerChange: (e: any) => void;
   }
->((props, ref: any) => {
+>(function Seeker(props, ref: any) {
   const { handlePlayerChange, currentTime, durationTime } = props;
 
   const currentPercentage = durationTime

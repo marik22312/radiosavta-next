@@ -11,12 +11,11 @@ import {
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons/faArrowCircleRight";
-import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons/faArrowCircleLeft";
-import { AudioPlayer } from "../../AudioPlayer/AudioPlayer";
-import { usePlayerState } from '../../../providers/PlayerProvider/usePlayerState';
-import { usePlayerControls } from '../../../providers/PlayerProvider/usePlayerControls';
-import { useLivePlayer } from '../../../hook/useLivePlayer';
+import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
+import { usePlayerControls } from "../../../providers/PlayerProvider/usePlayerControls";
+import { useLivePlayer } from "../../../hook/useLivePlayer";
+import { usePlayerBindings } from "../AudioPlayer/usePlayerBinding";
+import { Seeker } from "../AudioPlayer/Seeker/Seeker";
 
 interface FullScreenPlayerProps {
   visible: boolean;
@@ -24,19 +23,30 @@ interface FullScreenPlayerProps {
   onShare: () => void;
 }
 
-export function FullScreenPlayer(props: FullScreenPlayerProps) {
+export const FullScreenPlayer = React.forwardRef<
+  HTMLAudioElement,
+  FullScreenPlayerProps
+>(function FullScreenPlayer(props, ref) {
   const wrapperStyle: CSSProperties = {
     top: props.visible ? "0" : "100%",
     transitionDelay: props.visible ? "0.3s" : "0s",
   };
 
-  const {isLive, toggleLive} = useLivePlayer()
-  const {isPlaying, isPaused, isStopped, songTitle, artist, imageUrl} = usePlayerState();
-  const {pause, resume} = usePlayerControls();
+  const { isLive, toggleLive } = useLivePlayer();
+  const { isPlaying, isPaused, isStopped, songTitle, artist, imageUrl } =
+    usePlayerState();
+  const { pause, resume } = usePlayerControls();
+  // @ts-expect-error
+  const { currentTime, seekerRef } = usePlayerBindings(ref);
+
+  const handlePlayerChange = (value: number) => {
+    // @ts-expect-error
+    ref.current!.currentTime = value;
+  };
 
   const togglePlay = () => {
     if (isStopped || isLive) {
-    //   logFooterPlayerPlay();
+      //   logFooterPlayerPlay();
       return toggleLive();
     }
     if (isPaused) {
@@ -67,55 +77,59 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
               <button
                 className={styles.fullScreenPlayer__share}
                 onClick={toggleLive}
-				disabled={isLive}
+                disabled={isLive}
               >
-                  <>
-                    <FontAwesomeIcon
-                      icon={faBroadcastTower as any}
-                    />
-                    <span> חזרה לשידור חי</span>
-                  </>
+                <>
+                  <FontAwesomeIcon icon={faBroadcastTower as any} />
+                  <span> חזרה לשידור חי</span>
+                </>
               </button>
             </div>
-            <h3 className={styles.fullScreenPLayer__title}>
-              {artist}
-            </h3>
+            <h3 className={styles.fullScreenPLayer__title}>{artist}</h3>
 
-            <h5 className={styles.fullScreenPLayer__subtitle}>
-              {songTitle}
-            </h5>
-			<div className={styles.fullScreenPlayer__imageContainer}>
-            <img
-              className={styles.fullScreenPLayer__image}
-              src={imageUrl}
-              alt={songTitle}
-			  />
-			  </div>
-            <AudioPlayer />
+            <h5 className={styles.fullScreenPLayer__subtitle}>{songTitle}</h5>
+            <div className={styles.fullScreenPlayer__imageContainer}>
+              <img
+                className={styles.fullScreenPLayer__image}
+                src={imageUrl}
+                alt={songTitle}
+              />
+            </div>
+            {!isStopped && !isLive && <Seeker
+              ref={seekerRef}
+              currentTime={currentTime}
+			  // @ts-expect-error
+              durationTime={ref.current.duration}
+              handlePlayerChange={handlePlayerChange}
+            />}
             <div className={styles.fullScreenPlayer__buttons}>
-              {!isLive && <button className={styles.fullScreenPlayer__button}>
-                <FontAwesomeIcon
-                  // TODO change to actual icon
-                  icon={faForward as any}
-                  size="1x"
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              </button>}
-              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay}/>
-              {!isLive && <button className={styles.fullScreenPlayer__button}>
-                <FontAwesomeIcon
-                  // TODO change to actual icon
-                  icon={faBackward as any}
-                  size="1x"
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              </button>}
+              {!isLive && (
+                <button className={styles.fullScreenPlayer__button}>
+                  <FontAwesomeIcon
+                    // TODO change to actual icon
+                    icon={faForward as any}
+                    size="1x"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
+                </button>
+              )}
+              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay} />
+              {!isLive && (
+                <button className={styles.fullScreenPlayer__button}>
+                  <FontAwesomeIcon
+                    // TODO change to actual icon
+                    icon={faBackward as any}
+                    size="1x"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
+                </button>
+              )}
             </div>
             <Agenda open onShare={props.onShare} />
           </div>
@@ -123,4 +137,4 @@ export function FullScreenPlayer(props: FullScreenPlayerProps) {
       </div>
     </>
   );
-}
+});

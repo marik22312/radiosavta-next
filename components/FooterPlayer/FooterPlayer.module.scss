@@ -14,20 +14,26 @@
   box-shadow: var(--inverted-shadow);
   transition: transform 0.3s ease-in-out;
   padding-inline: 10px;
-
+  
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: var(--SPACE1);
+  grid-row-gap: 0px;
   @include media-breakpoint(md) {
-	display: grid;
 	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 15px;
-	grid-row-gap: 0px;
+	transform: unset !important;
   }
 }
 
 
 .rightSide {
+	grid-area: 1 / 1 / 2 / 5;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
 	@include media-breakpoint(md) {
-		display: block;
 		grid-area: 1 / 1 / 2 / 4;
 	}
 }
@@ -40,7 +46,7 @@
   padding: 0 10px;
   gap: 0 10px;
   height: 100%;
-  max-width: calc(100vw - 70px);
+  max-width: calc(100% - 140px);
 
   @include media-breakpoint(md) {
 	display: inline-block;
@@ -56,9 +62,6 @@
   color: var(--banana);
   font-weight: 700;
 
-  @include media-breakpoint(md) {
-    font-size: 0.7rem;
-  }
 }
 
 .songTitle {
@@ -78,7 +81,7 @@
   @include media-breakpoint(md) {
     margin-right: var(--SPACE3);
     max-width: calc(100vw - 800px);
-    font-size: 0.6rem;
+    font-size: 0.4rem;
 	margin: 0;
   }
 }
@@ -103,4 +106,26 @@
   @include media-breakpoint(md) {
     display: block;
   }
+}
+
+.seekerWrapper {
+	display: none;
+
+	@include media-breakpoint(md) {
+		display: block;
+		grid-area: 1 / 4 / 2 / 11;
+	}
+}
+
+.footerActionsWrapper {
+	grid-area: 1 / 5 / 2 / 6; 
+	@include media-breakpoint(md) {
+		grid-area: 1 / 11 / 2 / 13;
+	}
+}
+
+.toggleFullScreen {
+	@include media-breakpoint(md) {
+		display: none;
+	}
 }

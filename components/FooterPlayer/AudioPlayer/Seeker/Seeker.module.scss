@@ -1,4 +1,4 @@
-@import "../../../styles/mixinsNew.scss";
+@import "../../../../styles/mixinsNew";
 
 .seekerWrapper {
   display: flex;
@@ -7,6 +7,7 @@
   flex-direction: row-reverse;
   gap: 10px;
   padding-inline: 10px;
+  font-size: 0.4rem;
 }
 
 .seeker {
