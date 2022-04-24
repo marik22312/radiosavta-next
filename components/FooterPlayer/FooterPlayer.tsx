@@ -34,23 +34,25 @@ export const FooterPlayer: React.FC = () => {
     <>
       {/* <AudioPlayer /> */}
       <div className={styles.footer} style={wrapperStyle}>
+		  <div className={styles.rightSide}>
+
         <PlayPauseButton
           isPlaying={isPlaying}
           isLoading={isLoading}
           displayLoader
           onClick={toggleLive}
-        />
+		  />
         <img className={styles.playerImage} src={image} alt="" />
         {/*<Agenda /> should show only on desktop*/}
         <div className={styles.contentWrapper}>
           <p className={styles.programName}>
             {isLive ? `שידור חי ${streamer}` : artist}
           </p>
-          <div className={styles.horizontalDivider} />
           <p className={styles.songTitle} title={songTitle}>
             {songTitle}
           </p>
         </div>
+		  </div>
         <div
           className={styles.toggleFullScreen}
           onClick={() => setIsPlayerOpen(true)}
