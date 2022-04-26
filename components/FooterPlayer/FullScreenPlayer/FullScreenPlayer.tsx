@@ -15,6 +15,7 @@ import { usePlayerControls } from "../../../providers/PlayerProvider/usePlayerCo
 import { useLivePlayer } from "../../../hook/useLivePlayer";
 import { usePlayerBindings } from "../AudioPlayer/usePlayerBinding";
 import { Seeker } from "../AudioPlayer/Seeker/Seeker";
+import { useTogglePLay } from '../hooks/useTogglePlay';
 
 interface FullScreenPlayerProps {
   visible: boolean;
@@ -26,6 +27,10 @@ export const FullScreenPlayer = React.forwardRef<
   HTMLAudioElement,
   FullScreenPlayerProps
 >(function FullScreenPlayer(props, ref) {
+
+	if (!ref) {
+		throw new Error('ref is not defined');
+	}
   const wrapperStyle: CSSProperties = {
     top: props.visible ? "0" : "100%",
     transitionDelay: props.visible ? "0.3s" : "0s",
@@ -37,17 +42,9 @@ export const FullScreenPlayer = React.forwardRef<
   const { pause, resume } = usePlayerControls();
   // @ts-expect-error
   const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
+  const {togglePlay} = useTogglePLay();
 
-  const togglePlay = () => {
-    if (isStopped || isLive) {
-      //   logFooterPlayerPlay();
-      return toggleLive();
-    }
-    if (isPaused) {
-      return resume();
-    }
-    return pause();
-  };
+  const shouldDisplaySeeker = !isStopped && !isLive;
 
   return (
     <>
@@ -89,7 +86,7 @@ export const FullScreenPlayer = React.forwardRef<
                 alt={songTitle}
               />
             </div>
-            {!isStopped && !isLive && <Seeker
+            {shouldDisplaySeeker&& <Seeker
               ref={seekerRef}
               currentTime={currentTime}
 			  // @ts-expect-error

@@ -5,6 +5,7 @@ import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
 import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 import { useAudio } from "../providers/PlayerProvider/useAudio";
+import { DEFAULT_PLAYER_IMAGE } from '../config/images';
 
 export const useLivePlayer = () => {
   const { playTrack, stop } = usePlayerControls();
@@ -31,7 +32,7 @@ export const useLivePlayer = () => {
         audioUrl: LIVE_STREAM_URL,
         title: songTitle || "",
         artist: "שידור חי",
-        imageUrl: "https://res.cloudinary.com/marik-shnitman/image/upload/v1637258645/radiosavta/assets/ogImage.jpg",
+        imageUrl: DEFAULT_PLAYER_IMAGE,
       });
       setIsLive(true);
       return;

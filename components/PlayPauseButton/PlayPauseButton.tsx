@@ -11,6 +11,9 @@ export const PlayPauseButton: React.FC<{
   displayLoader?: boolean;
   onClick?: (e: any) => void;
 }> = (props) => {
+
+	const shouldDisplayLoader = props.isLoading && props.displayLoader;
+	
   if (props.isLoading && props.displayLoader) {
     return (
       <img

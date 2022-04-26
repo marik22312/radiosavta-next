@@ -1,13 +1,23 @@
 import React from "react";
 import styles from "./Seeker.module.scss";
 
+function formatTime(seconds: any) {
+    let minutes: string | number = Math.floor(seconds / 60);
+    minutes = (minutes >= 10) ? minutes : "0" + minutes;
+    seconds = Math.floor(seconds % 60);
+    seconds = (seconds >= 10) ? seconds : "0" + seconds;
+    return minutes + ":" + seconds;
+  }
+
+interface SeekerProps {
+	currentTime: number;
+	durationTime: number;
+	onSeek: (e: any) => void;
+}
+
 export const Seeker = React.forwardRef<
   any,
-  {
-    currentTime: number;
-    durationTime: number;
-    onSeek: (e: any) => void;
-  }
+  SeekerProps
 >(function Seeker(props, ref: any) {
   const { onSeek, currentTime, durationTime } = props;
 
@@ -25,7 +35,9 @@ export const Seeker = React.forwardRef<
   return (
     <div className={styles.seekerWrapper}>
       <span>
-        {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60)}
+	  {currentTime
+          ? formatTime(currentTime)
+          : "00:00"}
       </span>
       <input
         ref={ref}

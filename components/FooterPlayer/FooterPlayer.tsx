@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
 import { Agenda } from '../Agenda/Agenda';
+import { useTogglePLay } from './hooks/useTogglePlay';
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -37,6 +38,7 @@ export const FooterPlayer: React.FC = () => {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
   const [isAgendaOpen, setIsAgendaOpen] = useState(false)
+  const {togglePlay: togglePlayerPlay} = useTogglePLay();
 
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
@@ -53,15 +55,11 @@ export const FooterPlayer: React.FC = () => {
 
   const togglePlay = (e: any) => {
 	  e.stopPropagation();
-    if (isStopped || isLive) {
-        logFooterPlayerPlay();
-      return toggleLive();
-    }
-    if (isPaused) {
-      return resume();
-    }
-    return pause();
+	  togglePlayerPlay();
   };
+
+  const shouldShowSeeker = !isStopped && !isLive;
+  const durationTime = audioRef.current?.duration ?? 0;
 
   return (
     <>
@@ -86,11 +84,11 @@ export const FooterPlayer: React.FC = () => {
           </div>
         </div>
         <div className={styles.seekerWrapper}>
-          {!isStopped && !isLive && (
+          {shouldShowSeeker && (
             <Seeker
               ref={seekerRef}
               currentTime={currentTime}
-              durationTime={audioRef.current?.duration ?? 0}
+              durationTime={durationTime}
               onSeek={onSeek}
             />
           )}
