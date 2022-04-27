@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from "react";
-import { PlayerState } from "../../providers/PlayerProvider/PlayerProviderV2";
-import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
+import { PlayerState } from "../../../providers/PlayerProvider/PlayerProviderV2";
+import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
 
 export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
   const animationRef = useRef<any>();
@@ -62,5 +62,11 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     }
   }, [playerState, audioUrl, audioRef]);
 
-  return { currentTime, seekerRef };
+  const onSeek = (value: number) => {
+	  if (audioRef.current) {
+		  audioRef.current.currentTime = value;
+	  }
+  };
+
+  return { currentTime, seekerRef, onSeek };
 };

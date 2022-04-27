@@ -1,87 +1,157 @@
-@import '../../styles//mixins.scss';
+@import "../../styles/mixinsNew.scss";
 
 .footer {
-	direction: ltr;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: var( --footerHeight);
-    background-color: var( --dark-green);
-    display: flex;
-    flex-direction: column;
-	align-items: flex-start;
-	z-index: 999;
-	box-shadow: var(--inverted-shadow);
-  }
-
-  .contentWrapper {
-	  display: flex;
-	  justify-content: left;
-	  align-items: center;
-	  height: 100%;
-	  margin-left: var(--SPACE5);
-	  max-width: calc(100vw - 70px);
-
-	  @include media-breakpoint(sm) {
-		  justify-content: flex-start;
-		  flex-wrap: wrap;
-		  align-items: center;
-		//   max-width: 100%;
-		  padding: 0 10px;
-		  gap: 0 10px;
-	  }
-  }
-
-  .programName {
-	  font-size: 1.2rem;
-	  color: var(--banana);
-	  font-weight: 700;
-
-	  @include media-breakpoint(sm) {
-		  font-size: 0.5rem;
-	  }
-	}
-	
-	.songTitle {
-		font-size: 1.2rem;
-		font-weight: normal;
-		color: #fff;
-		margin-right: var(--SPACE3);
-		text-transform: capitalize;
-		
-		max-width: calc(100vw - 800px);
-		text-overflow:ellipsis;
-		white-space:nowrap;
-		overflow:hidden;
-		display:block;
-
-		@include media-breakpoint(sm) {
-			font-size: 0.5rem;
-			min-width: 100%;
-			max-width: calc(100vw - 280px);
-			margin-top: -35px;
-		}
-	}
-	
-	.playTime {
-		font-size: 1.2rem;
-		color: var(--banana);
-		font-weight: bold;
-		
-		@include media-breakpoint(sm) {
-			font-size: 0.5rem;
-		}
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footerHeight);
+  background-color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 999;
+  box-shadow: var(--inverted-shadow);
+  transition: transform 0.3s ease-in-out;
+  padding-inline: 10px;
   
-  .horizontalDivider {
-	width: 1px;
-	background-color: var(--banana);
-	height: 45px;
-	margin: 0 15px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: var(--SPACE1);
+  grid-row-gap: 0px;
+  @include media-breakpoint(md) {
+	grid-template-columns: repeat(12, 1fr);
+	transform: unset !important;
+  }
+}
+
+
+.rightSide {
+	grid-area: 1 / 1 / 2 / 5;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	@include media-breakpoint(md) {
+		grid-area: 1 / 1 / 2 / 4;
+	}
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 10px;
+  gap: 0 10px;
+  height: 100%;
+  max-width: calc(100% - 140px);
+
+  @include media-breakpoint(md) {
+	display: inline-block;
+  }
+}
+
+.playerImage {
+  max-width: 50px;
+}
+
+.programName {
+  font-size: 0.5rem;
+  color: var(--banana);
+  font-weight: 700;
+
+}
+
+.songTitle {
+  font-size: 0.5rem;
+  font-weight: normal;
+  color: #fff;
+  text-transform: capitalize;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  min-width: 100%;
+  max-width: calc(100vw - 280px);
+  margin-top: -35px;
+
+  @include media-breakpoint(md) {
+    margin-right: var(--SPACE3);
+    max-width: calc(100vw - 800px);
+    font-size: 0.4rem;
+	margin: 0;
+  }
+}
+
+.playTime {
+  font-size: 0.5rem;
+  color: var(--banana);
+  font-weight: bold;
+
+  @include media-breakpoint(md) {
+    font-size: 1.2rem;
+  }
+}
+
+.horizontalDivider {
+  width: 1px;
+  background-color: var(--banana);
+  height: 45px;
+  margin: 0 15px;
+  display: none;
+
+  @include media-breakpoint(md) {
+    display: block;
+  }
+}
+
+.seekerWrapper {
+	display: none;
+
+	@include media-breakpoint(md) {
+		display: block;
+		grid-area: 1 / 4 / 2 / 11;
+	}
+}
+
+.footerActionsWrapper {
+	grid-area: 1 / 5 / 2 / 6; 
+	font-size: 0.4rem;
+	color: #fff;
+	text-align: center;
 	
-	@include media-breakpoint(sm) {
+	display: flex;
+	justify-content: space-around;
+	
+	button {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		background: none;
+		border: none;
+		color: white;
+
+		&:disabled {
+			color: #757575;
+		}
+
+		@include media-breakpoint(md) {
+			display: flex;
+		}
+	}
+	@include media-breakpoint(md) {
+		grid-area: 1 / 11 / 2 / 13;
+	}
+}
+
+.toggleFullScreen {
+	@include media-breakpoint(md) {
 		display: none;
 	}
-  }
-  
+}

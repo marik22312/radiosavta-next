@@ -1,4 +1,4 @@
-import { Track, TrackV2 } from "../../domain/Player";
+import { TrackV2 } from "../../domain/Player";
 import { PlayerState } from "./PlayerProviderV2";
 import { useAudio } from "./useAudio";
 

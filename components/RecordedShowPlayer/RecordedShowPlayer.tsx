@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./RecordedShowsPlayer.module.scss";
 
-import {usePlayerControls as usePlayerControlsV2} from '../../providers/PlayerProvider/usePlayerControls';
+import { usePlayerControls as usePlayerControlsV2 } from "../../providers/PlayerProvider/usePlayerControls";
 
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import {
@@ -19,7 +19,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { usePlayerState } from '../../providers/PlayerProvider/usePlayerState';
+import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -33,7 +33,7 @@ export interface RecordedShowPlayerProps {
 export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   props
 ) => {
-  const {playTrack, pause, resume} = usePlayerControlsV2();
+  const { playTrack, pause, resume } = usePlayerControlsV2();
   const { isPlaying, songTitle } = usePlayerState();
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -50,12 +50,12 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       source: props.source,
       programId: props.programId,
     });
-	return playTrack({
-		audioUrl: props.url,
-		title: props.name,
-		artist: props.programName,
-		imageUrl: props.backgroundImageUrl || '',
-	})
+    return playTrack({
+      audioUrl: props.url,
+      title: props.name,
+      artist: props.programName,
+      imageUrl: props.backgroundImageUrl || "",
+    });
   };
 
   const logClickShare = (type: "NATIVE" | "CUSTOM") => {
@@ -79,7 +79,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       url: `${url.origin}/archive?showId=${props.showId}`,
       text: `${props.programName} - ${props.name}`,
     };
-    if (navigator?.canShare?.(shareData) && navigator.share) {
+    if (navigator.share) {
       try {
         const shareRes = await navigator.share(shareData);
         logClickShare("NATIVE");
@@ -135,16 +135,16 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
         title={`שתפו את ${props.name}`}
         shareableTitle={`${props.programName} - ${props.name} האזינו ברדיוסבתא!`}
         url={
-          typeof window !== "undefined" &&
-          `${new URL(window.location.href).origin}/archive?showId=${
-            props.showId
-          }` || ''
+          (typeof window !== "undefined" &&
+            `${new URL(window.location.href).origin}/archive?showId=${
+              props.showId
+            }`) ||
+          ""
         }
       />
     </div>
   );
 };
-
 
 interface ShareType {
   FACEBOOK: "FACEBOOK";
