@@ -109,7 +109,7 @@ export const FooterPlayer: React.FC = () => {
           </button>
           <button onClick={() => setIsAgendaOpen(!isAgendaOpen)}>
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
-            מה הלו"ז?
+            מה הלו&quot;ז?
           </button>
         </div>
       </div>
