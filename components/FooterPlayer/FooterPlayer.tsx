@@ -59,17 +59,17 @@ export const FooterPlayer: React.FC = () => {
   });
 
   const onSkipTenSeconds = () => {
-	const currentTime = audioRef.current?.currentTime;
-	if (currentTime) {
-	  audioRef!.current!.currentTime = currentTime + 10;
-	}
-  }
+    const currentTime = audioRef.current?.currentTime;
+    if (currentTime) {
+      audioRef!.current!.currentTime = currentTime + 10;
+    }
+  };
   const onBackTenSeconds = () => {
-	const currentTime = audioRef.current?.currentTime;
-	if (currentTime) {
-	  audioRef!.current!.currentTime = currentTime - 10;
-	}
-  }
+    const currentTime = audioRef.current?.currentTime;
+    if (currentTime) {
+      audioRef!.current!.currentTime = currentTime - 10;
+    }
+  };
 
   const getShareableData = () => {
     const url = new URL(window.location.href);
@@ -83,7 +83,7 @@ export const FooterPlayer: React.FC = () => {
   };
 
   const onShare = () => {
-	  setIsPlayerOpen(false);
+    setIsPlayerOpen(false);
     return share(getShareableData());
   };
   const wrapperStyle: CSSProperties = {
@@ -165,10 +165,10 @@ export const FooterPlayer: React.FC = () => {
         onShare={onShare}
         visible={isPlayerOpen}
         onClose={() => setIsPlayerOpen(false)}
-		onSkipTenSeconds={onSkipTenSeconds}
-		onBackTenSeconds={onBackTenSeconds}
+        onSkipTenSeconds={onSkipTenSeconds}
+        onBackTenSeconds={onBackTenSeconds}
       />
-      <Agenda onShare={() => null} open={isAgendaOpen}/>
+      <Agenda onShare={() => null} open={isAgendaOpen} />
       {!isStopped && (
         <ShareModal
           isOpen={isShareModalOpen}
