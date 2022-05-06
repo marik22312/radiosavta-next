@@ -18,10 +18,19 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
       audioRef.current.addEventListener("ended", () => {
         setPlayerState(PlayerState.STOPPED);
       });
+
+	  audioRef.current.addEventListener("loadstart", () => {
+		setPlayerState(PlayerState.LOADING);
+	  })
+	  audioRef.current.addEventListener("error", () => {
+		setPlayerState(PlayerState.STOPPED);
+	  })
     }
     return () => {
       audioRef.current?.removeEventListener("canplay", () => null);
       audioRef.current?.removeEventListener("ended", () => null);
+      audioRef.current?.removeEventListener("loadstart", () => null);
+      audioRef.current?.removeEventListener("error", () => null);
     };
   }, [audioRef, setPlayerState]);
 

@@ -1,7 +1,7 @@
 @import "../../../styles/mixinsNew.scss";
 
 .fullScreenPlayerWrapper {
-	font-size: 0.7rem;
+  font-size: 0.7rem;
   position: fixed;
   background: rgba(74, 74, 74, 0.4);
   right: 0;
@@ -13,7 +13,7 @@
   height: 100vh;
 
   @include media-breakpoint(md) {
-	  display: none;
+    display: none;
   }
 
   .fullScreenPlayer {
@@ -27,10 +27,10 @@
   }
 
   .fullScreenPlayer__imageContainer {
-	  height: 100px;
-	  width: 100px;
-	  text-align: center;
-	  margin: auto;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    margin: auto;
   }
 
   .fullScreenPLayer__image {
@@ -41,10 +41,11 @@
 
   .fullScreenPlayer__close {
     position: absolute;
-    top: 10px;
+    top: 75%;
+    transform: translateY(-50%);
     left: 10px;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
   }
 
   .fullScreenPlayer_content {
@@ -60,6 +61,7 @@
     max-width: 100%;
   }
   .fullScreenPlayer__actions {
+    position: relative;
     border-bottom: 1px solid var(--banana);
     width: 100%;
     display: flex;
@@ -67,15 +69,15 @@
     padding: var(--SPACE3) 0;
     color: white;
 
-	button {
-		background: none;
-		border: none;
-		color: white;
+    button {
+      background: none;
+      border: none;
+      color: white;
 
-		&:disabled {
-			color: #757575;
-		}
-	}
+      &:disabled {
+        color: #757575;
+      }
+    }
   }
   .fullScreenPlayer__buttons {
     display: flex;
@@ -94,9 +96,9 @@
 }
 
 .fullScreenPLayer__title {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 .fullScreenPLayer__subtitle {
-	font-size: 0.8rem;
-	color: #fff;
+  font-size: 0.8rem;
+  color: #fff;
 }

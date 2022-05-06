@@ -21,6 +21,8 @@ interface FullScreenPlayerProps {
   visible: boolean;
   onClose: any;
   onShare: () => void;
+  onSkipTenSeconds: () => void;
+  onBackTenSeconds: () => void;
 }
 
 export const FullScreenPlayer = React.forwardRef<
@@ -37,9 +39,8 @@ export const FullScreenPlayer = React.forwardRef<
   };
 
   const { isLive, toggleLive } = useLivePlayer();
-  const { isPlaying, isPaused, isStopped, songTitle, artist, imageUrl } =
+  const { isPlaying, isStopped, songTitle, artist, imageUrl } =
     usePlayerState();
-  const { pause, resume } = usePlayerControls();
   // @ts-expect-error
   const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
   const {togglePlay} = useTogglePLay();
@@ -50,14 +51,14 @@ export const FullScreenPlayer = React.forwardRef<
     <>
       <div className={styles.fullScreenPlayerWrapper} style={wrapperStyle}>
         <div className={styles.fullScreenPlayer}>
+          <div className={styles.fullScreenPlayer_content}>
+            <div className={styles.fullScreenPlayer__actions}>
           <div
             onClick={() => props.onClose()}
             className={styles.fullScreenPlayer__close}
           >
             <FontAwesomeIcon icon={faAngleDown as any} color="white" />
           </div>
-          <div className={styles.fullScreenPlayer_content}>
-            <div className={styles.fullScreenPlayer__actions}>
               <button
                 className={styles.fullScreenPlayer__share}
                 onClick={() => props.onShare()}
@@ -95,7 +96,7 @@ export const FullScreenPlayer = React.forwardRef<
             />}
             <div className={styles.fullScreenPlayer__buttons}>
               {!isLive && (
-                <button className={styles.fullScreenPlayer__button}>
+                <button className={styles.fullScreenPlayer__button} onClick={props.onSkipTenSeconds}>
                   <FontAwesomeIcon
                     // TODO change to actual icon
                     icon={faForward as any}
@@ -109,7 +110,7 @@ export const FullScreenPlayer = React.forwardRef<
               )}
               <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay} />
               {!isLive && (
-                <button className={styles.fullScreenPlayer__button}>
+                <button className={styles.fullScreenPlayer__button} onClick={props.onBackTenSeconds}>
                   <FontAwesomeIcon
                     // TODO change to actual icon
                     icon={faBackward as any}
