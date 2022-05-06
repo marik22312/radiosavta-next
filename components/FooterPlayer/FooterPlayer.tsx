@@ -153,7 +153,7 @@ export const FooterPlayer: React.FC = () => {
         visible={isPlayerOpen}
         onClose={() => setIsPlayerOpen(false)}
       />
-      <Agenda onShare={() => null} />
+      <Agenda onShare={() => null} open={isAgendaOpen}/>
       {!isStopped && (
         <ShareModal
           isOpen={isShareModalOpen}
