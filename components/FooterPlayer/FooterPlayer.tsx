@@ -17,9 +17,9 @@ import {
   faCalendar,
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
-import { Agenda } from '../Agenda/Agenda';
-import { useTogglePLay } from './hooks/useTogglePlay';
+import { logFooterPlayerPlay } from "../../api/Mixpanel.api";
+import { Agenda } from "../Agenda/Agenda";
+import { useTogglePLay } from "./hooks/useTogglePlay";
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -37,8 +37,8 @@ export const FooterPlayer: React.FC = () => {
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
-  const [isAgendaOpen, setIsAgendaOpen] = useState(false)
-  const {togglePlay: togglePlayerPlay} = useTogglePLay();
+  const [isAgendaOpen, setIsAgendaOpen] = useState(false);
+  const { togglePlay: togglePlayerPlay } = useTogglePLay();
 
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
@@ -54,8 +54,8 @@ export const FooterPlayer: React.FC = () => {
   }, [imageUrl]);
 
   const togglePlay = (e: any) => {
-	  e.stopPropagation();
-	  togglePlayerPlay();
+    e.stopPropagation();
+    togglePlayerPlay();
   };
 
   const shouldShowSeeker = !isStopped && !isLive;
@@ -93,10 +93,11 @@ export const FooterPlayer: React.FC = () => {
             />
           )}
         </div>
-        <div className={styles.footerActionsWrapper} onClick={() => setIsPlayerOpen(true)}>
-          <div
-            className={styles.toggleFullScreen}
-          >
+        <div
+          className={styles.footerActionsWrapper}
+          onClick={() => setIsPlayerOpen(true)}
+        >
+          <div className={styles.toggleFullScreen}>
             <FontAwesomeIcon icon={faAngleUp as any} color="white" />
           </div>
           <button onClick={toggleLive}>
@@ -121,7 +122,7 @@ export const FooterPlayer: React.FC = () => {
         visible={isPlayerOpen}
         onClose={() => setIsPlayerOpen(false)}
       />
-	  <Agenda onShare={() => null}/>
+      <Agenda onShare={() => null} open={isAgendaOpen} />
     </>
   );
 };
