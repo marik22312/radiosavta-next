@@ -1,38 +1,38 @@
-@import "../../styles//mixins.scss";
-  
-  .shareModal {
-	  position: absolute;
-	  top: 50%;
-	  left: 50%;
-	  right: auto;
-	  bottom: auto;
-	  margin-right: -50%;
-	  transform: translate(-50%, -50%);
-	  border: 10px solid var(--dark-green);
-	  background-color: var(--banana);
-	  width: 75%;
-	  max-width: 700px;
-	  padding: var(--SPACE1);
-  
-	  @include media-breakpoint(md) {
-		  width: 75%;
-	  }
+@import "../../styles/mixinsNew.scss";
+
+.shareModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border: 10px solid var(--dark-green);
+  background-color: var(--banana);
+  width: 75%;
+  max-width: 700px;
+  padding: var(--SPACE1);
+
+  @include media-breakpoint(md) {
+    width: 75%;
   }
-  .shareModalContent {
-	  input {
-		  direction: ltr;
-	  }
-  
+}
+
+.shareModalContent {
+  input {
+    direction: ltr;
   }
-  .shareModalTitle {
-	  margin-bottom: var(--SPACE1);
-	  text-align: center;
-  }
-  
-  .shareModalSocialWrapper {
-	  display: flex;
-	  flex-direction: row;
-	  align-items: center;
-	  justify-content: center;
-	  margin: var(--SPACE1) 0;
-  }
+}
+.shareModalTitle {
+  margin-bottom: var(--SPACE1);
+  text-align: center;
+}
+
+.shareModalSocialWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: var(--SPACE1) 0;
+}

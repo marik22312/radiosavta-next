@@ -10,4 +10,11 @@ export interface TrackV2 {
   title: string;
   audioUrl: string;
   imageUrl: string;
+  metaData: TrackMetaData;
+}
+
+export interface TrackMetaData {
+	programId?: string | number;
+	recordedShowId?: string | number;
+	
 }
