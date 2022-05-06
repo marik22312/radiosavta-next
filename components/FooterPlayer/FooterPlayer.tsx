@@ -70,6 +70,7 @@ export const FooterPlayer: React.FC = () => {
   };
 
   const onShare = () => {
+	  setIsPlayerOpen(false);
     return share(getShareableData());
   };
   const wrapperStyle: CSSProperties = {
