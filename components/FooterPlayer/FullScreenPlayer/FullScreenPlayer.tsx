@@ -51,14 +51,14 @@ export const FullScreenPlayer = React.forwardRef<
     <>
       <div className={styles.fullScreenPlayerWrapper} style={wrapperStyle}>
         <div className={styles.fullScreenPlayer}>
+          <div className={styles.fullScreenPlayer_content}>
+            <div className={styles.fullScreenPlayer__actions}>
           <div
             onClick={() => props.onClose()}
             className={styles.fullScreenPlayer__close}
           >
             <FontAwesomeIcon icon={faAngleDown as any} color="white" />
           </div>
-          <div className={styles.fullScreenPlayer_content}>
-            <div className={styles.fullScreenPlayer__actions}>
               <button
                 className={styles.fullScreenPlayer__share}
                 onClick={() => props.onShare()}

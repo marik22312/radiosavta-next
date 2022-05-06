@@ -151,6 +151,7 @@
 }
 
 .toggleFullScreen {
+	font-size: 1rem;
 	@include media-breakpoint(md) {
 		display: none;
 	}
