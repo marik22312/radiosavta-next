@@ -17,9 +17,14 @@ import {
   faCalendar,
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { logFooterPlayerPlay } from '../../api/Mixpanel.api';
-import { Agenda } from '../Agenda/Agenda';
-import { useTogglePLay } from './hooks/useTogglePlay';
+import {
+  logFooterPlayerPlay,
+  logShareRecordedShow,
+} from "../../api/Mixpanel.api";
+import { Agenda } from "../Agenda/Agenda";
+import { useTogglePLay } from "./hooks/useTogglePlay";
+import { useShare } from "../../hook/useShare";
+import { ShareModal } from "../ShareModal/ShareModal";
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -32,14 +37,42 @@ export const FooterPlayer: React.FC = () => {
     imageUrl,
     isStopped,
     isPaused,
+    metaData,
   } = usePlayerState();
   const { pause, resume } = usePlayerControls();
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
-  const [isAgendaOpen, setIsAgendaOpen] = useState(false)
-  const {togglePlay: togglePlayerPlay} = useTogglePLay();
+  const [isAgendaOpen, setIsAgendaOpen] = useState(false);
+  const { togglePlay: togglePlayerPlay } = useTogglePLay();
 
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  const onShareSuccess = () => {};
+  const onShareFailed = () => {
+    setIsShareModalOpen(true);
+  };
+
+  const { share } = useShare({
+    onError: onShareFailed,
+    onSuccess: onShareSuccess,
+  });
+
+  const getShareableData = () => {
+    const url = new URL(window.location.href);
+    if (isLive) {
+      return { text: "רדיוסבתא - שידור חי", url: url.origin };
+    }
+    return {
+      text: `רדיוסבתא - ${songTitle}`,
+      url: `${url.origin}/archive?showId=${metaData.recordedShowId}`,
+    };
+  };
+
+  const onShare = () => {
+	  setIsPlayerOpen(false);
+    return share(getShareableData());
+  };
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
     transitionDelay: isPlayerOpen ? "0s" : "0.3s",
@@ -54,8 +87,8 @@ export const FooterPlayer: React.FC = () => {
   }, [imageUrl]);
 
   const togglePlay = (e: any) => {
-	  e.stopPropagation();
-	  togglePlayerPlay();
+    e.stopPropagation();
+    togglePlayerPlay();
   };
 
   const shouldShowSeeker = !isStopped && !isLive;
@@ -93,17 +126,18 @@ export const FooterPlayer: React.FC = () => {
             />
           )}
         </div>
-        <div className={styles.footerActionsWrapper} onClick={() => setIsPlayerOpen(true)}>
-          <div
-            className={styles.toggleFullScreen}
-          >
+        <div
+          className={styles.footerActionsWrapper}
+          onClick={() => setIsPlayerOpen(true)}
+        >
+          <div className={styles.toggleFullScreen}>
             <FontAwesomeIcon icon={faAngleUp as any} color="white" />
           </div>
-          <button onClick={toggleLive}>
+          <button onClick={toggleLive} disabled={isStopped || isLive}>
             <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
             חזרה לשידור חי
           </button>
-          <button>
+          <button onClick={onShare} disabled={isStopped}>
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
@@ -115,13 +149,20 @@ export const FooterPlayer: React.FC = () => {
       </div>
       <FullScreenPlayer
         ref={audioRef}
-        onShare={
-          () => {} // TODO add share function
-        }
+        onShare={onShare}
         visible={isPlayerOpen}
         onClose={() => setIsPlayerOpen(false)}
       />
-	  <Agenda onShare={() => null}/>
+      <Agenda onShare={() => null} />
+      {!isStopped && (
+        <ShareModal
+          isOpen={isShareModalOpen}
+          title={getShareableData().text}
+          url={getShareableData().url}
+          shareableTitle={getShareableData().text}
+          onRequestClose={() => setIsShareModalOpen(false)}
+        />
+      )}
     </>
   );
 };

@@ -2,7 +2,7 @@ import { PlayerState } from "./PlayerProviderV2";
 import { useAudio } from "./useAudio";
 
 export const usePlayerState = () => {
-  const { playerState, audioUrl, setPlayerState, songTitle, artist, imageUrl } =
+  const { playerState, audioUrl, setPlayerState, songTitle, artist, imageUrl, metaData } =
     useAudio();
 
   return {
@@ -16,5 +16,6 @@ export const usePlayerState = () => {
     songTitle,
     artist,
     imageUrl,
+	metaData
   };
 };

@@ -22,7 +22,7 @@ export interface ShareType {
 		  className={style.shareModal}
 		  isOpen={props.isOpen}
 		  onRequestClose={props.onRequestClose}
-		  contentLabel="Example Modal"
+		  contentLabel={props.title}
 		>
 		  <div className={style.shareModalContent}>
 			<h3 className={style.shareModalTitle}>{props.title}</h3>

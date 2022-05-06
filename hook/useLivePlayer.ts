@@ -33,6 +33,7 @@ export const useLivePlayer = () => {
         title: songTitle || "",
         artist: "שידור חי",
         imageUrl: DEFAULT_PLAYER_IMAGE,
+		metaData: {}
       });
       setIsLive(true);
       return;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DEFAULT_PLAYER_IMAGE } from '../../config/images';
+import { TrackMetaData, TrackV2 } from '../../domain/Player';
 
 export enum PlayerState {
   STOPPED = "STOPPED",
@@ -19,6 +20,8 @@ export interface AudioContext {
   setAudioUrl(url: string): void;
   playerState: PlayerState;
   setPlayerState(state: PlayerState): void;
+  metaData: TrackMetaData;
+  setMetaData(metaData: any): void,
 }
 
 export const PlayerContext = React.createContext<AudioContext | null>(null);
@@ -29,10 +32,12 @@ export const AudioPlayerProvider: React.FC = (props) => {
   const [artist, setArtist] = useState<string>("רדיוסבתא");
   const [audioUrl, setAudioUrl] = useState<string>();
   const [playerState, setPlayerState] = useState(PlayerState.STOPPED);
+  const [metaData, setMetaData] = useState<TrackMetaData>({})
 
   return (
     <PlayerContext.Provider
       value={{
+		  metaData, setMetaData,
         imageUrl,
         setArtist,
         setAudioUrl,

@@ -3,7 +3,7 @@ import { PlayerState } from "./PlayerProviderV2";
 import { useAudio } from "./useAudio";
 
 export const usePlayerControls = () => {
-  const { setAudioUrl, setArtist, setImageUrl, setPlayerState, setSongTitle } =
+  const { setAudioUrl, setArtist, setImageUrl, setPlayerState, setSongTitle, setMetaData } =
     useAudio();
 
   const playTrack = (track: TrackV2) => {
@@ -12,6 +12,7 @@ export const usePlayerControls = () => {
     setArtist(track.artist);
     setImageUrl(track.imageUrl);
     setSongTitle(track.title);
+	setMetaData(track.metaData);
   };
 
   const pause = () => {
