@@ -22,6 +22,7 @@ import {
   logFilterByRecordedShow,
   logSearchRecordedShow,
   logResetFilterByProgram,
+  logOpenSharedShow,
 } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
 import { programParser } from "../../parsers/Programs.parser";
@@ -37,6 +38,14 @@ const ProgramsPage: React.FC = (props) => {
       : undefined,
   });
   const { programs } = usePrograms();
+
+  useEffect(() => {
+	const showId = router.query.showId as string;
+	if (showId) {
+		logOpenSharedShow(showId);
+	}
+  }, [router.query.showId]);
+  
 
   const options = [
     { label: "כל התכניות", value: undefined },
