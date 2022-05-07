@@ -18,7 +18,7 @@ import {
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-	logAgendaOpen,
+  logAgendaOpen,
   logFooterPlayerPlay,
   logShareLiveStream,
   logShareRecordedShow,
@@ -87,20 +87,20 @@ export const FooterPlayer: React.FC = () => {
   const onShare = () => {
     setIsPlayerOpen(false);
 
-	if (isLive) {
-		logShareLiveStream({
-			streamerName: artist,
-			type: 'UNKNOWN'
-		})
-	} else {
-		logShareRecordedShow({
-			programName: artist ?? "UKNOWN",
-			showName: songTitle ?? "UNKNOWN",
-			source: "FOOTER_PLAYER",
-			type: "UNKNOWN",
-			showId: metaData.recordedShowId as number,
-		})
-	}
+    if (isLive) {
+      logShareLiveStream({
+        streamerName: artist,
+        type: "UNKNOWN",
+      });
+    } else {
+      logShareRecordedShow({
+        programName: artist ?? "UNKNOWN",
+        showName: songTitle ?? "UNKNOWN",
+        source: "FOOTER_PLAYER",
+        type: "UNKNOWN",
+        showId: metaData.recordedShowId as number,
+      });
+    }
     return share(getShareableData());
   };
 
@@ -172,9 +172,12 @@ export const FooterPlayer: React.FC = () => {
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
-          <button onClick={() => {
-			 	logAgendaOpen() 
-			  setIsAgendaOpen(!isAgendaOpen)}}>
+          <button
+            onClick={() => {
+              logAgendaOpen();
+              setIsAgendaOpen((prevState) => !prevState);
+            }}
+          >
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
             מה הלו&quot;ז?
           </button>
