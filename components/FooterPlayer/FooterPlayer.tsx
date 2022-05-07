@@ -18,6 +18,7 @@ import {
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {
+	logAgendaOpen,
   logFooterPlayerPlay,
   logShareLiveStream,
   logShareRecordedShow,
@@ -171,7 +172,9 @@ export const FooterPlayer: React.FC = () => {
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
-          <button onClick={() => setIsAgendaOpen(!isAgendaOpen)}>
+          <button onClick={() => {
+			 	logAgendaOpen() 
+			  setIsAgendaOpen(!isAgendaOpen)}}>
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
             מה הלו&quot;ז?
           </button>
@@ -185,7 +188,7 @@ export const FooterPlayer: React.FC = () => {
         onSkipTenSeconds={onSkipTenSeconds}
         onBackTenSeconds={onBackTenSeconds}
       />
-      <Agenda onShare={() => null} open={isAgendaOpen} />
+      <Agenda open={isAgendaOpen} />
       {!isStopped && (
         <ShareModal
           isOpen={isShareModalOpen}
