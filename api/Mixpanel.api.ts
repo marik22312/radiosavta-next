@@ -84,7 +84,13 @@ export const logShareRecordedShow = (args: {
 	source: "HOMEPAGE" | "PROGRAM_PAGE" | "ARCHIVE" | 'FOOTER_PLAYER';
 	programId?: number;
 	showId: number;
-	type: "NATIVE" | "CUSTOM"
+	type: "NATIVE" | "CUSTOM" | "UNKNOWN"
 }) => {
 	log('recordedShows.share', args)
+}
+export const logShareLiveStream = (args: {
+	streamerName?: string;
+	type: "NATIVE" | "CUSTOM" | "UNKNOWN",
+}) => {
+	log('player.shareLiveStream', args)
 }

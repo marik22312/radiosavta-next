@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   logFooterPlayerPlay,
+  logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
 import { Agenda } from "../Agenda/Agenda";
@@ -84,8 +85,24 @@ export const FooterPlayer: React.FC = () => {
 
   const onShare = () => {
     setIsPlayerOpen(false);
+
+	if (isLive) {
+		logShareLiveStream({
+			streamerName: artist,
+			type: 'UNKNOWN'
+		})
+	} else {
+		logShareRecordedShow({
+			programName: artist ?? "UKNOWN",
+			showName: songTitle ?? "UNKNOWN",
+			source: "FOOTER_PLAYER",
+			type: "UNKNOWN",
+			showId: metaData.recordedShowId as number,
+		})
+	}
     return share(getShareableData());
   };
+
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
     transitionDelay: isPlayerOpen ? "0s" : "0.3s",
