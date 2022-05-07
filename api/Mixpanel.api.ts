@@ -94,3 +94,7 @@ export const logShareLiveStream = (args: {
 }) => {
 	log('player.shareLiveStream', args)
 }
+
+export const logOpenSharedShow = (showId: string) => {
+	log('archive.openSharedShow', {showId})
+}
