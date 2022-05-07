@@ -1,18 +1,9 @@
-import {
-  faCalendarPlus,
-  faCalendarMinus,
-  faBroadcastTower,
-  faShareAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { logAgendaOpen } from "../../api/Mixpanel.api";
 import { Schedule } from "../../domain/Schedule";
 import { useAgenda } from "../../hook/useAgenda";
-import { useLivePlayer } from "../../hook/useLivePlayer";
 import styles from "./Agenda.module.scss";
 
-export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
+export const Agenda: React.FC<{ open?: boolean }> = (
   props
 ) => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
@@ -26,7 +17,6 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
     : styles.closed;
 
   const { data } = useAgenda();
-  const { isLive, toggleLive } = useLivePlayer();
 
   useEffect(() => {
     if (data?.schedule) {
@@ -36,13 +26,6 @@ export const Agenda: React.FC<{ onShare: () => void; open?: boolean }> = (
       setSchedule(sorted);
     }
   }, [data]);
-
-  const toggle = () => {
-    if (!isOpen) {
-      logAgendaOpen();
-    }
-    setIsOpen(!isOpen);
-  };
 
   // @ts-expect-error
   const timeOptions: DateTimeFormatOptions = {

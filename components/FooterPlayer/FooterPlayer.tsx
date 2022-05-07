@@ -18,7 +18,9 @@ import {
   faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {
+  logAgendaOpen,
   logFooterPlayerPlay,
+  logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
 import { Agenda } from "../Agenda/Agenda";
@@ -84,8 +86,24 @@ export const FooterPlayer: React.FC = () => {
 
   const onShare = () => {
     setIsPlayerOpen(false);
+
+    if (isLive) {
+      logShareLiveStream({
+        streamerName: artist,
+        type: "UNKNOWN",
+      });
+    } else {
+      logShareRecordedShow({
+        programName: artist ?? "UNKNOWN",
+        showName: songTitle ?? "UNKNOWN",
+        source: "FOOTER_PLAYER",
+        type: "UNKNOWN",
+        showId: metaData.recordedShowId as number,
+      });
+    }
     return share(getShareableData());
   };
+
   const wrapperStyle: CSSProperties = {
     transform: isPlayerOpen ? "translateY(80px)" : "",
     transitionDelay: isPlayerOpen ? "0s" : "0.3s",
@@ -154,7 +172,12 @@ export const FooterPlayer: React.FC = () => {
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
-          <button onClick={() => setIsAgendaOpen(!isAgendaOpen)}>
+          <button
+            onClick={() => {
+              logAgendaOpen();
+              setIsAgendaOpen((prevState) => !prevState);
+            }}
+          >
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
             מה הלו&quot;ז?
           </button>
@@ -168,7 +191,7 @@ export const FooterPlayer: React.FC = () => {
         onSkipTenSeconds={onSkipTenSeconds}
         onBackTenSeconds={onBackTenSeconds}
       />
-      <Agenda onShare={() => null} open={isAgendaOpen} />
+      <Agenda open={isAgendaOpen} />
       {!isStopped && (
         <ShareModal
           isOpen={isShareModalOpen}

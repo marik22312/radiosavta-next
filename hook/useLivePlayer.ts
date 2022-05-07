@@ -31,7 +31,7 @@ export const useLivePlayer = () => {
       playTrack({
         audioUrl: LIVE_STREAM_URL,
         title: songTitle || "",
-        artist: "שידור חי",
+        artist: streamer === "NA" ?  "שידור חי" : streamer,
         imageUrl: DEFAULT_PLAYER_IMAGE,
 		metaData: {}
       });

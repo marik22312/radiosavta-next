@@ -39,7 +39,7 @@ export const FullScreenPlayer = React.forwardRef<
   };
 
   const { isLive, toggleLive } = useLivePlayer();
-  const { isPlaying, isStopped, songTitle, artist, imageUrl } =
+  const { isPlaying, isStopped, songTitle, artist, imageUrl, isLoading } =
     usePlayerState();
   // @ts-expect-error
   const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
@@ -108,7 +108,7 @@ export const FullScreenPlayer = React.forwardRef<
                   />
                 </button>
               )}
-              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay} />
+              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay} isLoading={isLoading} displayLoader/>
               {!isLive && (
                 <button className={styles.fullScreenPlayer__button} onClick={props.onBackTenSeconds}>
                   <FontAwesomeIcon
@@ -123,7 +123,7 @@ export const FullScreenPlayer = React.forwardRef<
                 </button>
               )}
             </div>
-            <Agenda open onShare={props.onShare} />
+            <Agenda open/>
           </div>
         </div>
       </div>
