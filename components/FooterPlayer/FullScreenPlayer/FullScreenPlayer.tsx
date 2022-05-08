@@ -62,6 +62,7 @@ export const FullScreenPlayer = React.forwardRef<
               <button
                 className={styles.fullScreenPlayer__share}
                 onClick={() => props.onShare()}
+				disabled={isStopped}
               >
                 <FontAwesomeIcon icon={faShareAlt as any} />
                 <span> שיתוף</span>

@@ -87,20 +87,21 @@ export const FooterPlayer: React.FC = () => {
   const onShare = () => {
     setIsPlayerOpen(false);
 
-    if (isLive) {
-      logShareLiveStream({
-        streamerName: artist,
-        type: "UNKNOWN",
-      });
-    } else {
-      logShareRecordedShow({
-        programName: artist ?? "UNKNOWN",
-        showName: songTitle ?? "UNKNOWN",
-        source: "FOOTER_PLAYER",
-        type: "UNKNOWN",
-        showId: metaData.recordedShowId as number,
-      });
-    }
+	if(isStopped || !isLive) {
+		logShareRecordedShow({
+		  programName: artist ?? "UNKNOWN",
+		  showName: songTitle ?? "UNKNOWN",
+		  source: "FOOTER_PLAYER",
+		  type: "UNKNOWN",
+		  showId: metaData.recordedShowId as number,
+		});
+	} else {
+		logShareLiveStream({
+		  streamerName: artist,
+		  type: "UNKNOWN",
+	})
+}
+
     return share(getShareableData());
   };
 
