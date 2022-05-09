@@ -74,10 +74,16 @@ export const FooterPlayer: React.FC = () => {
   };
 
   const getShareableData = () => {
+	// Fallback so it wont fail when SSR
+    if (!global?.window || !window) {
+      return { text: "רדיוסבתא - שידור חי", url: "" };
+    }
+
     const url = new URL(window.location.href);
-    if (isLive) {
+    if (isLive || isStopped) {
       return { text: "רדיוסבתא - שידור חי", url: url.origin };
     }
+
     return {
       text: `רדיוסבתא - ${songTitle}`,
       url: `${url.origin}/archive?showId=${metaData.recordedShowId}`,
@@ -87,20 +93,20 @@ export const FooterPlayer: React.FC = () => {
   const onShare = () => {
     setIsPlayerOpen(false);
 
-	if(isStopped || !isLive) {
-		logShareRecordedShow({
-		  programName: artist ?? "UNKNOWN",
-		  showName: songTitle ?? "UNKNOWN",
-		  source: "FOOTER_PLAYER",
-		  type: "UNKNOWN",
-		  showId: metaData.recordedShowId as number,
-		});
-	} else {
-		logShareLiveStream({
-		  streamerName: artist,
-		  type: "UNKNOWN",
-	})
-}
+    if (isStopped || isLive) {
+      logShareRecordedShow({
+        programName: artist ?? "UNKNOWN",
+        showName: songTitle ?? "UNKNOWN",
+        source: "FOOTER_PLAYER",
+        type: "UNKNOWN",
+        showId: metaData.recordedShowId as number,
+      });
+    } else {
+      logShareLiveStream({
+        streamerName: artist,
+        type: "UNKNOWN",
+      });
+    }
 
     return share(getShareableData());
   };
@@ -169,7 +175,7 @@ export const FooterPlayer: React.FC = () => {
             <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
             חזרה לשידור חי
           </button>
-          <button onClick={onShare} disabled={isStopped}>
+          <button onClick={onShare}>
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
             שתף
           </button>
@@ -193,15 +199,13 @@ export const FooterPlayer: React.FC = () => {
         onBackTenSeconds={onBackTenSeconds}
       />
       <Agenda open={isAgendaOpen} />
-      {!isStopped && (
-        <ShareModal
-          isOpen={isShareModalOpen}
-          title={getShareableData().text}
-          url={getShareableData().url}
-          shareableTitle={getShareableData().text}
-          onRequestClose={() => setIsShareModalOpen(false)}
-        />
-      )}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        title={getShareableData().text}
+        url={getShareableData().url}
+        shareableTitle={getShareableData().text}
+        onRequestClose={() => setIsShareModalOpen(false)}
+      />
     </>
   );
 };
