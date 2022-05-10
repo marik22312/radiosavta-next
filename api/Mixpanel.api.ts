@@ -81,10 +81,20 @@ export const logWebVitals = ({eventName, value}:{eventName: string; value: numbe
 export const logShareRecordedShow = (args: {
 	programName: string;
 	showName: string;
-	source: "HOMEPAGE" | "PROGRAM_PAGE" | "ARCHIVE";
-	programId: number;
+	source: "HOMEPAGE" | "PROGRAM_PAGE" | "ARCHIVE" | 'FOOTER_PLAYER';
+	programId?: number;
 	showId: number;
-	type: "NATIVE" | "CUSTOM"
+	type: "NATIVE" | "CUSTOM" | "UNKNOWN"
 }) => {
 	log('recordedShows.share', args)
+}
+export const logShareLiveStream = (args: {
+	streamerName?: string;
+	type: "NATIVE" | "CUSTOM" | "UNKNOWN",
+}) => {
+	log('player.shareLiveStream', args)
+}
+
+export const logOpenSharedShow = (showId: string) => {
+	log('archive.openSharedShow', {showId})
 }

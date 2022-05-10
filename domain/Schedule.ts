@@ -6,7 +6,7 @@ export interface Schedule {
         name: string;
         start_timestamp: Date;
         start: Date;
-        type: string;
+        type: 'streamer' | 'playlist';
 }
 
 export interface ScheduleResponse {

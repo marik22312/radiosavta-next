@@ -2965,6 +2965,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-dom@^17.0.11":
+  version "17.0.16"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.16.tgz#7caba93cf2806c51e64d620d8dff4bae57e06cc4"
+  integrity sha512-DWcXf8EbMrO/gWnQU7Z88Ws/p16qxGpPyjTKTpmBSFKeE+HveVubqGO1CVK7FrwlWD5MuOcvh8gtd0/XO38NdQ==
+  dependencies:
+    "@types/react" "^17"
+
 "@types/react-modal@^3.13.1":
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/@types/react-modal/-/react-modal-3.13.1.tgz#5b9845c205fccc85d9a77966b6e16dc70a60825a"
@@ -3005,10 +3012,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@17.0.11":
-  version "17.0.11"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.11.tgz#67fcd0ddbf5a0b083a0f94e926c7d63f3b836451"
-  integrity sha512-yFRQbD+whVonItSk7ZzP/L+gPTJVBkL/7shLEF+i9GC/1cV3JmUxEQz6+9ylhUpWSDuqo1N9qEvqS6vTj4USUA==
+"@types/react@^17", "@types/react@^17.0.11":
+  version "17.0.45"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.45.tgz#9b3d5b661fd26365fefef0e766a1c6c30ccf7b3f"
+  integrity sha512-YfhQ22Lah2e3CHPsb93tRwIGNiSwkuz1/blk4e6QrWS0jQzCSNbGLtOEYhPg02W0yGTTmpajp7dCTbBAMN3qsg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -8568,9 +8575,9 @@ lines-and-columns@^1.1.6:
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
 lint-staged@^12.3.4:
-  version "12.4.0"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.4.0.tgz#1fb8c73ac7a1c670b87bd2c1bf1e302c866e77af"
-  integrity sha512-3X7MR0h9b7qf4iXf/1n7RlVAx+EzpAZXoCEMhVSpaBlgKDfH2ewf+QUm7BddFyq29v4dgPP+8+uYpWuSWx035A==
+  version "12.4.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.4.1.tgz#63fa27bfc8a33515f6902f63f6670864f1fb233c"
+  integrity sha512-PTXgzpflrQ+pODQTG116QNB+Q6uUTDg5B5HqGvNhoQSGt8Qy+MA/6zSnR8n38+sxP5TapzeQGTvoKni0KRS8Vg==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"

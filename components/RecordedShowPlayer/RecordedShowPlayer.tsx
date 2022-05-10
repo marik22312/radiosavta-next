@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import style from "./RecordedShowsPlayer.module.scss";
 
-import { usePlayerControls } from "../../hook/usePlayerControls";
+import { usePlayerControls as usePlayerControlsV2 } from "../../providers/PlayerProvider/usePlayerControls";
 
-import { usePLayerState } from "../../hook/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import {
   logPlayRecordedShow,
@@ -20,6 +19,9 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
+import { useShare } from "../../hook/useShare";
+import { ShareModal } from '../ShareModal/ShareModal';
 export interface RecordedShowPlayerProps {
   url: string;
   name: string;
@@ -33,12 +35,25 @@ export interface RecordedShowPlayerProps {
 export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   props
 ) => {
-  const { play, pause, resume } = usePlayerControls();
-  const { isPlaying, title } = usePLayerState();
+  const { playTrack, pause, resume } = usePlayerControlsV2();
+  const { isPlaying, songTitle } = usePlayerState();
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
+  const onShareSuccess = () => {
+    logClickShare("NATIVE");
+  };
+  const onShareFailed = () => {
+    logClickShare("CUSTOM");
+    setIsShareModalOpen(true);
+  };
+
+  const { share } = useShare({
+    onError: onShareFailed,
+    onSuccess: onShareSuccess,
+  });
+
   const togglePlay = () => {
-    if (title === props.name) {
+    if (songTitle === props.name) {
       if (isPlaying) {
         return pause();
       }
@@ -50,10 +65,15 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       source: props.source,
       programId: props.programId,
     });
-    return play({
+    return playTrack({
+      audioUrl: props.url,
       title: props.name,
-      url: props.url,
-      programTitle: props.programName,
+      artist: props.programName,
+      imageUrl: props.backgroundImageUrl || "",
+	  metaData: {
+		  programId: props.programId,
+		  recordedShowId: props.showId,
+	  }
     });
   };
 
@@ -69,27 +89,12 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
   };
 
   const onShare = async () => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
     const url = new URL(window.location.href);
     const shareData = {
       url: `${url.origin}/archive?showId=${props.showId}`,
       text: `${props.programName} - ${props.name}`,
     };
-    if (navigator?.canShare?.(shareData) && navigator.share) {
-      try {
-        const shareRes = await navigator.share(shareData);
-        logClickShare("NATIVE");
-        return shareRes;
-      } catch (error: any) {
-        console.error("Navigation failed", error.message);
-      }
-    }
-
-    logClickShare("CUSTOM");
-    return setIsShareModalOpen(true);
+    share(shareData);
   };
 
   return (
@@ -118,7 +123,7 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
       <div className={style.controlsWrapper}>
         <PlayPauseButton
           onClick={() => togglePlay()}
-          isPlaying={isPlaying && title === props.name}
+          isPlaying={isPlaying && songTitle === props.name}
         />
       </div>
       <button className={style.shareButtonWrapper} onClick={onShare}>
@@ -134,16 +139,16 @@ export const RecordedShowPlayer: React.FC<RecordedShowPlayerProps> = (
         title={`שתפו את ${props.name}`}
         shareableTitle={`${props.programName} - ${props.name} האזינו ברדיוסבתא!`}
         url={
-          typeof window !== "undefined" &&
-          `${new URL(window.location.href).origin}/archive?showId=${
-            props.showId
-          }` || ''
+          (typeof window !== "undefined" &&
+            `${new URL(window.location.href).origin}/archive?showId=${
+              props.showId
+            }`) ||
+          ""
         }
       />
     </div>
   );
 };
-
 
 interface ShareType {
   FACEBOOK: "FACEBOOK";
@@ -157,33 +162,3 @@ interface ShareModalProps {
   onRequestClose?: () => void;
   onBeforeSave?: (type: ShareType) => void;
 }
-const ShareModal: React.FC<ShareModalProps> = (props) => {
-  return (
-    <div>
-      <Modal
-        className={style.shareModal}
-        isOpen={props.isOpen}
-        onRequestClose={props.onRequestClose}
-        contentLabel="Example Modal"
-      >
-        <div className={style.shareModalContent}>
-          <h3 className={style.shareModalTitle}>{props.title}</h3>
-          <div className={style.shareModalSocialWrapper}>
-            <FacebookShareButton url={props.url} quote={props.shareableTitle}>
-              <FacebookIcon size={40} />
-            </FacebookShareButton>
-            <WhatsappShareButton url={props.url} title={props.shareableTitle}>
-              <WhatsappIcon size={40} />
-            </WhatsappShareButton>
-          </div>
-          <input
-            readOnly
-            type="url"
-            value={props.url}
-            style={{ width: "100%", height: "40px", fontSize: "1rem" }}
-          />
-        </div>
-      </Modal>
-    </div>
-  );
-};
