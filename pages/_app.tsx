@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "keen-slider/keen-slider.min.css";
