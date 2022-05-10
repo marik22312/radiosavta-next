@@ -14,11 +14,28 @@ import * as FLATTED from "flatted";
 import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
 import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV2";
+import {useRouter} from 'next/router'
+const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
+
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = React.useRef(new QueryClient());
+  const router = useRouter()
+
+  useEffect(() => {
+    import('react-facebook-pixel')
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+        ReactPixel.init(FB_PIXEL_ID!)
+        ReactPixel.pageView()
+
+        router.events.on('routeChangeComplete', () => {
+          ReactPixel.pageView()
+        })
+      })
+  }, [router.events])
 
   return (
     <QueryClientProvider client={queryClient.current}>
