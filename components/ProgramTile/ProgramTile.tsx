@@ -33,7 +33,7 @@ export const ProgramTile: React.FC<{ program: Program }> = ({ program }) => {
         </div>
         <div className={styles.seeProgram}>
 			<Link href={`/archive?programId=${program.id}`}>
-				<a onClick={() => logOpenProgram({programId:program.id})}>עבור לתוכנית</a>
+				<a onClick={() => logOpenProgram({programId:program.id})}>האזנה להקלטות</a>
 			</Link>
 		</div>
       </div>
