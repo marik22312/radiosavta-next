@@ -27,10 +27,11 @@ import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
+import { useConectedPlayerBindings } from './AudioPlayer/useConnectedPlayerBindings';
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { seekerRef, currentTime, onSeek } = usePlayerBindings(audioRef);
+  const { seekerRef, currentTime, onSeek } = useConectedPlayerBindings(audioRef);
   const {
     songTitle,
     artist,
@@ -41,7 +42,6 @@ export const FooterPlayer: React.FC = () => {
     isPaused,
     metaData,
   } = usePlayerState();
-  const { pause, resume } = usePlayerControls();
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");

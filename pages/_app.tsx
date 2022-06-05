@@ -15,12 +15,15 @@ import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
 import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV2";
 import {useRouter} from 'next/router'
+import { AppPropsWithLayout } from '../domain/AppProps';
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
 
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const queryClient = React.useRef(new QueryClient());
   const router = useRouter()
 
@@ -36,6 +39,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         })
       })
   }, [router.events])
+
+  const getLayout = Component.getLayout;
+  if (getLayout) {
+	return getLayout(<Component {...pageProps} />)
+  }
 
   return (
     <QueryClientProvider client={queryClient.current}>

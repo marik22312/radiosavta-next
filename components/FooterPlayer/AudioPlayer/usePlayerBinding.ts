@@ -1,29 +1,33 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { PlayerState } from "../../../providers/PlayerProvider/PlayerProviderV2";
-import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
 
-export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
+interface AudioControlCallbacks {
+	onCanPlay?: () => void;
+	onEnded?: () => void;
+	onLoadStart?: () => void;
+	onError?: () => void;
+}
+export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>, playerState: PlayerState, audioUrl: string | undefined, callbacks?: AudioControlCallbacks) => {
   const animationRef = useRef<any>();
   const seekerRef = useRef<any>();
   const [currentTime, setCurrentTime] = useState(0);
 
-  const { playerState, audioUrl, setPlayerState, isPlaying, isPaused } =
-    usePlayerState();
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.addEventListener("canplay", () => {
-        setPlayerState(PlayerState.PLAYING);
+        callbacks?.onCanPlay?.();
       });
 
       audioRef.current.addEventListener("ended", () => {
-        setPlayerState(PlayerState.STOPPED);
+		callbacks?.onEnded?.();
       });
 
 	  audioRef.current.addEventListener("loadstart", () => {
-		setPlayerState(PlayerState.LOADING);
+		callbacks?.onLoadStart?.();
+	  
 	  })
 	  audioRef.current.addEventListener("error", () => {
-		setPlayerState(PlayerState.STOPPED);
+		callbacks?.onError?.();
 	  })
     }
     return () => {
@@ -32,7 +36,7 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
       audioRef.current?.removeEventListener("loadstart", () => null);
       audioRef.current?.removeEventListener("error", () => null);
     };
-  }, [audioRef, setPlayerState]);
+  }, [audioRef, callbacks]);
 
   useEffect(() => {
     const whilePlaying = () => {
@@ -44,6 +48,7 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     };
 
     const onPlay = () => {
+		console.log('onPlay')
       audioRef.current?.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     };
