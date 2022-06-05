@@ -1,7 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { PlayerState } from "../../../providers/PlayerProvider/PlayerProviderV2";
-import { usePlayerState } from '../../../providers/PlayerProvider/usePlayerState';
-
+import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
 
 export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
   const animationRef = useRef<any>();
@@ -17,16 +16,15 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
       });
 
       audioRef.current.addEventListener("ended", () => {
-		setPlayerState(PlayerState.STOPPED);
+        setPlayerState(PlayerState.STOPPED);
       });
 
-	  audioRef.current.addEventListener("loadstart", () => {
-		setPlayerState(PlayerState.LOADING);
-	  
-	  })
-	  audioRef.current.addEventListener("error", () => {
-		setPlayerState(PlayerState.STOPPED);
-	  })
+      audioRef.current.addEventListener("loadstart", () => {
+        setPlayerState(PlayerState.LOADING);
+      });
+      audioRef.current.addEventListener("error", () => {
+        setPlayerState(PlayerState.STOPPED);
+      });
     }
     return () => {
       audioRef.current?.removeEventListener("canplay", () => null);
@@ -46,7 +44,6 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     };
 
     const onPlay = () => {
-		console.log('onPlay')
       audioRef.current?.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     };
@@ -75,9 +72,9 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
   }, [playerState, audioUrl, audioRef]);
 
   const onSeek = (value: number) => {
-	  if (audioRef.current) {
-		  audioRef.current.currentTime = value;
-	  }
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
+    }
   };
 
   return { currentTime, seekerRef, onSeek };
