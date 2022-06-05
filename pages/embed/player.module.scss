@@ -33,18 +33,21 @@
   justify-content: space-between;
 }
 
+.playPauseButtonWrapper {
+	width: 100px;
+	margin-right: -25px;
+
+	img {
+		width: 100%;
+	}
+}
+
 .currentSongInfo {
   h2 {
     width: 250px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-}
-
-.playPauseButtonWrapper {
-  img {
-    width: 41px;
   }
 }
 

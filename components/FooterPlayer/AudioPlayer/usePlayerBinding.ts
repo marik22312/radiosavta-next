@@ -1,33 +1,31 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { PlayerState } from "../../../providers/PlayerProvider/PlayerProviderV2";
+import { usePlayerState } from '../../../providers/PlayerProvider/usePlayerState';
 
-interface AudioControlCallbacks {
-	onCanPlay?: () => void;
-	onEnded?: () => void;
-	onLoadStart?: () => void;
-	onError?: () => void;
-}
-export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>, playerState: PlayerState, audioUrl: string | undefined, callbacks?: AudioControlCallbacks) => {
+
+export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
   const animationRef = useRef<any>();
   const seekerRef = useRef<any>();
   const [currentTime, setCurrentTime] = useState(0);
 
+  const { playerState, audioUrl, setPlayerState, isPlaying, isPaused } =
+    usePlayerState();
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.addEventListener("canplay", () => {
-        callbacks?.onCanPlay?.();
+        setPlayerState(PlayerState.PLAYING);
       });
 
       audioRef.current.addEventListener("ended", () => {
-		callbacks?.onEnded?.();
+		setPlayerState(PlayerState.STOPPED);
       });
 
 	  audioRef.current.addEventListener("loadstart", () => {
-		callbacks?.onLoadStart?.();
+		setPlayerState(PlayerState.LOADING);
 	  
 	  })
 	  audioRef.current.addEventListener("error", () => {
-		callbacks?.onError?.();
+		setPlayerState(PlayerState.STOPPED);
 	  })
     }
     return () => {
@@ -36,7 +34,7 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>, playerS
       audioRef.current?.removeEventListener("loadstart", () => null);
       audioRef.current?.removeEventListener("error", () => null);
     };
-  }, [audioRef, callbacks]);
+  }, [audioRef, setPlayerState]);
 
   useEffect(() => {
     const whilePlaying = () => {

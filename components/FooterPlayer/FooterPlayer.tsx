@@ -27,11 +27,10 @@ import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
-import { useConectedPlayerBindings } from './AudioPlayer/useConnectedPlayerBindings';
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { seekerRef, currentTime, onSeek } = useConectedPlayerBindings(audioRef);
+  const { seekerRef, currentTime, onSeek } = usePlayerBindings(audioRef);
   const {
     songTitle,
     artist,

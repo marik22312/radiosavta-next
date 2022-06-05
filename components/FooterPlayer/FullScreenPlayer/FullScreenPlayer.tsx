@@ -16,7 +16,6 @@ import { useLivePlayer } from "../../../hook/useLivePlayer";
 import { usePlayerBindings } from "../AudioPlayer/usePlayerBinding";
 import { Seeker } from "../AudioPlayer/Seeker/Seeker";
 import { useTogglePLay } from '../hooks/useTogglePlay';
-import { useConectedPlayerBindings } from '../AudioPlayer/useConnectedPlayerBindings';
 
 interface FullScreenPlayerProps {
   visible: boolean;
@@ -43,7 +42,7 @@ export const FullScreenPlayer = React.forwardRef<
   const { isPlaying, isStopped, songTitle, artist, imageUrl, isLoading } =
     usePlayerState();
   // @ts-expect-error
-  const { currentTime, seekerRef, onSeek } = useConectedPlayerBindings(ref);
+  const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
   const {togglePlay} = useTogglePLay();
 
   const shouldDisplaySeeker = !isStopped && !isLive;
