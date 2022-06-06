@@ -19,12 +19,12 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
         setPlayerState(PlayerState.STOPPED);
       });
 
-	  audioRef.current.addEventListener("loadstart", () => {
-		setPlayerState(PlayerState.LOADING);
-	  })
-	  audioRef.current.addEventListener("error", () => {
-		setPlayerState(PlayerState.STOPPED);
-	  })
+      audioRef.current.addEventListener("loadstart", () => {
+        setPlayerState(PlayerState.LOADING);
+      });
+      audioRef.current.addEventListener("error", () => {
+        setPlayerState(PlayerState.STOPPED);
+      });
     }
     return () => {
       audioRef.current?.removeEventListener("canplay", () => null);
@@ -72,9 +72,9 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
   }, [playerState, audioUrl, audioRef]);
 
   const onSeek = (value: number) => {
-	  if (audioRef.current) {
-		  audioRef.current.currentTime = value;
-	  }
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
+    }
   };
 
   return { currentTime, seekerRef, onSeek };

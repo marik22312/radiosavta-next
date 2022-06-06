@@ -98,3 +98,10 @@ export const logShareLiveStream = (args: {
 export const logOpenSharedShow = (showId: string) => {
 	log('archive.openSharedShow', {showId})
 }
+
+export const logPlayFromEmbeddedPlayer = (args: {
+	streamer: string;
+	parentOrigin: string;
+}) => {
+	log('player.playFromEmbeddedPlayer', args)
+}

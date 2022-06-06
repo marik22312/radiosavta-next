@@ -41,7 +41,6 @@ export const FooterPlayer: React.FC = () => {
     isPaused,
     metaData,
   } = usePlayerState();
-  const { pause, resume } = usePlayerControls();
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");

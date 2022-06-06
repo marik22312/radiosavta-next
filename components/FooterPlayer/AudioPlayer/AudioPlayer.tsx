@@ -5,8 +5,7 @@ import { Seeker } from "./Seeker/Seeker";
 import { usePlayerBindings } from "./usePlayerBinding";
 
 export const AudioPlayer = React.forwardRef<HTMLAudioElement, {} >(function AudioPlayer(props, ref) {
-  const { audioUrl, isPlaying, isPaused } = usePlayerState();
-  const { isLive } = useLivePlayer();
+  const { audioUrl} = usePlayerState();
 
   return (
     <>
