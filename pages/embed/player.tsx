@@ -73,7 +73,7 @@ const EmbeddedPlayerPage: NextPageWithLayout = () => {
     }
     logPlayFromEmbeddedPlayer({
       streamer: artist,
-      parentOrigin: window.referrer,
+      parentOrigin: document.referrer,
     });
     setPlayerState(PlayerState.PLAYING);
     setAudioUrl(LIVE_STREAM_URL);
