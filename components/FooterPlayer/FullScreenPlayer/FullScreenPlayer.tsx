@@ -1,7 +1,7 @@
 import styles from "./FullScreenPlayer.module.scss";
 import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
 import { Agenda } from "../../Agenda/Agenda";
-import React, { CSSProperties, useEffect } from "react";
+import React, { CSSProperties } from "react";
 import {
   faAngleDown,
   faBackward,
@@ -16,7 +16,6 @@ import { useLivePlayer } from "../../../hook/useLivePlayer";
 import { usePlayerBindings } from "../AudioPlayer/usePlayerBinding";
 import { Seeker } from "../AudioPlayer/Seeker/Seeker";
 import { useTogglePLay } from "../hooks/useTogglePlay";
-import { MouseEventHandler } from "react";
 
 interface FullScreenPlayerProps {
   visible: boolean;
@@ -35,7 +34,6 @@ export const FullScreenPlayer = React.forwardRef(function FullScreenPlayer(
   }
 
   const wrapperStyle: CSSProperties = {
-    top: 0,
     transform: props.visible ? "translateY(0)" : "translateY(100%)",
     transitionDelay: props.visible ? "0.3s" : "0s",
   };
