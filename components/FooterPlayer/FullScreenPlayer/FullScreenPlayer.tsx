@@ -1,7 +1,7 @@
 import styles from "./FullScreenPlayer.module.scss";
 import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
 import { Agenda } from "../../Agenda/Agenda";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import {
   faAngleDown,
   faBackward,
@@ -15,7 +15,8 @@ import { usePlayerControls } from "../../../providers/PlayerProvider/usePlayerCo
 import { useLivePlayer } from "../../../hook/useLivePlayer";
 import { usePlayerBindings } from "../AudioPlayer/usePlayerBinding";
 import { Seeker } from "../AudioPlayer/Seeker/Seeker";
-import { useTogglePLay } from '../hooks/useTogglePlay';
+import { useTogglePLay } from "../hooks/useTogglePlay";
+import { MouseEventHandler } from "react";
 
 interface FullScreenPlayerProps {
   visible: boolean;
@@ -25,16 +26,17 @@ interface FullScreenPlayerProps {
   onBackTenSeconds: () => void;
 }
 
-export const FullScreenPlayer = React.forwardRef<
-  HTMLAudioElement,
-  FullScreenPlayerProps
->(function FullScreenPlayer(props, ref) {
+export const FullScreenPlayer = React.forwardRef(function FullScreenPlayer(
+  props: FullScreenPlayerProps,
+  ref: HTMLAudioElement
+) {
+  if (!ref) {
+    throw new Error("ref is not defined");
+  }
 
-	if (!ref) {
-		throw new Error('ref is not defined');
-	}
   const wrapperStyle: CSSProperties = {
-    top: props.visible ? "0" : "100%",
+    top: 0,
+    transform: props.visible ? "translateY(0)" : "translateY(100%)",
     transitionDelay: props.visible ? "0.3s" : "0s",
   };
 
@@ -43,7 +45,7 @@ export const FullScreenPlayer = React.forwardRef<
     usePlayerState();
   // @ts-expect-error
   const { currentTime, seekerRef, onSeek } = usePlayerBindings(ref);
-  const {togglePlay} = useTogglePLay();
+  const { togglePlay } = useTogglePLay();
 
   const shouldDisplaySeeker = !isStopped && !isLive;
 
@@ -53,12 +55,12 @@ export const FullScreenPlayer = React.forwardRef<
         <div className={styles.fullScreenPlayer}>
           <div className={styles.fullScreenPlayer_content}>
             <div className={styles.fullScreenPlayer__actions}>
-          <div
-            onClick={() => props.onClose()}
-            className={styles.fullScreenPlayer__close}
-          >
-            <FontAwesomeIcon icon={faAngleDown as any} color="white" />
-          </div>
+              <div
+                onClick={() => props.onClose()}
+                className={styles.fullScreenPlayer__close}
+              >
+                <FontAwesomeIcon icon={faAngleDown as any} color="white" />
+              </div>
               <button
                 className={styles.fullScreenPlayer__share}
                 onClick={() => props.onShare()}
@@ -87,16 +89,21 @@ export const FullScreenPlayer = React.forwardRef<
                 alt={songTitle}
               />
             </div>
-            {shouldDisplaySeeker&& <Seeker
-              ref={seekerRef}
-              currentTime={currentTime}
-			  // @ts-expect-error
-              durationTime={ref.current.duration}
-              onSeek={onSeek}
-            />}
+            {shouldDisplaySeeker && (
+              <Seeker
+                ref={seekerRef}
+                currentTime={currentTime}
+                // @ts-expect-error
+                durationTime={ref.current.duration}
+                onSeek={onSeek}
+              />
+            )}
             <div className={styles.fullScreenPlayer__buttons}>
               {!isLive && (
-                <button className={styles.fullScreenPlayer__button} onClick={props.onSkipTenSeconds}>
+                <button
+                  className={styles.fullScreenPlayer__button}
+                  onClick={props.onSkipTenSeconds}
+                >
                   <FontAwesomeIcon
                     // TODO change to actual icon
                     icon={faForward as any}
@@ -108,9 +115,17 @@ export const FullScreenPlayer = React.forwardRef<
                   />
                 </button>
               )}
-              <PlayPauseButton isPlaying={isPlaying} onClick={togglePlay} isLoading={isLoading} displayLoader/>
+              <PlayPauseButton
+                isPlaying={isPlaying}
+                onClick={togglePlay}
+                isLoading={isLoading}
+                displayLoader
+              />
               {!isLive && (
-                <button className={styles.fullScreenPlayer__button} onClick={props.onBackTenSeconds}>
+                <button
+                  className={styles.fullScreenPlayer__button}
+                  onClick={props.onBackTenSeconds}
+                >
                   <FontAwesomeIcon
                     // TODO change to actual icon
                     icon={faBackward as any}
@@ -123,7 +138,7 @@ export const FullScreenPlayer = React.forwardRef<
                 </button>
               )}
             </div>
-            <Agenda open/>
+            <Agenda open />
           </div>
         </div>
       </div>
