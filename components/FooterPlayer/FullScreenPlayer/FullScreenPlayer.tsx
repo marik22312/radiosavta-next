@@ -25,10 +25,10 @@ interface FullScreenPlayerProps {
   onBackTenSeconds: () => void;
 }
 
-export const FullScreenPlayer = React.forwardRef(function FullScreenPlayer(
-  props: FullScreenPlayerProps,
-  ref: HTMLAudioElement
-) {
+export const FullScreenPlayer = React.forwardRef<
+  HTMLAudioElement,
+  FullScreenPlayerProps
+>(function FullScreenPlayer(props, ref) {
   if (!ref) {
     throw new Error("ref is not defined");
   }
