@@ -47,9 +47,14 @@ export const FullScreenPlayer = React.forwardRef<
 
   const shouldDisplaySeeker = !isStopped && !isLive;
 
+  const isActiveClass = props.visible ? styles.fullScreenActive : "";
+
   return (
     <>
-      <div className={styles.fullScreenPlayerWrapper} style={wrapperStyle}>
+      <div
+        className={`${styles.fullScreenPlayerWrapper} ${isActiveClass}`}
+        style={wrapperStyle}
+      >
         <div className={styles.fullScreenPlayer}>
           <div className={styles.fullScreenPlayer_content}>
             <div className={styles.fullScreenPlayer__actions}>
