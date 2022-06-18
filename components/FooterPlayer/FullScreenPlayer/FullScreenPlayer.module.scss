@@ -26,6 +26,10 @@
     }
   }
 
+  @media screen and (orientation: landscape) {
+    transform: translateY(100%);
+  }
+
   .fullScreenPlayer {
     flex-basis: 100%;
     background: var(--dark-green);
@@ -120,5 +124,8 @@
     @supports (-webkit-appearance: none) {
       bottom: 0;
     }
+  }
+  @media screen and (orientation: landscape) {
+    transform: translateY(50%);
   }
 }
