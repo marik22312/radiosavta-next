@@ -28,7 +28,6 @@ export const Page: React.FC<PageProps> = ({
         async={true}
       ></Script>
       <Head>
-        <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
         <title>רדיוסבתא - {title}</title>
         <meta name="description" content="קולקטיב רדיו אינטרנט" />
         <link rel="icon" href="/favicon.ico" />
