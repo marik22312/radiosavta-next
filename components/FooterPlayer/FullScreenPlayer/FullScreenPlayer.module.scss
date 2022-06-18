@@ -1,15 +1,5 @@
 @import "../../../styles/mixinsNew.scss";
 
-.fullScreenActive {
-  transform: translateY(0);
-  transition-delay: 0.3s;
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      bottom: 0;
-    }
-  }
-}
-
 .fullScreenPlayerWrapper {
   font-size: 0.7rem;
   position: fixed;
@@ -21,8 +11,8 @@
   align-items: flex-end;
   transition: transform 0.3s ease-in-out;
   z-index: 5002;
-  transform: translateY(-100vh);
-  transition-delay: 0;
+  transform: translateY(100vh);
+  transition-delay: 0s;
 
   @include media-breakpoint(md) {
     display: none;
@@ -121,4 +111,14 @@
 .fullScreenPLayer__subtitle {
   font-size: 0.8rem;
   color: #fff;
+}
+
+.fullScreenActive {
+  transform: translateY(0);
+  transition-delay: 0.3s;
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      bottom: 0;
+    }
+  }
 }

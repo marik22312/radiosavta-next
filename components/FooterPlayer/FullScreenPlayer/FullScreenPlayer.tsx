@@ -33,11 +33,6 @@ export const FullScreenPlayer = React.forwardRef<
     throw new Error("ref is not defined");
   }
 
-  const wrapperStyle: CSSProperties = {
-    transform: props.visible ? "translateY(0)" : "translateY(100vh)",
-    transitionDelay: props.visible ? "0.3s" : "0s",
-  };
-
   const { isLive, toggleLive } = useLivePlayer();
   const { isPlaying, isStopped, songTitle, artist, imageUrl, isLoading } =
     usePlayerState();
@@ -47,14 +42,13 @@ export const FullScreenPlayer = React.forwardRef<
 
   const shouldDisplaySeeker = !isStopped && !isLive;
 
-  const isActiveClass = props.visible ? styles.fullScreenActive : "";
+  const isActiveClass = `${styles.fullScreenPlayerWrapper} ${
+    props.visible ? styles.fullScreenActive : ""
+  }`;
 
   return (
     <>
-      <div
-        className={`${styles.fullScreenPlayerWrapper} ${isActiveClass}`}
-        style={wrapperStyle}
-      >
+      <div className={isActiveClass}>
         <div className={styles.fullScreenPlayer}>
           <div className={styles.fullScreenPlayer_content}>
             <div className={styles.fullScreenPlayer__actions}>
