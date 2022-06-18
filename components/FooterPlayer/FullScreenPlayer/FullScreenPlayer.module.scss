@@ -14,7 +14,7 @@
   transform: translateY(100vh);
   transition-delay: 0s;
 
-  @include media-breakpoint(md) {
+  @include media-breakpoint(sm) {
     display: none;
   }
 
