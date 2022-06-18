@@ -34,7 +34,7 @@ export const FullScreenPlayer = React.forwardRef<
   }
 
   const wrapperStyle: CSSProperties = {
-    transform: props.visible ? "translateY(0)" : "translateY(100%)",
+    transform: props.visible ? "translateY(0)" : "translateY(100vh)",
     transitionDelay: props.visible ? "0.3s" : "0s",
   };
 
