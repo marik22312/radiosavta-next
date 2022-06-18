@@ -22,7 +22,11 @@ export const Page: React.FC<PageProps> = ({
   const navbarWidth = 215;
   return (
     <>
-	<Script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=a87d12a175b8f' async={true}></Script>
+      <Script
+        id="pixel-script-poptin"
+        src="https://cdn.popt.in/pixel.js?id=a87d12a175b8f"
+        async={true}
+      ></Script>
       <Head>
         <title>רדיוסבתא - {title}</title>
         <meta name="description" content="קולקטיב רדיו אינטרנט" />
@@ -33,27 +37,33 @@ export const Page: React.FC<PageProps> = ({
           property="og:description"
           content="Radiosavta - An Online Internet Radio"
         />
-        <meta property="og:image" content={previewImage || 'https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1637258645/radiosavta/assets/ogImage.jpg'} />
+        <meta
+          property="og:image"
+          content={
+            previewImage ||
+            "https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1637258645/radiosavta/assets/ogImage.jpg"
+          }
+        />
 
-		{/* eslint-disable-next-line @next/next/no-page-custom-font */}
-		<link
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
           href="https://fonts.googleapis.com/css2?family=Karantina"
           rel="stylesheet"
-		  />
-		  {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-		<link
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
           href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre"
           rel="stylesheet"
         />
 
-		{/* Global Site Tag (gtag.js) - Google Analytics */}
-		<script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -61,9 +71,8 @@ export const Page: React.FC<PageProps> = ({
               page_path: window.location.pathname,
             });
           `,
-            }}
-          />
-		
+          }}
+        />
       </Head>
       <Navbar
         onClose={() => setIsOpen(false)}
@@ -71,9 +80,7 @@ export const Page: React.FC<PageProps> = ({
         title={title}
         width={navbarWidth}
       />
-      <div
-        className={styles.pageContent}
-      >
+      <div className={styles.pageContent}>
         <div className={styles.pageWrapper}>
           {children}
           <Footer />

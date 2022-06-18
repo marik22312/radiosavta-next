@@ -73,7 +73,7 @@ export const FooterPlayer: React.FC = () => {
   };
 
   const getShareableData = () => {
-	// Fallback so it wont fail when SSR
+    // Fallback so it wont fail when SSR
     if (!global?.window || !window) {
       return { text: "רדיוסבתא - שידור חי", url: "" };
     }
@@ -110,11 +110,6 @@ export const FooterPlayer: React.FC = () => {
     return share(getShareableData());
   };
 
-  const wrapperStyle: CSSProperties = {
-    transform: isPlayerOpen ? "translateY(80px)" : "",
-    transitionDelay: isPlayerOpen ? "0s" : "0.3s",
-  };
-
   useEffect(() => {
     if (imageUrl) {
       setImage(imageUrl);
@@ -131,10 +126,14 @@ export const FooterPlayer: React.FC = () => {
   const shouldShowSeeker = !isStopped && !isLive;
   const durationTime = audioRef.current?.duration ?? 0;
 
+  const footerWrapperClass = `${styles.footer} ${
+    isPlayerOpen ? styles.footerClosed : ""
+  }`;
+
   return (
     <>
       <AudioPlayer ref={audioRef} />
-      <div className={styles.footer} style={wrapperStyle}>
+      <div className={footerWrapperClass}>
         <div className={styles.rightSide} onClick={() => setIsPlayerOpen(true)}>
           <PlayPauseButton
             isPlaying={isPlaying}

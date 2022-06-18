@@ -6,14 +6,28 @@
   background: rgba(74, 74, 74, 0.4);
   right: 0;
   left: 0;
+  bottom: 0;
   display: flex;
   align-items: flex-end;
-  transition: top 0.3s ease-in-out, z-index 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   z-index: 5002;
-  height: 100vh;
+  transform: translateY(100vh);
+  transition-delay: 0s;
 
-  @include media-breakpoint(md) {
+  @include media-breakpoint(sm) {
     display: none;
+  }
+
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      transform: none;
+      transition: bottom, 0.3s ease-in-out;
+      bottom: -100vh;
+    }
+  }
+
+  @media screen and (orientation: landscape) {
+    transform: translateY(100%);
   }
 
   .fullScreenPlayer {
@@ -101,4 +115,17 @@
 .fullScreenPLayer__subtitle {
   font-size: 0.8rem;
   color: #fff;
+}
+
+.fullScreenActive {
+  transform: translateY(0);
+  transition-delay: 0.3s;
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      bottom: 0;
+    }
+  }
+  @media screen and (orientation: landscape) {
+    transform: translateY(50%);
+  }
 }
