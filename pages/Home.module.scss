@@ -107,11 +107,11 @@
 
 /** About us section */
 .aboutUsSection {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
+	// display: grid;
+	// grid-template-columns: repeat(2, 1fr);
+	// grid-template-rows: 1fr;
+	// grid-column-gap: 0px;
+	// grid-row-gap: 0px;
 	
 	height: calc(100vh - var(--footerHeight) - 100px);
 	max-height: 1000px;
@@ -135,10 +135,10 @@
 	}
 }
 .aboutUsPane {
-	grid-area: 1 / 1 / 2 / 2;
-	flex-basis: 50%;
+	// grid-area: 1 / 1 / 2 / 2;
+	// flex-basis: 50%;
 	text-shadow: var(--shadow);
-	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/w_600/v1637768906/radiosavta/backgrounds/pub40_BW");
+	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/w_1280/v1637768906/radiosavta/backgrounds/pub40_BW");
 	background-size: cover;
     background-repeat: no-repeat;
 	padding: var(--SPACE2);
