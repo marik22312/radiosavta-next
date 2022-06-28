@@ -85,8 +85,8 @@ export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
           </p>
         </div>
       </div>
-      <div className={style.galleryPane}>
-	  <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
+      {/* <div className={style.galleryPane}> */}
+	  {/* <div ref={sliderRef} className={cn("keen-slider", style.sliderWrapper)}>
           {props.imagesToShow.map((url, index) => {
             return (
               <div key={url} className="keen-slider__slide">
@@ -125,7 +125,7 @@ export const AboutSection: React.FC<{imagesToShow: string[]}> = (props) => {
           })}
         </div>
       )}
-      </div>
+      </div> */}
     </section>
   );
 };
