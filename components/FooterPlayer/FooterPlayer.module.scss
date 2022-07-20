@@ -45,7 +45,7 @@
   align-items: center;
 
   @include media-breakpoint(sm) {
-    grid-area: 1 / 1 / 2 / 4;
+    grid-area: 1 / 1 / 2 / 5;
   }
 }
 
@@ -65,11 +65,11 @@
 }
 
 .playerImage {
-  max-width: 50px;
+  max-width: 100px;
 }
 
 .programName {
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   color: var(--banana);
   font-weight: 700;
 }
@@ -91,7 +91,7 @@
   @include media-breakpoint(sm) {
     margin-right: var(--SPACE3);
     max-width: calc(100vw - 800px);
-    font-size: 0.4rem;
+    font-size: 0.5rem;
     margin: 0;
   }
 }
@@ -123,7 +123,7 @@
 
   @include media-breakpoint(sm) {
     display: block;
-    grid-area: 1 / 4 / 2 / 11;
+    grid-area: 1/5/2/11;
   }
 }
 
@@ -176,4 +176,8 @@
       bottom: -80px;
     }
   }
+}
+
+.iconText {
+	margin-top: 2px;
 }
