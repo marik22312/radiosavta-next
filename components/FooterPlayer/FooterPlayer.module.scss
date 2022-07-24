@@ -62,10 +62,20 @@
   @include media-breakpoint(sm) {
     display: inline-block;
   }
+
+  @include media-breakpoint(md) {
+    max-width: 250px;
+    min-width: 250px;
+  }
 }
 
 .playerImage {
   max-width: 100px;
+  max-height: 50px;
+
+  @include media-breakpoint(md) {
+    max-height: 100%;
+  }
 }
 
 .programName {
@@ -179,5 +189,5 @@
 }
 
 .iconText {
-	margin-top: 2px;
+  margin-top: 2px;
 }
