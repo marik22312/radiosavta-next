@@ -190,4 +190,8 @@
 
 .iconText {
   margin-top: 2px;
+  
+  @include media-breakpoint(md) {
+	font-size: 0.5rem;
+  }
 }

@@ -18,9 +18,9 @@ export const PlayPauseButton: React.FC<{
     return (
       <img
         src={LoadingAnimated}
-        alt="test"
-        width={50}
-        height={50}
+        alt="Loading"
+        width={65}
+        height={65}
         className={styles.loadingCircle}
       />
     );
@@ -29,14 +29,14 @@ export const PlayPauseButton: React.FC<{
     return (
       <img
         src={Pause}
-        alt="test"
-        width={50}
-        height={50}
+        alt="Pause Button"
+        width={65}
+        height={65}
         onClick={(e) => props.onClick?.(e)}
       />
     );
   }
   return (
-    <img src={Play} alt="test" width={50} height={50} onClick={props.onClick} />
+    <img src={Play} alt="Play Button" width={65} height={65} onClick={props.onClick} />
   );
 };
