@@ -1,22 +1,33 @@
+@import "../../styles/mixinsNew.scss";
+
 .loadingCircle {
-	animation: loadingMedia .7s;
-	animation-iteration-count: infinite;
+  animation: loadingMedia 0.7s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes loadingMedia {
-	0% {
-		transform: rotate(0deg);
-	}
-	25% {
-		transform: rotate(90deg);
-	}
-	50% {
-		transform: rotate(180deg);
-	}
-	75% {
-		transform: rotate(270deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.playPauseImg {
+  width: 40px;
+  height: 40px;
+  @include media-breakpoint(md) {
+    width: 65px;
+    height: 65px;
+  }
 }

@@ -171,11 +171,15 @@ export const FooterPlayer: React.FC = () => {
           </div>
           <button onClick={toggleLive} disabled={isStopped || isLive}>
             <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
+			<span className={styles.iconText}>
             חזרה לשידור חי
+			</span>
           </button>
           <button onClick={onShare}>
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
+			<span className={styles.iconText}>
             שתף
+			</span>
           </button>
           <button
             onClick={() => {
@@ -184,7 +188,9 @@ export const FooterPlayer: React.FC = () => {
             }}
           >
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
+			<span className={styles.iconText}>
             מה הלו&quot;ז?
+			</span>
           </button>
         </div>
       </div>
