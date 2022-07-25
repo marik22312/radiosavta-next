@@ -7,15 +7,13 @@
   width: 100%;
   height: var(--footerHeight);
   background-color: var(--dark-green);
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   z-index: 999;
   box-shadow: var(--inverted-shadow);
   transition: transform 0.3s ease-in-out;
   padding-inline: 10px;
 
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: var(--SPACE1);
@@ -43,6 +41,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
 
   @include media-breakpoint(sm) {
     grid-area: 1 / 1 / 2 / 5;
@@ -58,6 +57,7 @@
   gap: 0 10px;
   height: 100%;
   max-width: calc(100% - 140px);
+  min-width: calc(100% - 140px);
 
   @include media-breakpoint(sm) {
     display: inline-block;
@@ -190,8 +190,8 @@
 
 .iconText {
   margin-top: 2px;
-  
+
   @include media-breakpoint(md) {
-	font-size: 0.5rem;
+    font-size: 0.5rem;
   }
 }

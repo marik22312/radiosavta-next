@@ -4,6 +4,7 @@ import Play from "./Button/Play.svg";
 import Pause from "./Button/Pause.svg";
 import LoadingAnimated from "./Button/LoadingAnimated.svg";
 import styles from "./PlayPauseButton.module.scss";
+import cn from "classnames";
 
 export const PlayPauseButton: React.FC<{
   isPlaying?: boolean;
@@ -11,17 +12,14 @@ export const PlayPauseButton: React.FC<{
   displayLoader?: boolean;
   onClick?: (e: any) => void;
 }> = (props) => {
+  const shouldDisplayLoader = props.isLoading && props.displayLoader;
 
-	const shouldDisplayLoader = props.isLoading && props.displayLoader;
-	
   if (props.isLoading && props.displayLoader) {
     return (
       <img
         src={LoadingAnimated}
         alt="Loading"
-        width={65}
-        height={65}
-        className={styles.loadingCircle}
+        className={cn(styles.loadingCircle, styles.playPauseImg)}
       />
     );
   }
@@ -30,13 +28,17 @@ export const PlayPauseButton: React.FC<{
       <img
         src={Pause}
         alt="Pause Button"
-        width={65}
-        height={65}
         onClick={(e) => props.onClick?.(e)}
+        className={styles.playPauseImg}
       />
     );
   }
   return (
-    <img src={Play} alt="Play Button" width={65} height={65} onClick={props.onClick} />
+    <img
+      src={Play}
+      alt="Play Button"
+      onClick={props.onClick}
+      className={styles.playPauseImg}
+    />
   );
 };
