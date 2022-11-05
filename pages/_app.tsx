@@ -51,7 +51,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <AudioPlayerProvider>
         <Hydrate
           state={
+			// @ts-expect-error
             pageProps.dehydratedState &&
+			// @ts-expect-error
             FLATTED.parse(pageProps.dehydratedState)
           }
         >
