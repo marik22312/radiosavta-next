@@ -26,12 +26,10 @@ export const logPlayRecordedShow = (args: {
 };
 
 export const logFooterPlayerPlay = () => {
-	console.log(new Error())
 	log('footerPlayer.play',{})
 }
 
 export const logFooterPlayerPause = () => {
-	console.log(new Error())
 	log('footerPlayer.pause',{})
 }
 

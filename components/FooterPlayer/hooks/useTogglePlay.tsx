@@ -10,7 +10,6 @@ export const useTogglePLay = () => {
 	const {isLive, toggleLive} = useLivePlayer();
 	
 	const togglePlay = () => {
-		debugger;
 		if (isStopped || isLive) {
 		  return toggleLive();
 		}
