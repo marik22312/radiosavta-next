@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { logPlayLive } from "../api/Mixpanel.api";
+import { logFooterPlayerPause, logPlayLive } from "../api/Mixpanel.api";
 import { LIVE_STREAM_URL } from "../config/stream";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
@@ -38,7 +38,7 @@ export const useLivePlayer = () => {
       setIsLive(true);
       return;
     }
-
+	logFooterPlayerPause()
     stop();
     setIsLive(false);
   };
