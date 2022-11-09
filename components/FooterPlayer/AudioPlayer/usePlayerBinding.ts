@@ -25,12 +25,16 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
       audioRef.current.addEventListener("error", () => {
         setPlayerState(PlayerState.STOPPED);
       });
+      audioRef.current.addEventListener("timeupdate", () => {
+        console.log('TimeUpdated')
+      });
     }
     return () => {
       audioRef.current?.removeEventListener("canplay", () => null);
       audioRef.current?.removeEventListener("ended", () => null);
       audioRef.current?.removeEventListener("loadstart", () => null);
       audioRef.current?.removeEventListener("error", () => null);
+      audioRef.current?.removeEventListener("timeupdate", () => null);
     };
   }, [audioRef, setPlayerState]);
 

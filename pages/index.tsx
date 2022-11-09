@@ -18,12 +18,44 @@ import { getAllActivePrograms } from "../api/Programs.api";
 import { prefetchLatestRecordedShows } from '../hook/useLatestRecordedShows';
 
 import { getFilteredImages } from "../utils/getRandomImages.utils";
-import Image from 'next/image'
+import Image from 'next/image';
+
+const useWorker = () => {
+	const worker = useRef<Worker>();
+
+	useEffect(() => {
+		worker.current = new Worker(new URL('../workers/analytics.worker.ts', import.meta.url));
+	worker.current.addEventListener('message', (message) => {
+		console.log('Got message', message.data)
+	})
+	worker.current.postMessage('Hello World');
+
+	return () => {
+		worker.current?.terminate();
+	}
+	}, [])
+
+	return worker;
+}
 
 export const Home: React.FC<{imagesToShow: string[]}> = (props) => {
   
 
   const { programs } = usePrograms({ limit: 3, rand: true });
+	const worker = useWorker();
+//   const worker = useRef<Worker>();
+  
+//   useEffect(() => {
+// 	worker.current = new Worker(new URL('../workers/analytics.worker.ts', import.meta.url));
+// 	worker.current.addEventListener('message', (message) => {
+// 		console.log('Got message', message.data)
+// 	})
+// 	worker.current.postMessage('Hello World');
+
+// 	return () => {
+// 		worker.current?.terminate();
+// 	}
+//   }, [])
 
   return (
     <Page title="ראשי">
