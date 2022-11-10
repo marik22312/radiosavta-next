@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { logPlayLive } from "../api/Mixpanel.api";
+import { logFooterPlayerPause, logPlayLive } from "../api/Mixpanel.api";
 import { LIVE_STREAM_URL } from "../config/stream";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
 import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 import { useAudio } from "../providers/PlayerProvider/useAudio";
-import { DEFAULT_PLAYER_IMAGE } from '../config/images';
+import { DEFAULT_PLAYER_IMAGE } from "../config/images";
 
 export const useLivePlayer = () => {
   const { playTrack, stop } = usePlayerControls();
@@ -31,14 +31,14 @@ export const useLivePlayer = () => {
       playTrack({
         audioUrl: LIVE_STREAM_URL,
         title: songTitle || "",
-        artist: streamer === "NA" ?  "שידור חי" : streamer,
+        artist: streamer === "NA" ? "שידור חי" : streamer,
         imageUrl: DEFAULT_PLAYER_IMAGE,
-		metaData: {}
+        metaData: {},
       });
       setIsLive(true);
       return;
     }
-
+    logFooterPlayerPause();
     stop();
     setIsLive(false);
   };

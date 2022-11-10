@@ -19,7 +19,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   logAgendaOpen,
-  logFooterPlayerPlay,
   logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";

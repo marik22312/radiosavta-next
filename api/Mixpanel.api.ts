@@ -28,6 +28,11 @@ export const logPlayRecordedShow = (args: {
 export const logFooterPlayerPlay = () => {
 	log('footerPlayer.play',{})
 }
+
+export const logFooterPlayerPause = () => {
+	log('footerPlayer.pause',{})
+}
+
 export const logPlayLive = ({streamerName}:{streamerName: string}) => {
 	log('livePlayer.playLive', {streamerName})
 }
