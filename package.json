@@ -19,6 +19,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@sentry/nextjs": "^7.21.1",
     "@svgr/webpack": "^5.5.0",
     "@types/react-modal": "^3.13.1",
     "@types/react-vertical-timeline-component": "^3.0.1",
