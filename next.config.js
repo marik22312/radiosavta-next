@@ -1,6 +1,7 @@
-const withImages = require('next-images')
+const withImages = require('next-images');
+const { withSentryConfig } = require("@sentry/nextjs");
 
-module.exports = withImages({
+const configWithImages = withImages({
 	reactStrictMode: true,
 	images: {
 		domains: ['res.cloudinary.com'],
@@ -18,3 +19,5 @@ module.exports = withImages({
 		FB_PIXEL_ID: process.env.FB_PIXEL_ID,
 	}
   })
+
+  module.exports = withSentryConfig(configWithImages);
