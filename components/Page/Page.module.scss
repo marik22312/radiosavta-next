@@ -1,5 +1,27 @@
 @import '../../styles/mixins.scss';
+
+// mobile design for all screens with #333 background color. should look like mobile even on bigger screens
+.pageContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5rem;
+	font-weight: 300;
+	line-height: 1.5;
+	text-align: center;
+	background-color: #060606;
+}
+
+.pageWrapper {
+	max-width: 400px;
+	width: 100%;
+	background-color: #333;
+}
+
 .pageContent > div {
-	transition: all 0.5s ease-in-out;
-	
+	transition: all 0.5s ease-in-out;	
 }

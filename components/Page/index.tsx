@@ -12,11 +12,13 @@ import { Footer } from "../Footer/Footer";
 interface PageProps {
   title: string;
   previewImage?: string;
+  showHeaderFooter?: boolean;
 }
 export const Page: React.FC<PageProps> = ({
   children,
   title,
   previewImage,
+  showHeaderFooter = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navbarWidth = 215;
@@ -74,18 +76,21 @@ export const Page: React.FC<PageProps> = ({
           }}
         />
       </Head>
-      <Navbar
-        onClose={() => setIsOpen(false)}
-        onOpen={() => setIsOpen(true)}
-        title={title}
-        width={navbarWidth}
-      />
-      <div className={styles.pageContent}>
-        <div className={styles.pageWrapper}>
-          {children}
-          <Footer />
+      {showHeaderFooter ? (
+        <>
+          <div className={styles.pageContent}>
+            <Navbar title={title} width={navbarWidth} />
+            <div className={styles.pageWrapper}>
+              {children}
+              <Footer />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={styles.pageContent}>
+          <div className={styles.pageWrapper}>{children}</div>
         </div>
-      </div>
+      )}
     </>
   );
 };

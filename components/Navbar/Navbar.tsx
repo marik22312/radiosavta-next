@@ -11,11 +11,8 @@ import {
   logNavbarNavigation,
 } from "../../api/Mixpanel.api";
 
-
 interface NavBarProps {
   title: string;
-  onOpen(): void;
-  onClose(): void;
   width: number;
 }
 
@@ -53,14 +50,11 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
     return open();
   };
 
-
   const open = () => {
     setIsOpen(true);
-    props.onOpen();
   };
   const close = () => {
     setIsOpen(false);
-    props.onClose();
   };
 
   return (

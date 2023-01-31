@@ -14,35 +14,32 @@ import * as FLATTED from "flatted";
 import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
 import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV2";
-import {useRouter} from 'next/router'
-import { AppPropsWithLayout } from '../domain/AppProps';
+import { useRouter } from "next/router";
+import { AppPropsWithLayout } from "../domain/AppProps";
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
-
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
 
-
-
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const queryClient = React.useRef(new QueryClient());
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    import('react-facebook-pixel')
+    import("react-facebook-pixel")
       .then((x) => x.default)
       .then((ReactPixel) => {
-        ReactPixel.init(FB_PIXEL_ID!)
-        ReactPixel.pageView()
+        ReactPixel.init(FB_PIXEL_ID!);
+        ReactPixel.pageView();
 
-        router.events.on('routeChangeComplete', () => {
-          ReactPixel.pageView()
-        })
-      })
-  }, [router.events])
+        router.events.on("routeChangeComplete", () => {
+          ReactPixel.pageView();
+        });
+      });
+  }, [router.events]);
 
   const getLayout = Component.getLayout;
   if (getLayout) {
-	return getLayout(<Component {...pageProps} />)
+    return getLayout(<Component {...pageProps} />);
   }
 
   return (
@@ -51,14 +48,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <AudioPlayerProvider>
         <Hydrate
           state={
-			// @ts-expect-error
+            // @ts-expect-error
             pageProps.dehydratedState &&
-			// @ts-expect-error
+            // @ts-expect-error
             FLATTED.parse(pageProps.dehydratedState)
           }
         >
           <Component {...pageProps} />
-          <FooterPlayer />
+          {/* <FooterPlayer /> */}
         </Hydrate>
       </AudioPlayerProvider>
     </QueryClientProvider>
@@ -76,8 +73,8 @@ export function reportWebVitals({
 
   // @ts-expect-error
   window.gtag &&
-  // @ts-expect-error
-  window.gtag("event", name, {
+    // @ts-expect-error
+    window.gtag("event", name, {
       event_category:
         label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
       value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
