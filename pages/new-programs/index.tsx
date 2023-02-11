@@ -9,9 +9,10 @@ import { dehydrate } from "react-query/hydration";
 import { usePrograms } from "../../hook/usePrograms";
 import { Colors } from "../../components/ui/Colors";
 import style from "./ProgramTile.module.scss";
-import { programParser } from '../../parsers/Programs.parser';
-import Image from 'next/image';
-import { useRecordedShowByProgramId } from '../../hook/useRecordedShowsByProgram';
+import { programParser } from "../../parsers/Programs.parser";
+import Image from "next/image";
+import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
+import Link from 'next/link';
 
 const LIMIT_OF_PROGRAMS = 5;
 
@@ -39,12 +40,12 @@ const ProgramsPage: React.FC = () => {
           {programs.map((program, index) => {
             return (
               <Program
-			  programId={program.id}
+                programId={program.id}
                 key={program.id}
                 title={program.name_he}
                 isExpanded={expandedProgramIndex === index}
                 onExpandProgram={() => onExpandProgram(index)}
-				imageUrl={programParser.programImage(program)}
+                imageUrl={programParser.programImage(program)}
               />
             );
           })}
@@ -64,17 +65,15 @@ const Program: React.FC<{
   return (
     <div
       onClick={props.onExpandProgram}
-	  data-is-expanded={props.isExpanded}
+      data-is-expanded={props.isExpanded}
       className={style.programWrapper}
       style={{
         fontFamily: "Heebo",
         paddingRight: "21px",
       }}
     >
-      <div
-	  className={style.programHeader}
-      >
-        <div >
+      <div className={style.programHeader}>
+        <div>
           <h3
             style={{
               color: Colors.TEXT_GREY,
@@ -97,24 +96,51 @@ const Program: React.FC<{
           )}
         </div>
         <div className={style.imageWrapper}>
-			<Image src={props.imageUrl} height="52" width="55" alt={props.title}/>
-		</div>
+          <Image
+            src={props.imageUrl}
+            height="52"
+            width="55"
+            alt={props.title}
+          />
+        </div>
       </div>
-      <ProgramContent isCollapsed={!!props.isExpanded} programId={props.programId}/>
+      <ProgramContent
+        isCollapsed={!!props.isExpanded}
+        programId={props.programId}
+      />
     </div>
   );
 };
 
-const ProgramContent: React.FC<{ isCollapsed: boolean; programId: string | number }> = (props) => {
-	const {recordedShows} = useRecordedShowByProgramId(props.programId);
+const ProgramContent: React.FC<{
+  isCollapsed: boolean;
+  programId: string | number;
+}> = (props) => {
+  const { recordedShows } = useRecordedShowByProgramId(props.programId);
   return (
-    <div className={style.programContent} data-collapsed={props.isCollapsed}>
-      <ul>
-		{recordedShows?.flat().slice(0, 5).map((recordedShow) => {
-			return <li key={recordedShow.id} data-is-playing={false}>{recordedShow.name}</li>
-		})}
-	  </ul>
-    </div>
+    <>
+      <div className={style.programContent} data-collapsed={props.isCollapsed}>
+        <ul>
+          {recordedShows
+            ?.flat()
+            .slice(0, 5)
+            .map((recordedShow) => {
+              return (
+                <li key={recordedShow.id} data-is-playing={false}>
+                  {recordedShow.name}
+                </li>
+              );
+            })}
+        </ul>
+        <div className={style.archiveCtaWrapper} onClick={(e) => e.stopPropagation()}>
+			<Link href={`/programs/${props.programId}`} passHref>
+          <span>
+            <a>לארכיון</a>
+          </span>
+			</Link>
+        </div>
+      </div>
+    </>
   );
 };
 
