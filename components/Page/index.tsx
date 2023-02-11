@@ -55,6 +55,11 @@ export const Page: React.FC<PageProps> = ({
           href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre"
           rel="stylesheet"
         />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Heebo"
+          rel="stylesheet"
+        />
 
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script

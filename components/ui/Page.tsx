@@ -1,18 +1,29 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import React from 'react';
 import style from './Page.module.scss';
 import Link from 'next/link';
 import { logNavbarNavigation } from '../../api/Mixpanel.api';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Head from 'next/head';
 
 export const Page: React.FC = ({children}) => {
 	return (
+		<>
+		<Head>
+			
+			<link
+				href="https://fonts.googleapis.com/css2?family=Heebo&display=optional"
+				rel="stylesheet"
+			/>
+		</Head>
 		<div className={style.responsivePage}>
 		<div className={style.pageWrapper}>
 			<Navbar />
 			{children}
 		</div>
 		</div>
+		</>
 	)
 }
 const MenuItem: React.FC<{ url: string; title: string}> = (props) => {
