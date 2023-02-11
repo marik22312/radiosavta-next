@@ -1,0 +1,15 @@
+.programWrapper {
+	// transition: max-height 0.2s ease-out;
+	background-color: #6C6A6A;
+	margin-bottom: 3px;
+}
+.programContent {
+	transition: max-height 0.2s ease-out;
+	overflow: hidden;
+	max-height: 0;
+	margin-top: 15px;
+
+	&[data-collapsed="true"] {
+		max-height: 232px;
+	}
+}
