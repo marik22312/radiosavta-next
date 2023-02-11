@@ -8,7 +8,10 @@ import * as FLATTED from "flatted";
 import { dehydrate } from "react-query/hydration";
 import { usePrograms } from "../../hook/usePrograms";
 import { Colors } from "../../components/ui/Colors";
-import style from './ProgramTile.module.scss';
+import style from "./ProgramTile.module.scss";
+import { programParser } from '../../parsers/Programs.parser';
+import Image from 'next/image';
+import { useRecordedShowByProgramId } from '../../hook/useRecordedShowsByProgram';
 
 const LIMIT_OF_PROGRAMS = 5;
 
@@ -17,7 +20,9 @@ const ProgramsPage: React.FC = () => {
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
 
   const onExpandProgram = (index: number) => {
-    setExpandedProgramIndex((currentIndex) => currentIndex === index ? undefined : index);
+    setExpandedProgramIndex((currentIndex) =>
+      currentIndex === index ? undefined : index
+    );
   };
 
   return (
@@ -26,16 +31,20 @@ const ProgramsPage: React.FC = () => {
         <div style={{ paddingRight: "21px" }}>
           <Heading>התכניות של סבתא</Heading>
         </div>
-        <div style={{
-			marginTop: '45px'
-		}}>
+        <div
+          style={{
+            marginTop: "45px",
+          }}
+        >
           {programs.map((program, index) => {
             return (
               <Program
+			  programId={program.id}
                 key={program.id}
                 title={program.name_he}
                 isExpanded={expandedProgramIndex === index}
                 onExpandProgram={() => onExpandProgram(index)}
+				imageUrl={programParser.programImage(program)}
               />
             );
           })}
@@ -49,51 +58,65 @@ const Program: React.FC<{
   title: string;
   isExpanded: boolean;
   onExpandProgram: () => void;
+  imageUrl: string;
+  programId: string | number;
 }> = (props) => {
   return (
     <div
-	onClick={props.onExpandProgram}
-	className={style.programWrapper}
+      onClick={props.onExpandProgram}
+	  data-is-expanded={props.isExpanded}
+      className={style.programWrapper}
       style={{
         fontFamily: "Heebo",
-		paddingRight: '21px',
+        paddingRight: "21px",
       }}
     >
-      <div style={{
-		paddingTop: '6px'
-	  }}>
-        <h3
-          style={{
-            color: Colors.TEXT_GREY,
-            fontSize: 16,
-            fontWeight: 500,
-          }}
-        >
-          {props.title}
-        </h3>
-		<div>Logo</div>
+      <div
+	  className={style.programHeader}
+      >
+        <div >
+          <h3
+            style={{
+              color: Colors.TEXT_GREY,
+              fontSize: 16,
+              fontWeight: 500,
+            }}
+          >
+            {props.title}
+          </h3>
+          {props.isExpanded ? null : (
+            <div
+              style={{
+                marginTop: "4px",
+                color: Colors.SAVTA_RED,
+                fontSize: "16px",
+              }}
+            >
+              <span>עוד</span>
+            </div>
+          )}
+        </div>
+        <div className={style.imageWrapper}>
+			<Image src={props.imageUrl} height="52" width="55" alt={props.title}/>
+		</div>
       </div>
-      {props.isExpanded ? null : <div 
-	  style={{marginTop: '4px', color: Colors.SAVTA_RED, fontSize: '16px'}}
-	  >
-        <span>עוד</span>
-      </div>}
-      <ProgramContent isCollapsed={!!props.isExpanded}/>
+      <ProgramContent isCollapsed={!!props.isExpanded} programId={props.programId}/>
     </div>
   );
 };
 
-const ProgramContent: React.FC<{isCollapsed: boolean}> = (props) => {
-	return (
-		<div className={style.programContent} data-collapsed={props.isCollapsed}>
-			<div>,ufi</div>
-			<div>,ufi</div>
-			<div>,ufi</div>
-			<div>,ufi</div>
-			<div>,ufi</div>
-		</div>
-	)
-}
+const ProgramContent: React.FC<{ isCollapsed: boolean; programId: string | number }> = (props) => {
+	const {recordedShows} = useRecordedShowByProgramId(props.programId);
+  return (
+    <div className={style.programContent} data-collapsed={props.isCollapsed}>
+      <ul>
+		{recordedShows?.flat().slice(0, 5).map((recordedShow) => {
+			return <li key={recordedShow.id} data-is-playing={false}>{recordedShow.name}</li>
+		})}
+	  </ul>
+    </div>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
