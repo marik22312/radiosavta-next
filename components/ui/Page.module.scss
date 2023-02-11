@@ -1,0 +1,11 @@
+.responsivePage {}
+
+.pageWrapper {
+	width: 100%;
+	height: calc(var(--vh, 1vh)*100);
+
+  @media (min-width: 430px) {
+	width: 400px;
+	margin: 5vh 0;
+  }
+}
