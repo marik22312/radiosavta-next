@@ -12,6 +12,7 @@ const configWithImages = withImages({
 	},
 	env: {
 		BASE_API_URL: process.env.BASE_API_URL,
+		SITE_LOGO_URL: process.env.SITE_LOGO_URL,
 		NEXT_IMAGE_ALLOWED_DOMAINS: process.env.NEXT_IMAGE_ALLOWED_DOMAINS,
 		NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 		MIXPANEL_API_KEY: process.env.MIXPANEL_API_KEY,
