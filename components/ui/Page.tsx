@@ -3,11 +3,7 @@ import style from './Page.module.scss';
 
 export const Page: React.FC = ({children}) => {
 	return (
-		<div className="responsive-page" style={{
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-		}}>
+		<div className={style.responsivePage}>
 		<div className={style.pageWrapper}>
 			{children}
 		</div>
