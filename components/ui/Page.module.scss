@@ -1,6 +1,14 @@
-.responsivePage {}
+.responsivePage {
+	background-color: #333333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding-top: 35px;
+}
 
 .pageWrapper {
+	background-color: #333333;
 	width: 100%;
 	height: calc(var(--vh, 1vh)*100);
 
