@@ -9,11 +9,15 @@ import { dehydrate } from "react-query/hydration";
 import { usePrograms } from "../../hook/usePrograms";
 import { programParser } from "../../parsers/Programs.parser";
 import { ProgramTile } from './components/ProgramTile';
+import { prefetchQueryPrograms, useQueryPrograms } from '../../hook/useQueryPrograms';
 
 
 const ProgramsPage: React.FC = () => {
-  const { programs } = usePrograms();
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
+  const {programs} = useQueryPrograms({sort: {
+	orderBy: 'DESC',
+	field: 'program.recordedShow'
+  }});
 
   const onExpandProgram = (index: number) => {
     setExpandedProgramIndex((currentIndex) =>
@@ -53,9 +57,10 @@ const ProgramsPage: React.FC = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(`active-programs`, ({ pageParam = 1 }) =>
-    getAllActivePrograms()
-  );
+  await prefetchQueryPrograms(queryClient, {sort: {
+	orderBy: 'DESC',
+	field: 'program.recordedShow'
+  }})
   const { data } = await getAllActivePrograms();
 
   if (!data.activeShows) {
