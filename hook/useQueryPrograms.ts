@@ -1,15 +1,15 @@
-import {QueryClient, useQuery } from 'react-query';
+import {QueryClient, useInfiniteQuery, useQuery } from 'react-query';
 import { queryPrograms, QueryProgramsRequest } from '../api/Programs.api';
 
 export const prefetchQueryPrograms = (queryClient: QueryClient, req: QueryProgramsRequest) => {
-	return queryClient.prefetchQuery(['query-programs', req], () => queryPrograms(req));
+	return queryClient.prefetchInfiniteQuery(['query-programs', req], () => queryPrograms(req));
 }
 
 export const useQueryPrograms = (req: QueryProgramsRequest) => {
-	const {data, ...rest} = useQuery(['query-programs', req], () => queryPrograms(req));
+	const {data, ...rest} = useInfiniteQuery(['query-programs', req], () => queryPrograms(req));
 
 	return {
-		programs: data?.data.programs || [],
+		programs: data?.pages.map(p => p.data.programs).flat() ?? [],
 		...rest
 	}
 }

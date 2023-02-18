@@ -61,16 +61,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	orderBy: 'DESC',
 	field: 'program.recordedShow'
   }})
-  const { data } = await getAllActivePrograms();
-
-  if (!data.activeShows) {
-    return {
-      notFound: true,
-    };
-  }
   return {
     props: {
-      activePrograms: data.activeShows,
       dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
     },
   };
