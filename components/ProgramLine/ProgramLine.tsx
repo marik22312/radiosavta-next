@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Colors } from "../../../components/ui/Colors";
-import { useRecordedShowByProgramId } from "../../../hook/useRecordedShowsByProgram";
-import style from "./ProgramTile.module.scss";
+import { Colors } from "../ui/Colors";
+import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
+import style from "./ProgramLine.module.scss";
 
-interface ProgramTileProps {
+interface ProgramLineProps {
   title: string;
   isExpanded: boolean;
   onExpandProgram: () => void;
@@ -13,7 +13,7 @@ interface ProgramTileProps {
   programId: string | number;
 }
 
-export const ProgramTile: React.FC<ProgramTileProps> = (props) => {
+export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
   return (
     <div
       onClick={props.onExpandProgram}

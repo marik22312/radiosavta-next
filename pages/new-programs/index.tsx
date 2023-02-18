@@ -1,14 +1,12 @@
 import { GetServerSideProps } from "next";
 import React, { useState } from "react";
 import { QueryClient } from "react-query";
-import { getAllActivePrograms } from "../../api/Programs.api";
 import { Page } from "../../components/ui/Page";
 import { Heading } from "../../components/ui/Typography";
 import * as FLATTED from "flatted";
 import { dehydrate } from "react-query/hydration";
-import { usePrograms } from "../../hook/usePrograms";
 import { programParser } from "../../parsers/Programs.parser";
-import { ProgramTile } from "./components/ProgramTile";
+import { ProgramLine } from "../../components/ProgramLine/ProgramLine";
 import {
   prefetchQueryPrograms,
   useQueryPrograms,
@@ -42,7 +40,7 @@ const ProgramsPage: React.FC = () => {
         >
           {programs.map((program, index) => {
             return (
-              <ProgramTile
+              <ProgramLine
                 programId={program.id}
                 key={program.id}
                 title={program.name_he}
