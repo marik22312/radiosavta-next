@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from 'next/link';
+import Link from "next/link";
 import React from "react";
 import { Colors } from "../../../components/ui/Colors";
-import { useRecordedShowByProgramId } from '../../../hook/useRecordedShowsByProgram';
+import { useRecordedShowByProgramId } from "../../../hook/useRecordedShowsByProgram";
 import style from "./ProgramTile.module.scss";
 
 interface ProgramTileProps {
@@ -64,34 +64,38 @@ export const ProgramTile: React.FC<ProgramTileProps> = (props) => {
   );
 };
 
-const ProgramContent: React.FC<{
+interface ProgramContentProps {
 	isCollapsed: boolean;
 	programId: string | number;
-  }> = (props) => {
-	const { recordedShows } = useRecordedShowByProgramId(props.programId);
-	return (
-	  <>
-		<div className={style.programContent} data-collapsed={props.isCollapsed}>
-		  <ul>
-			{recordedShows
-			  ?.flat()
-			  .slice(0, 5)
-			  .map((recordedShow) => {
-				return (
-				  <li key={recordedShow.id} data-is-playing={false}>
-					{recordedShow.name}
-				  </li>
-				);
-			  })}
-		  </ul>
-		  <div className={style.archiveCtaWrapper} onClick={(e) => e.stopPropagation()}>
-			  <Link href={`/programs/${props.programId}`} passHref>
-			<span>
-			  <a>לארכיון</a>
-			</span>
-			  </Link>
-		  </div>
-		</div>
-	  </>
-	);
-  };
+}
+const ProgramContent: React.FC<ProgramContentProps> = (props) => {
+  const { recordedShows } = useRecordedShowByProgramId(props.programId);
+  return (
+    <>
+      <div className={style.programContent} data-collapsed={props.isCollapsed}>
+        <ul>
+          {recordedShows
+            ?.flat()
+            .slice(0, 5)
+            .map((recordedShow) => {
+              return (
+                <li key={recordedShow.id} data-is-playing={false}>
+                  {recordedShow.name}
+                </li>
+              );
+            })}
+        </ul>
+        <div
+          className={style.archiveCtaWrapper}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Link href={`/programs/${props.programId}`} passHref>
+            <span>
+              <a>לארכיון</a>
+            </span>
+          </Link>
+        </div>
+      </div>
+    </>
+  );
+};
