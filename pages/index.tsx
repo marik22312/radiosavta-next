@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { Page } from "../components/Page";
 import style from "./Home.module.scss";
 
 import cn from "classnames";
@@ -20,36 +19,36 @@ import { prefetchLatestRecordedShows } from "../hook/useLatestRecordedShows";
 import { getFilteredImages } from "../utils/getRandomImages.utils";
 import Image from "next/image";
 import LandingPage from "./landingPage";
+import { Page } from "../components/ui/Page";
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
-  const [isLandingPageActive, setIsLandingPageActive] = useState<boolean>(true);
-
   const { programs } = usePrograms({ limit: 3, rand: true });
 
-  return isLandingPageActive ? (
-    <LandingPage />
-  ) : (
-    <Page title="ראשי">
-      <AboutSection imagesToShow={props.imagesToShow} />
-      <section className={style.latestShowsSection}>
-        <h2>העלאות אחרונות</h2>
-        <div className={style.latestShowsList}>
-          <RecordedShowsListStandalone />
-        </div>
-        <p className={style.allShowsLink}>
-          <Link href="/archive">לבויעדם &gt;&gt;</Link>
-        </p>
-      </section>
-      <section className={style.programsList}>
-        <h2>תוכניות</h2>
-        <div className={style.programsListWrapper}>
-          <ProgramsListStandalone programs={programs} />
-        </div>
-        <p className={style.allShowsLink}>
-          <Link href="/programs">לכל התוכניות &gt;&gt;</Link>
-        </p>
-      </section>
-    </Page>
+  return (
+    <>
+      <Page>
+        <LandingPage />
+        <AboutSection imagesToShow={props.imagesToShow} />
+        <section className={style.latestShowsSection}>
+          <h2>העלאות אחרונות</h2>
+          <div className={style.latestShowsList}>
+            <RecordedShowsListStandalone />
+          </div>
+          <p className={style.allShowsLink}>
+            <Link href="/archive">לבויעדם &gt;&gt;</Link>
+          </p>
+        </section>
+        <section className={style.programsList}>
+          <h2>תוכניות</h2>
+          <div className={style.programsListWrapper}>
+            <ProgramsListStandalone programs={programs} />
+          </div>
+          <p className={style.allShowsLink}>
+            <Link href="/programs">לכל התוכניות &gt;&gt;</Link>
+          </p>
+        </section>
+      </Page>
+    </>
   );
 };
 

@@ -1,16 +1,39 @@
-.LandingPageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  max-width: 100%;
-  background-color: transparent;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 300;
-  line-height: 1.5;
-  text-align: center;
+@import '../../styles/utils.scss';
+
+$inactiveSize: 90vh;
+$activeSize: 30vh;
+
+.landingPageContainer {
+    @include responsivePage;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.inactiveLandingPageContainer {
+    background-color: transparent;
+}
+
+.landingPageWrapper {
+    @include responsivePageWrapper;
+    background-color: #060606;
+    transition: transform 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
+}
+
+.initialLandingPage {
+    transform: translateY(0);
+    padding-bottom: 0;
+}
+
+.activeLandingPage {
+    transform: translateY($activeSize);
+    padding-bottom: $activeSize;
+}
+
+.inactiveLandingPage {
+    transform: translateY($inactiveSize);
+    padding-bottom: $inactiveSize;
 }
 
 .LandingPageAbout {
