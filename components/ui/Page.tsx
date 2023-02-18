@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
 			<MenuItem url="/" title="ראשי" />
 			<MenuItem url="/new-programs" title="תכניות" />
 			<MenuItem url="/new-about" title="אודות"/>
-			<MenuItem url="/" title="הצטרפות" />
+			<MenuItem url="/join-us" title="הצטרפות" />
 		</div>
 
 	)
