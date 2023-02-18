@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
         width="70"
       />
       <MenuItem url="/" title="ראשי" />
-      <MenuItem url="/" title="תכניות" />
+      <MenuItem url="/new-programs" title="תכניות" />
       <MenuItem url="/new-about" title="אודות" />
       <MenuItem url="/" title="הצטרפות" />
     </div>

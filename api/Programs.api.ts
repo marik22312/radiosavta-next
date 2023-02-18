@@ -31,3 +31,13 @@ export const getProgramById = (programId: string | number) => {
     `/v2/programs/${programId}`
   );
 };
+
+export interface QueryProgramsRequest {
+	sort?: {
+		orderBy: 'ASC' | 'DESC';
+		field: 'program.recordedShow';
+	}
+}
+export const queryPrograms = (req: QueryProgramsRequest) => {
+	return httpClient.post<{ programs: Program[] }>('/v2/programs/query', req);
+}
