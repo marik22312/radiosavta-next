@@ -1,0 +1,91 @@
+@import '../../styles/utils.scss';
+
+$inactiveSize: 90vh;
+$activeSize: 30vh;
+
+.landingPageContainer {
+    @include responsivePage;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.inactiveLandingPageContainer {
+    background-color: transparent;
+}
+
+.landingPageWrapper {
+    @include responsivePageWrapper;
+    background-color: #060606;
+    transition: transform 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
+}
+
+.initialLandingPage {
+    transform: translateY(0);
+    padding-bottom: 0;
+}
+
+.activeLandingPage {
+    transform: translateY($activeSize);
+    padding-bottom: $activeSize;
+}
+
+.inactiveLandingPage {
+    transform: translateY($inactiveSize);
+    padding-bottom: $inactiveSize;
+}
+
+.LandingPageAbout {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.landingPageTitle {
+    color: #8F8989;
+    font-size: 40px;
+}
+
+.landingPageSubtitle {
+    color: #8F8989;
+    font-size: 17px;
+}
+
+.landingPageQuote {
+    color: #CC9933;
+    font-size: 20px;
+}
+
+.landingPagePlay {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingPagePlaySubtitle {
+    color: #CC9933;
+    font-size: 13px;
+}
+
+.LandingPageFooter {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-block-end: 20px;
+}
+
+.landingPageFooterButton {
+    background: transparent;
+    color: #CC9933;
+}
+
+.footerButtonIcon {
+    transform: rotate(180deg);
+}
