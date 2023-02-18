@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
 		<div className={style.navbarWrapper}>
 			<Image src={process.env.SITE_LOGO_URL!} alt="לוגו" height="89" width="70"/>
 			<MenuItem url="/" title="ראשי" />
-			<MenuItem url="/" title="תכניות" />
+			<MenuItem url="/new-programs" title="תכניות" />
 			<MenuItem url="/new-about" title="אודות"/>
 			<MenuItem url="/" title="הצטרפות" />
 		</div>

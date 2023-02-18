@@ -1,0 +1,69 @@
+.programWrapper {
+  transition: background-color 0.2s ease-out;
+  background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  margin-bottom: 3px;
+  mix-blend-mode: screen;
+
+  border-radius: 5px;
+
+  &[data-is-expanded="true"] {
+    background: #6c6a6a;
+    mix-blend-mode: unset;
+  }
+}
+
+.programHeader {
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+.programContent {
+  transition: max-height 0.2s ease-out;
+  overflow: hidden;
+  max-height: 0;
+
+  &[data-collapsed="true"] {
+    max-height: 232px;
+  }
+
+  ul {
+    li {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #060606;
+
+      &[data-is-playing="true"] {
+        color: #cccccc;
+      }
+    }
+  }
+}
+
+.archiveCtaWrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+
+  span {
+    border-radius: 5px;
+    background-color: #cc9933;
+    padding: 2px 5px;
+    a {
+      background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+  }
+}
+
+.imageWrapper {
+  border-radius: 5px;
+  img {
+    border-radius: 5px;
+  }
+}
