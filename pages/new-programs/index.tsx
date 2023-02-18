@@ -8,16 +8,20 @@ import * as FLATTED from "flatted";
 import { dehydrate } from "react-query/hydration";
 import { usePrograms } from "../../hook/usePrograms";
 import { programParser } from "../../parsers/Programs.parser";
-import { ProgramTile } from './components/ProgramTile';
-import { prefetchQueryPrograms, useQueryPrograms } from '../../hook/useQueryPrograms';
-
+import { ProgramTile } from "./components/ProgramTile";
+import {
+  prefetchQueryPrograms,
+  useQueryPrograms,
+} from "../../hook/useQueryPrograms";
 
 const ProgramsPage: React.FC = () => {
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
-  const {programs} = useQueryPrograms({sort: {
-	orderBy: 'DESC',
-	field: 'program.recordedShow'
-  }});
+  const { programs } = useQueryPrograms({
+    sort: {
+      orderBy: "DESC",
+      field: "program.recordedShow",
+    },
+  });
 
   const onExpandProgram = (index: number) => {
     setExpandedProgramIndex((currentIndex) =>
@@ -57,10 +61,12 @@ const ProgramsPage: React.FC = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  await prefetchQueryPrograms(queryClient, {sort: {
-	orderBy: 'DESC',
-	field: 'program.recordedShow'
-  }})
+  await prefetchQueryPrograms(queryClient, {
+    sort: {
+      orderBy: "DESC",
+      field: "program.recordedShow",
+    },
+  });
   return {
     props: {
       dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
