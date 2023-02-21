@@ -90,6 +90,14 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
   const { recordedShows } = useRecordedShowByProgramId(props.programId);
   const { songTitle } = usePlayerState();
 
+  const onClickRecordedShow = (
+    e: React.MouseEvent<HTMLLIElement>,
+    recordedShow: RecordedShow
+  ) => {
+    e.stopPropagation();
+    props.onPressTrack(recordedShow);
+  };
+
   return (
     <>
       <div className={style.programContent} data-collapsed={props.isCollapsed}>
@@ -102,10 +110,7 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
                 <li
                   key={recordedShow.id}
                   data-is-playing={recordedShow.name === songTitle}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onPressTrack(recordedShow);
-                  }}
+                  onClick={(e) => onClickRecordedShow(e, recordedShow)}
                 >
                   {recordedShow.name}
                 </li>
