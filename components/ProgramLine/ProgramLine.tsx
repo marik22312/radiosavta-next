@@ -4,6 +4,10 @@ import React from "react";
 import { Colors } from "../ui/Colors";
 import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import style from "./ProgramLine.module.scss";
+import { usePlayerControls as usePlayerControlsV2 } from "../../providers/PlayerProvider/usePlayerControls";
+import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
+import { RecordedShow } from "../../domain/RecordedShow";
+import { programParser } from "../../parsers/Programs.parser";
 
 interface ProgramLineProps {
   title: string;
@@ -14,6 +18,16 @@ interface ProgramLineProps {
 }
 
 export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
+  const { playTrack } = usePlayerControlsV2();
+  const onPlayTrack = (recordedShow: RecordedShow) => {
+    playTrack({
+      title: recordedShow.name,
+      audioUrl: recordedShow.url,
+      artist: props.title,
+      imageUrl: programParser.programImage(recordedShow.program),
+      metaData: {},
+    });
+  };
   return (
     <div
       onClick={props.onExpandProgram}
@@ -57,6 +71,8 @@ export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
         </div>
       </div>
       <ProgramContent
+        onPressTrack={onPlayTrack}
+        programName={props.title}
         isCollapsed={!!props.isExpanded}
         programId={props.programId}
       />
@@ -65,11 +81,15 @@ export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
 };
 
 interface ProgramContentProps {
-	isCollapsed: boolean;
-	programId: string | number;
+  programName: string;
+  isCollapsed: boolean;
+  programId: string | number;
+  onPressTrack: (recordedShow: RecordedShow) => void;
 }
 const ProgramContent: React.FC<ProgramContentProps> = (props) => {
   const { recordedShows } = useRecordedShowByProgramId(props.programId);
+  const { songTitle } = usePlayerState();
+
   return (
     <>
       <div className={style.programContent} data-collapsed={props.isCollapsed}>
@@ -79,7 +99,14 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
             .slice(0, 5)
             .map((recordedShow) => {
               return (
-                <li key={recordedShow.id} data-is-playing={false}>
+                <li
+                  key={recordedShow.id}
+                  data-is-playing={recordedShow.name === songTitle}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.onPressTrack(recordedShow);
+                  }}
+                >
                   {recordedShow.name}
                 </li>
               );
