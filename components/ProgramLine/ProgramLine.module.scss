@@ -29,6 +29,8 @@
 
   ul {
     li {
+      cursor: pointer;
+      user-select: none;
       font-size: 16px;
       margin-bottom: 10px;
       color: #060606;
