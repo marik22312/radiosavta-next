@@ -101,22 +101,11 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
   return (
     <>
       <div className={style.programContent} data-collapsed={props.isCollapsed}>
-        <ul>
-          {recordedShows
-            ?.flat()
-            .slice(0, 5)
-            .map((recordedShow) => {
-              return (
-                <li
-                  key={recordedShow.id}
-                  data-is-playing={recordedShow.name === songTitle}
-                  onClick={(e) => onClickRecordedShow(e, recordedShow)}
-                >
-                  {recordedShow.name}
-                </li>
-              );
-            })}
-        </ul>
+        <RecordedShowsList
+          recordedShows={recordedShows?.flat()}
+          onClickRecordedShow={onClickRecordedShow}
+          songTitle={songTitle ?? ""}
+        />
         <div
           className={style.archiveCtaWrapper}
           onClick={(e) => e.stopPropagation()}
@@ -129,5 +118,35 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
         </div>
       </div>
     </>
+  );
+};
+
+const RecordedShowsList: React.FC<{
+  recordedShows?: RecordedShow[];
+  onClickRecordedShow: (e: any, recordedShow: RecordedShow) => void;
+  songTitle: string;
+}> = (props) => {
+  if (!props.recordedShows?.length) {
+    return (
+      <div className={style.recordedShowEmptyState}>
+        <p>אין תכניות מוקלטות</p>
+      </div>
+    );
+  }
+
+  return (
+    <ul>
+      {props.recordedShows.slice(0, 5).map((recordedShow) => {
+        return (
+          <li
+            key={recordedShow.id}
+            data-is-playing={recordedShow.name === props.songTitle}
+            onClick={(e) => props.onClickRecordedShow(e, recordedShow)}
+          >
+            {recordedShow.name}
+          </li>
+        );
+      })}
+    </ul>
   );
 };
