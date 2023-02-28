@@ -2,7 +2,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { useState } from "react";
-import { PlayPauseButton } from "../../components/PlayPauseButton/PlayPauseButton";
+import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
 
 import style from "./landingPage.module.scss";
 

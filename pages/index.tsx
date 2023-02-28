@@ -19,14 +19,12 @@ import { prefetchLatestRecordedShows } from "../hook/useLatestRecordedShows";
 
 import { getFilteredImages } from "../utils/getRandomImages.utils";
 import Image from "next/image";
-import LandingPage from "./landingPage";
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   const { programs } = usePrograms({ limit: 3, rand: true });
 
   return (
     <Page title="ראשי">
-      <LandingPage />
       <AboutSection imagesToShow={props.imagesToShow} />
       <section className={style.latestShowsSection}>
         <h2>העלאות אחרונות</h2>

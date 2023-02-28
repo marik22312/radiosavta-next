@@ -26,6 +26,7 @@ import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
+import LandingPage from "./landingPage";
 
 export const FooterPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -132,6 +133,7 @@ export const FooterPlayer: React.FC = () => {
   return (
     <>
       <AudioPlayer ref={audioRef} />
+      <LandingPage />
       <div className={footerWrapperClass}>
         <div className={styles.rightSide} onClick={() => setIsPlayerOpen(true)}>
           <PlayPauseButton
@@ -170,15 +172,11 @@ export const FooterPlayer: React.FC = () => {
           </div>
           <button onClick={toggleLive} disabled={isStopped || isLive}>
             <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
-			<span className={styles.iconText}>
-            חזרה לשידור חי
-			</span>
+            <span className={styles.iconText}>חזרה לשידור חי</span>
           </button>
           <button onClick={onShare}>
             <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
-			<span className={styles.iconText}>
-            שתף
-			</span>
+            <span className={styles.iconText}>שתף</span>
           </button>
           <button
             onClick={() => {
@@ -187,9 +185,7 @@ export const FooterPlayer: React.FC = () => {
             }}
           >
             <FontAwesomeIcon icon={faCalendar as any} size="1x" />
-			<span className={styles.iconText}>
-            מה הלו&quot;ז?
-			</span>
+            <span className={styles.iconText}>מה הלו&quot;ז?</span>
           </button>
         </div>
       </div>
