@@ -5,9 +5,9 @@ import { Heading } from "../../components/ui/Typography";
 import ReCAPTCHA from "react-google-recaptcha";
 import style from "./joinUs.module.scss";
 import { ContactFormRequest } from "../../api/Contact.api";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
+import { Alert, AlertType } from '../../components/ui/Alert';
 
 enum FormFields {
   NAME = "fullname",
@@ -116,29 +116,6 @@ const JoinUsPage: React.FC = () => {
   );
 };
 
-export enum AlertType {
-  SUCCESS = "success",
-  ERROR = "error",
-}
-
-export interface AlertProps {
-  type: "success" | "error";
-  text: string;
-}
-export const Alert: React.FC<AlertProps> = (props) => {
-  return (
-    <div className={style.notification} data-type={props.type}>
-      <span>
-        {props.type === AlertType.SUCCESS ? (
-          <FaCheckCircle size={25} />
-        ) : (
-          <FaTimesCircle size={25} />
-        )}
-      </span>
-      <p>{props.text}</p>
-    </div>
-  );
-};
 
 const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
   if (args.isLoading) {
