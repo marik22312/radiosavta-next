@@ -14,7 +14,7 @@ export enum AlertType {
   }
   export const Alert: React.FC<AlertProps> = (props) => {
 	return (
-	  <div className={style.notification} data-type={props.type}>
+	  <div className={style.alert} data-type={props.type}>
 		<span>
 		  {props.type === AlertType.SUCCESS ? (
 			<FaCheckCircle size={25} />
