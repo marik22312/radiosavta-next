@@ -7,7 +7,7 @@ import style from "./joinUs.module.scss";
 import { ContactFormRequest } from "../../api/Contact.api";
 import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
-import { Alert, AlertType } from '../../components/ui/Alert';
+import { Alert, AlertType } from "../../components/ui/Alert";
 
 enum FormFields {
   NAME = "fullname",
@@ -115,7 +115,6 @@ const JoinUsPage: React.FC = () => {
     </Page>
   );
 };
-
 
 const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
   if (args.isLoading) {

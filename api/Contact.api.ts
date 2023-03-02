@@ -1,11 +1,11 @@
-import { httpClient } from './httpClient'
+import { httpClient } from "./httpClient";
 
 export interface ContactFormRequest {
-	fullname?: string;
-	email?: string;
-	message?: string;
-	recaptcha?: string;
+  fullname?: string;
+  email?: string;
+  message?: string;
+  recaptcha?: string;
 }
 export const submitContactForm = (req: ContactFormRequest) => {
-	return httpClient.post<{ successMessage: string }>('/v2/contact', req);
-}
+  return httpClient.post<{ successMessage: string }>("/v2/contact", req);
+};
