@@ -4,9 +4,10 @@ import { Page } from "../../components/ui/Page";
 import { Heading } from "../../components/ui/Typography";
 import ReCAPTCHA from "react-google-recaptcha";
 import style from "./joinUs.module.scss";
-import { ContactFormRequest, submitContactForm } from "../../api/Contact.api";
-import { useMutation, UseMutationOptions } from "react-query";
-import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
+import { ContactFormRequest } from "../../api/Contact.api";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FormField } from "../../components/ui/FormField";
+import { useContactForm } from "../../hook/useContactForm";
 
 enum FormFields {
   NAME = "fullname",
@@ -14,36 +15,6 @@ enum FormFields {
   MESSAGE = "message",
 }
 
-const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
-  if (args.isLoading) {
-    return "loading";
-  }
-  if (args.isSuccess) {
-    return "success";
-  }
-};
-
-const ButtonIcon: React.FC<{ isLoading?: boolean; isSuccess?: boolean }> = (
-  props
-) => {
-  if (props.isLoading) {
-    return <FaSpinner />;
-  }
-  if (props.isSuccess) {
-    return <FaCheckCircle />;
-  }
-  return null;
-};
-const useContactForm = (opts?: {
-  onSuccess?: (data: Awaited<ReturnType<typeof submitContactForm>>) => void;
-  onError?: (error: Error) => void;
-}) => {
-  const { mutate, ...rest } = useMutation(submitContactForm, opts);
-  return {
-    submitForm: mutate,
-    ...rest,
-  };
-};
 const JoinUsPage: React.FC = () => {
   const captchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -169,56 +140,13 @@ export const Alert: React.FC<AlertProps> = (props) => {
   );
 };
 
-export default JoinUsPage;
-
-export interface FormFieldProps {
-  label?: string;
-  name?: string;
-  type?: "text" | "email" | "textarea" | "submit";
-  placeholder?: string;
-  skin?: "success" | "loading";
-}
-export const FormField: React.FC<FormFieldProps> = (props) => {
-  if (props.type === "textarea") {
-    return (
-      <fieldset className={style.input}>
-        <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
-        <textarea
-          id={props.name && `input-${props.name}`}
-          name={props.name}
-          placeholder={props.placeholder}
-        />
-      </fieldset>
-    );
+const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
+  if (args.isLoading) {
+    return "loading";
   }
-  if (props.type === "submit") {
-    const isLoading = props.skin === "loading";
-    const isSuccess = props.skin === "success";
-    return (
-      <fieldset
-        className={style.input}
-        data-type="submit"
-        data-skin={getButtonSkin({ isLoading, isSuccess })}
-      >
-        <span>
-          <ButtonIcon isLoading={isLoading} isSuccess={isSuccess} />
-        </span>
-        <button type="submit" disabled={isLoading}>
-          שלח
-        </button>
-      </fieldset>
-    );
+  if (args.isSuccess) {
+    return "success";
   }
-
-  return (
-    <fieldset className={style.input}>
-      <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
-      <input
-        type={props.type}
-        id={props.name && `input-${props.name}`}
-        name={props.name}
-        placeholder={props.placeholder}
-      />
-    </fieldset>
-  );
 };
+
+export default JoinUsPage;
