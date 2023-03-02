@@ -82,6 +82,7 @@ const JoinUsPage: React.FC = () => {
               placeholder="ישראל ישראלי"
             />
             <FormField
+              inputType="email"
               label="אימייל"
               name={FormFields.EMAIL}
               placeholder="israel@israeli.co.il"
@@ -99,6 +100,7 @@ const JoinUsPage: React.FC = () => {
             />
             <FormField
               type="submit"
+              label={getSubmitMessage({ isLoading, isSuccess })}
               skin={getButtonSkin({ isLoading, isSuccess })}
             />
           </form>
@@ -122,6 +124,18 @@ const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
   }
   if (args.isSuccess) {
     return "success";
+  }
+};
+
+const getSubmitMessage = (args: {
+  isLoading?: boolean;
+  isSuccess?: boolean;
+}) => {
+  if (args.isLoading) {
+    return "שולח...";
+  }
+  if (args.isSuccess) {
+    return "ההודעה נשלחה!";
   }
 };
 

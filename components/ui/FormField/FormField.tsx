@@ -18,7 +18,8 @@ const ButtonIcon: React.FC<{ isLoading?: boolean; isSuccess?: boolean }> = (
 export interface FormFieldProps {
   label?: string;
   name?: string;
-  type?: "text" | "email" | "textarea" | "submit";
+  type?: "text" | "textarea" | "submit";
+  inputType?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   skin?: "success" | "loading";
 }
@@ -48,7 +49,7 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
           <ButtonIcon isLoading={isLoading} isSuccess={isSuccess} />
         </span>
         <button type="submit" disabled={isLoading}>
-          שלח
+          {props.label ?? "שלח"}
         </button>
       </fieldset>
     );
@@ -58,7 +59,7 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
     <fieldset className={style.input}>
       <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
       <input
-        type={props.type}
+        type={props.inputType}
         id={props.name && `input-${props.name}`}
         name={props.name}
         placeholder={props.placeholder}

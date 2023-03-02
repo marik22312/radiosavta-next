@@ -1,12 +1,12 @@
 @keyframes rotation {
-	from {
-	  transform: rotate(0deg);
-	}
-	to {
-	  transform: rotate(359deg);
-	}
+  from {
+    transform: rotate(0deg);
   }
-  
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 .input {
   display: block;
   font-family: "Heebo";
@@ -89,14 +89,15 @@
 
       span {
         display: flex;
-		svg {
-		  animation: rotation 1s linear infinite;
-		}
+        svg {
+          animation: rotation 1s linear infinite;
+        }
       }
     }
 
     &[data-skin="success"] {
       button {
+        color: #cccccc;
         background-color: #1e742b;
         border-radius: 5px 0 0 5px;
         border-right: none;
