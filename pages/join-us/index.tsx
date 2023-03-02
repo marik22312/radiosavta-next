@@ -51,18 +51,18 @@ const JoinUsPage: React.FC = () => {
 
   const { submitForm, isError, isSuccess } = useContactForm({
     onSuccess: (data) => {
-		setIsLoading(false);
+      setIsLoading(false);
       formRef.current?.reset();
-	  captchaRef.current?.reset();
+      captchaRef.current?.reset();
     },
-	onError: (error) => {
-		captchaRef.current?.reset();
-		setIsLoading(false);
-	}
+    onError: (error) => {
+      captchaRef.current?.reset();
+      setIsLoading(false);
+    },
   });
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-	setIsLoading(true);
+    setIsLoading(true);
 
     const captcha = await captchaRef.current?.executeAsync();
     const data: ContactFormRequest = {
@@ -119,7 +119,7 @@ const JoinUsPage: React.FC = () => {
               label="הודעה"
               type="textarea"
               name={FormFields.MESSAGE}
-			  placeholder="איזה אלופים אתם! איך מצטרפים?"
+              placeholder="איזה אלופים אתם! איך מצטרפים?"
             />
             <ReCAPTCHA
               ref={captchaRef}
@@ -180,16 +180,16 @@ export interface FormFieldProps {
 }
 export const FormField: React.FC<FormFieldProps> = (props) => {
   if (props.type === "textarea") {
-	return (
-		<fieldset className={style.input}>
-      <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
-      <textarea
-        id={props.name && `input-${props.name}`}
-        name={props.name}
-        placeholder={props.placeholder}
-      />
-    </fieldset>
-	)
+    return (
+      <fieldset className={style.input}>
+        <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
+        <textarea
+          id={props.name && `input-${props.name}`}
+          name={props.name}
+          placeholder={props.placeholder}
+        />
+      </fieldset>
+    );
   }
   if (props.type === "submit") {
     const isLoading = props.skin === "loading";
