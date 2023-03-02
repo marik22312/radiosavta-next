@@ -22,6 +22,7 @@ export interface FormFieldProps {
   inputType?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   skin?: "success" | "loading";
+  disabled?: boolean;
 }
 export const FormField: React.FC<FormFieldProps> = (props) => {
   if (props.type === "textarea") {
@@ -29,6 +30,7 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
       <fieldset className={style.input}>
         <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
         <textarea
+          disabled={props.disabled}
           id={props.name && `input-${props.name}`}
           name={props.name}
           placeholder={props.placeholder}
@@ -48,7 +50,7 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
         <span>
           <ButtonIcon isLoading={isLoading} isSuccess={isSuccess} />
         </span>
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={props.disabled}>
           {props.label ?? "שלח"}
         </button>
       </fieldset>
@@ -59,6 +61,7 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
     <fieldset className={style.input}>
       <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
       <input
+        disabled={props.disabled}
         type={props.inputType}
         id={props.name && `input-${props.name}`}
         name={props.name}

@@ -99,6 +99,7 @@ const JoinUsPage: React.FC = () => {
               sitekey={process.env.RECAPTCA_KEY!}
             />
             <FormField
+              disabled={isLoading || isSuccess}
               type="submit"
               label={getSubmitMessage({ isLoading, isSuccess })}
               skin={getButtonSkin({ isLoading, isSuccess })}
