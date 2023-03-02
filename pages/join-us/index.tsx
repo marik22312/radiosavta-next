@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Colors } from "../../components/ui/Colors";
 import { Page } from "../../components/ui/Page";
 import { Heading } from "../../components/ui/Typography";
@@ -21,17 +21,18 @@ const getButtonSkin = (args: { isLoading?: boolean; isSuccess?: boolean }) => {
   if (args.isSuccess) {
     return "success";
   }
-  return "default";
 };
 
-const ButtonIcon: React.FC<{isLoading?: boolean; isSuccess?: boolean}> = (props) => {
-	if (props.isLoading) {
-		return <FaSpinner />;
-	}
-	if (props.isSuccess) {
-		return <FaCheckCircle />;
-	}
-	return null
+const ButtonIcon: React.FC<{ isLoading?: boolean; isSuccess?: boolean }> = (
+  props
+) => {
+  if (props.isLoading) {
+    return <FaSpinner />;
+  }
+  if (props.isSuccess) {
+    return <FaCheckCircle />;
+  }
+  return null;
 };
 const useContactForm = (opts?: {
   onSuccess?: (data: Awaited<ReturnType<typeof submitContactForm>>) => void;
@@ -46,14 +47,22 @@ const useContactForm = (opts?: {
 const JoinUsPage: React.FC = () => {
   const captchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { submitForm, isLoading, isError, isSuccess } = useContactForm({
+  const { submitForm, isError, isSuccess } = useContactForm({
     onSuccess: (data) => {
+		setIsLoading(false);
       formRef.current?.reset();
+	  captchaRef.current?.reset();
     },
+	onError: (error) => {
+		captchaRef.current?.reset();
+		setIsLoading(false);
+	}
   });
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+	setIsLoading(true);
 
     const captcha = await captchaRef.current?.executeAsync();
     const data: ContactFormRequest = {
@@ -65,11 +74,7 @@ const JoinUsPage: React.FC = () => {
       [FormFields.MESSAGE]: e.target[FormFields.MESSAGE].value,
       recaptcha: captcha ?? "",
     };
-    const response = submitForm(data);
-
-    // TODO: Clear form
-
-    captchaRef.current?.reset();
+    submitForm(data);
   };
   return (
     <Page>
@@ -100,46 +105,31 @@ const JoinUsPage: React.FC = () => {
         </div>
         <div className={style.formWrapper}>
           <form ref={formRef} onSubmit={onSubmit}>
-            <fieldset className={style.input}>
-              <label htmlFor={FormFields.NAME}>שם מלא</label>
-              <input
-                type="text"
-                id={FormFields.NAME}
-                name={FormFields.NAME}
-                placeholder="ישראל ישראלי"
-              />
-            </fieldset>
-            <fieldset className={style.input}>
-              <label htmlFor={FormFields.EMAIL}>אימייל</label>
-              <input
-                type="text"
-                id={FormFields.EMAIL}
-                name={FormFields.EMAIL}
-                placeholder="israel@israel.co.il"
-              />
-            </fieldset>
-            <fieldset className={style.input}>
-              <label htmlFor={FormFields.MESSAGE}>הודעה</label>
-              <textarea
-                id={FormFields.MESSAGE}
-                placeholder="איזה אלופים אתם! איך מצטרפים?"
-              />
-            </fieldset>
+            <FormField
+              label="שם מלא"
+              name={FormFields.NAME}
+              placeholder="ישראל ישראלי"
+            />
+            <FormField
+              label="אימייל"
+              name={FormFields.EMAIL}
+              placeholder="israel@israeli.co.il"
+            />
+            <FormField
+              label="הודעה"
+              type="textarea"
+              name={FormFields.MESSAGE}
+			  placeholder="איזה אלופים אתם! איך מצטרפים?"
+            />
             <ReCAPTCHA
               ref={captchaRef}
               size="invisible"
               sitekey={process.env.RECAPTCA_KEY!}
             />
-            <fieldset
-              className={style.input}
-              data-type="submit"
-              data-skin={getButtonSkin({ isLoading, isSuccess })}
-            >
-              <span>
-                <ButtonIcon isLoading={isLoading} isSuccess={isSuccess} />
-              </span>
-              <button disabled={isLoading}>שלח</button>
-            </fieldset>
+            <FormField
+              type="submit"
+              skin={getButtonSkin({ isLoading, isSuccess })}
+            />
           </form>
           <div className={style.formStatusWrapper}>
             {isError && (
@@ -180,3 +170,55 @@ export const Alert: React.FC<AlertProps> = (props) => {
 };
 
 export default JoinUsPage;
+
+export interface FormFieldProps {
+  label?: string;
+  name?: string;
+  type?: "text" | "email" | "textarea" | "submit";
+  placeholder?: string;
+  skin?: "success" | "loading";
+}
+export const FormField: React.FC<FormFieldProps> = (props) => {
+  if (props.type === "textarea") {
+	return (
+		<fieldset className={style.input}>
+      <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
+      <textarea
+        id={props.name && `input-${props.name}`}
+        name={props.name}
+        placeholder={props.placeholder}
+      />
+    </fieldset>
+	)
+  }
+  if (props.type === "submit") {
+    const isLoading = props.skin === "loading";
+    const isSuccess = props.skin === "success";
+    return (
+      <fieldset
+        className={style.input}
+        data-type="submit"
+        data-skin={getButtonSkin({ isLoading, isSuccess })}
+      >
+        <span>
+          <ButtonIcon isLoading={isLoading} isSuccess={isSuccess} />
+        </span>
+        <button type="submit" disabled={isLoading}>
+          שלח
+        </button>
+      </fieldset>
+    );
+  }
+
+  return (
+    <fieldset className={style.input}>
+      <label htmlFor={`input-${props.name}`}>{props.label ?? ""}</label>
+      <input
+        type={props.type}
+        id={props.name && `input-${props.name}`}
+        name={props.name}
+        placeholder={props.placeholder}
+      />
+    </fieldset>
+  );
+};
