@@ -12,6 +12,7 @@
 	background-color: #333333;
 	width: 100%;
 	height: calc(var(--vh, 1vh)*100);
+	overflow: auto;
 
   @media (min-width: 430px) {
 	width: 400px;
