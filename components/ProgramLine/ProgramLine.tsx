@@ -57,7 +57,7 @@ export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
                 fontSize: "16px",
               }}
             >
-              <span>עוד</span>
+                <span>עוד</span>
             </div>
           )}
         </div>
@@ -110,7 +110,7 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
           className={style.archiveCtaWrapper}
           onClick={(e) => e.stopPropagation()}
         >
-          <Link href={`/programs/${props.programId}`} passHref>
+          <Link href={`/new-programs/${props.programId}`} passHref>
             <span>
               <a>לארכיון</a>
             </span>
