@@ -26,9 +26,9 @@ export const SingleProgramPage: React.FC<{
         <Heading>{props.program.name_he}</Heading>
       </div>
       <div style={{ paddingRight: "21px", marginTop: "21px" }}>
-		<p className={style.programHosts}>
-        בהגשת {props.program.users.map((u) => u.name).join(", ")}
-		</p>
+        <p className={style.programHosts}>
+          בהגשת {props.program.users.map((u) => u.name).join(", ")}
+        </p>
       </div>
       <div>
         <div
