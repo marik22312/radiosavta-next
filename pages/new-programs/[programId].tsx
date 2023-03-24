@@ -22,22 +22,17 @@ export const SingleProgramPage: React.FC<{
   const { playTrack } = usePlayerControls();
   return (
     <Page>
-      <div style={{ paddingRight: "21px" }}>
+      <div className={style.pageTitleWrapepr}>
         <Heading>{props.program.name_he}</Heading>
       </div>
-      <div style={{ paddingRight: "21px", marginTop: "21px" }}>
+      <div className={style.programHostsWrapper}>
         <p className={style.programHosts}>
           בהגשת {props.program.users.map((u) => u.name).join(", ")}
         </p>
       </div>
       <div>
         <div
-          style={{
-            paddingRight: "21px",
-            marginBottom: "15px",
-            marginTop: "21px",
-          }}
-        >
+          className={style.recordedShowsTitleWrapper}>
           <Heading color={Colors.SAVTA_ORANGE}>העלאות אחרונות</Heading>
         </div>
         <div>
