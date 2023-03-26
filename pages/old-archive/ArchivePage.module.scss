@@ -1,0 +1,117 @@
+@import '../../styles/mixins';
+
+
+.archivePage {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1631971111/radiosavta/backgrounds/bg_purple");
+	background-size: cover;
+	min-height: calc(100vh - var(--footerHeight));
+	background-size: contain;
+    background-repeat: repeat;
+	padding-top: 4rem;
+	
+	@include media-breakpoint(md) {
+		padding-top: 2rem;
+	}
+	@include media-breakpoint(sm) {
+		padding-top: 2rem;
+	}
+
+}
+
+.recordedShows {
+	display: flex;
+    justify-content: center;
+	flex-wrap: nowrap;
+    padding-bottom: var(--footerHeight);
+}
+
+.singleShow {
+	width: calc(33% - 20px);
+    margin: 10px 10px;
+
+	@media screen and (max-width: 1024px) {
+		width: 100%;
+		height: auto;
+	}
+}
+
+.quoteSection {
+	margin-bottom:1rem;
+}
+
+.quote {
+	color: #ffffff;
+	font-size: 1rem;
+	margin-bottom: 1.5rem;
+	text-shadow: var(--shadow);
+	text-align: center;
+	margin-top: var(--SPACE2);
+
+	@include media-breakpoint(sm) {
+		margin-right: 1.5rem;
+	}
+}
+
+.programsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+	min-height: 100%;
+}
+
+.programWrapper {
+	margin: 12px 0;
+}
+
+.filterWrapper {
+	width: 97%;
+}
+
+.input {
+	height: 50px;
+	background: rgba(0, 0, 0%, 40%);
+	border: 1px solid var(--banana);
+	margin: 10px 0;
+	color: rgba(255, 255, 100%, 100%);
+	font-size: 0.8rem;
+	padding-right: 10px;
+	outline: none !important;
+	&:focus {
+		border-width: 2px;
+	}
+
+	&::placeholder {
+		color: rgba(255, 255, 100%, 75%);
+		font-size: 0.8rem;
+		padding-right: 10px;
+	}
+	
+}
+
+.searchQuery {
+	width: 100%;
+}
+
+.programSelect, .dateSelect {
+	width: calc(50% - 10px);
+}
+
+.programSelect {
+	margin-left: 10px;
+}
+
+.dateSelect {
+	margin-right: 10px;
+}
+
+.noResultsWrapper {
+	color:#ffffff;
+	text-align: center;
+
+	padding-top: 2rem;
+	width: 100%;
+
+	& > * {
+		margin-bottom: 1rem;
+	}
+}
