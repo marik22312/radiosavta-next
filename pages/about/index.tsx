@@ -1,120 +1,25 @@
-import React from "react";
-import { Page } from "../../components/Page";
-import { BASE_IMAGE } from "../../config/images";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react';
+import { Page } from '../../components/ui/Page';
+import { Heading } from '../../components/ui/Typography';
+import style from './aboutPage.module.scss';
 
-import style from "./AboutPageNew.module.scss";
-import BecomeAPateronButton from "./assets/become_a_patron_button@2x.png";
-import TeamMembersData from "./data/team.json";
-import { TeamMember } from "../../components/TeamMember/TeamMember";
-import classNames from "classnames";
-
-const CONTACT_NUMBER = process.env.CONTACT_NUMBER;
-
-const AboutUsPage = () => {
-  return (
-    <Page title="הסיפור של סבתא">
-      <div className={style.pageWrapper}>
-        <div className={style.aboutUsSection}>
-          <div className={style.titleAndAbout}>
-            <div className={style.title}>
-              <h1>
-                רדיוסבתא
-                <br />
-                קולקטיב רדיו אינטרנטי
-              </h1>
-            </div>
-            <div className={style.aboutUsText}>
-              <p>
-                קולקטיב &apos;רדיו סבתא&apos; נוסד בשנת 2015 כתחנת רדיו אינטרנטי
-                במצפה רמון. התחנה נוסדה ע&quot;י עירא דיין, במטרה להנציח את
-                (סבתא) יעל קרן, חמתו.
-              </p>
-              <p>
-                עירא ביקש לשמר בפעילות התחנה את האוירה החמה והמארחת שהיתה בסלון
-                של סבתא, שהיתה מלווה תמיד במוזיקה משובחת בשלל סגנונות. הרדיו
-                משדר מוזיקה איכותית ללא פשרות והרבה כבוד לסבים והסבתות, חיבור
-                לשורשים ולרוח המדברית.
-              </p>
-              <p>
-                בתחילת הדרך התחנה עבדה מתוך אולפן במצפה רמון, ע&quot;י תושבי
-                מצפה רמון. עם השנים, חלק מההרכב המקורי של שדרני התחנה עזב את
-                מצפה רמון אך לא את רדיו-סבתא, והחלו שידורים מבתי חלק מהשדרנים
-                בנוסף לשידור החי מהאולפן.
-              </p>
-              <p>
-                בשנת 2020 עם פרוץ משבר הקורונה התחנה עברה לשידור אינטרנטי ללא
-                אולפן מרכזי אלא ממספר נקודות שידור ברחבי ישראל, מרמת הגולן, תל
-                אביב, באר שבע, רמתן גן, אפיקים, אשלים, מדרשת בן גוריון ומצפה רמון. נכון לאוקטובר
-                2020 התחנה מתפקדת למעשה כקולקטיב שבו מתחלקים החברים בזמני השידור
-                בערבים.
-              </p>
-              <p>
-                המודל הכלכלי של רדיו סבתא נשען בעיקר על כספי תומכים חופשיים, דרך
-                פלטפורמת פטריון. כדי שהתחנה תוכל לשדר באופן בר קיימא, הציפייה
-                מהחברים בקולקטיב לעשות מנוי לתרומה חודשית בשיעור של 5$ שמאפשר
-                תשלום על הוצאות התפעול השוטפות והמשך הצטיידות ומיתוג.{" "}
-              </p>
-            </div>
-          </div>
-          <div className={style.stickyWrapper}>
-            <div className={style.pateronCta}>
-              <h3>עזרו לנו להפיץ מוזיקה טובה</h3>
-              <Link href="https://www.patreon.com/radiosavta/" passHref={true}>
-                <a target="_blank" rel="noopener">
-                  <Image
-                    src={BecomeAPateronButton}
-                    alt="Become a Pateron"
-                    height={40}
-                    width={160}
-                  />
-                </a>
-              </Link>
-            </div>
-            <JoinCta className="show-md" />
-          </div>
-          <div className={style.radioImage}>
-            <Image
-              src={`${BASE_IMAGE}/radiosavta/gallery/berech.jpg`}
-              layout={"fill"}
-              alt="Radisoavta vibe image"
-            />
-          </div>
-          <JoinCta className={"hide-md"} />
-        </div>
-        <div className={style.teamSection}>
-          <div className={style.teamSectionTitle}>
-            <h2>בעלי תפקידים</h2>
-          </div>
-          <div className={style.teamMembersWrapper}>
-            {TeamMembersData.map((member) => {
-              return <TeamMember {...member} key={`member-${member.name}`} />;
-            })}
-          </div>
-        </div>
-      </div>
-    </Page>
-  );
-};
-
-interface JoinCtaProps {
-  className: string;
+const NewAboutPage: React.FC = () => {
+	return (
+		<Page>
+			<div style={{paddingRight: '21px'}}>
+			<Heading>למה סבתא?</Heading>
+			</div>
+			<div className={style.aboutUsWrapper}>
+				<div className={style.aboutUsText}>
+					<p>קולקטיב‭ &apos;‬רדיו‭ ‬סבתא‭&apos; ‬נוסד‭ ‬בשנת‭ ‬2015‭ ‬כתחנת‭ ‬רדיו‭ ‬אינטרנטי‭ ‬במצפה‭ ‬רמון‭ ‬ע‭&quot;‬י‭ ‬עירא‭ ‬דיין‭, ‬ושם‭ ‬לו‭ ‬למטרה‭ ‬להנציח‭ ‬את‭ ‬המורשת‭ ‬המוסיקלית‭ ‬של‭ ‬יעל‭ ‬קרן‭ ‬ז&quot;ל‭, ‬הסבתא‭ ‬והחמות‭ ‬של‭ ‬עירא‭. ‬הרעיון‭ ‬היה‭ ‬להביא‭ ‬לשידור‭ ‬את‭ ‬האוירה‭ ‬החמה‭ ‬והפתוחה‭ ‬לכל‭ ‬שהיתה‭ ‬בסלון‭ ‬של‭ ‬סבתא‭. ‬איסוף‭ ‬והאזנה‭ ‬למוסיקה‭ ‬משובחת‭ ‬24‭ ‬שעות‭ ‬ביממה‭, ‬ואורחים‭ ‬רבים‭ ‬שהתקבלו‭ ‬בחום‭ ‬ואהבה</p>
+					<p>זה‭ ‬התחיל‭ ‬משידור‭ ‬בלתי‭ ‬פוסק‭ ‬של‭ ‬מוסיקה‭ ‬והתפתח‭ ‬לתכניות‭ ‬קבועות‭ ‬בסגנונות‭ ‬שונים‭ ‬ומגוונים‭. ‬כ‭-‬5‭ ‬שנים‭ ‬שודרו‭ ‬תכניות‭ ‬מהאולפן‭ ‬במצפה‭, ‬והתחנה‭ ‬תופעלה‭ ‬על‭ ‬ידי‭ ‬תושבי‭ ‬המקום‭ ‬וחברים‭ ‬של‭ ‬המשפחה‭. ‬</p>
+					<p>עם‭ ‬השנים‭, ‬הרכב‭ ‬השדרנים‭ ‬השתנה‭. ‬חלק‭ ‬מהשדרנים‭ ‬עזבו‭ ‬את‭ ‬מצפה‭ ‬רמון‭ ‬ושדרנים‭ ‬חדשים‭ ‬הצטרפו‭. ‬עם‭ ‬פרוץ‭ ‬משבר‭ ‬הקורונה‭ ‬ב‭-‬2020‭ ‬השידורים‭ ‬עברו‭ ‬מהאולפן‭ ‬במצפה‭ ‬רמון‭ ‬לאולפנים‭ ‬ביתיים‭ ‬ברחבי‭ ‬הארץ‭ ‬והעולם‭: ‬מרמת‭ ‬הגולן‭, ‬תל‭ ‬אביב‭, ‬ברלין‭, ‬באר‭ ‬שבע‭, ‬רמת‭-‬גן‭, ‬עמק‭ ‬הירדן‭, ‬דרמסאלה‭, ‬אשלים‭, ‬מדרשת‭ ‬בן‭ ‬גוריון‭, ‬מצפה‭ ‬רמון‭ ‬ולאורך‭ ‬שביל‭ ‬ישראל‭. </p>
+					<p>התחנה‭ ‬מתפקדת‭ ‬למעשה‭ ‬כקולקטיב‭ ‬שבו‭ ‬מתחלקים‭ ‬החברים‭ ‬בזמני‭ ‬השידור‭ ‬בערבים‭ ‬לפי‭ ‬לו&quot;ז‭ ‬קבוע‭ ‬ופתוח‭ ‬לאלתורים‭. ‬בזמן‭ ‬שאין‭ ‬תכניות‭ ‬חיות‭ ‬מתנגנים‭ ‬פלייליסטים‭ ‬איכותיים‭ ‬הנערכים‭ ‬ומתעדכנים‭ ‬ע&quot;י‭ ‬השדרנים‭.‬</p>
+					<p>המודל‭ ‬הכלכלי‭ ‬של‭ ‬רדיו‭ ‬סבתא‭ ‬נשען‭ ‬בעיקר‭ ‬על‭ ‬תומכים‭ ‬חופשיים‭ ‬מכל‭ ‬העולם‭, ‬אוהבי‭ ‬ומעריכי‭ ‬מוסיקה‭ ‬ללא‭ ‬הפרעות‭ ‬מסחריות‭. ‬בכדי‭ ‬שהתחנה‭ ‬תוכל‭ ‬להמשיך‭ ‬לשדר‭, ‬להתפתח‭ ‬ולהשתפר‭, ‬נודה‭ ‬לכם‭/‬ן‭ ‬ביותר‭ ‬על‭ ‬תרומה‭ ‬חודשית‭ ‬סמלית‭ ‬דרך‭ ‬פלטפורמת‭ ‬Patreon‭ ‬בהרשמה‭ ‬חד‭ ‬פעמית‭ ‬לתרומה‭ ‬חודשית‭ ‬קבועה‭ ‬וצנועה‭,‬‭ ‬שנותנת‭ ‬לנו‭ ‬אפשרות‭ ‬להמשיך‭ ‬לשדר‭ ‬ולהמשיך‭ ‬את‭ ‬הזרם‭ ‬הבלתי‭ ‬פוסק‭ ‬של‭ ‬מוזיקה‭ ‬ואהבה‭,‬‭ ‬כמו‭ ‬בסלון‭ ‬של‭ ‬סבתא‭. ‬</p>
+				</div>
+			</div>
+		</Page>
+	)
 }
-const JoinCta: React.FC<JoinCtaProps> = (props) => {
-  return (
-    <div className={classNames(style.joinCta, props.className)}>
-      <h3>אוהבים רדיו?</h3>
-      <Link
-        href={`https://wa.me/${CONTACT_NUMBER}?text=%D7%94%D7%99%D7%99!%0A%D7%A4%D7%95%D7%A0%D7%94%20%D7%90%D7%9C%D7%99%D7%99%D7%9A%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%9C%D7%92%D7%91%D7%99%20%D7%A9%D7%99%D7%93%D7%95%D7%A8%20%D7%91%D7%A8%D7%93%D7%99%D7%95%D7%A1%D7%91%D7%AA%D7%90`}
-        passHref
-      >
-        <a target="_blank" className={style.joinButton}>
-          הצטרפו אלינו
-        </a>
-      </Link>
-    </div>
-  );
-};
 
-export default AboutUsPage;
+export default NewAboutPage;
