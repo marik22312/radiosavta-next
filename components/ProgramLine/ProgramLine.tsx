@@ -110,7 +110,7 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
           className={style.archiveCtaWrapper}
           onClick={(e) => e.stopPropagation()}
         >
-          <Link href={`/new-programs/${props.programId}`} passHref>
+          <Link href={`/programs/${props.programId}`} passHref>
             <span>
               <a>לארכיון</a>
             </span>
