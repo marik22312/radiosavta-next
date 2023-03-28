@@ -1,0 +1,56 @@
+.pageTitleWrapepr {
+	padding-right: 21px;;
+}
+
+.programHostsWrapper {
+	padding-right: 21px;
+	margin-top: 21px;
+}
+
+.programHosts {
+  font-family: "Heebo";
+  font-size: 16px;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+.recordedShowsTitleWrapper {
+  padding-right: 21px;
+  margin-bottom: 15px;
+  margin-top: 21px;
+}
+
+.recordedShowWrapper {
+  font-family: "Heebo";
+  height: 66px;
+  background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  mix-blend-mode: screen;
+  border-radius: 10px;
+  padding: 6px 14px;
+  padding-right: 21px;
+  margin-bottom: 6px;
+
+  cursor: pointer;
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #cc9933;
+  }
+
+  &[data-isPlaying="true"] {
+    background: #8f8989;
+
+    h3 {
+      color: #cccccc;
+    }
+
+    p {
+      color: #060606;
+    }
+  }
+}

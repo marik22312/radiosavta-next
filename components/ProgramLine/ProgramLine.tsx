@@ -57,7 +57,7 @@ export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
                 fontSize: "16px",
               }}
             >
-              <span>עוד</span>
+                <span>עוד</span>
             </div>
           )}
         </div>

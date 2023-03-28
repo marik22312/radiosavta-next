@@ -18,6 +18,7 @@ const configWithImages = withImages({
 		MIXPANEL_API_KEY: process.env.MIXPANEL_API_KEY,
 		CONTACT_NUMBER: process.env.CONTACT_NUMBER,
 		FB_PIXEL_ID: process.env.FB_PIXEL_ID,
+		RECAPTCA_KEY: process.env.RECAPTCA_KEY,
 	}
   })
 

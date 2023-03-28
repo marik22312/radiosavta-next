@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <MenuItem url="/" title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
-          <MenuItem url="/archive" title="הבוידעם" />
+          <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
         </div>
       </div>
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
           </div>
           <MenuItem url="/" title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
-          <MenuItem url="/archive" title="הבוידעם" />
+          <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
         </div>
       </div>
