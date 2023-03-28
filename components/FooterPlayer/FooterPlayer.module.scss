@@ -1,9 +1,6 @@
 @import "../../styles/mixinsNew.scss";
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: var(--footerHeight);
   background-color: var(--dark-green);

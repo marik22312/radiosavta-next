@@ -26,9 +26,15 @@ import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
-import LandingPage from "./landingPage";
+import PlayerWrapper, {
+  PlayerWrapperState,
+} from "./PlayerWrapper/PlayerWrapper";
 
-export const FooterPlayer: React.FC = () => {
+interface PlayerInterface {
+  state: PlayerWrapperState;
+}
+
+const FooterPlayer = (props: PlayerInterface) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const { seekerRef, currentTime, onSeek } = usePlayerBindings(audioRef);
   const {
@@ -133,7 +139,7 @@ export const FooterPlayer: React.FC = () => {
   return (
     <>
       <AudioPlayer ref={audioRef} />
-      <LandingPage />
+      <PlayerWrapper />
       <div className={footerWrapperClass}>
         <div className={styles.rightSide} onClick={() => setIsPlayerOpen(true)}>
           <PlayPauseButton
@@ -208,3 +214,5 @@ export const FooterPlayer: React.FC = () => {
     </>
   );
 };
+
+export default FooterPlayer;

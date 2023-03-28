@@ -3,7 +3,7 @@
 $inactiveSize: 90vh;
 $activeSize: 30vh;
 
-.landingPageContainer {
+.playerWrapperContainer {
     @include responsivePage;
     position: fixed;
     inset: 0;
@@ -11,32 +11,32 @@ $activeSize: 30vh;
     transition: background-color 0.5s ease-in-out;
 }
 
-.inactiveLandingPageContainer {
+.inactivePlayerWrapperContainer {
     background-color: transparent;
 }
 
-.landingPageWrapper {
+.playerWrapperWrapper {
     @include responsivePageWrapper;
     background-color: #060606;
     transition: transform 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
 }
 
-.initialLandingPage {
+.initialPlayerWrapper {
     transform: translateY(0);
     padding-bottom: 0;
 }
 
-.activeLandingPage {
+.activePlayerWrapper {
     transform: translateY($activeSize);
     padding-bottom: $activeSize;
 }
 
-.inactiveLandingPage {
+.inactivePlayerWrapper {
     transform: translateY($inactiveSize);
     padding-bottom: $inactiveSize;
 }
 
-.LandingPageAbout {
+.PlayerWrapperAbout {
     flex-basis: 25%;
     display: flex;
     flex-direction: column;
@@ -44,22 +44,22 @@ $activeSize: 30vh;
     align-items: center;
 }
 
-.landingPageTitle {
+.playerWrapperTitle {
     color: #8F8989;
     font-size: 40px;
 }
 
-.landingPageSubtitle {
+.playerWrapperSubtitle {
     color: #8F8989;
     font-size: 17px;
 }
 
-.landingPageQuote {
+.playerWrapperQuote {
     color: #CC9933;
     font-size: 20px;
 }
 
-.landingPagePlay {
+.playerWrapperPlay {
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
@@ -67,12 +67,12 @@ $activeSize: 30vh;
     align-items: center;
 }
 
-.landingPagePlaySubtitle {
+.playerWrapperPlaySubtitle {
     color: #CC9933;
     font-size: 13px;
 }
 
-.LandingPageFooter {
+.PlayerWrapperFooter {
     flex-basis: 25%;
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@ $activeSize: 30vh;
     padding-block-end: 20px;
 }
 
-.landingPageFooterButton {
+.playerWrapperFooterButton {
     background: transparent;
     color: #CC9933;
 }
