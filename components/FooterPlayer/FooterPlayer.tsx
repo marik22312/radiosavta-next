@@ -26,9 +26,8 @@ import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
-import PlayerWrapper, {
-  PlayerWrapperState,
-} from "./PlayerWrapper/PlayerWrapper";
+import PlayerWrapper from "./PlayerWrapper/PlayerWrapper";
+import { PlayerWrapperState } from "../../domain/Player";
 
 interface PlayerInterface {
   state: PlayerWrapperState;
@@ -139,7 +138,6 @@ const FooterPlayer = (props: PlayerInterface) => {
   return (
     <>
       <AudioPlayer ref={audioRef} />
-      <PlayerWrapper />
       <div className={footerWrapperClass}>
         <div className={styles.rightSide} onClick={() => setIsPlayerOpen(true)}>
           <PlayPauseButton

@@ -1,19 +1,14 @@
+import React, { useState } from "react";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { useState } from "react";
+import { PlayerWrapperState } from "../../../domain/Player";
 import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
-import FooterPlayer from "../FooterPlayer";
 
 import style from "./playerWrapper.module.scss";
+import FooterPlayer from "../FooterPlayer";
 
-export enum PlayerWrapperState {
-  Initial,
-  Active,
-  Inactive,
-}
-
-const PlayerWrapper = () => {
+const PlayerWrapper: React.FC = () => {
   const [pageStatus, setPageStatus] = useState<PlayerWrapperState>(
     PlayerWrapperState.Initial
   );
@@ -53,7 +48,7 @@ const PlayerWrapper = () => {
         )}
       >
         <FooterPlayer state={pageStatus} />
-        {/* <div className={style.PlayerWrapperAbout}>
+        <div className={style.PlayerWrapperAbout}>
           <h1 className={style.playerWrapperTitle}>רדיו סבתא</h1>
           <h2 className={style.playerWrapperSubtitle}>קולקטיב רדיו אינטרנטי</h2>
           <h3 className={style.playerWrapperQuote}>כשהעגלה נוסעת, המלונים...</h3>
@@ -76,7 +71,7 @@ const PlayerWrapper = () => {
             />{" "}
             כניסה לאתר
           </button>
-        </div> */}
+        </div>
       </div>
     </div>
   );
