@@ -67,6 +67,16 @@ $activeSize: 30vh;
     align-items: center;
 }
 
+.playIconInitial {
+    color: #CC9933;
+    font-size: 100px;
+}
+
+.playIconActive {
+    color: #CC9933;
+    font-size: 50px;
+}
+
 .playerWrapperPlaySubtitle {
     color: #CC9933;
     font-size: 13px;
@@ -83,9 +93,26 @@ $activeSize: 30vh;
 
 .playerWrapperFooterButton {
     background: transparent;
+    border: none;
     color: #CC9933;
 }
 
 .footerButtonIcon {
     transform: rotate(180deg);
+}
+
+.playerWrapperOpenButton {
+    color: #CC9933;
+    margin-inline: auto;
+    background: transparent;
+    border: none;
+    transform: rotate(-90deg);
+    position: relative;
+    top: 5px;
+    font-size: 15px;
+}
+
+.hide {
+    display: none;
+    font-size: 0;
 }

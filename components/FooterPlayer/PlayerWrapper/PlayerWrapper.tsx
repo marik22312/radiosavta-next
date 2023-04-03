@@ -12,21 +12,26 @@ const PlayerWrapper: React.FC = () => {
   const [pageStatus, setPageStatus] = useState<PlayerWrapperState>(
     PlayerWrapperState.Initial
   );
+
+  const pageIsActive = pageStatus === PlayerWrapperState.Active;
+  const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
+  const pageIsInitial = pageStatus === PlayerWrapperState.Initial;
+
   return (
     <div
       className={classNames(
         style.playerWrapperContainer,
         {
           [style.initialPlayerWrapperContainer]:
-            pageStatus === PlayerWrapperState.Initial,
+          pageIsInitial,
         },
         {
           [style.inactivePlayerWrapperContainer]:
-            pageStatus === PlayerWrapperState.Active,
+          pageIsActive,
         },
         {
           [style.inactivePlayerWrapperContainer]:
-            pageStatus === PlayerWrapperState.Inactive,
+          pageIsInactive,
         }
       )}
     >
@@ -35,26 +40,26 @@ const PlayerWrapper: React.FC = () => {
           style.playerWrapperWrapper,
           {
             [style.initialPlayerWrapper]:
-              pageStatus === PlayerWrapperState.Initial,
+              pageIsInitial,
           },
           {
             [style.activePlayerWrapper]:
-              pageStatus === PlayerWrapperState.Active,
+            pageIsActive,
           },
           {
             [style.inactivePlayerWrapper]:
-              pageStatus === PlayerWrapperState.Inactive,
+            pageIsInactive,
           }
         )}
       >
-        <FooterPlayer state={pageStatus} />
-        <div className={style.PlayerWrapperAbout}>
+        {/* <FooterPlayer state={pageStatus} /> */}
+        <div className={classNames(style.PlayerWrapperAbout, {[style.hide]: pageIsInactive })}>
           <h1 className={style.playerWrapperTitle}>רדיו סבתא</h1>
           <h2 className={style.playerWrapperSubtitle}>קולקטיב רדיו אינטרנטי</h2>
           <h3 className={style.playerWrapperQuote}>כשהעגלה נוסעת, המלונים...</h3>
         </div>
         <div
-          className={style.playerWrapperPlay}
+          className={classNames(style.playerWrapperPlay, {[style.hide]: pageIsInactive })}
           onClick={() => setPageStatus(PlayerWrapperState.Active)}
         >
           <PlayPauseButton />
@@ -62,7 +67,7 @@ const PlayerWrapper: React.FC = () => {
         </div>
         <div className={style.PlayerWrapperFooter}>
           <button
-            className={style.playerWrapperFooterButton}
+            className={classNames(style.playerWrapperFooterButton, {[style.hide]: pageIsInactive })}
             onClick={() => setPageStatus(PlayerWrapperState.Inactive)}
           >
             <FontAwesomeIcon
@@ -72,6 +77,12 @@ const PlayerWrapper: React.FC = () => {
             כניסה לאתר
           </button>
         </div>
+        <button
+          className={classNames(style.playerWrapperOpenButton, {[style.hide]: !pageIsInactive })}
+          onClick={() => setPageStatus(PlayerWrapperState.Active)}
+        >
+          <FontAwesomeIcon className={style.footerOpenIcon} icon={faPlay as any} />
+        </button>
       </div>
     </div>
   );
