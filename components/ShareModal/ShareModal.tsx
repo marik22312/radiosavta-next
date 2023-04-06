@@ -17,7 +17,7 @@ export interface ShareType {
   }
   export const ShareModal: React.FC<ShareModalProps> = (props) => {
 	return (
-	  <div>
+	  <>
 		<Modal
 		  className={style.shareModal}
 		  isOpen={props.isOpen}
@@ -42,7 +42,7 @@ export interface ShareType {
 			/>
 		  </div>
 		</Modal>
-	  </div>
+	  </>
 	);
   };
   

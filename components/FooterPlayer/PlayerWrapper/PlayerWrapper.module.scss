@@ -7,7 +7,6 @@ $activeSize: 30vh;
     @include responsivePage;
     position: fixed;
     inset: 0;
-    z-index: 9999;
     transition: background-color 0.5s ease-in-out;
 }
 
@@ -29,42 +28,13 @@ $activeSize: 30vh;
 .activePlayerWrapper {
     transform: translateY($activeSize);
     padding-bottom: $activeSize;
+    justify-content: center;
+    gap: 30px;
 }
 
 .inactivePlayerWrapper {
     transform: translateY($inactiveSize);
     padding-bottom: $inactiveSize;
-}
-
-.PlayerWrapperAbout {
-    flex-basis: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.playerWrapperTitle {
-    color: #8F8989;
-    font-size: 40px;
-}
-
-.playerWrapperSubtitle {
-    color: #8F8989;
-    font-size: 17px;
-}
-
-.playerWrapperQuote {
-    color: #CC9933;
-    font-size: 20px;
-}
-
-.playerWrapperPlay {
-    flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .playIconInitial {
@@ -75,11 +45,6 @@ $activeSize: 30vh;
 .playIconActive {
     color: #CC9933;
     font-size: 50px;
-}
-
-.playerWrapperPlaySubtitle {
-    color: #CC9933;
-    font-size: 13px;
 }
 
 .PlayerWrapperFooter {
@@ -95,6 +60,8 @@ $activeSize: 30vh;
     background: transparent;
     border: none;
     color: #CC9933;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .footerButtonIcon {

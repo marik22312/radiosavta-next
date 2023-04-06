@@ -11,6 +11,7 @@ export const PlayPauseButton: React.FC<{
   isLoading?: boolean;
   displayLoader?: boolean;
   onClick?: (e: any) => void;
+  style?: React.CSSProperties;
 }> = (props) => {
   const shouldDisplayLoader = props.isLoading && props.displayLoader;
 
@@ -20,6 +21,7 @@ export const PlayPauseButton: React.FC<{
         src={LoadingAnimated}
         alt="Loading"
         className={cn(styles.loadingCircle, styles.playPauseImg)}
+        style={props.style}
       />
     );
   }
@@ -30,6 +32,7 @@ export const PlayPauseButton: React.FC<{
         alt="Pause Button"
         onClick={(e) => props.onClick?.(e)}
         className={styles.playPauseImg}
+        style={props.style}
       />
     );
   }
@@ -39,6 +42,7 @@ export const PlayPauseButton: React.FC<{
       alt="Play Button"
       onClick={props.onClick}
       className={styles.playPauseImg}
+      style={props.style}
     />
   );
 };
