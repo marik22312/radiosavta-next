@@ -30,6 +30,8 @@ import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
 import PlayerWrapper from "./PlayerWrapper/PlayerWrapper";
 import { PlayerWrapperState } from "../../domain/Player";
+import VolumeSlider from "./VolumeSlider/VolumeSlider";
+import classNames from "classnames";
 
 interface PlayerInterface {
   state: PlayerWrapperState;
@@ -52,7 +54,6 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const { isLive, streamer, toggleLive } = useLivePlayer();
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [image, setImage] = useState("");
-  const [isAgendaOpen, setIsAgendaOpen] = useState(false);
   const { togglePlay: togglePlayerPlay } = useTogglePLay();
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -157,6 +158,54 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
     </>
   )
 
+  const seekerContent = () => (
+    <div className={styles.seekerWrapper}>
+      {shouldShowSeeker && (
+        <Seeker
+          ref={seekerRef}
+          currentTime={currentTime}
+          durationTime={durationTime}
+          onSeek={onSeek}
+        />
+      )}
+    </div>
+  )
+
+  const broadcastIcon = () => {
+    // TODO: get icons
+    if (!isPlaying) {
+      return
+    }
+    if (isLive) {
+      return <img className={styles.broadcastIcon} src={`${BASE_IMAGE_ICON}radiosavta/broadcast.svg`} alt="" />
+    }
+    if (isPlaying && !isLive) {
+      return <img className={styles.broadcastIcon} src={`${BASE_IMAGE_ICON}radiosavta/recorded.svg`} alt="" />
+    }
+    return null
+  }
+
+  const volumeControlContent = () => (
+    <div className={styles.volumeWrapper}>
+      <button className={classNames(styles.actionButton, styles.volumeButton)}>
+        <FontAwesomeIcon icon={faVolumeUp as any} />
+        <VolumeSlider />
+      </button>
+    </div>
+  )
+
+  const shareButtonContent = () => (
+    <button className={styles.actionButton} onClick={onShare}>
+      <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
+    </button>
+  )
+
+  const openClosePlayerButton = (mode: PlayerWrapperState) => (
+    <button className={styles.actionButton} onClick={() => props.changeState(mode)}>
+      <span className={styles.togglePlayerButton} />
+    </button>
+  )
+
   const initialContent = () => {
     return (
       <>
@@ -172,68 +221,25 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const inActiveContent = () => {
     return (
       <>
-        <div className={footerWrapperClass}>
-          <div
-            className={styles.rightSide}
-            onClick={() => setIsPlayerOpen(true)}
-          >
-            {playButtonContent()}
-            <img className={styles.playerImage} src={image} alt="" />
-            {/*<Agenda /> should show only on desktop*/}
-            <div className={styles.contentWrapper}>
-              <p className={styles.programName}>
-                {isLive ? `שידור חי ${streamer}` : artist}
-              </p>
-              <p className={styles.songTitle} title={songTitle}>
-                {songTitle}
-              </p>
-            </div>
+        <div className={styles.inactivePlayerWrapper}>
+        <div className={styles.inactivePlayerInner}>
+          {playButtonContent()}
+          <div className={styles.contentWrapper}>
+            <p className={styles.programName}>
+              {isLive ? `שידור חי ${streamer}` : artist}
+            </p>
+            <p className={styles.songTitle} title={songTitle}>
+              {songTitle}
+            </p>
           </div>
-          <div className={styles.seekerWrapper}>
-            {shouldShowSeeker && (
-              <Seeker
-                ref={seekerRef}
-                currentTime={currentTime}
-                durationTime={durationTime}
-                onSeek={onSeek}
-              />
-            )}
-          </div>
-          <div
-            className={styles.footerActionsWrapper}
-            onClick={() => setIsPlayerOpen(true)}
-          >
-            <div className={styles.toggleFullScreen}>
-              <FontAwesomeIcon icon={faAngleUp as any} color="white" />
-            </div>
-            <button onClick={toggleLive} disabled={isStopped || isLive}>
-              <FontAwesomeIcon icon={faBroadcastTower as any} size="1x" />
-              <span className={styles.iconText}>חזרה לשידור חי</span>
-            </button>
-            <button onClick={onShare}>
-              <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
-              <span className={styles.iconText}>שתף</span>
-            </button>
-            <button
-              onClick={() => {
-                logAgendaOpen();
-                setIsAgendaOpen((prevState) => !prevState);
-              }}
-            >
-              <FontAwesomeIcon icon={faCalendar as any} size="1x" />
-              <span className={styles.iconText}>מה הלו&quot;ז?</span>
-            </button>
+          {seekerContent()}
+          <div className={styles.footerActions}>
+            {volumeControlContent()}
+            {shareButtonContent()}
           </div>
         </div>
-        <FullScreenPlayer
-          ref={audioRef}
-          onShare={onShare}
-          visible={isPlayerOpen}
-          onClose={() => setIsPlayerOpen(false)}
-          onSkipTenSeconds={onSkipTenSeconds}
-          onBackTenSeconds={onBackTenSeconds}
-        />
-        <Agenda open={isAgendaOpen} />
+          {openClosePlayerButton(PlayerWrapperState.Active)}
+        </div>
       </>
     );
   };
@@ -244,15 +250,10 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
         {isPlaying && !isLive && <Seeker ref={seekerRef} currentTime={currentTime} durationTime={durationTime} onSeek={onSeek} />}
         <div className={styles.activeContentHeader}>
           <FontAwesomeIcon icon={faBroadcastTower as any} style={{ color: '#ccc', width: '25px', height: '25px' }} />
-          <button className="closeButton" onClick={() => props.changeState(PlayerWrapperState.Inactive)}>
-            <span className={styles.togglePlayerButton} />
-          </button>
+          {openClosePlayerButton(PlayerWrapperState.Inactive)}
           <div className={styles.headerColumn}>
-            {/* TODO: add volume slider */}
-            <button className="volumeSliderOpenButton"><FontAwesomeIcon icon={faVolumeUp as any} /></button>
-            <button onClick={onShare}>
-              <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
-            </button>
+            {volumeControlContent()}
+            {shareButtonContent()}
           </div>
           </div>
         {headerTextContent()}
