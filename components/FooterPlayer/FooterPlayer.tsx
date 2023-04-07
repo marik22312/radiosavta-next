@@ -4,13 +4,12 @@ import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
 import { AudioPlayer } from "./AudioPlayer/AudioPlayer";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
-import { FullScreenPlayer } from "./FullScreenPlayer/FullScreenPlayer";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import { BASE_IMAGE_ICON } from "../../config/images";
 import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
-import { Seeker } from "./AudioPlayer/Seeker/Seeker";
+import { Seeker } from "./Seeker/Seeker";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import {
   faBroadcastTower,
@@ -33,6 +32,9 @@ import { PlayerWrapperState } from "../../domain/Player";
 import VolumeSlider from "./VolumeSlider/VolumeSlider";
 import classNames from "classnames";
 
+import isLiveIcon from '../../images/isLive.svg';
+import isBroadcastIcon from '../../images/isPlayingProgram.svg';
+
 interface PlayerInterface {
   state: PlayerWrapperState;
   changeState: (state: PlayerWrapperState) => void;
@@ -40,7 +42,7 @@ interface PlayerInterface {
 
 const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { seekerRef, currentTime, onSeek } = usePlayerBindings(audioRef);
+  const { seekerRef, currentTime, onSeek, volume, onVolumeChange } = usePlayerBindings(audioRef);
   const {
     songTitle,
     artist,
@@ -135,18 +137,24 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
     isPlayerOpen ? styles.footerClosed : ""
   }`;
 
-  const playButtonContent = (pageState?: PlayerWrapperState) => (
-    <PlayPauseButton
-      isPlaying={isPlaying}
-      isLoading={isLoading}
-      onClick={() => togglePlay(pageState)}
-      displayLoader
-      style={{
-        width: props.state === PlayerWrapperState.Initial ? "120px" : "60px",
-        height: props.state === PlayerWrapperState.Initial ? "120px" : "60px",
-      }}
-    />
-  )
+  const playButtonContent = (pageState?: PlayerWrapperState) => {
+    let iconSize = '50px';
+    if (props.state === PlayerWrapperState.Initial) {
+      iconSize = '120px';
+    } else if (props.state === PlayerWrapperState.Active) {
+      iconSize = '60px';
+    }
+
+    return (
+      <PlayPauseButton
+        isPlaying={isPlaying}
+        isLoading={isLoading}
+        onClick={() => togglePlay(pageState)}
+        displayLoader
+        style={{ width: iconSize, height: iconSize }}
+      />
+    )
+    }
 
   const headerTextContent = () => (
     <>
@@ -172,15 +180,14 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   )
 
   const broadcastIcon = () => {
-    // TODO: get icons
     if (!isPlaying) {
-      return
+      return <span />
     }
     if (isLive) {
-      return <img className={styles.broadcastIcon} src={`${BASE_IMAGE_ICON}radiosavta/broadcast.svg`} alt="" />
+      return <img src={isLiveIcon} alt="" />
     }
     if (isPlaying && !isLive) {
-      return <img className={styles.broadcastIcon} src={`${BASE_IMAGE_ICON}radiosavta/recorded.svg`} alt="" />
+      return <img src={isBroadcastIcon} alt="" />
     }
     return null
   }
@@ -188,8 +195,7 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const volumeControlContent = () => (
     <div className={styles.volumeWrapper}>
       <button className={classNames(styles.actionButton, styles.volumeButton)}>
-        <FontAwesomeIcon icon={faVolumeUp as any} />
-        <VolumeSlider />
+        <VolumeSlider volume={volume} onVolumeChange={onVolumeChange} />
       </button>
     </div>
   )
@@ -222,6 +228,7 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
     return (
       <>
         <div className={styles.inactivePlayerWrapper}>
+          {broadcastIcon()}
         <div className={styles.inactivePlayerInner}>
           {playButtonContent()}
           <div className={styles.contentWrapper}>
@@ -247,9 +254,9 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const activeContent = () => {
     return (
       <div className={styles.activeContent}>
-        {isPlaying && !isLive && <Seeker ref={seekerRef} currentTime={currentTime} durationTime={durationTime} onSeek={onSeek} />}
+        {seekerContent()}
         <div className={styles.activeContentHeader}>
-          <FontAwesomeIcon icon={faBroadcastTower as any} style={{ color: '#ccc', width: '25px', height: '25px' }} />
+          {broadcastIcon()}
           {openClosePlayerButton(PlayerWrapperState.Inactive)}
           <div className={styles.headerColumn}>
             {volumeControlContent()}

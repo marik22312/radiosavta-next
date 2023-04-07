@@ -24,6 +24,7 @@
 }
 
 .playPauseImg {
+  cursor: pointer;
   width: 40px;
   height: 40px;
   @include media-breakpoint(md) {

@@ -10,14 +10,26 @@ $activeSize: 30vh;
     transition: background-color 0.5s ease-in-out;
 }
 
+.initialPlayerWrapperContainer {
+    background-color: rgba(6, 6, 6, 0.7);
+    pointer-events: none;
+}
+
 .inactivePlayerWrapperContainer {
     background-color: transparent;
+    pointer-events: none;
+}
+
+.activePlayerWrapperContainer {
+    background-color: rgba(6, 6, 6, 0.4);
+    pointer-events: all;
 }
 
 .playerWrapperWrapper {
     @include responsivePageWrapper;
     background-color: #060606;
     transition: transform 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
+    pointer-events: all;
 }
 
 .initialPlayerWrapper {

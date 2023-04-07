@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { PlayerWrapperState } from "../../../domain/Player";
 import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
 
-import styles from "./playerWrapper.module.scss";
+import styles from "./PlayerWrapper.module.scss";
 import FooterPlayer from "../FooterPlayer";
 
 const PlayerWrapper: React.FC = () => {
@@ -26,7 +26,7 @@ const PlayerWrapper: React.FC = () => {
           pageIsInitial,
         },
         {
-          [styles.inactivePlayerWrapperContainer]:
+          [styles.activePlayerWrapperContainer]:
           pageIsActive,
         },
         {

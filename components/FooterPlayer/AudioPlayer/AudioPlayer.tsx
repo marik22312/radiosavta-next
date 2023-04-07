@@ -1,8 +1,5 @@
-import React, { useRef } from "react";
-import { useLivePlayer } from "../../../hook/useLivePlayer";
+import React from "react";
 import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
-import { Seeker } from "./Seeker/Seeker";
-import { usePlayerBindings } from "./usePlayerBinding";
 
 export const AudioPlayer = React.forwardRef<HTMLAudioElement, {} >(function AudioPlayer(props, ref) {
   const { audioUrl} = usePlayerState();
