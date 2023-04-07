@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
@@ -6,28 +6,20 @@ import { AudioPlayer } from "./AudioPlayer/AudioPlayer";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { PlayPauseButton } from "../PlayPauseButton/PlayPauseButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import { BASE_IMAGE_ICON } from "../../config/images";
 import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
 import { Seeker } from "./Seeker/Seeker";
-import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import {
-  faBroadcastTower,
-  faCalendar,
-  faPlay,
   faShareAlt,
-  faVolumeUp,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   logAgendaOpen,
   logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
-import { Agenda } from "../Agenda/Agenda";
 import { useTogglePLay } from "./hooks/useTogglePlay";
 import { useShare } from "../../hook/useShare";
 import { ShareModal } from "../ShareModal/ShareModal";
-import PlayerWrapper from "./PlayerWrapper/PlayerWrapper";
 import { PlayerWrapperState } from "../../domain/Player";
 import VolumeSlider from "./VolumeSlider/VolumeSlider";
 import classNames from "classnames";
@@ -70,19 +62,6 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
     onError: onShareFailed,
     onSuccess: onShareSuccess,
   });
-
-  const onSkipTenSeconds = () => {
-    const currentTime = audioRef.current?.currentTime;
-    if (currentTime) {
-      audioRef!.current!.currentTime = currentTime + 10;
-    }
-  };
-  const onBackTenSeconds = () => {
-    const currentTime = audioRef.current?.currentTime;
-    if (currentTime) {
-      audioRef!.current!.currentTime = currentTime - 10;
-    }
-  };
 
   const getShareableData = () => {
     // Fallback so it wont fail when SSR
@@ -132,10 +111,6 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
 
   const shouldShowSeeker = !isStopped && !isLive;
   const durationTime = audioRef.current?.duration ?? 0;
-
-  const footerWrapperClass = `${styles.footer} ${
-    isPlayerOpen ? styles.footerClosed : ""
-  }`;
 
   const playButtonContent = (pageState?: PlayerWrapperState) => {
     let iconSize = '50px';

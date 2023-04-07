@@ -3,7 +3,6 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { PlayerWrapperState } from "../../../domain/Player";
-import { PlayPauseButton } from "../../PlayPauseButton/PlayPauseButton";
 
 import styles from "./PlayerWrapper.module.scss";
 import FooterPlayer from "../FooterPlayer";
