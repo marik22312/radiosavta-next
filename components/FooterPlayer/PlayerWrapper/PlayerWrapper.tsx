@@ -16,39 +16,41 @@ const PlayerWrapper: React.FC = () => {
   const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
   const pageIsInitial = pageStatus === PlayerWrapperState.Initial;
 
+  const getWrapperContainerClass = () => {
+    if (pageIsInitial) {
+      return styles.initialPlayerWrapperContainer;
+    }
+    if (pageIsActive) {
+      return styles.activePlayerWrapperContainer;
+    }
+    if (pageIsInactive) {
+      return styles.inactivePlayerWrapperContainer;
+    }
+  };
+
+  const getWrapperClass = () => {
+    if (pageIsInitial) {
+      return styles.initialPlayerWrapper;
+    }
+    if (pageIsActive) {
+      return styles.activePlayerWrapper;
+    }
+    if (pageIsInactive) {
+      return styles.inactivePlayerWrapper;
+    }
+  };
+
   return (
     <div
       className={classNames(
         styles.playerWrapperContainer,
-        {
-          [styles.initialPlayerWrapperContainer]:
-            pageIsInitial,
-        },
-        {
-          [styles.activePlayerWrapperContainer]:
-            pageIsActive,
-        },
-        {
-          [styles.inactivePlayerWrapperContainer]:
-            pageIsInactive,
-        }
+        getWrapperContainerClass()
       )}
     >
       <div
         className={classNames(
           styles.playerWrapperWrapper,
-          {
-            [styles.initialPlayerWrapper]:
-              pageIsInitial,
-          },
-          {
-            [styles.activePlayerWrapper]:
-            pageIsActive,
-          },
-          {
-            [styles.inactivePlayerWrapper]:
-            pageIsInactive,
-          }
+          getWrapperClass()
         )}
       >
         <FooterPlayer state={pageStatus} changeState={setPageStatus} />
