@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
@@ -9,11 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BASE_IMAGE_ICON } from "../../config/images";
 import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
 import { Seeker } from "./Seeker/Seeker";
+import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import {
-  faShareAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  logAgendaOpen,
   logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
@@ -24,8 +21,8 @@ import { PlayerWrapperState } from "../../domain/Player";
 import VolumeSlider from "./VolumeSlider/VolumeSlider";
 import classNames from "classnames";
 
-import isLiveIcon from '../../images/isLive.svg';
-import isBroadcastIcon from '../../images/isPlayingProgram.svg';
+import isLiveIcon from "../../images/isLive.svg";
+import isBroadcastIcon from "../../images/isPlayingProgram.svg";
 
 interface PlayerInterface {
   state: PlayerWrapperState;
@@ -34,27 +31,14 @@ interface PlayerInterface {
 
 const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { seekerRef, currentTime, onSeek, volume, onVolumeChange } = usePlayerBindings(audioRef);
-  const {
-    songTitle,
-    artist,
-    isPlaying,
-    isLoading,
-    imageUrl,
-    isStopped,
-    isPaused,
-    metaData,
-  } = usePlayerState();
-  const { isLive, streamer, toggleLive } = useLivePlayer();
-  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-  const [image, setImage] = useState("");
+  const { songTitle, artist, imageUrl, isStopped, metaData } = usePlayerState();
+  const { isLive, streamer } = useLivePlayer();
   const { togglePlay: togglePlayerPlay } = useTogglePLay();
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const onShareSuccess = () => {};
   const onShareFailed = () => {
-    console.log("share failed")
     setIsShareModalOpen(true);
   };
 
@@ -81,7 +65,6 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   };
 
   const onShare = () => {
-
     if (isStopped || isLive) {
       logShareRecordedShow({
         programName: artist ?? "UNKNOWN",
@@ -100,48 +83,179 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
     return share(getShareableData());
   };
 
-  useEffect(() => {
-    setImage(imageUrl || `${BASE_IMAGE_ICON}radiosavta/logo_head`)
-  }, [imageUrl]);
-
   const togglePlay = (pageState?: PlayerWrapperState) => {
-    pageState && props.changeState(pageState)
+    pageState && props.changeState(pageState);
     togglePlayerPlay();
   };
 
-  const shouldShowSeeker = !isStopped && !isLive;
-  const durationTime = audioRef.current?.duration ?? 0;
+  const openClosePlayerButton = (mode: PlayerWrapperState) => (
+    <button
+      className={styles.actionButton}
+      onClick={() => props.changeState(mode)}
+    >
+      <span className={styles.togglePlayerButton} />
+    </button>
+  );
 
-  const playButtonContent = (pageState?: PlayerWrapperState) => {
-    let iconSize = '50px';
-    if (props.state === PlayerWrapperState.Initial) {
-      iconSize = '120px';
-    } else if (props.state === PlayerWrapperState.Active) {
-      iconSize = '60px';
-    }
-
+  const inActiveContent = () => {
     return (
-      <PlayPauseButton
-        isPlaying={isPlaying}
-        isLoading={isLoading}
-        onClick={() => togglePlay(pageState)}
-        displayLoader
-        style={{ width: iconSize, height: iconSize }}
-      />
-    )
-    }
+      <>
+        <div className={styles.inactivePlayerWrapper}>
+          <BroadcastIcon />
+          <div className={styles.inactivePlayerInner}>
+            <PlayButtonContent
+              currentPageState={PlayerWrapperState.Inactive}
+              togglePlay={togglePlay}
+            />
+            <div className={styles.contentWrapper}>
+              <p className={styles.programName}>
+                {isLive ? `שידור חי ${streamer}` : artist}
+              </p>
+              <p className={styles.songTitle} title={songTitle}>
+                {songTitle}
+              </p>
+            </div>
+            <SeekerContent audioRef={audioRef} />
+            <div className={styles.footerActions}>
+              <VolumeControlContent audioRef={audioRef} />
+              <ShareButtonContent onShare={onShare} />
+            </div>
+          </div>
+          {openClosePlayerButton(PlayerWrapperState.Active)}
+        </div>
+      </>
+    );
+  };
 
-  const headerTextContent = () => (
-    <>
-      <div className={styles.PlayerWrapperAbout}>
-        <h1 className={styles.playerWrapperTitle}>רדיו סבתא</h1>
-        <h2 className={styles.playerWrapperSubtitle}>קולקטיב רדיו אינטרנטי</h2>
-        <h3 className={styles.playerWrapperQuote}>כשהעגלה נוסעת, המלונים...</h3>
+  const activeContent = () => {
+    return (
+      <div className={styles.activeContent}>
+        <SeekerContent audioRef={audioRef} />
+        <div className={styles.activeContentHeader}>
+          <BroadcastIcon />
+          {openClosePlayerButton(PlayerWrapperState.Inactive)}
+          <div className={styles.headerColumn}>
+            <VolumeControlContent audioRef={audioRef} />
+            <ShareButtonContent onShare={onShare} />
+          </div>
+        </div>
+        <HeaderTextContent />
+        <div className={styles.activeContentWrapper}>
+          <img
+            className={styles.playerImage}
+            src={imageUrl || `${BASE_IMAGE_ICON}radiosavta/logo_head`}
+            alt=""
+          />
+          <PlayButtonContent
+            currentPageState={PlayerWrapperState.Active}
+            togglePlay={togglePlay}
+          />
+          <p className={styles.programName}>
+            {isLive ? `שידור חי ${streamer}` : artist}
+          </p>
+          <p className={styles.songTitle} title={songTitle}>
+            {songTitle}
+          </p>
+        </div>
       </div>
-    </>
-  )
+    );
+  };
 
-  const seekerContent = () => (
+  const renderContent = () => {
+    if (props.state === PlayerWrapperState.Initial) {
+      return <InitialContent togglePlay={togglePlay} />;
+    }
+    if (props.state === PlayerWrapperState.Active) {
+      return activeContent();
+    }
+    if (props.state === PlayerWrapperState.Inactive) {
+      return inActiveContent();
+    }
+  };
+
+  return (
+    <>
+      <AudioPlayer ref={audioRef} />
+      {renderContent()}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        title={getShareableData().text}
+        url={getShareableData().url}
+        shareableTitle={getShareableData().text}
+        onRequestClose={() => setIsShareModalOpen(false)}
+      />
+    </>
+  );
+};
+
+export default FooterPlayer;
+
+interface playPauseButtonContentInterface {
+  pageStateActive?: PlayerWrapperState;
+  currentPageState: PlayerWrapperState;
+  togglePlay: (pageState?: PlayerWrapperState) => void;
+}
+
+const PlayButtonContent: React.FC<playPauseButtonContentInterface> = (
+  props: playPauseButtonContentInterface
+) => {
+  const { isPlaying, isLoading } = usePlayerState();
+
+  let iconSize = "50px";
+  if (props.currentPageState === PlayerWrapperState.Initial) {
+    iconSize = "120px";
+  } else if (props.currentPageState === PlayerWrapperState.Active) {
+    iconSize = "60px";
+  }
+
+  return (
+    <PlayPauseButton
+      isPlaying={isPlaying}
+      isLoading={isLoading}
+      onClick={() =>
+        props.togglePlay && props.togglePlay(props.pageStateActive)
+      }
+      displayLoader
+      style={{ width: iconSize, height: iconSize }}
+    />
+  );
+};
+
+const BroadcastIcon: React.FC = () => {
+  const { isPlaying } = usePlayerState();
+  const { isLive, toggleLive } = useLivePlayer();
+
+  if (!isPlaying) {
+    return <div style={{ minHeight: "12px", maxHeight: "12px" }} />;
+  }
+  if (isLive) {
+    return <img src={isLiveIcon} alt="live streaming" />;
+  }
+  if (isPlaying && !isLive) {
+    return (
+      <img
+        src={isBroadcastIcon}
+        alt="pre recorder program"
+        onClick={toggleLive}
+      />
+    );
+  }
+  return null;
+};
+
+interface seekerInterface {
+  audioRef: React.RefObject<HTMLAudioElement>;
+}
+
+const SeekerContent: React.FC<seekerInterface> = (props: seekerInterface) => {
+  const { seekerRef, currentTime, onSeek } = usePlayerBindings(props.audioRef);
+  const { isStopped } = usePlayerState();
+  const { isLive } = useLivePlayer();
+
+  const shouldShowSeeker = !isStopped && !isLive;
+  const durationTime = props.audioRef.current?.duration ?? 0;
+
+  return (
     <div className={styles.seekerWrapper}>
       {shouldShowSeeker && (
         <Seeker
@@ -152,123 +266,65 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
         />
       )}
     </div>
-  )
+  );
+};
 
-  const broadcastIcon = () => {
-    if (!isPlaying) {
-      return <span />
-    }
-    if (isLive) {
-      return <img src={isLiveIcon} alt="" />
-    }
-    if (isPlaying && !isLive) {
-      return <img src={isBroadcastIcon} alt="" />
-    }
-    return null
-  }
-
-  const volumeControlContent = () => (
+const VolumeControlContent: React.FC<seekerInterface> = (
+  props: seekerInterface
+) => {
+  const { volume, onVolumeChange } = usePlayerBindings(props.audioRef);
+  return (
     <div className={styles.volumeWrapper}>
       <button className={classNames(styles.actionButton, styles.volumeButton)}>
         <VolumeSlider volume={volume} onVolumeChange={onVolumeChange} />
       </button>
     </div>
-  )
-
-  const shareButtonContent = () => (
-    <button className={styles.actionButton} onClick={onShare}>
-      <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
-    </button>
-  )
-
-  const openClosePlayerButton = (mode: PlayerWrapperState) => (
-    <button className={styles.actionButton} onClick={() => props.changeState(mode)}>
-      <span className={styles.togglePlayerButton} />
-    </button>
-  )
-
-  const initialContent = () => {
-    return (
-      <>
-        {headerTextContent()}
-        <div>
-          {playButtonContent(PlayerWrapperState.Active)}
-          <span className={styles.playerWrapperPlaySubtitle} onClick={() => togglePlay(PlayerWrapperState.Active)}>לחצו לניגון</span>
-        </div>
-      </>
-    );
-  };
-
-  const inActiveContent = () => {
-    return (
-      <>
-        <div className={styles.inactivePlayerWrapper}>
-          {broadcastIcon()}
-        <div className={styles.inactivePlayerInner}>
-          {playButtonContent()}
-          <div className={styles.contentWrapper}>
-            <p className={styles.programName}>
-              {isLive ? `שידור חי ${streamer}` : artist}
-            </p>
-            <p className={styles.songTitle} title={songTitle}>
-              {songTitle}
-            </p>
-          </div>
-          {seekerContent()}
-          <div className={styles.footerActions}>
-            {volumeControlContent()}
-            {shareButtonContent()}
-          </div>
-        </div>
-          {openClosePlayerButton(PlayerWrapperState.Active)}
-        </div>
-      </>
-    );
-  };
-
-  const activeContent = () => {
-    return (
-      <div className={styles.activeContent}>
-        {seekerContent()}
-        <div className={styles.activeContentHeader}>
-          {broadcastIcon()}
-          {openClosePlayerButton(PlayerWrapperState.Inactive)}
-          <div className={styles.headerColumn}>
-            {volumeControlContent()}
-            {shareButtonContent()}
-          </div>
-          </div>
-        {headerTextContent()}
-        <div className={styles.activeContentWrapper}>
-          <img className={styles.playerImage} src={image} alt="" />
-          {playButtonContent()}
-          <p className={styles.programName}>
-            {isLive ? `שידור חי ${streamer}` : artist}
-          </p>
-          <p className={styles.songTitle} title={songTitle}>
-            {songTitle}
-          </p>
-      </div>
-      </div>
-    );
-  };
-
-  return (
-    <>
-      <AudioPlayer ref={audioRef} />
-      {/* this could be written as a switch case, but I prefer this way */}
-      {props.state === PlayerWrapperState.Initial && initialContent()}
-      {props.state === PlayerWrapperState.Active && activeContent()}
-      {props.state === PlayerWrapperState.Inactive && inActiveContent()}
-      <ShareModal
-          isOpen={isShareModalOpen}
-          title={getShareableData().text}
-          url={getShareableData().url}
-          shareableTitle={getShareableData().text}
-          onRequestClose={() => setIsShareModalOpen(false)}
-        />
-    </>
   );
 };
 
-export default FooterPlayer;
+const HeaderTextContent = () => (
+  <>
+    <div className={styles.PlayerWrapperAbout}>
+      <h1 className={styles.playerWrapperTitle}>רדיו סבתא</h1>
+      <h2 className={styles.playerWrapperSubtitle}>קולקטיב רדיו אינטרנטי</h2>
+      <h3 className={styles.playerWrapperQuote}>כשהעגלה נוסעת, המלונים...</h3>
+    </div>
+  </>
+);
+
+interface initialContentInterface {
+  togglePlay: (pageState?: PlayerWrapperState) => void;
+}
+
+const InitialContent: React.FC<initialContentInterface> = (
+  props: initialContentInterface
+) => (
+  <>
+    <HeaderTextContent />
+    <div>
+      <PlayButtonContent
+        currentPageState={PlayerWrapperState.Initial}
+        pageStateActive={PlayerWrapperState.Active}
+        togglePlay={props.togglePlay}
+      />
+      <span
+        className={styles.playerWrapperPlaySubtitle}
+        onClick={() => props.togglePlay(PlayerWrapperState.Active)}
+      >
+        לחצו לניגון
+      </span>
+    </div>
+  </>
+);
+
+interface shareButtonContentInterface {
+  onShare: () => void;
+}
+
+const ShareButtonContent: React.FC<shareButtonContentInterface> = (
+  props: shareButtonContentInterface
+) => (
+  <button className={styles.actionButton} onClick={props.onShare}>
+    <FontAwesomeIcon icon={faShareAlt as any} size="1x" />
+  </button>
+);

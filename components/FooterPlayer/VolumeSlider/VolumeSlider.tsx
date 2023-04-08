@@ -41,7 +41,7 @@ const OrangeSlider = withStyles({
 
 interface VolumeSliderProps {
   volume: number;
-  onVolumeChange: (e: any) => void;
+  onVolumeChange: (e: number | number[]) => void;
 }
 
 const VolumeSlider: React.FC<VolumeSliderProps> = (

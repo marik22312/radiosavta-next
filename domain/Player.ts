@@ -20,7 +20,7 @@ export interface TrackMetaData {
 }
 
 export enum PlayerWrapperState {
-  Initial,
-  Active,
-  Inactive,
+  Initial = "initial",
+  Active = "active",
+  Inactive = "inactive",
 }

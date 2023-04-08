@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Seeker.module.scss";
 import Slider from '@bit/mui-org.material-ui.slider';
 import { withStyles } from '@bit/mui-org.material-ui.styles';
 
@@ -58,13 +57,12 @@ export const Seeker = React.forwardRef<
   };
 
   return (
-    <div className={styles.seekerWrapper}>
+    <div>
       <SeekerSlider
         ref={ref}
         min={0}
         defaultValue={0}
         max={durationTime}
-        className={styles.seeker}
         onChange={handleChange}
         value={currentTime}
         valueLabelFormat={formatTime}

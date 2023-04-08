@@ -22,15 +22,15 @@ const PlayerWrapper: React.FC = () => {
         styles.playerWrapperContainer,
         {
           [styles.initialPlayerWrapperContainer]:
-          pageIsInitial,
+            pageIsInitial,
         },
         {
           [styles.activePlayerWrapperContainer]:
-          pageIsActive,
+            pageIsActive,
         },
         {
           [styles.inactivePlayerWrapperContainer]:
-          pageIsInactive,
+            pageIsInactive,
         }
       )}
     >
@@ -64,12 +64,6 @@ const PlayerWrapper: React.FC = () => {
             כניסה לאתר
           </button>
         </div>
-        {/* <button
-          className={classNames(styles.playerWrapperOpenButton, {[styles.hide]: !pageIsInactive })}
-          onClick={() => setPageStatus(PlayerWrapperState.Active)}
-        >
-          <FontAwesomeIcon className={styles.footerOpenIcon} icon={faPlay as any} />
-        </button> */}
       </div>
     </div>
   );
