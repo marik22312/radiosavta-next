@@ -21,8 +21,8 @@ import { PlayerWrapperState } from "../../domain/Player";
 import VolumeSlider from "./VolumeSlider/VolumeSlider";
 import classNames from "classnames";
 
-import isLiveIcon from "../../images/isLive.svg";
-import isBroadcastIcon from "../../images/isPlayingProgram.svg";
+import isLiveIcon from "./broadcastIcon/isLive.svg";
+import isBroadcastIcon from "./broadcastIcon/isPlayingProgram.svg";
 
 interface PlayerInterface {
   state: PlayerWrapperState;
