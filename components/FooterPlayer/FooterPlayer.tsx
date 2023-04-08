@@ -31,8 +31,8 @@ interface PlayerInterface {
 
 const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { songTitle, artist, imageUrl, isStopped, metaData } = usePlayerState();
-  const { isLive, streamer } = useLivePlayer();
+  const { songTitle, artist, isStopped, metaData } = usePlayerState();
+  const { isLive } = useLivePlayer();
   const { togglePlay: togglePlayerPlay } = useTogglePLay();
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
