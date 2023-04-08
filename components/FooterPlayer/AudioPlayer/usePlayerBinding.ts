@@ -77,5 +77,14 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     }
   };
 
-  return { currentTime, seekerRef, onSeek };
+  const onVolumeChange = (value: number | number[]) => {
+    if (audioRef.current) {
+      if (Array.isArray(value)) {
+        value = value[0];
+      }
+      audioRef.current.volume = value;
+    }
+  };
+
+  return { currentTime, seekerRef, onSeek, onVolumeChange, volume: audioRef.current?.volume ?? 1 };
 };

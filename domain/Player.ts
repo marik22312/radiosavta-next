@@ -18,3 +18,9 @@ export interface TrackMetaData {
 	recordedShowId?: string | number;
 	
 }
+
+export enum PlayerWrapperState {
+  Initial = "initial",
+  Active = "active",
+  Inactive = "inactive",
+}
