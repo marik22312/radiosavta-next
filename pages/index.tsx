@@ -41,9 +41,6 @@ export const AboutSection: React.FC<{ imagesToShow: string[] }> = (props) => {
       </div>
       <div className={style.agendaWrapper}>
         {data?.schedule
-          .sort((a, b) => {
-            return new Date(a.start).getHours() - new Date(b.start).getHours();
-          })
           .map((item, index) => {
             return (
               <div key={index} className={style.agendaItem}>
