@@ -258,6 +258,8 @@
   padding-right: 21px;
   font-family: "Heebo";
   background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  mix-blend-mode: screen;
+  border-radius: 10px;
 }
 
 .agendaItem {
@@ -274,13 +276,15 @@
 }
 
 .recordedShowsSection {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 .recordedShowsWrapper {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 .recordedShowItem {
   background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  mix-blend-mode: screen;
+
   font-family: "Heebo";
   font-size: 16px;
   margin-bottom: 3px;
@@ -289,15 +293,15 @@
   padding-right: 21px;
 
   h4 {
-	color:#CCCCCC;	
-margin-bottom: 5px;
+    color: #cccccc;
+    margin-bottom: 5px;
   }
 
   h5 {
-	color:#CC9933;
+    color: #cc9933;
   }
 
-  &[data-isPlaying="true"] {
+  &[data-isplaying="true"] {
     background: #8f8989;
 
     h4 {
