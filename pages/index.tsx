@@ -45,13 +45,13 @@ export const AboutSection: React.FC<{ imagesToShow: string[] }> = (props) => {
             return (
               <div key={index} className={style.agendaItem}>
                 <div className={style.agendaItemTime}>
-                  <span className={style.agendaItemTime}>
+                  <p className={style.agendaItemTime}>
                     {Intl.DateTimeFormat("he", {
                       hour: "2-digit",
                       minute: "2-digit",
                     }).format(new Date(item.start))}
-                  </span>
-                  <span className={style.agendaItemName}>{item.name}</span>
+                  </p>
+                  <p className={style.agendaItemName}>{item.name}</p>
                 </div>
               </div>
             );

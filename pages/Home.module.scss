@@ -10,14 +10,17 @@
 
 .agendaItem {
   margin-bottom: 5px;
+  line-height: 14px;
 }
 .agendaItemTime {
+  display: inline-block;
   margin-left: 10px;
   color: #cc6666;
   font-size: 16px;
 }
 
 .agendaItemName {
+  display: inline-block;
   color: #cccccc;
 }
 
