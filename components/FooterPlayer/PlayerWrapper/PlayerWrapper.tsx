@@ -12,9 +12,10 @@ const PlayerWrapper: React.FC = () => {
     PlayerWrapperState.Initial
   );
 
-  const pageIsActive = pageStatus === PlayerWrapperState.Active;
-  const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
-  const pageIsInitial = pageStatus === PlayerWrapperState.Initial;
+  const pageIsActive = false
+//   const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
+  const pageIsInactive = true
+  const pageIsInitial = false
 
   const getWrapperContainerClass = () => {
     if (pageIsInitial) {
