@@ -16,6 +16,7 @@ import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV
 import { useRouter } from "next/router";
 import { AppPropsWithLayout } from "../domain/AppProps";
 import PlayerWrapper from "../components/FooterPlayer/PlayerWrapper/PlayerWrapper";
+import { Page } from "../components/ui/Page";
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
@@ -44,19 +45,20 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient.current}>
-      <NextNProgress color="#ded15b" />
       <AudioPlayerProvider>
-        <Hydrate
-          state={
-            // @ts-expect-error
-            pageProps.dehydratedState &&
-            // @ts-expect-error
-            FLATTED.parse(pageProps.dehydratedState)
-          }
-        >
-          <Component {...pageProps} />
-          <PlayerWrapper />
-        </Hydrate>
+        <Page>
+          <NextNProgress color="#ded15b" />
+          <Hydrate
+            state={
+              // @ts-expect-error
+              pageProps.dehydratedState &&
+              // @ts-expect-error
+              FLATTED.parse(pageProps.dehydratedState)
+            }
+          >
+            <Component {...pageProps} />
+          </Hydrate>
+        </Page>
       </AudioPlayerProvider>
     </QueryClientProvider>
   );

@@ -25,10 +25,12 @@ import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   return (
-    <Page title="ראשי">
+    <>
+      {/* <Page title="ראשי"> */}
       <AboutSection imagesToShow={props.imagesToShow} />
       <UploadsSection />
-    </Page>
+      {/* </Page> */}
+    </>
   );
 };
 
@@ -40,22 +42,21 @@ export const AboutSection: React.FC<{ imagesToShow: string[] }> = (props) => {
         <Heading>לו&quot;ז יומי</Heading>
       </div>
       <div className={style.agendaWrapper}>
-        {data?.schedule
-          .map((item, index) => {
-            return (
-              <div key={index} className={style.agendaItem}>
-                <div className={style.agendaItemTime}>
-                  <p className={style.agendaItemTime}>
-                    {Intl.DateTimeFormat("he", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }).format(new Date(item.start))}
-                  </p>
-                  <p className={style.agendaItemName}>{item.name}</p>
-                </div>
+        {data?.schedule.map((item, index) => {
+          return (
+            <div key={index} className={style.agendaItem}>
+              <div className={style.agendaItemTime}>
+                <p className={style.agendaItemTime}>
+                  {Intl.DateTimeFormat("he", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }).format(new Date(item.start))}
+                </p>
+                <p className={style.agendaItemName}>{item.name}</p>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -108,7 +109,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   await prefetchLatestRecordedShows(queryClient, { limit: 3 });
   await prefetchAgenda(queryClient);
-  
+
   return {
     props: {
       dehydratedState: stringify(dehydrate(queryClient)),

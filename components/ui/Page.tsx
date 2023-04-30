@@ -6,6 +6,7 @@ import { logNavbarNavigation } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
+import PlayerWrapper from '../FooterPlayer/PlayerWrapper/PlayerWrapper';
 
 export interface PageProps {
   title?: string;
@@ -63,6 +64,7 @@ export const Page: React.FC<PageProps> = ({
         <div className={style.pageWrapper}>
           <Navbar />
           {children}
+		  <PlayerWrapper />
         </div>
       </div>
     </>
