@@ -10,7 +10,7 @@ const LandingPage = () => {
   
   return (
     <>
-        <motion.div
+        {/* <motion.div
           key={router.route}
           initial="initialState"
           animate="animateState"
@@ -31,7 +31,7 @@ const LandingPage = () => {
               clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
             },
           }}
-        >
+        > */}
 		<div>
           <div>
             <h2>עמוד נחיתה</h2>
@@ -40,19 +40,9 @@ const LandingPage = () => {
             <Link href="/">כניסה לאתר</Link>
           </div>
 		  </div>
-        </motion.div>
+        {/* </motion.div> */}
     </>
   );
-};
-
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  console.log("#######", context.req.cookies);
-
-  return {
-    props: {},
-  };
 };
 
 export default LandingPage;

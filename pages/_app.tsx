@@ -46,19 +46,46 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient.current}>
       <AudioPlayerProvider>
         <Page>
-          <AnimatePresence exitBeforeEnter>
-              <NextNProgress color="#ded15b" />
-              <Hydrate
-                state={
-                  // @ts-expect-error
-                  pageProps.dehydratedState &&
-                  // @ts-expect-error
-                  FLATTED.parse(pageProps.dehydratedState)
-                }
-              >
-                {getLayout ? getLayout(<Component {...pageProps}/>) : <Component {...pageProps} />}
-              </Hydrate>
+            <NextNProgress color="#ded15b" />
+            <Hydrate
+              state={
+                // @ts-expect-error
+                pageProps.dehydratedState &&
+                // @ts-expect-error
+                FLATTED.parse(pageProps.dehydratedState)
+              }
+            >
+				<AnimatePresence exitBeforeEnter>
+				<motion.div
+          key={router.route}
+          initial="initialState"
+          animate="animateState"
+          exit="exitState"
+          transition={{
+            duration: 0.75,
+          }}
+          variants={{
+            initialState: {
+              opacity: 0,
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+            },
+            animateState: {
+              opacity: 1,
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+            },
+            exitState: {
+              clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
+            },
+          }}
+        >
+              {getLayout ? (
+                getLayout(<Component {...pageProps} />)
+              ) : (
+				  <Component {...pageProps} />
+              )}
+			  </motion.div>
           </AnimatePresence>
+            </Hydrate>
         </Page>
       </AudioPlayerProvider>
     </QueryClientProvider>

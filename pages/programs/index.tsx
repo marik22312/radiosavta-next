@@ -11,6 +11,7 @@ import {
   prefetchQueryPrograms,
   useQueryPrograms,
 } from "../../hook/useQueryPrograms";
+import { asStandardPage } from '../../components/asStandardPage';
 
 const ProgramsPage: React.FC = () => {
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
@@ -29,7 +30,6 @@ const ProgramsPage: React.FC = () => {
 
   return (
     <>
-      <Page>
         <div style={{ paddingRight: "21px" }}>
           <Heading>התכניות של סבתא</Heading>
         </div>
@@ -51,7 +51,6 @@ const ProgramsPage: React.FC = () => {
             );
           })}
         </div>
-      </Page>
     </>
   );
 };
@@ -72,4 +71,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default ProgramsPage;
+export default asStandardPage(ProgramsPage);
