@@ -11,6 +11,8 @@ import PlayerWrapper from '../FooterPlayer/PlayerWrapper/PlayerWrapper';
 export interface PageProps {
   title?: string;
   previewImageUrl?: string;
+  renderNavbar?: boolean;
+  renderPlayer?: boolean;
 }
 export const Page: React.FC<PageProps> = ({
   children,
@@ -62,9 +64,7 @@ export const Page: React.FC<PageProps> = ({
       </Head>
       <div className={style.responsivePage}>
         <div className={style.pageWrapper}>
-          <Navbar />
           {children}
-		  <PlayerWrapper />
         </div>
       </div>
     </>
@@ -84,7 +84,7 @@ const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
   );
 };
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   return (
     <div className={style.navbarWrapper}>
       <Image

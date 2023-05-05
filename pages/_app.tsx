@@ -16,7 +16,7 @@ import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV
 import { useRouter } from "next/router";
 import { AppPropsWithLayout } from "../domain/AppProps";
 import PlayerWrapper from "../components/FooterPlayer/PlayerWrapper/PlayerWrapper";
-import { Page } from "../components/ui/Page";
+import { Page, Navbar } from "../components/ui/Page";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
@@ -41,9 +41,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   }, [router.events]);
 
   const getLayout = Component.getLayout;
-  if (getLayout) {
-    return getLayout(<Component {...pageProps} />);
-  }
 
   return (
     <QueryClientProvider client={queryClient.current}>
@@ -81,7 +78,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                   FLATTED.parse(pageProps.dehydratedState)
                 }
               >
-                <Component {...pageProps} />
+                {getLayout ? getLayout(<Component {...pageProps}/>) : <Component {...pageProps} />}
               </Hydrate>
             </motion.div>
           </AnimatePresence>

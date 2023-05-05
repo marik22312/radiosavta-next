@@ -22,6 +22,7 @@ import { prefetchAgenda, useAgenda } from "../hook/useAgenda";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../parsers/Programs.parser";
 import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
+import { asStandardPage } from '../components/asStandardPage';
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   return (
@@ -103,7 +104,7 @@ const UploadsSection: React.FC = () => {
   );
 };
 
-export default Home;
+export default asStandardPage(Home);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
