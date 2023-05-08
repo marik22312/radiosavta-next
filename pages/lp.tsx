@@ -18,16 +18,18 @@ const LandingPage = () => {
       }}
       variants={{
         initialState: {
-          opacity: 0,
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+        //   clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+		top: 0
         },
         animateState: {
           opacity: 1,
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+		  top: 0
+        //    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         },
         exitState: {
+			top: '100%',
           opacity: 0,
-          clipPath: "polygon(0 80%, 100% 80%, 100% 100%, 0% 100%)",
+        //   clipPath: "polygon(0 80%, 100% 80%, 100% 100%, 0% 100%)",
         },
       }}
       style={{
