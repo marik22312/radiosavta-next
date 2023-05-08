@@ -30,7 +30,6 @@ export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   const router = useRouter();
   return (
     <motion.div
-                // key={'NOTAS'}
                 initial="initialState"
                 animate="animateState"
                 exit="exitState"
