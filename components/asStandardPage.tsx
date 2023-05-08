@@ -9,7 +9,7 @@ export const asStandardPage = (Page: React.ElementType) => {
 			<>
 			<Navbar/>
 				{page}
-			{/* <PlayerWrapper /> */}
+			<PlayerWrapper />
 			</>
 		)
 	}
