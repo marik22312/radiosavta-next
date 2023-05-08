@@ -8,7 +8,9 @@ export const asStandardPage = (Page: React.ElementType) => {
 		return (
 			<>
 			<Navbar/>
+			<div>
 				{page}
+			</div>
 			<PlayerWrapper />
 			</>
 		)
