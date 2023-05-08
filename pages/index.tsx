@@ -29,10 +29,31 @@ import { useRouter } from "next/router";
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   const router = useRouter();
   return (
-    <>
+    <motion.div
+                // key={'NOTAS'}
+                initial="initialState"
+                animate="animateState"
+                exit="exitState"
+                transition={{
+                  duration: 0.75,
+                }}
+                variants={{
+                  initialState: {
+                    opacity: 0,
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+                  },
+                  animateState: {
+                    opacity: 1,
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+                  },
+                  exitState: {
+                    clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
+                  },
+                }}
+              >
         <AboutSection imagesToShow={props.imagesToShow} />
         <UploadsSection />
-     </>
+     </motion.div>
   );
 };
 
