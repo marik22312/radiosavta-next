@@ -127,15 +127,6 @@ const UploadsSection: React.FC = () => {
 export default asStandardPage(Home);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const shouldRedirectToLandingPage = context.req.cookies['someCookieWithSavta'];
-	// if (!shouldRedirectToLandingPage) {
-	// 	return {
-	// 		redirect: {
-	// 			destination: '/lp',
-	// 			permanent: false,
-	// 		}
-	// 	}
-	// }
   const queryClient = new QueryClient();
 
   await prefetchLatestRecordedShows(queryClient, { limit: 3 });
