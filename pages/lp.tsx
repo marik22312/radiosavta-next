@@ -10,24 +10,12 @@ const LandingPage = () => {
 
   return (
     <motion.main
-      initial="initialState"
-      animate="animateState"
-      exit="exitState"
+      exit={{
+        top: "100%",
+        opacity: 0,
+      }}
       transition={{
         duration: 0.75,
-      }}
-      variants={{
-        initialState: {
-		top: 0
-        },
-        animateState: {
-          opacity: 1,
-		  top: 0
-        },
-        exitState: {
-			top: '100%',
-          opacity: 0,
-        },
       }}
       style={{
         position: "absolute",
