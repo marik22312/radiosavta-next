@@ -16,6 +16,9 @@ import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV
 import { useRouter } from "next/router";
 import { AppPropsWithLayout } from "../domain/AppProps";
 import PlayerWrapper from "../components/FooterPlayer/PlayerWrapper/PlayerWrapper";
+import { Page, Navbar } from "../components/ui/Page";
+import { motion, AnimatePresence } from "framer-motion";
+
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
 
 mixpanel.init(process.env.MIXPANEL_API_KEY!, { debug: true });
@@ -38,25 +41,29 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   }, [router.events]);
 
   const getLayout = Component.getLayout;
-  if (getLayout) {
-    return getLayout(<Component {...pageProps} />);
-  }
 
   return (
     <QueryClientProvider client={queryClient.current}>
-      <NextNProgress color="#ded15b" />
       <AudioPlayerProvider>
-        <Hydrate
-          state={
-            // @ts-expect-error
-            pageProps.dehydratedState &&
-            // @ts-expect-error
-            FLATTED.parse(pageProps.dehydratedState)
-          }
-        >
-          <Component {...pageProps} />
-          <PlayerWrapper />
-        </Hydrate>
+        <Page>
+          <NextNProgress color="#ded15b" />
+          <Hydrate
+            state={
+              // @ts-expect-error
+              pageProps.dehydratedState &&
+              // @ts-expect-error
+              FLATTED.parse(pageProps.dehydratedState)
+            }
+          >
+            <AnimatePresence exitBeforeEnter initial={false}>
+                {getLayout ? (
+                  getLayout(<Component {...pageProps} key={router.route}/>)
+                ) : (
+                  <Component {...pageProps} key={router.route}/>
+                )}
+            </AnimatePresence>
+          </Hydrate>
+        </Page>
       </AudioPlayerProvider>
     </QueryClientProvider>
   );

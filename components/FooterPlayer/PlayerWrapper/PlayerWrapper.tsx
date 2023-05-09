@@ -9,34 +9,27 @@ import FooterPlayer from "../FooterPlayer";
 
 const PlayerWrapper: React.FC = () => {
   const [pageStatus, setPageStatus] = useState<PlayerWrapperState>(
-    PlayerWrapperState.Initial
+    PlayerWrapperState.Inactive
   );
 
   const pageIsActive = pageStatus === PlayerWrapperState.Active;
   const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
-  const pageIsInitial = pageStatus === PlayerWrapperState.Initial;
 
   const getWrapperContainerClass = () => {
-    if (pageIsInitial) {
-      return styles.initialPlayerWrapperContainer;
+    if (pageIsInactive) {
+      return styles.inactivePlayerWrapperContainer;
     }
     if (pageIsActive) {
       return styles.activePlayerWrapperContainer;
     }
-    if (pageIsInactive) {
-      return styles.inactivePlayerWrapperContainer;
-    }
   };
 
   const getWrapperClass = () => {
-    if (pageIsInitial) {
-      return styles.initialPlayerWrapper;
+    if (pageIsInactive) {
+      return styles.inactivePlayerWrapper;
     }
     if (pageIsActive) {
       return styles.activePlayerWrapper;
-    }
-    if (pageIsInactive) {
-      return styles.inactivePlayerWrapper;
     }
   };
 
@@ -48,15 +41,18 @@ const PlayerWrapper: React.FC = () => {
       )}
     >
       <div
-        className={classNames(
-          styles.playerWrapperWrapper,
-          getWrapperClass()
-        )}
+        className={classNames(styles.playerWrapperWrapper, getWrapperClass())}
       >
         <FooterPlayer state={pageStatus} changeState={setPageStatus} />
-        <div className={classNames(styles.PlayerWrapperFooter, {[styles.hide]: !pageIsInitial })}>
+        <div
+          className={classNames(styles.PlayerWrapperFooter, {
+            [styles.hide]: true,
+          })}
+        >
           <button
-            className={classNames(styles.playerWrapperFooterButton, {[styles.hide]: pageIsInactive })}
+            className={classNames(styles.playerWrapperFooterButton, {
+              [styles.hide]: pageIsInactive,
+            })}
             onClick={() => setPageStatus(PlayerWrapperState.Inactive)}
           >
             <FontAwesomeIcon

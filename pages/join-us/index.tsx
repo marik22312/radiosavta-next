@@ -8,6 +8,7 @@ import { ContactFormRequest } from "../../api/Contact.api";
 import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
 import { Alert, AlertType } from "../../components/ui/Alert";
+import { asStandardPage } from "../../components/asStandardPage";
 
 enum FormFields {
   NAME = "fullname",
@@ -48,7 +49,7 @@ const JoinUsPage: React.FC = () => {
     submitForm(data);
   };
   return (
-    <Page>
+    <>
       <div style={{ paddingRight: "21px" }}>
         <Heading>הצטרפו לקולקטיב</Heading>
       </div>
@@ -115,7 +116,7 @@ const JoinUsPage: React.FC = () => {
           </div>
         </div>
       </section>
-    </Page>
+    </>
   );
 };
 
@@ -140,4 +141,4 @@ const getSubmitMessage = (args: {
   }
 };
 
-export default JoinUsPage;
+export default asStandardPage(JoinUsPage);

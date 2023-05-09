@@ -61,7 +61,6 @@ export const Page: React.FC<PageProps> = ({
       </Head>
       <div className={style.responsivePage}>
         <div className={style.pageWrapper}>
-          <Navbar />
           {children}
         </div>
       </div>
@@ -82,7 +81,7 @@ const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
   );
 };
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   return (
     <div className={style.navbarWrapper}>
       <Image

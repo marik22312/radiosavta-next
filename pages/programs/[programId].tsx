@@ -13,6 +13,7 @@ import style from "./singleProgram.module.scss";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../../parsers/Programs.parser";
+import { asStandardPage } from '../../components/asStandardPage';
 
 export const SingleProgramPage: React.FC<{
   program: Program;
@@ -21,7 +22,7 @@ export const SingleProgramPage: React.FC<{
   const { songTitle } = usePlayerState();
   const { playTrack } = usePlayerControls();
   return (
-    <Page>
+	<>
       <div className={style.pageTitleWrapepr}>
         <Heading>{props.program.name_he}</Heading>
       </div>
@@ -70,11 +71,11 @@ export const SingleProgramPage: React.FC<{
           })}
         </div>
       </div>
-    </Page>
+	  </>
   );
 };
 
-export default SingleProgramPage;
+export default asStandardPage(SingleProgramPage);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();

@@ -1,11 +1,12 @@
 import React from 'react';
+import { asStandardPage } from '../../components/asStandardPage';
 import { Page } from '../../components/ui/Page';
 import { Heading } from '../../components/ui/Typography';
 import style from './aboutPage.module.scss';
 
 const NewAboutPage: React.FC = () => {
 	return (
-		<Page>
+		<>
 			<div style={{paddingRight: '21px'}}>
 			<Heading>למה סבתא?</Heading>
 			</div>
@@ -18,8 +19,8 @@ const NewAboutPage: React.FC = () => {
 					<p>המודל‭ ‬הכלכלי‭ ‬של‭ ‬רדיו‭ ‬סבתא‭ ‬נשען‭ ‬בעיקר‭ ‬על‭ ‬תומכים‭ ‬חופשיים‭ ‬מכל‭ ‬העולם‭, ‬אוהבי‭ ‬ומעריכי‭ ‬מוסיקה‭ ‬ללא‭ ‬הפרעות‭ ‬מסחריות‭. ‬בכדי‭ ‬שהתחנה‭ ‬תוכל‭ ‬להמשיך‭ ‬לשדר‭, ‬להתפתח‭ ‬ולהשתפר‭, ‬נודה‭ ‬לכם‭/‬ן‭ ‬ביותר‭ ‬על‭ ‬תרומה‭ ‬חודשית‭ ‬סמלית‭ ‬דרך‭ ‬פלטפורמת‭ ‬Patreon‭ ‬בהרשמה‭ ‬חד‭ ‬פעמית‭ ‬לתרומה‭ ‬חודשית‭ ‬קבועה‭ ‬וצנועה‭,‬‭ ‬שנותנת‭ ‬לנו‭ ‬אפשרות‭ ‬להמשיך‭ ‬לשדר‭ ‬ולהמשיך‭ ‬את‭ ‬הזרם‭ ‬הבלתי‭ ‬פוסק‭ ‬של‭ ‬מוזיקה‭ ‬ואהבה‭,‬‭ ‬כמו‭ ‬בסלון‭ ‬של‭ ‬סבתא‭. ‬</p>
 				</div>
 			</div>
-		</Page>
+		</>
 	)
 }
 
-export default NewAboutPage;
+export default asStandardPage(NewAboutPage);
