@@ -91,7 +91,12 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   return (
     <>
       <AudioPlayer ref={audioRef} />
-      <RenderContent {...props} audioRef={audioRef} onShare={onShare} togglePlay={togglePlay} />
+      <RenderContent
+        {...props}
+        audioRef={audioRef}
+        onShare={onShare}
+        togglePlay={togglePlay}
+      />
       <ShareModal
         isOpen={isShareModalOpen}
         title={getShareableData().text}
@@ -140,10 +145,10 @@ const BroadcastIcon: React.FC = () => {
   const { isPlaying } = usePlayerState();
   const { isLive, toggleLive } = useLivePlayer();
 
-  const style = {minHeight: "12px", maxHeight: "18px", width: '30px'}
+  const style = { minHeight: "12px", maxHeight: "18px", width: "30px" };
 
   if (!isPlaying) {
-    return <div style={style} />;
+    return <></>;
   }
   if (isLive) {
     return <img src={isLiveIcon} alt="live streaming" style={style} />;
@@ -248,11 +253,10 @@ interface openClosePlayerButtonInterface {
   changeState: () => void;
 }
 
-const OpenClosePlayerButton: React.FC<openClosePlayerButtonInterface> = (props: openClosePlayerButtonInterface) => (
-  <button
-    className={styles.actionButton}
-    onClick={props.changeState}
-  >
+const OpenClosePlayerButton: React.FC<openClosePlayerButtonInterface> = (
+  props: openClosePlayerButtonInterface
+) => (
+  <button className={styles.actionButton} onClick={props.changeState}>
     <span className={styles.togglePlayerButton} />
   </button>
 );
@@ -264,10 +268,12 @@ interface activeContentInterface {
   onShare: () => void;
 }
 
-const ActiveContent: React.FC<activeContentInterface> = (props: activeContentInterface) => {
-  const { songTitle, artist, imageUrl} = usePlayerState();
+const ActiveContent: React.FC<activeContentInterface> = (
+  props: activeContentInterface
+) => {
+  const { songTitle, artist, imageUrl } = usePlayerState();
   const { isLive, streamer } = useLivePlayer();
-  
+
   return (
     <div className={styles.activeContent}>
       <SeekerContent audioRef={props.audioRef} />
@@ -308,8 +314,10 @@ interface inactiveContentInterface {
   onShare: () => void;
 }
 
-const InActiveContent: React.FC<inactiveContentInterface> = (props: inactiveContentInterface) => {
-  const { songTitle, artist} = usePlayerState();
+const InActiveContent: React.FC<inactiveContentInterface> = (
+  props: inactiveContentInterface
+) => {
+  const { songTitle, artist } = usePlayerState();
   const { isLive, streamer } = useLivePlayer();
   return (
     <>
@@ -348,25 +356,31 @@ interface playerContentInterface {
   onShare: () => void;
 }
 
-const RenderContent: React.FC<playerContentInterface> = (props: playerContentInterface) => {
+const RenderContent: React.FC<playerContentInterface> = (
+  props: playerContentInterface
+) => {
   if (props.state === PlayerWrapperState.Initial) {
     return <InitialContent togglePlay={props.togglePlay} />;
   }
   if (props.state === PlayerWrapperState.Active) {
-    return (<ActiveContent 
-    togglePlay={props.togglePlay} 
-    audioRef={props.audioRef} 
-    changeState={() => props.changeState(PlayerWrapperState.Inactive)} 
-    onShare={props.onShare} 
-    />);
+    return (
+      <ActiveContent
+        togglePlay={props.togglePlay}
+        audioRef={props.audioRef}
+        changeState={() => props.changeState(PlayerWrapperState.Inactive)}
+        onShare={props.onShare}
+      />
+    );
   }
   if (props.state === PlayerWrapperState.Inactive) {
-    return (<InActiveContent 
-      togglePlay={props.togglePlay} 
-      audioRef={props.audioRef} 
-      changeState={() => props.changeState(PlayerWrapperState.Active)} 
-      onShare={props.onShare} 
-      />);
+    return (
+      <InActiveContent
+        togglePlay={props.togglePlay}
+        audioRef={props.audioRef}
+        changeState={() => props.changeState(PlayerWrapperState.Active)}
+        onShare={props.onShare}
+      />
+    );
   }
   return <div />;
 };
