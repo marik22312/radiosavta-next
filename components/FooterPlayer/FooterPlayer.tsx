@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 import styles from "./FooterPlayer.module.scss";
 import { useLivePlayer } from "../../hook/useLivePlayer";
@@ -34,6 +35,13 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const { songTitle, artist, isStopped, metaData } = usePlayerState();
   const { isLive } = useLivePlayer();
   const { togglePlay: togglePlayerPlay } = useTogglePLay();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.playing && router.query.playing === "true") {
+      togglePlay(PlayerWrapperState.Active);
+    }
+  }, [router.query.playing]);
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 

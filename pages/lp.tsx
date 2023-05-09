@@ -41,7 +41,7 @@ const LandingPage = () => {
           </h3>
         </div>
         <div>
-          <Link href="/">
+          <Link href={{ pathname: "/", query: { playing: true } }}>
             <div className={styles.playWrapper}>
               <img src={Play} alt="Play Button" />
               <span>לחצו לניגון</span>
