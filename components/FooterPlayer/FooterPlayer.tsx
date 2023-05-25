@@ -156,7 +156,7 @@ const BroadcastIcon: React.FC = () => {
   const style = { minHeight: "12px", maxHeight: "18px", width: "30px" };
 
   if (!isPlaying) {
-    return <></>;
+    return <div style={style}></div>;
   }
   if (isLive) {
     return <img src={isLiveIcon} alt="live streaming" style={style} />;

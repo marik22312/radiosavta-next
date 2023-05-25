@@ -25,22 +25,25 @@ export const useLivePlayer = () => {
 
   const toggleLive = async () => {
     if (!isLive) {
+		const streamer = 'NA'
+		playTrack({
+			// logPlayLive({ streamerName: streamer });
+		  audioUrl: LIVE_STREAM_URL,
+		  title: songTitle || "",
+		  artist: streamer === "NA" ? "שידור חי" : streamer,
+		  imageUrl: DEFAULT_PLAYER_IMAGE,
+		  metaData: {},
+		});
+		setIsLive(true);
       const data = await refetch();
-      const streamer = data.data?.streamer || "NA";
-      logPlayLive({ streamerName: streamer });
-      playTrack({
-        audioUrl: LIVE_STREAM_URL,
-        title: songTitle || "",
-        artist: streamer === "NA" ? "שידור חי" : streamer,
-        imageUrl: DEFAULT_PLAYER_IMAGE,
-        metaData: {},
-      });
-      setIsLive(true);
+    //   const streamer = data.data?.streamer || "NA";
+	  console.log("isLive", isLive);
       return;
     }
     logFooterPlayerPause();
     stop();
     setIsLive(false);
+	return;
   };
 
   return {

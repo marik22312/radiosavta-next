@@ -6,9 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Play from "../components/PlayPauseButton/Button/Play.svg";
 import styles from "./lp/landingPage.module.scss";
+import { AudioPlayer } from '../components/FooterPlayer/AudioPlayer/AudioPlayer';
+import { useLivePlayer } from '../hook/useLivePlayer';
 
 const LandingPage = () => {
+  const {toggleLive} = useLivePlayer();
   const router = useRouter();
+
+  const playLiveAndNavigateHome = async () => {
+	await toggleLive();
+	console.log('Heh?')
+	router.push("/", undefined, { shallow: true });
+  }
 
   return (
     <motion.main
@@ -41,15 +50,16 @@ const LandingPage = () => {
           </h3>
         </div>
         <div>
-          <Link href={{ pathname: "/", query: { playing: true } }}>
-            <div className={styles.playWrapper}>
+          {/* <Link passHref href={{ pathname: "/", query: { playing: true } }}> */}
+          {/* <Link passHref href="/"> */}
+            <div className={styles.playWrapper} onClick={() => playLiveAndNavigateHome()}>
               <img src={Play} alt="Play Button" />
               <span>לחצו לניגון</span>
             </div>
-          </Link>
+          {/* </Link> */}
         </div>
         <div className={styles.footerButton}>
-          <Link href="/">
+          <Link passHref href="/">
             <span>
               <FontAwesomeIcon
                 style={{ transform: "rotate(180deg)" }}

@@ -61,6 +61,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                 ) : (
                   <Component {...pageProps} key={router.route}/>
                 )}
+				<PlayerWrapper />
             </AnimatePresence>
           </Hydrate>
         </Page>

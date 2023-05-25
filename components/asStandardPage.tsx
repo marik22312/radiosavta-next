@@ -9,7 +9,6 @@ export const asStandardPage = (Page: React.ElementType) => {
       <>
         <Navbar />
         <div style={{ paddingBottom: 15 }}>{page}</div>
-        <PlayerWrapper />
       </>
     );
   };
