@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Play from "../components/PlayPauseButton/Button/Play.svg";
-import styles from "./lp/landingPage.module.scss";
-import { AudioPlayer } from '../components/FooterPlayer/AudioPlayer/AudioPlayer';
-import { useLivePlayer } from '../hook/useLivePlayer';
+import styles from "./LandingPage.module.scss";
+import { useLivePlayer } from '../../hook/useLivePlayer';
 
 const LandingPage = () => {
   const {toggleLive} = useLivePlayer();
