@@ -1,12 +1,23 @@
-import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { Page } from "../components/ui/Page";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import Play from "../components/PlayPauseButton/Button/Play.svg";
+import styles from "./lp/landingPage.module.scss";
+import { AudioPlayer } from '../components/FooterPlayer/AudioPlayer/AudioPlayer';
+import { useLivePlayer } from '../hook/useLivePlayer';
 
 const LandingPage = () => {
+  const {toggleLive} = useLivePlayer();
   const router = useRouter();
+
+  const playLiveAndNavigateHome = async () => {
+	await toggleLive();
+	console.log('Heh?')
+	router.push("/", undefined, { shallow: true });
+  }
 
   return (
     <motion.main
@@ -25,20 +36,38 @@ const LandingPage = () => {
         height: "100%",
         backgroundColor: "#000000",
         color: "#ffffff",
+        overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <h2>עמוד נחיתה</h2>
+      <div className={styles.landingPageWrapper}>
+        <div className={styles.PlayerWrapperAbout}>
+          <h1 className={styles.playerWrapperTitle}>רדיו סבתא</h1>
+          <h2 className={styles.playerWrapperSubtitle}>
+            קולקטיב רדיו אינטרנטי
+          </h2>
+          <h3 className={styles.playerWrapperQuote}>
+            כשהעגלה נוסעת, המלונים...
+          </h3>
         </div>
         <div>
-          <Link href="/">כניסה לאתר</Link>
+          {/* <Link passHref href={{ pathname: "/", query: { playing: true } }}> */}
+          {/* <Link passHref href="/"> */}
+            <div className={styles.playWrapper} onClick={() => playLiveAndNavigateHome()}>
+              <img src={Play} alt="Play Button" />
+              <span>לחצו לניגון</span>
+            </div>
+          {/* </Link> */}
+        </div>
+        <div className={styles.footerButton}>
+          <Link passHref href="/">
+            <span>
+              <FontAwesomeIcon
+                style={{ transform: "rotate(180deg)" }}
+                icon={faPlay as any}
+              />{" "}
+              כניסה לאתר
+            </span>
+          </Link>
         </div>
       </div>
     </motion.main>

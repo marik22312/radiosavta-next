@@ -44,24 +44,6 @@ const PlayerWrapper: React.FC = () => {
         className={classNames(styles.playerWrapperWrapper, getWrapperClass())}
       >
         <FooterPlayer state={pageStatus} changeState={setPageStatus} />
-        <div
-          className={classNames(styles.PlayerWrapperFooter, {
-            [styles.hide]: true,
-          })}
-        >
-          <button
-            className={classNames(styles.playerWrapperFooterButton, {
-              [styles.hide]: pageIsInactive,
-            })}
-            onClick={() => setPageStatus(PlayerWrapperState.Inactive)}
-          >
-            <FontAwesomeIcon
-              className={styles.footerButtonIcon}
-              icon={faPlay as any}
-            />{" "}
-            כניסה לאתר
-          </button>
-        </div>
       </div>
     </div>
   );

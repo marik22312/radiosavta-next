@@ -4,7 +4,11 @@ import { withStyles } from "@bit/mui-org.material-ui.styles";
 
 import styles from "./VolumeSlider.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeDown, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faVolumeDown,
+  faVolumeMute,
+  faVolumeUp,
+} from "@fortawesome/free-solid-svg-icons";
 
 const OrangeSlider = withStyles({
   root: {
@@ -19,7 +23,7 @@ const OrangeSlider = withStyles({
     width: 15,
     backgroundColor: "currentColor",
     marginTop: -8,
-    marginLeft: -12,
+    marginLeft: "0 !important",
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
     },
@@ -57,17 +61,21 @@ const VolumeSlider: React.FC<VolumeSliderProps> = (
 
   const getVolumeIcon = () => {
     if (value === 0) {
-        return faVolumeMute;
+      return faVolumeMute;
     } else if (value < 0.5) {
-        return faVolumeDown;
+      return faVolumeDown;
     } else {
-        return faVolumeUp;
+      return faVolumeUp;
     }
-    }
+  };
 
   return (
     <>
-      <FontAwesomeIcon icon={getVolumeIcon() as any} width='20px' height='20px' />
+      <FontAwesomeIcon
+        icon={getVolumeIcon() as any}
+        width="20px"
+        height="20px"
+      />
       <div className={styles.sliderContainer}>
         <OrangeSlider
           className={styles.slider}
@@ -77,6 +85,7 @@ const VolumeSlider: React.FC<VolumeSliderProps> = (
           aria-labelledby="vertical-slider"
           min={0}
           max={1}
+          defaultValue={1}
           step={0.01}
         />
       </div>

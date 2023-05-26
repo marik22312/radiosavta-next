@@ -1,0 +1,68 @@
+
+
+.landingPageWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.PlayerWrapperAbout {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+.playWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  img {
+    width: 120px;
+    height: 120px;
+  }
+  span {
+    color: #CC9933;
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+
+  .playerWrapperTitle {
+    color: #8F8989;
+    font-weight: 400;
+    font-size: 40px;
+    margin-bottom: 5px;
+  }
+  
+  .playerWrapperSubtitle {
+    color: #8F8989;
+    font-weight: 400;
+    font-size: 17px;
+  }
+  
+  .playerWrapperQuote {
+    color: #CC9933;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 15px;
+    padding: 0;
+  }
+  
+  .footerButton {
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #CC9933;
+    font-size: 18px;
+    cursor: pointer;
+    padding-bottom: 15px;
+    span {
+      display: flex;
+      gap: 5px;
+    }
+  }
