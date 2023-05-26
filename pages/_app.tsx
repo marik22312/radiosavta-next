@@ -56,13 +56,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             }
           >
             <AnimatePresence exitBeforeEnter initial={false}>
-                {getLayout ? (
-                  getLayout(<Component {...pageProps} key={router.route}/>)
-                ) : (
-                  <Component {...pageProps} key={router.route}/>
-                )}
-				<PlayerWrapper />
+              {getLayout ? (
+                getLayout(<Component {...pageProps} key={router.route} />)
+              ) : (
+                <Component {...pageProps} key={router.route} />
+              )}
             </AnimatePresence>
+            <PlayerWrapper />
           </Hydrate>
         </Page>
       </AudioPlayerProvider>

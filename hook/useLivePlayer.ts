@@ -27,7 +27,6 @@ export const useLivePlayer = () => {
     if (!isLive) {
 		const streamer = 'NA'
 		playTrack({
-			// logPlayLive({ streamerName: streamer });
 		  audioUrl: LIVE_STREAM_URL,
 		  title: songTitle || "",
 		  artist: streamer === "NA" ? "שידור חי" : streamer,
@@ -35,9 +34,7 @@ export const useLivePlayer = () => {
 		  metaData: {},
 		});
 		setIsLive(true);
-      const data = await refetch();
-    //   const streamer = data.data?.streamer || "NA";
-	  console.log("isLive", isLive);
+      refetch();
       return;
     }
     logFooterPlayerPause();
