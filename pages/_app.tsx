@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                 <Component {...pageProps} key={router.route} />
               )}
             </AnimatePresence>
-            <PlayerWrapper visible={router.route !== "/lp" && router.isReady} />
+            <PlayerWrapper />
           </Hydrate>
         </Page>
       </AudioPlayerProvider>
