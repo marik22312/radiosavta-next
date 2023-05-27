@@ -34,7 +34,8 @@ export const useLivePlayer = () => {
 		  metaData: {},
 		});
 		setIsLive(true);
-      refetch();
+		refetch();
+		
       return;
     }
     logFooterPlayerPause();
