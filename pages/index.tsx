@@ -1,134 +1,80 @@
-import { Page } from "../components/ui/Page";
-import style from "./Home.module.scss";
-
-import cn from "classnames";
-
-import { GetServerSideProps } from "next";
-import { QueryClient } from "react-query";
-import { stringify } from "flatted";
-import { dehydrate } from "react-query/hydration";
-
-import { usePrograms } from "../hook/usePrograms";
-import { getAllActivePrograms } from "../api/Programs.api";
-import {
-  prefetchLatestRecordedShows,
-  useLatestRecordedShows,
-} from "../hook/useLatestRecordedShows";
-
-import { getFilteredImages } from "../utils/getRandomImages.utils";
-import { Heading } from "../components/ui/Typography";
-import { Colors } from "../components/ui/Colors";
-import { prefetchAgenda, useAgenda } from "../hook/useAgenda";
-import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
-import { programParser } from "../parsers/Programs.parser";
-import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
-import { asStandardPage } from "../components/asStandardPage";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import Play from "../components/PlayPauseButton/Button/Play.svg";
+import styles from "./lp/LandingPage.module.scss";
+import { useLivePlayer } from "../hook/useLivePlayer";
+import { useNextCssRemovalPrevention } from "@madeinhaus/nextjs-page-transition";
 
-export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
+const LandingPage = () => {
+  useNextCssRemovalPrevention();
+  const { toggleLive } = useLivePlayer();
   const router = useRouter();
+
+  const playLiveAndNavigateHome = async () => {
+    await toggleLive();
+    router.push("/home", undefined, { shallow: true });
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <motion.main
+      exit={{
+        top: "100%",
+        opacity: 0,
+      }}
       transition={{
         duration: 0.75,
       }}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#000000",
+        color: "#ffffff",
+        overflow: "hidden",
+      }}
     >
-      <AboutSection imagesToShow={props.imagesToShow} />
-      <UploadsSection />
-    </motion.div>
+      <div className={styles.landingPageWrapper}>
+        <div className={styles.PlayerWrapperAbout}>
+          <h1 className={styles.playerWrapperTitle}>רדיו סבתא</h1>
+          <h2 className={styles.playerWrapperSubtitle}>
+            קולקטיב רדיו אינטרנטי
+          </h2>
+          <h3 className={styles.playerWrapperQuote}>
+            כשהעגלה נוסעת, המלונים...
+          </h3>
+        </div>
+        <div>
+          {/* <Link passHref href={{ pathname: "/", query: { playing: true } }}> */}
+          {/* <Link passHref href="/"> */}
+          <div
+            className={styles.playWrapper}
+            onClick={() => playLiveAndNavigateHome()}
+          >
+            <img src={Play} alt="Play Button" />
+            <span>לחצו לניגון</span>
+          </div>
+          {/* </Link> */}
+        </div>
+        <div className={styles.footerButton}>
+          <Link passHref href="/">
+            <span>
+              <FontAwesomeIcon
+                style={{ transform: "rotate(180deg)" }}
+                icon={faPlay as any}
+              />{" "}
+              כניסה לאתר
+            </span>
+          </Link>
+        </div>
+      </div>
+    </motion.main>
   );
 };
 
-export const AboutSection: React.FC<{ imagesToShow: string[] }> = (props) => {
-  const { data } = useAgenda();
-  return (
-    <section>
-      <div style={{ paddingRight: "21px" }}>
-        <Heading>לו&quot;ז יומי</Heading>
-      </div>
-      <div className={style.agendaWrapper}>
-        {data?.schedule.map((item, index) => {
-          return (
-            <div key={index} className={style.agendaItem}>
-              <div className={style.agendaItemTime}>
-                <p className={style.agendaItemTime}>
-                  {Intl.DateTimeFormat("he", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  }).format(new Date(item.start))}
-                </p>
-                <p className={style.agendaItemName}>{item.name}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-};
-
-const UploadsSection: React.FC = () => {
-  const { recordedShows } = useLatestRecordedShows({ limit: 5 });
-  const { playTrack } = usePlayerControls();
-  const { songTitle } = usePlayerState();
-
-  return (
-    <section className={style.recordedShowsSection}>
-      <div style={{ paddingRight: "21px" }}>
-        <Heading color={Colors.SAVTA_ORANGE}>העלאות אחרונות</Heading>
-      </div>
-      <div className={style.recordedShowsWrapper}>
-        {recordedShows?.map((show, index) => {
-          return (
-            <div
-              key={show.id}
-              className={style.recordedShowItem}
-              onClick={() =>
-                playTrack({
-                  artist: show.program?.name_he,
-                  title: show.name,
-                  audioUrl: show.url,
-                  imageUrl: programParser.programImage(show.program),
-                  metaData: {
-                    programId: show.program?.id,
-                    recordedShowId: show.id,
-                  },
-                })
-              }
-              data-isplaying={songTitle === show.name}
-            >
-              <h4>{show.program?.name_he}</h4>
-              <h5>{show.name}</h5>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-};
-
-export default asStandardPage(Home);
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	if (!context.req.cookies["savta-visited-landingPage"]) {
-		return {
-			redirect: {
-				destination: "/lp",
-				permanent: false,
-			}
-		}
-	}
-  const queryClient = new QueryClient();
-
-  await prefetchLatestRecordedShows(queryClient, { limit: 3 });
-  await prefetchAgenda(queryClient);
-
-  return {
-    props: {
-      dehydratedState: stringify(dehydrate(queryClient)),
-    },
-  };
-};
+export default LandingPage;

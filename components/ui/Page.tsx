@@ -90,7 +90,7 @@ export const Navbar: React.FC = () => {
         height="89"
         width="70"
       />
-      <MenuItem url="/" title="ראשי" />
+      <MenuItem url="/home" title="ראשי" />
       <MenuItem url="/programs" title="תכניות" />
       <MenuItem url="/about" title="אודות" />
       <MenuItem url="/join-us" title="הצטרפות" />

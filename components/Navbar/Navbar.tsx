@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             width: navbarWidth,
           }}
         >
-          <MenuItem url="/" title="ראשי" />
+          <MenuItem url="/home" title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
           <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
-              <Link href="/">
+              <Link href="/home">
                 <img
                   src={`${BASE_IMAGE_ICON}radiosavta/logo_head`}
                   width="100%"
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
               <span></span>
             </div>
           </div>
-          <MenuItem url="/" title="ראשי" />
+          <MenuItem url="/home" title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
           <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
