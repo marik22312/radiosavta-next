@@ -16,7 +16,6 @@ const LandingPage = () => {
 
   const playLiveAndNavigateHome = async () => {
 	await toggleLive();
-	console.log('Heh?')
 	router.push("/", undefined, { shallow: true });
   }
 
