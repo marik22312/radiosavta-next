@@ -8,6 +8,7 @@ import Play from "../components/PlayPauseButton/Button/Play.svg";
 import styles from "./lp/LandingPage.module.scss";
 import { useLivePlayer } from "../hook/useLivePlayer";
 import { useNextCssRemovalPrevention } from "@madeinhaus/nextjs-page-transition";
+import { HOME_PAGE_URL } from '../domain/Navigation';
 
 const LandingPage = () => {
   useNextCssRemovalPrevention();
@@ -16,7 +17,7 @@ const LandingPage = () => {
 
   const playLiveAndNavigateHome = async () => {
     await toggleLive();
-    router.push("/home", undefined, { shallow: true });
+    router.push(HOME_PAGE_URL, undefined, { shallow: true });
   };
 
   return (

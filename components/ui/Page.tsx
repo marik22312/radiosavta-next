@@ -6,6 +6,7 @@ import { logNavbarNavigation } from "../../api/Mixpanel.api";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
+import { HOME_PAGE_URL } from '../../domain/Navigation';
 
 export interface PageProps {
   title?: string;
@@ -90,7 +91,7 @@ export const Navbar: React.FC = () => {
         height="89"
         width="70"
       />
-      <MenuItem url="/home" title="ראשי" />
+      <MenuItem url={HOME_PAGE_URL} title="ראשי" />
       <MenuItem url="/programs" title="תכניות" />
       <MenuItem url="/about" title="אודות" />
       <MenuItem url="/join-us" title="הצטרפות" />
