@@ -4,7 +4,7 @@ $inactiveSize: 90vh;
 $activeSize: 30vh;
 
 .playerWrapperContainer {
-    // @include responsivePage;
+    position: -webkit-sticky;
     position: sticky;
     bottom: 0;
     margin-top: auto;
