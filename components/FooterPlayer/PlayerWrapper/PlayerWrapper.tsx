@@ -7,7 +7,13 @@ import { PlayerWrapperState } from "../../../domain/Player";
 import styles from "./PlayerWrapper.module.scss";
 import FooterPlayer from "../FooterPlayer";
 
-const PlayerWrapper: React.FC = () => {
+interface PlayerWrapperProps {
+  visible: boolean;
+}
+
+const PlayerWrapper: React.FC<PlayerWrapperProps> = (
+  props: PlayerWrapperProps
+) => {
   const [pageStatus, setPageStatus] = useState<PlayerWrapperState>(
     PlayerWrapperState.Inactive
   );
@@ -16,6 +22,9 @@ const PlayerWrapper: React.FC = () => {
   const pageIsInactive = pageStatus === PlayerWrapperState.Inactive;
 
   const getWrapperContainerClass = () => {
+    if (!props.visible) {
+      return styles.hide;
+    }
     if (pageIsInactive) {
       return styles.inactivePlayerWrapperContainer;
     }

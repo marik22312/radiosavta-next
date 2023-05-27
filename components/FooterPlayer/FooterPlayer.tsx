@@ -153,7 +153,7 @@ const BroadcastIcon: React.FC = () => {
   const { isPlaying } = usePlayerState();
   const { isLive, toggleLive } = useLivePlayer();
 
-  const style = { minHeight: "12px", maxHeight: "18px", width: "30px" };
+  const style = { minHeight: "18px", maxHeight: "18px", width: "30px" };
 
   if (!isPlaying) {
     return <div style={style}></div>;

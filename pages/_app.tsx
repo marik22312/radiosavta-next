@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       });
   }, [router.events]);
 
-  const getLayout = Component.getLayout;
+  const { getLayout } = Component;
 
   return (
     <QueryClientProvider client={queryClient.current}>
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                 <Component {...pageProps} key={router.route} />
               )}
             </AnimatePresence>
-            <PlayerWrapper />
+            <PlayerWrapper visible={router.route !== "/lp" && router.isReady} />
           </Hydrate>
         </Page>
       </AudioPlayerProvider>

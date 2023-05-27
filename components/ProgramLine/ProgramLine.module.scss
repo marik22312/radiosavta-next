@@ -3,7 +3,7 @@
   background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
   margin-bottom: 3px;
   mix-blend-mode: screen;
-
+  cursor: pointer;
   border-radius: 5px;
 
   &[data-is-expanded="true"] {
@@ -31,9 +31,15 @@
 
   ul {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
     li {
       cursor: pointer;
       user-select: none;
+      &:hover {
+        color: #eeb137;
+      }
 
       &[data-is-playing="true"] {
         color: #cccccc;
@@ -57,6 +63,10 @@
     border-radius: 5px;
     background-color: #cc9933;
     padding: 2px 5px;
+    transition: background-color 0.2s ease-out;
+    &:hover {
+      background-color: #eeb137;
+    }
     a {
       background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
       -webkit-background-clip: text;
