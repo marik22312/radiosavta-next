@@ -17,7 +17,11 @@ import { useRouter } from "next/router";
 import { AppPropsWithLayout } from "../domain/AppProps";
 import PlayerWrapper from "../components/FooterPlayer/PlayerWrapper/PlayerWrapper";
 import { Page, Navbar } from "../components/ui/Page";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+
+import PageTransition, {
+  useAsPathWithoutHash,
+} from "@madeinhaus/nextjs-page-transition";
 
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
 
@@ -42,6 +46,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const { getLayout } = Component;
 
+  const key = useAsPathWithoutHash();
+
   return (
     <QueryClientProvider client={queryClient.current}>
       <AudioPlayerProvider>
@@ -56,11 +62,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             }
           >
             <AnimatePresence exitBeforeEnter initial={false}>
-              {getLayout ? (
-                getLayout(<Component {...pageProps} key={router.route} />)
-              ) : (
-                <Component {...pageProps} key={router.route} />
-              )}
+                {getLayout ? (
+                  getLayout(<Component {...pageProps} key={key} />)
+                ) : (
+                  <Component {...pageProps} key={router.route} />
+                )}
             </AnimatePresence>
             <PlayerWrapper />
           </Hydrate>

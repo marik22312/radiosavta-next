@@ -6,17 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Play from "../../components/PlayPauseButton/Button/Play.svg";
 import styles from "./LandingPage.module.scss";
-import { useLivePlayer } from '../../hook/useLivePlayer';
+import { useLivePlayer } from "../../hook/useLivePlayer";
+import { useNextCssRemovalPrevention } from "@madeinhaus/nextjs-page-transition";
 
 const LandingPage = () => {
-  const {toggleLive} = useLivePlayer();
+  useNextCssRemovalPrevention();
+  const { toggleLive } = useLivePlayer();
   const router = useRouter();
 
   const playLiveAndNavigateHome = async () => {
-	await toggleLive();
-	console.log('Heh?')
-	router.push("/", undefined, { shallow: true });
-  }
+    await toggleLive();
+    router.push("/", undefined, { shallow: true });
+  };
 
   return (
     <motion.main
@@ -51,10 +52,13 @@ const LandingPage = () => {
         <div>
           {/* <Link passHref href={{ pathname: "/", query: { playing: true } }}> */}
           {/* <Link passHref href="/"> */}
-            <div className={styles.playWrapper} onClick={() => playLiveAndNavigateHome()}>
-              <img src={Play} alt="Play Button" />
-              <span>לחצו לניגון</span>
-            </div>
+          <div
+            className={styles.playWrapper}
+            onClick={() => playLiveAndNavigateHome()}
+          >
+            <img src={Play} alt="Play Button" />
+            <span>לחצו לניגון</span>
+          </div>
           {/* </Link> */}
         </div>
         <div className={styles.footerButton}>
