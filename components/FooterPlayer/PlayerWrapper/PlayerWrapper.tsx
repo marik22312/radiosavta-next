@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { PlayerWrapperState } from "../../../domain/Player";
 
