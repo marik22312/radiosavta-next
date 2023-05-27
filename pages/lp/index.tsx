@@ -7,8 +7,10 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Play from "../../components/PlayPauseButton/Button/Play.svg";
 import styles from "./LandingPage.module.scss";
 import { useLivePlayer } from '../../hook/useLivePlayer';
+import {useNextCssRemovalPrevention} from '@madeinhaus/nextjs-page-transition'
 
 const LandingPage = () => {
+	const removeStyles = useNextCssRemovalPrevention()
   const {toggleLive} = useLivePlayer();
   const router = useRouter();
 
@@ -24,6 +26,7 @@ const LandingPage = () => {
         top: "100%",
         opacity: 0,
       }}
+	  
       transition={{
         duration: 0.75,
       }}
