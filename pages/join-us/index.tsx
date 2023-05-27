@@ -94,11 +94,13 @@ const JoinUsPage: React.FC = () => {
               name={FormFields.MESSAGE}
               placeholder="איזה אלופים אתם! איך מצטרפים?"
             />
-            <ReCAPTCHA
-              ref={captchaRef}
-              size="invisible"
-              sitekey={process.env.RECAPTCA_KEY!}
-            />
+            {process.env.RECAPTCA_KEY && (
+              <ReCAPTCHA
+                ref={captchaRef}
+                size="invisible"
+                sitekey={process.env.RECAPTCA_KEY!}
+              />
+            )}
             <FormField
               disabled={isLoading || isSuccess}
               type="submit"

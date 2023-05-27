@@ -13,15 +13,17 @@
   line-height: 14px;
 }
 .agendaItemTime {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin-left: 10px;
   color: #cc6666;
   font-size: 16px;
 }
 
 .agendaItemName {
-  display: inline-block;
   color: #cccccc;
+  line-height: 20px;
 }
 
 .recordedShowsSection {
@@ -40,6 +42,13 @@
   border-radius: 10px;
   padding: 10px 0;
   padding-right: 21px;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.3);
+    mix-blend-mode: unset;
+  }
 
   h4 {
     color: #cccccc;

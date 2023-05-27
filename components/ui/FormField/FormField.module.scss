@@ -38,6 +38,12 @@
     }
   }
 
+  textarea {
+    height: 100px;
+    resize: none;
+    padding-top: 7px;
+  }
+
   &[data-type="submit"] {
     display: flex;
 

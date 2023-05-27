@@ -18,8 +18,13 @@
 .playWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+  margin-inline: auto;
   align-items: center;
   gap: 10px;
+  padding-inline: 7px;
+  cursor: pointer;
   img {
     width: 120px;
     height: 120px;

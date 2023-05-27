@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       });
   }, [router.events]);
 
-  const getLayout = Component.getLayout;
+  const { getLayout } = Component;
 
   return (
     <QueryClientProvider client={queryClient.current}>
