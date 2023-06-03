@@ -8,14 +8,8 @@ import Image from "next/image";
 import Head from "next/head";
 import { HOME_PAGE_URL } from '../../domain/Navigation';
 
-export interface PageProps {
-  title?: string;
-  previewImageUrl?: string;
-}
-export const Page: React.FC<PageProps> = ({
+export const Page: React.FC = ({
   children,
-  title,
-  previewImageUrl,
 }) => {
   return (
     <>
