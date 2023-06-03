@@ -19,9 +19,12 @@ import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 import { asStandardPage } from "../components/asStandardPage";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { Seo } from '../components/seo/seo';
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   return (
+	<>
+	<Seo />
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -32,6 +35,7 @@ export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
       <AboutSection imagesToShow={props.imagesToShow} />
       <UploadsSection />
     </motion.div>
+	</>
   );
 };
 

@@ -14,6 +14,7 @@ import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../../parsers/Programs.parser";
 import { asStandardPage } from '../../components/asStandardPage';
+import { Seo } from '../../components/seo/seo';
 
 export const SingleProgramPage: React.FC<{
   program: Program;
@@ -23,6 +24,7 @@ export const SingleProgramPage: React.FC<{
   const { playTrack } = usePlayerControls();
   return (
 	<>
+	<Seo title={`רדיוסבתא - ${props.program.name_he}`}/>
       <div className={style.pageTitleWrapepr}>
         <Heading>{props.program.name_he}</Heading>
       </div>

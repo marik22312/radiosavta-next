@@ -3,10 +3,12 @@ import { asStandardPage } from '../../components/asStandardPage';
 import { Page } from '../../components/ui/Page';
 import { Heading } from '../../components/ui/Typography';
 import style from './aboutPage.module.scss';
+import { Seo } from '../../components/seo/seo';
 
 const NewAboutPage: React.FC = () => {
 	return (
 		<>
+		<Seo title="רדיוסבתא - למה סבתא?"/>
 			<div style={{paddingRight: '21px'}}>
 			<Heading>למה סבתא?</Heading>
 			</div>

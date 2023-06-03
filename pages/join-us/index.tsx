@@ -9,6 +9,7 @@ import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
 import { Alert, AlertType } from "../../components/ui/Alert";
 import { asStandardPage } from "../../components/asStandardPage";
+import { Seo } from '../../components/seo/seo';
 
 enum FormFields {
   NAME = "fullname",
@@ -50,6 +51,7 @@ const JoinUsPage: React.FC = () => {
   };
   return (
     <>
+	<Seo title=" רדיוסבתא - הצטרפו לקולקטיב" />
       <div style={{ paddingRight: "21px" }}>
         <Heading>הצטרפו לקולקטיב</Heading>
       </div>
