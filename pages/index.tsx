@@ -9,6 +9,8 @@ import styles from "./lp/LandingPage.module.scss";
 import { useLivePlayer } from "../hook/useLivePlayer";
 import { useNextCssRemovalPrevention } from "@madeinhaus/nextjs-page-transition";
 import { HOME_PAGE_URL } from '../domain/Navigation';
+import { NextSeo } from 'next-seo';
+import { Seo } from '../components/seo/seo';
 
 const LandingPage = () => {
   useNextCssRemovalPrevention();
@@ -21,6 +23,8 @@ const LandingPage = () => {
   };
 
   return (
+	<>
+	<Seo />
     <motion.main
       exit={{
         top: "100%",
@@ -63,7 +67,7 @@ const LandingPage = () => {
           {/* </Link> */}
         </div>
         <div className={styles.footerButton}>
-          <Link passHref href="/">
+          <Link passHref href={HOME_PAGE_URL}>
             <span>
               <FontAwesomeIcon
                 style={{ transform: "rotate(180deg)" }}
@@ -75,6 +79,7 @@ const LandingPage = () => {
         </div>
       </div>
     </motion.main>
+	</>
   );
 };
 

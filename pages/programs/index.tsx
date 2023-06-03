@@ -12,6 +12,7 @@ import {
   useQueryPrograms,
 } from "../../hook/useQueryPrograms";
 import { asStandardPage } from '../../components/asStandardPage';
+import { Seo } from '../../components/seo/seo';
 
 const ProgramsPage: React.FC = () => {
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
@@ -30,6 +31,7 @@ const ProgramsPage: React.FC = () => {
 
   return (
     <>
+	<Seo title="התכניות של סבתא"/>
         <div style={{ paddingRight: "21px" }}>
           <Heading>התכניות של סבתא</Heading>
         </div>
