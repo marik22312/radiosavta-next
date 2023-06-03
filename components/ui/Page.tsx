@@ -20,22 +20,6 @@ export const Page: React.FC<PageProps> = ({
   return (
     <>
       <Head>
-        <title>רדיוסבתא - {title}</title>
-        <meta name="description" content="קולקטיב רדיו אינטרנט" />
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta property="og:title" content={title} />
-        <meta
-          property="og:description"
-          content="Radiosavta - An Online Internet Radio"
-        />
-        <meta
-          property="og:image"
-          content={
-            previewImageUrl ||
-            "https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1637258645/radiosavta/assets/ogImage.jpg"
-          }
-        />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Heebo&display=optional"
