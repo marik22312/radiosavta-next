@@ -166,7 +166,7 @@ const BroadcastIcon: React.FC = () => {
       src={isBroadcastIcon}
       alt="pre recorder program"
       onClick={toggleLive}
-      style={style}
+      style={{ ...style, cursor: "pointer" }}
     />
   );
 };

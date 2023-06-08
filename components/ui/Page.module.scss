@@ -11,11 +11,14 @@
 }
 
 .pageWrapper {
+  display: flex;
+  flex-direction: column;
   background-color: #333333;
   width: 100%;
   overflow: auto;
   height: 100vh;
   position: relative;
+  overflow-x: hidden;
 
   @media (min-width: 430px) {
     width: 400px;
