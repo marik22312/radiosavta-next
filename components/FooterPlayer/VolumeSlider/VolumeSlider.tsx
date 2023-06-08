@@ -12,7 +12,7 @@ import {
 
 const OrangeSlider = withStyles({
   root: {
-    color: "#CC9933",
+    color: "#CC9933 !important",
     height: 15,
     width: "4px !important",
     display: "flex",
