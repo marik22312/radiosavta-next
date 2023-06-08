@@ -51,7 +51,11 @@ const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
   return (
     <Link href={props.url}>
       <a
-        onClick={() => logNavbarNavigation(props.url)}
+        onClick={() => logNavbarNavigation({
+			url: props.url,
+			currentUrl: router.pathname,
+			targetUrl: props.url
+		})}
         data-current={router.pathname === props.url}
       >
         {props.title}

@@ -12,6 +12,7 @@ import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
 import { Seeker } from "./Seeker/Seeker";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import {
+	logFooterPlayerExpand,
   logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
@@ -375,7 +376,10 @@ const RenderContent: React.FC<playerContentInterface> = (
       <ActiveContent
         togglePlay={props.togglePlay}
         audioRef={props.audioRef}
-        changeState={() => props.changeState(PlayerWrapperState.Inactive)}
+        changeState={() => {
+			logFooterPlayerExpand({state: PlayerWrapperState.Inactive})
+			props.changeState(PlayerWrapperState.Inactive)
+		}}
         onShare={props.onShare}
       />
     );
@@ -385,7 +389,10 @@ const RenderContent: React.FC<playerContentInterface> = (
       <InActiveContent
         togglePlay={props.togglePlay}
         audioRef={props.audioRef}
-        changeState={() => props.changeState(PlayerWrapperState.Active)}
+        changeState={() => {
+			logFooterPlayerExpand({state: PlayerWrapperState.Active})
+			props.changeState(PlayerWrapperState.Active)
+		}}
         onShare={props.onShare}
       />
     );

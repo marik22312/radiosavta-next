@@ -13,8 +13,9 @@ import style from "./singleProgram.module.scss";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../../parsers/Programs.parser";
-import { asStandardPage } from '../../components/asStandardPage';
-import { Seo } from '../../components/seo/seo';
+import { asStandardPage } from "../../components/asStandardPage";
+import { Seo } from "../../components/seo/seo";
+import { logPlayRecordedShow } from "../../api/Mixpanel.api";
 
 export const SingleProgramPage: React.FC<{
   program: Program;
@@ -23,8 +24,8 @@ export const SingleProgramPage: React.FC<{
   const { songTitle } = usePlayerState();
   const { playTrack } = usePlayerControls();
   return (
-	<>
-	<Seo title={`רדיוסבתא - ${props.program.name_he}`}/>
+    <>
+      <Seo title={`רדיוסבתא - ${props.program.name_he}`} />
       <div className={style.pageTitleWrapepr}>
         <Heading>{props.program.name_he}</Heading>
       </div>
@@ -34,8 +35,7 @@ export const SingleProgramPage: React.FC<{
         </p>
       </div>
       <div>
-        <div
-          className={style.recordedShowsTitleWrapper}>
+        <div className={style.recordedShowsTitleWrapper}>
           <Heading color={Colors.SAVTA_ORANGE}>העלאות אחרונות</Heading>
         </div>
         <div>
@@ -46,6 +46,12 @@ export const SingleProgramPage: React.FC<{
                 data-isPlaying={songTitle === s.name}
                 className={style.recordedShowWrapper}
                 onClick={() => {
+                  logPlayRecordedShow({
+                    programId: props.program.id,
+                    showName: s.name,
+                    source: "PROGRAM_PAGE",
+                    programName: programParser.programImage(props.program),
+                  });
                   playTrack({
                     title: s.name,
                     audioUrl: s.url,
@@ -73,7 +79,7 @@ export const SingleProgramPage: React.FC<{
           })}
         </div>
       </div>
-	  </>
+    </>
   );
 };
 

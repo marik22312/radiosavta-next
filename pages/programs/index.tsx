@@ -13,6 +13,8 @@ import {
 } from "../../hook/useQueryPrograms";
 import { asStandardPage } from '../../components/asStandardPage';
 import { Seo } from '../../components/seo/seo';
+import { Program } from '../../domain/Program';
+import { logExpandProgram } from '../../api/Mixpanel.api';
 
 const ProgramsPage: React.FC = () => {
   const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
@@ -23,7 +25,11 @@ const ProgramsPage: React.FC = () => {
     },
   });
 
-  const onExpandProgram = (index: number) => {
+  const onExpandProgram = ({index, program}:{index: number; program: Program}) => {
+	logExpandProgram({
+		programId: program.id,
+		programName: programParser.name(program),
+	})
     setExpandedProgramIndex((currentIndex) =>
       currentIndex === index ? undefined : index
     );
@@ -47,7 +53,7 @@ const ProgramsPage: React.FC = () => {
                 key={program.id}
                 title={program.name_he}
                 isExpanded={expandedProgramIndex === index}
-                onExpandProgram={() => onExpandProgram(index)}
+                onExpandProgram={() => onExpandProgram({index, program})}
                 imageUrl={programParser.programImage(program)}
               />
             );
