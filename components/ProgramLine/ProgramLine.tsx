@@ -119,7 +119,7 @@ const ProgramContent: React.FC<ProgramContentProps> = (props) => {
           onClick={(e) => e.stopPropagation()}
         >
           <Link href={`/programs/${props.programId}`} passHref>
-            <span onClick={}>
+            <span>
               <a>לארכיון</a>
             </span>
           </Link>
