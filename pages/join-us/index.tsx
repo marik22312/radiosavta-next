@@ -9,7 +9,8 @@ import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
 import { Alert, AlertType } from "../../components/ui/Alert";
 import { asStandardPage } from "../../components/asStandardPage";
-import { Seo } from '../../components/seo/seo';
+import { Seo } from "../../components/seo/seo";
+import { logClickOnSubmitContactForm } from '../../api/Mixpanel.api';
 
 enum FormFields {
   NAME = "fullname",
@@ -38,20 +39,29 @@ const JoinUsPage: React.FC = () => {
     setIsLoading(true);
 
     const captcha = await captchaRef.current?.executeAsync();
+    // @ts-expect-error
+    const name = e.target[FormFields.NAME].value ?? "";
+    // @ts-expect-error
+    const email = e.target[FormFields.EMAIL].value ?? "";
+    // @ts-expect-error
+    const message = e.target[FormFields.MESSAGE].value ?? "";
+
+	logClickOnSubmitContactForm({
+		hasEmail: !!email,
+		hasName: !!name,
+		hasMessage: !!message,
+	})
     const data: ContactFormRequest = {
-      // @ts-expect-error
-      [FormFields.NAME]: e.target[FormFields.NAME].value,
-      // @ts-expect-error
-      [FormFields.EMAIL]: e.target[FormFields.EMAIL].value,
-      // @ts-expect-error
-      [FormFields.MESSAGE]: e.target[FormFields.MESSAGE].value,
+      [FormFields.NAME]: name,
+      [FormFields.EMAIL]: email,
+      [FormFields.MESSAGE]: message,
       recaptcha: captcha ?? "",
     };
     submitForm(data);
   };
   return (
     <>
-	<Seo title=" רדיוסבתא - הצטרפו לקולקטיב" />
+      <Seo title=" רדיוסבתא - הצטרפו לקולקטיב" />
       <div style={{ paddingRight: "21px" }}>
         <Heading>הצטרפו לקולקטיב</Heading>
       </div>

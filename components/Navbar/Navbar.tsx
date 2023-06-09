@@ -10,8 +10,7 @@ import {
   logNavbarOpen,
   logNavbarNavigation,
 } from "../../api/Mixpanel.api";
-import { HOME_PAGE_URL } from '../../domain/Navigation';
-
+import { HOME_PAGE_URL } from "../../domain/Navigation";
 
 interface NavBarProps {
   title: string;
@@ -23,7 +22,15 @@ interface NavBarProps {
 const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
   return (
     <Link href={props.url}>
-      <a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
+      <a
+        onClick={() =>
+          logNavbarNavigation({
+            url: props.url,
+          })
+        }
+      >
+        {props.title}
+      </a>
     </Link>
   );
 };
@@ -53,7 +60,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
     logNavbarOpen();
     return open();
   };
-
 
   const open = () => {
     setIsOpen(true);

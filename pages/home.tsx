@@ -1,6 +1,5 @@
 import style from "./Home.module.scss";
 
-
 import { GetServerSideProps } from "next";
 import { QueryClient } from "react-query";
 import { stringify } from "flatted";
@@ -19,23 +18,24 @@ import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 import { asStandardPage } from "../components/asStandardPage";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { Seo } from '../components/seo/seo';
+import { Seo } from "../components/seo/seo";
+import { logPlayRecordedShow } from "../api/Mixpanel.api";
 
 export const Home: React.FC<{ imagesToShow: string[] }> = (props) => {
   return (
-	<>
-	<Seo />
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 0.75,
-      }}
-    >
-      <AboutSection imagesToShow={props.imagesToShow} />
-      <UploadsSection />
-    </motion.div>
-	</>
+    <>
+      <Seo />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 0.75,
+        }}
+      >
+        <AboutSection imagesToShow={props.imagesToShow} />
+        <UploadsSection />
+      </motion.div>
+    </>
   );
 };
 
@@ -83,7 +83,13 @@ const UploadsSection: React.FC = () => {
             <div
               key={show.id}
               className={style.recordedShowItem}
-              onClick={() =>
+              onClick={() => {
+                logPlayRecordedShow({
+                  programName: show.program?.name_he,
+                  showName: show.name,
+                  source: "HOMEPAGE",
+                  programId: show.program?.id,
+                });
                 playTrack({
                   artist: show.program?.name_he,
                   title: show.name,
@@ -93,8 +99,8 @@ const UploadsSection: React.FC = () => {
                     programId: show.program?.id,
                     recordedShowId: show.id,
                   },
-                })
-              }
+                });
+              }}
               data-isplaying={songTitle === show.name}
             >
               <h4>{show.program?.name_he}</h4>

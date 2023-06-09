@@ -12,6 +12,7 @@ import { HOME_PAGE_URL } from "../domain/Navigation";
 import { NextSeo } from "next-seo";
 import { Seo } from "../components/seo/seo";
 import LoadingAnimated from "../components/PlayPauseButton/Button/LoadingAnimated.svg";
+import { Origins, logLandingPagePressOnEnterSite, logPlayLive, logNavbarNavigation } from '../api/Mixpanel.api';
 
 const LandingPage = () => {
   useNextCssRemovalPrevention();
@@ -21,6 +22,9 @@ const LandingPage = () => {
 
   const playLiveAndNavigateHome = async () => {
     setIsLoading(true);
+	logPlayLive({
+		origin: Origins.LANDING_PAGE
+	});
     await toggleLive();
     router.push(HOME_PAGE_URL, undefined, { shallow: true });
   };
@@ -66,8 +70,15 @@ const LandingPage = () => {
               <span>לחצו לניגון</span>
             </div>
           </div>
-          <div className={styles.footerButton}>
-            <Link passHref href={HOME_PAGE_URL}>
+          <div className={styles.footerButton} onClick={() => {
+			logLandingPagePressOnEnterSite();
+			logNavbarNavigation({
+				currentUrl: router.pathname,
+				targetUrl: HOME_PAGE_URL,
+				url: HOME_PAGE_URL
+			})
+			router.push(HOME_PAGE_URL);
+		  }}>
               <span>
                 <FontAwesomeIcon
                   style={{ transform: "rotate(180deg)" }}
@@ -75,7 +86,6 @@ const LandingPage = () => {
                 />{" "}
                 כניסה לאתר
               </span>
-            </Link>
           </div>
         </div>
       </motion.main>

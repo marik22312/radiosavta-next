@@ -8,6 +8,7 @@ import { usePlayerControls as usePlayerControlsV2 } from "../../providers/Player
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { RecordedShow } from "../../domain/RecordedShow";
 import { programParser } from "../../parsers/Programs.parser";
+import { logPlayRecordedShow } from '../../api/Mixpanel.api';
 
 interface ProgramLineProps {
   title: string;
@@ -20,6 +21,13 @@ interface ProgramLineProps {
 export const ProgramLine: React.FC<ProgramLineProps> = (props) => {
   const { playTrack } = usePlayerControlsV2();
   const onPlayTrack = (recordedShow: RecordedShow) => {
+	logPlayRecordedShow({
+		programId: recordedShow.program.id,
+		programName: recordedShow.program.name_he,
+		showName: recordedShow.name,
+		source: 'PROGRAM_PAGE',
+
+	})
     playTrack({
       title: recordedShow.name,
       audioUrl: recordedShow.url,

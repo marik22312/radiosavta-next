@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { logFooterPlayerPause, logPlayLive } from "../api/Mixpanel.api";
+import { logFooterPlayerPause } from "../api/Mixpanel.api";
 import { LIVE_STREAM_URL } from "../config/stream";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
