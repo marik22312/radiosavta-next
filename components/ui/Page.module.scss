@@ -4,7 +4,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow: auto;
+  height: -webkit-fill-available;
   @media (min-width: 430px) {
     padding-block: 5vh;
   }
@@ -16,7 +18,8 @@
   background-color: #333333;
   width: 100%;
   overflow: auto;
-  height: 100vh;
+  min-height: -webkit-fill-available;
+  max-height: 100vh;
   position: relative;
   overflow-x: hidden;
 

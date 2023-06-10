@@ -27,12 +27,16 @@ main + .playerWrapperContainer {
 
 .activePlayerWrapperContainer {
     background-color: rgba(6, 6, 6, 0.4);
-    pointer-events: all;
+    pointer-events: none;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
     inset: 0;
     overflow: hidden;
     max-height: 100vh;
     height: 100%;
+    min-height: -webkit-fill-available;
     display: flex;
+    position: fixed;
 }
 
 .playerWrapperWrapper {
@@ -47,7 +51,7 @@ main + .playerWrapperContainer {
 }
 
 .activePlayerWrapper {
-    max-height: 70%;
+    max-height: 85%;
     margin-top: auto;
     justify-content: center;
     gap: 30px;
@@ -106,13 +110,13 @@ main + .playerWrapperContainer {
         max-height: 100px;
     }
     100% {
-        max-height: 70%;
+        max-height: 85%;
     }
 }
 
 @keyframes closePlayer {
     0% {
-        height: 70%;
+        height: 85%;
     }
     100% {
         height: 100px;
