@@ -37,6 +37,7 @@ main + .playerWrapperContainer {
     min-height: -webkit-fill-available;
     display: flex;
     position: fixed;
+    -webkit-backface-visibility: hidden;
 }
 
 .playerWrapperWrapper {
