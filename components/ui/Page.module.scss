@@ -32,10 +32,10 @@
   position: relative;
   overflow-x: hidden;
   padding-bottom: 110px;
+  min-height: 100vh;
 
   @media (min-width: 430px) {
     width: 400px;
-    min-height: 100vh;
     max-height: 100vh;
     box-shadow: 0 0 11px 0;
   }
