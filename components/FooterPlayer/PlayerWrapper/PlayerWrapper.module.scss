@@ -8,7 +8,7 @@ main + .playerWrapperContainer {
 }
 
 .playerWrapperContainer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
@@ -18,6 +18,9 @@ main + .playerWrapperContainer {
     height: 110px;
     min-height: 100px;
     max-height: 110px;
+    @media (min-width: 430px) {
+        position: sticky;
+    }
 }
 
 .initialPlayerWrapperContainer {
