@@ -29,9 +29,9 @@
   width: 100%;
   overflow: auto;
   min-height: -webkit-fill-available;
-  max-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  padding-bottom: 110px;
 
   @media (min-width: 430px) {
     width: 400px;
