@@ -66,6 +66,7 @@
   color: #CC9933;
   font-size: 20px;
   cursor: pointer;
+  padding-bottom: 3px;
 }
 
 .volumeButton > div {
@@ -129,8 +130,8 @@
 .seekerWrapper {
   position: absolute;
   top: -20px;
-  right: 15px;
-  left: 15px;
+  right: 20px;
+  left: 20px;
 }
 
 // inactive mode
