@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 40px;
-  /* CSS specific to iOS devices */ 
+  max-height: 100vh;
   @media (max-width: 430px) {
     padding-bottom: 110px;
   }
