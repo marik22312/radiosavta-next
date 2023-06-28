@@ -10,16 +10,19 @@ main + .playerWrapperContainer {
 .playerWrapperContainer {
     position: fixed;
     bottom: 0;
-    right: 0;
-    left: 0;
     z-index: 9999;
     margin-top: auto;
     transition: background-color 0.5s ease-in-out;
     height: 110px;
-    min-height: 100px;
+    min-height: 110px;
     max-height: 110px;
     @media (min-width: 430px) {
         position: sticky;
+    }
+    @media (max-width: 430px) {
+        position: fixed;
+        right: 0;
+        left: 0;
     }
 }
 
@@ -45,8 +48,11 @@ main + .playerWrapperContainer {
     height: 100%;
     min-height: -webkit-fill-available;
     display: flex;
-    position: fixed;
+    position: absolute;
     -webkit-backface-visibility: hidden;
+    @media (max-width: 430px) {
+        position: fixed;
+    }
 }
 
 .playerWrapperWrapper {
