@@ -8,6 +8,14 @@
   @media (max-width: 430px) {
     padding-bottom: 110px;
   }
+
+  /* CSS specific to iOS devices */ 
+  @media (max-width: 430px) {
+    @supports (-webkit-touch-callout: none) {
+      padding-bottom: 170px;
+      overflow: hidden;
+    }
+  }
 }
 
 .PlayerWrapperAbout {
