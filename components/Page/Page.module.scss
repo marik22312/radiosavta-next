@@ -3,3 +3,9 @@
 	transition: all 0.5s ease-in-out;
 	
 }
+
+.standardPage {
+	@media (max-width: 430px) {
+		padding-bottom: var(--player-height);
+	}
+}

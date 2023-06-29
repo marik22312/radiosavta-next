@@ -11,7 +11,7 @@ import {
   prefetchQueryPrograms,
   useQueryPrograms,
 } from "../../hook/useQueryPrograms";
-import { asStandardPage } from '../../components/asStandardPage';
+import { asStandardPage } from '../../components/Page/asStandardPage';
 import { Seo } from '../../components/seo/seo';
 import { Program } from '../../domain/Program';
 import { logExpandProgram } from '../../api/Mixpanel.api';

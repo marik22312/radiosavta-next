@@ -13,9 +13,9 @@ main + .playerWrapperContainer {
     z-index: 9999;
     margin-top: auto;
     transition: background-color 0.5s ease-in-out;
-    height: 110px;
-    min-height: 110px;
-    max-height: 110px;
+    height: var(--player-height);
+    min-height: var(--player-height);
+    max-height: var(--player-height);
     @media (min-width: 430px) {
         position: sticky;
     }

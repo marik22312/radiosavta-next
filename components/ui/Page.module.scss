@@ -1,9 +1,5 @@
 .responsivePage {
   background-color: #333333;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: -webkit-fill-available;
   overflow: auto;
   height: -webkit-fill-available;
@@ -21,13 +17,15 @@
   @media (min-width: 430px) {
     padding-block: 5vh;
     max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
 }
 
 .pageWrapper {
-  display: flex;
-  flex-direction: column;
   background-color: #333333;
   width: 100%;
   overflow: auto;
@@ -44,6 +42,8 @@
     max-height: 100vh;
     min-height: 90vh;
     box-shadow: 0 0 11px 0;
+    display: flex;
+    flex-direction: column;
   }
 
 }

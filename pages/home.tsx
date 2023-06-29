@@ -15,7 +15,7 @@ import { prefetchAgenda, useAgenda } from "../hook/useAgenda";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../parsers/Programs.parser";
 import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
-import { asStandardPage } from "../components/asStandardPage";
+import { asStandardPage } from "../components/Page/asStandardPage";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { Seo } from "../components/seo/seo";
