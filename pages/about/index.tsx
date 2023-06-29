@@ -1,5 +1,5 @@
 import React from 'react';
-import { asStandardPage } from '../../components/asStandardPage';
+import { asStandardPage } from '../../components/Page/asStandardPage';
 import { Page } from '../../components/ui/Page';
 import { Heading } from '../../components/ui/Typography';
 import style from './aboutPage.module.scss';

@@ -8,7 +8,7 @@ import { ContactFormRequest } from "../../api/Contact.api";
 import { FormField } from "../../components/ui/FormField";
 import { useContactForm } from "../../hook/useContactForm";
 import { Alert, AlertType } from "../../components/ui/Alert";
-import { asStandardPage } from "../../components/asStandardPage";
+import { asStandardPage } from "../../components/Page/asStandardPage";
 import { Seo } from "../../components/seo/seo";
 import { logClickOnSubmitContactForm } from '../../api/Mixpanel.api';
 

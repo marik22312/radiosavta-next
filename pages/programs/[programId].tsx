@@ -13,7 +13,7 @@ import style from "./singleProgram.module.scss";
 import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
 import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
 import { programParser } from "../../parsers/Programs.parser";
-import { asStandardPage } from "../../components/asStandardPage";
+import { asStandardPage } from "../../components/Page/asStandardPage";
 import { Seo } from "../../components/seo/seo";
 import { logPlayRecordedShow } from "../../api/Mixpanel.api";
 
