@@ -1,7 +1,6 @@
 .responsivePage {
   background-color: #333333;
   min-height: -webkit-fill-available;
-  overflow: auto;
   height: -webkit-fill-available;
 
   /* CSS specific to iOS devices */ 
@@ -28,10 +27,8 @@
 .pageWrapper {
   background-color: #333333;
   width: 100%;
-  overflow: auto;
   min-height: -webkit-fill-available;
   position: relative;
-  overflow-x: hidden;
 
   @media (max-width: 430px) {
     min-height: 100vh;
@@ -50,12 +47,12 @@
 
 .navbarWrapper {
   width: 100%;
-  height: 90px;
+  height: var(--navbar-height);
   background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 15px;
+  margin-bottom: var(--navbar-margin);
   position: sticky;
   top: 0;
   z-index: 100;
