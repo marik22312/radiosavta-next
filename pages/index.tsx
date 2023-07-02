@@ -20,6 +20,10 @@ const LandingPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+	router.prefetch(HOME_PAGE_URL);
+  }, [router])
+
   const playLiveAndNavigateHome = async () => {
     setIsLoading(true);
 	logPlayLive({
