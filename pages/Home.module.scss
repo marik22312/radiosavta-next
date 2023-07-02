@@ -1,258 +1,73 @@
-@import "../styles/mixins.scss";
-
-.gallerySection {
-	direction: ltr;
-	height: calc(100vh - var(--footerHeight) - 100px);
-	max-height: 600px;
-	position: relative;
+.agendaWrapper {
+  margin: 10px 0;
+  padding: 10px 0;
+  padding-right: 21px;
+  font-family: "Heebo";
+  background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  mix-blend-mode: screen;
+  border-radius: 10px;
 }
 
-.sliderWrapper {
-	height: 100%;
+.agendaItem {
+  margin-bottom: 5px;
+  line-height: 14px;
+}
+.agendaItemTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  color: #cc6666;
+  font-size: 16px;
 }
 
-
-.homeContentWrapper {
-	direction: rtl;
-	display: flex;
-	justify-content: space-around;
-	position: absolute;
-	top: 0;
-	background-color: rgba(0, 0, 0, 50%);
-	width:100%;
-	height: 100%;
-
-	@include media-breakpoint(sm) {
-		flex-direction: column;
-		justify-content: center;
-		text-align: center;
-		padding: 0 var(--SPACE3);
-	}
-
+.agendaItemName {
+  color: #cccccc;
+  line-height: 20px;
 }
 
-.homeContent {
-	display: flex;
-    flex-direction: column;
-	margin-top: var(--SPACE2);
-	color: white;
+.recordedShowsSection {
+  margin-top: 50px;
 }
-
-.quote {
-	font-size: 0.7rem;
-	max-width: 450px;
+.recordedShowsWrapper {
+  margin-top: 10px;
 }
+.recordedShowItem {
+  background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
+  mix-blend-mode: screen;
 
-.latestShowsSection {
-	position: relative;
-	text-align: center;
-	background-size: cover;
-	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1625318050/radiosavta/backgrounds/text1");
+  font-family: "Heebo";
+  font-size: 16px;
+  margin-bottom: 3px;
+  border-radius: 10px;
+  padding: 10px 0;
+  padding-right: 21px;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
 
-	h2 {
-		position: inherit;
-		background-color: var(--light-green);
-		display: inline-block;
-		color: #ffffff;
-		padding: 5px 8px;
-	}
-}
-
-
-.latestShowsList {
-	padding-top: 30px;
-	display: flex;
-	justify-content: center;
-	width: 90%;
-	margin: auto;
-}
-
-.allShowsLink {
-	display: inline-block;
-	background-color: var(--light-green);
-	position: relative;
-	color: #ffffff;
-	padding: 5px 8px;
-	margin-block: var(--SPACE3);
-}
-
-.latestShowsBg {
-	z-index: 0;
-}
-
-
-.programsList {
-	position: relative;
-	text-align: center;
-	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/v1637700618/radiosavta/assets/vectors/vinyls");
-    background-size: 130px;
-    background-position: center;
-    background-attachment: fixed;
-
-	h2 {
-		position: inherit;
-		background-color: var(--light-green);
-		display: inline-block;
-		color: #ffffff;
-		padding: 5px 8px;
-		z-index: 1;
-		margin-bottom: 30px;
-	}
-}
-
-.programsListWrapper {
-	width: 90%;
-	margin: auto;
-}
-
-/** About us section */
-.aboutUsSection {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-	
-	height: calc(100vh - var(--footerHeight));
-	max-height: 1000px;
-	color: #ffffff;
-	
-	@include media-breakpoint(sm) {
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(2, 1fr);
-		max-height: unset;
-		height: auto;
-		
-	}
-}
-
-.slideImageWrapper {  
-	img {
-	  object-fit: cover;
-	  width: 100% !important;
-	  position: relative !important;
-	  height: unset !important;
-	}
-}
-.aboutUsPane {
-	grid-area: 1 / 1 / 2 / 2;
-	flex-basis: 50%;
-	text-shadow: var(--shadow);
-	background-image: url("https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,dpr_auto,q_auto/w_600/v1637768906/radiosavta/backgrounds/pub40_BW");
-	background-size: cover;
-    background-repeat: no-repeat;
-	padding: var(--SPACE2);
-	
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	@include media-breakpoint(sm) {
-		grid-area: 1 / 1 / 2 / 2; 
-		height: 400px;
-	}
-	@include media-breakpoint(lg) {
-		font-size: 25px;
-		h1 {
-			font-size: 4em;
-			margin-block-end: var(--SPACE2);
-		}
-		h2 {
-			font-size: 2em;
-		}
-		p {
-			font-size: 1.2em;
-		}
-	}
-}
-.logoWrapper {
-	@include media-breakpoint(sm) {
-		text-align: center;
-	}
-}
-.aboutUsTextWrapper {
-	font-size: 0.7rem;
-
-	margin: var(--SPACE3) 0;
-	@include media-breakpoint(sm) {
-		text-align: center;
-		font-size: 1rem;
-		padding-left: var(--SPACE3);
-		padding-right: var(--SPACE3);
-	}
-
-	p {
-		@include media-breakpoint(sm) {
-			margin-top: var(--SPACE3);
-		}
-	}
-}
-.aboutUsText {}
-.aboutUsText {}
-.galleryPane {
-	grid-area: 1 / 2 / 2 / 3;
-	direction: ltr;
-	position: relative;
-	@include media-breakpoint(sm) {
-		grid-area: 2 / 1 / 3 / 2;
-	}
-}
-
-.aboutUsSliderImage {
-	max-width: 100%;
-}
-
-.carousel {
-	max-height: 100%;
-}
-
-.arrow {
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	fill: #fff;
-	cursor: pointer;
-  }
-  
-  .arrowLeft {
-	left: 5px;
-  }
-  
-  .arrowRight {
-	left: auto;
-	right: 5px;
-  }
-  
-  .arrowDisabled {
-	fill: rgba(255, 255, 255, 0.5);
+  &:hover {
+    filter: brightness(1.3);
+    mix-blend-mode: unset;
   }
 
-  .dots {
-	padding: 10px 0;
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
+  h4 {
+    color: #cccccc;
+    margin-bottom: 5px;
   }
-  
-  .dot {
-	border: none;
-	width: 10px;
-	height: 10px;
-	background: #c5c5c5;
-	border-radius: 50%;
-	margin: 0 5px;
-	padding: 5px;
-	cursor: pointer;
 
-	&:focus {
-		outline: none;
-	  }
+  h5 {
+    color: #cc9933;
+  }
 
+  &[data-isplaying="true"] {
+    background: #8f8989;
+
+    h4 {
+      color: #cccccc;
+    }
+
+    h5 {
+      color: #060606;
+    }
+  }
 }
-	.activeDot {
-		background: var(--light-green);
-	}
-  

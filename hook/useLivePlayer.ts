@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { logFooterPlayerPause, logPlayLive } from "../api/Mixpanel.api";
+import { logFooterPlayerPause } from "../api/Mixpanel.api";
 import { LIVE_STREAM_URL } from "../config/stream";
 import { useCurrentSongTitle } from "./useCurrentSongTitle";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
@@ -25,22 +25,23 @@ export const useLivePlayer = () => {
 
   const toggleLive = async () => {
     if (!isLive) {
-      const data = await refetch();
-      const streamer = data.data?.streamer || "NA";
-      logPlayLive({ streamerName: streamer });
-      playTrack({
-        audioUrl: LIVE_STREAM_URL,
-        title: songTitle || "",
-        artist: streamer === "NA" ? "שידור חי" : streamer,
-        imageUrl: DEFAULT_PLAYER_IMAGE,
-        metaData: {},
-      });
-      setIsLive(true);
+		const streamer = 'NA'
+		playTrack({
+		  audioUrl: LIVE_STREAM_URL,
+		  title: songTitle || "",
+		  artist: streamer === "NA" ? "שידור חי" : streamer,
+		  imageUrl: DEFAULT_PLAYER_IMAGE,
+		  metaData: {},
+		});
+		setIsLive(true);
+		refetch();
+		
       return;
     }
     logFooterPlayerPause();
     stop();
     setIsLive(false);
+	return;
   };
 
   return {

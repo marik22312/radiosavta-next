@@ -1,98 +1,89 @@
-import React, { useEffect } from "react";
+import { GetServerSideProps } from "next";
+import { dehydrate, QueryClient } from "react-query";
 import { getProgramById } from "../../api/Programs.api";
 import { queryRecordedShows } from "../../api/RecordedShows.api";
-import { GetServerSideProps } from "next";
-
-import style from "./SingleProgramPage.module.scss";
-import moment from "moment";
-
-import { Page } from "../../components/Page";
-import { RecordedShowsList } from "../../components/RecordedShowsList/RecordedShowsList";
-
-import Image from "next/image";
-import { QueryClient } from "react-query";
-import { dehydrate } from "react-query/hydration";
-import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 import * as FLATTED from "flatted";
-import { BASE_IMAGE_BW, BASE_IMAGE } from "../../config/images";
-import { getDayOfWeek } from '../../utils/program.utils';
-import { programParser } from '../../parsers/Programs.parser';
+import { Program } from "../../domain/Program";
+import { Page } from "../../components/ui/Page";
+import { Heading } from "../../components/ui/Typography";
+import { Colors } from "../../components/ui/Colors";
+import { useRecordedShowByProgramId } from "../../hook/useRecordedShowsByProgram";
 
+import style from "./singleProgram.module.scss";
+import { usePlayerState } from "../../providers/PlayerProvider/usePlayerState";
+import { usePlayerControls } from "../../providers/PlayerProvider/usePlayerControls";
+import { programParser } from "../../parsers/Programs.parser";
+import { asStandardPage } from "../../components/Page/asStandardPage";
+import { Seo } from "../../components/seo/seo";
+import { logPlayRecordedShow } from "../../api/Mixpanel.api";
 
-
-const UsersList: React.FC<{ users: any[] }> = (props) => {
-  if (props.users.length > 1) {
-    return (
-      <div className={style.people}>
-        <div className={style.broadcasterImageMulti}>
-          {props.users.map((u: any) => {
+export const SingleProgramPage: React.FC<{
+  program: Program;
+}> = (props) => {
+  const { recordedShows } = useRecordedShowByProgramId(props.program.id);
+  const { songTitle } = usePlayerState();
+  const { playTrack } = usePlayerControls();
+  return (
+    <>
+      <Seo title={`רדיוסבתא - ${props.program.name_he}`} />
+      <div className={style.pageTitleWrapepr}>
+        <Heading>{props.program.name_he}</Heading>
+      </div>
+      <div className={style.programHostsWrapper}>
+        <p className={style.programHosts}>
+          בהגשת {props.program.users.map((u) => u.name).join(", ")}
+        </p>
+      </div>
+      <div>
+        <div className={style.recordedShowsTitleWrapper}>
+          <Heading color={Colors.SAVTA_ORANGE}>העלאות אחרונות</Heading>
+        </div>
+        <div>
+          {recordedShows?.flat().map((s) => {
             return (
-              <>
-                <img
-                  key={`image-${u.id}`}
-                  src={`${BASE_IMAGE}/${u.profile_image}`}
-				  alt={u.name}
-                />
-              </>
+              <div
+                key={s.id}
+                data-isPlaying={songTitle === s.name}
+                className={style.recordedShowWrapper}
+                onClick={() => {
+                  logPlayRecordedShow({
+                    programId: props.program.id,
+                    showName: s.name,
+                    source: "PROGRAM_PAGE",
+                    programName: programParser.programImage(props.program),
+                  });
+                  playTrack({
+                    title: s.name,
+                    audioUrl: s.url,
+                    artist: props.program.name_he,
+                    imageUrl: programParser.programImage(props.program),
+                    metaData: {
+                      programId: props.program.id,
+                      recordedShowId: s.id,
+                    },
+                  });
+                }}
+              >
+                <Heading as="h3" color={Colors.TEXT_GREY}>
+                  {s.name}
+                </Heading>
+                <p className={style.uploadDate}>
+                  {Intl.DateTimeFormat("he", {
+                    day: "2-digit",
+                    month: "numeric",
+                    year: "numeric",
+                  }).format(new Date(s.created_at))}
+                </p>
+              </div>
             );
           })}
         </div>
       </div>
-    );
-  }
-  return (
-    <div className={style.people}>
-      <div className={style.broadcasterImage}>
-        {props.users.map((u: any) => {
-          return (
-            <>
-              <img
-                key={`image-${u.id}`}
-                src={`${BASE_IMAGE}/${u.profile_image}`}
-              />
-            </>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-const SingleProgramPage: React.FC<{ program: any; recordedShows: any[] }> = ({
-  program,
-  //   recordedShows,
-}) => {
-  return (
-    <>
-      <Page title={programParser.name(program)} previewImage={programParser.programImage(program)}>
-        <div
-          className={style.programHeader}
-          style={{ backgroundImage: `url(${programParser.programImage(program)})` }}
-        >
-          <div className={style.programDetailsWrapper}>
-            <div className={style.programInfo}>
-				<h1 className={style.programTime}>{programParser.name(program)}</h1>
-              <p className={style.programTime}>
-                {Intl.DateTimeFormat("he", { weekday: "long" }).format(
-                  getDayOfWeek(program)
-                )}{" "}
-                - {program.programTimes[0].start_time}
-              </p>
-            </div>
-            <UsersList users={program.users} />
-          </div>
-        </div>
-        <section className={style.archiveSection}>
-          <h3 className="section-title">הבוידעם</h3>
-          <div className={style.recordedShows}>
-            <RecordedShowsList programId={program.id} programName={programParser.name(program)}/>
-          </div>
-        </section>
-      </Page>
     </>
   );
 };
 
-export default SingleProgramPage;
+export default asStandardPage(SingleProgramPage);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();

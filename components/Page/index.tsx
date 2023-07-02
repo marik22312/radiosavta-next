@@ -31,6 +31,13 @@ export const Page: React.FC<PageProps> = ({
         <title>רדיוסבתא - {title}</title>
         <meta name="description" content="קולקטיב רדיו אינטרנט" />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="height=device-height, 
+                      width=device-width, initial-scale=1.0, 
+                      minimum-scale=1.0, maximum-scale=1.0, 
+                      user-scalable=no, target-densitydpi=device-dpi"
+        />
 
         <meta property="og:title" content={title} />
         <meta
@@ -53,6 +60,11 @@ export const Page: React.FC<PageProps> = ({
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre"
+          rel="stylesheet"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Heebo"
           rel="stylesheet"
         />
 

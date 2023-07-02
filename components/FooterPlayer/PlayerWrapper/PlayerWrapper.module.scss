@@ -1,0 +1,140 @@
+@import '../../../styles/utils.scss';
+
+$inactiveSize: 90vh;
+$activeSize: 30vh;
+
+main + .playerWrapperContainer {
+    display: none;
+}
+
+.playerWrapperContainer {
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    margin-top: auto;
+    transition: background-color 0.5s ease-in-out;
+    height: var(--player-height);
+    min-height: var(--player-height);
+    max-height: var(--player-height);
+    @media (min-width: 430px) {
+        position: sticky;
+    }
+    @media (max-width: 430px) {
+        position: fixed;
+        right: 0;
+        left: 0;
+    }
+}
+
+.initialPlayerWrapperContainer {
+    background-color: rgba(6, 6, 6, 0.7);
+    pointer-events: none;
+}
+
+.inactivePlayerWrapperContainer {
+    background-color: transparent;
+    pointer-events: none;
+    animation: closePlayer 0.5s ease-in-out;
+}
+
+.activePlayerWrapperContainer {
+    background-color: rgba(6, 6, 6, 0.4);
+    pointer-events: none;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    inset: 0;
+    overflow: hidden;
+    max-height: 100vh;
+    height: 100%;
+    min-height: -webkit-fill-available;
+    display: flex;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    @media (max-width: 430px) {
+        position: fixed;
+    }
+}
+
+.playerWrapperWrapper {
+    @include responsivePageWrapper;
+    background-color: #060606;
+    pointer-events: all;
+}
+
+.initialPlayerWrapper {
+    transform: translateY(0);
+    padding-bottom: 0;
+}
+
+.activePlayerWrapper {
+    max-height: 85%;
+    margin-top: auto;
+    justify-content: center;
+    gap: 30px;
+    animation: openPlayer 0.5s ease-in-out;
+}
+
+.playIconInitial {
+    color: #CC9933;
+    font-size: 100px;
+}
+
+.playIconActive {
+    color: #CC9933;
+    font-size: 50px;
+}
+
+.PlayerWrapperFooter {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-block-end: 20px;
+}
+
+.playerWrapperFooterButton {
+    background: transparent;
+    border: none;
+    color: #CC9933;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.footerButtonIcon {
+    transform: rotate(180deg);
+}
+
+.playerWrapperOpenButton {
+    color: #CC9933;
+    margin-inline: auto;
+    background: transparent;
+    border: none;
+    transform: rotate(-90deg);
+    position: relative;
+    top: 5px;
+    font-size: 15px;
+}
+
+.hide {
+    display: none;
+    font-size: 0;
+}
+
+@keyframes openPlayer {
+    0% {
+        max-height: 100px;
+    }
+    100% {
+        max-height: 85%;
+    }
+}
+
+@keyframes closePlayer {
+    0% {
+        height: 85%;
+    }
+    100% {
+        height: 100px;
+    }
+}

@@ -1,55 +1,82 @@
-import React from "react";
 import { GetServerSideProps } from "next";
-import * as FLATTED from "flatted";
+import React, { useState } from "react";
 import { QueryClient } from "react-query";
-
-import { getAllActivePrograms } from "../../api/Programs.api";
-import { Page } from "../../components/Page";
+import { Page } from "../../components/ui/Page";
+import { Heading } from "../../components/ui/Typography";
+import * as FLATTED from "flatted";
 import { dehydrate } from "react-query/hydration";
-import { usePrograms } from "../../hook/usePrograms";
+import { programParser } from "../../parsers/Programs.parser";
+import { ProgramLine } from "../../components/ProgramLine/ProgramLine";
+import {
+  prefetchQueryPrograms,
+  useQueryPrograms,
+} from "../../hook/useQueryPrograms";
+import { asStandardPage } from '../../components/Page/asStandardPage';
+import { Seo } from '../../components/seo/seo';
+import { Program } from '../../domain/Program';
+import { logExpandProgram } from '../../api/Mixpanel.api';
 
-import { ProgramTile } from "../../components/ProgramTile/ProgramTile";
+const ProgramsPage: React.FC = () => {
+  const [expandedProgramIndex, setExpandedProgramIndex] = useState<number>();
+  const { programs } = useQueryPrograms({
+    sort: {
+      orderBy: "DESC",
+      field: "program.recordedShow",
+    },
+  });
 
-import styles from './ProgramsPage.module.scss'
-import { Title } from '../../components/Typography/Title'
-import { ProgramsListStandalone } from "../../components/ProgramsList/ProgramsListStandalone";
+  const onExpandProgram = ({index, program}:{index: number; program: Program}) => {
+	logExpandProgram({
+		programId: program.id,
+		programName: programParser.name(program),
+	})
+    setExpandedProgramIndex((currentIndex) =>
+      currentIndex === index ? undefined : index
+    );
+  };
 
-const ProgramsPage: React.FC = (props) => {
-  const { programs } = usePrograms();
   return (
-    <Page title="התכניות שלנו">
-		<div className={styles.programsPage}>
-      <section className={styles.quoteSection}>
-        <Title as="h1">התכניות שלנו</Title>
-        <p className={styles.quote}>
-        הלו? זה רדיו? זוהי השאלה, מהי הפינה?
-        </p>
-      </section>
-        <ProgramsListStandalone programs={programs} />
-		</div>
-    </Page>
+    <>
+	<Seo title="התכניות של סבתא"/>
+        <div style={{ paddingRight: "21px" }}>
+          <Heading>התכניות של סבתא</Heading>
+        </div>
+        <div
+          style={{
+            marginTop: "45px",
+          }}
+        >
+          {programs.map((program, index) => {
+            return (
+              <ProgramLine
+                programId={program.id}
+                key={program.id}
+                title={program.name_he}
+                isExpanded={expandedProgramIndex === index}
+                onExpandProgram={() => onExpandProgram({index, program})}
+                imageUrl={programParser.programImage(program)}
+              />
+            );
+          })}
+        </div>
+    </>
   );
 };
-
-export default ProgramsPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(`active-programs`, ({ pageParam = 1 }) =>
-    getAllActivePrograms()
-  );
-  const { data } = await getAllActivePrograms();
-
-  if (!data.activeShows) {
-    return {
-      notFound: true,
-    };
-  }
+  await prefetchQueryPrograms(queryClient, {
+    sort: {
+      orderBy: "DESC",
+      field: "program.recordedShow",
+    },
+  });
   return {
     props: {
-      activePrograms: data.activeShows,
       dehydratedState: FLATTED.stringify(dehydrate(queryClient)),
     },
   };
 };
+
+export default asStandardPage(ProgramsPage);

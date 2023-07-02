@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import styles from '../../pages/programs/ProgramsPage.module.scss';
+import styles from '../../pages/old-programs/ProgramsPage.module.scss';
 
 import { ProgramTile } from "../ProgramTile/ProgramTile";
 import { Program } from "../../domain/Program";

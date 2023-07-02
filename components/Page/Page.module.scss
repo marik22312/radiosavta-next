@@ -1,5 +1,23 @@
 @import '../../styles/mixins.scss';
+
+$pageSize: calc(100% - var(--navbar-height) - var(--player-height) - var(--navbar-margin));
+
 .pageContent > div {
 	transition: all 0.5s ease-in-out;
-	
+}
+
+.standardPage {
+	@media (min-width: 430px) {
+		height: $pageSize;
+		max-height: $pageSize;
+		min-height: $pageSize;
+		scrollbar-width: none;  /* Firefox */
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		overflow-y: scroll;
+	}
+	@media (max-width: 430px) {
+		padding-bottom: var(--player-height);
+	}
 }

@@ -10,7 +10,7 @@ import {
   logNavbarOpen,
   logNavbarNavigation,
 } from "../../api/Mixpanel.api";
-
+import { HOME_PAGE_URL } from "../../domain/Navigation";
 
 interface NavBarProps {
   title: string;
@@ -22,7 +22,15 @@ interface NavBarProps {
 const MenuItem: React.FC<{ url: string; title: string }> = (props) => {
   return (
     <Link href={props.url}>
-      <a onClick={() => logNavbarNavigation(props.url)}>{props.title}</a>
+      <a
+        onClick={() =>
+          logNavbarNavigation({
+            url: props.url,
+          })
+        }
+      >
+        {props.title}
+      </a>
     </Link>
   );
 };
@@ -53,7 +61,6 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
     return open();
   };
 
-
   const open = () => {
     setIsOpen(true);
     props.onOpen();
@@ -76,9 +83,9 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
             width: navbarWidth,
           }}
         >
-          <MenuItem url="/" title="ראשי" />
+          <MenuItem url={HOME_PAGE_URL} title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
-          <MenuItem url="/archive" title="הבוידעם" />
+          <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
         </div>
       </div>
@@ -95,7 +102,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         >
           <div className={styles.navbarHead}>
             <div className={styles.logo}>
-              <Link href="/">
+              <Link href={HOME_PAGE_URL}>
                 <img
                   src={`${BASE_IMAGE_ICON}radiosavta/logo_head`}
                   width="100%"
@@ -115,9 +122,9 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
               <span></span>
             </div>
           </div>
-          <MenuItem url="/" title="ראשי" />
+          <MenuItem url={HOME_PAGE_URL} title="ראשי" />
           <MenuItem url="/programs" title="תכניות" />
-          <MenuItem url="/archive" title="הבוידעם" />
+          <MenuItem url="/join-us" title="הצטרפות" />
           <MenuItem url="/about" title="הסיפור שלנו" />
         </div>
       </div>

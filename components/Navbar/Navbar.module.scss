@@ -147,7 +147,7 @@ p {
 	  max-width: 80px;
 	  
 	  flex-direction: row;
-	  height: 90px;
+	  height: var(--navbar-height);
 	  margin: 0;
 	  margin-inline-start: var(--SPACE2);
 
