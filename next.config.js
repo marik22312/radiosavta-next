@@ -7,6 +7,13 @@ const configWithImages = withImages({
 		domains: ['res.cloudinary.com'],
 		disableStaticImages: true,
 	},
+	async redirects() {
+    		return [{
+        		source: '/archive',
+        		destination: '/programs',
+        		permanent: true,
+      		}]
+  	},
 	webpack(config) {
 	  return config;
 	},
