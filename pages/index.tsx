@@ -62,7 +62,7 @@ const LandingPage = () => {
               קולקטיב רדיו אינטרנטי
             </h2>
             <h3 className={styles.playerWrapperQuote}>
-              כשהעגלה נוסעת, המלונים...
+              כשהעגלה נוסעת, המלונים מסתדרים בארגזים
             </h3>
           </div>
           <div>
