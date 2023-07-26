@@ -151,6 +151,8 @@
   pointer-events: all;
   padding: 5px;
   position: relative;
+  min-height: 110px;
+  max-height: 110px;
   > img {
     margin-left: auto;
   }
