@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 import styles from "./FooterPlayer.module.scss";
@@ -12,7 +12,7 @@ import { usePlayerBindings } from "./AudioPlayer/usePlayerBinding";
 import { Seeker } from "./Seeker/Seeker";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import {
-	logFooterPlayerExpand,
+  logFooterPlayerExpand,
   logShareLiveStream,
   logShareRecordedShow,
 } from "../../api/Mixpanel.api";
@@ -154,7 +154,11 @@ const BroadcastIcon: React.FC = () => {
   const { isPlaying } = usePlayerState();
   const { isLive, toggleLive } = useLivePlayer();
 
-  const style = { minHeight: "18px", maxHeight: "18px", width: "30px" };
+  const style: CSSProperties = {
+    minHeight: "18px",
+    maxHeight: "18px",
+    width: "30px",
+  };
 
   if (!isPlaying) {
     return <div style={style}></div>;
@@ -331,7 +335,17 @@ const InActiveContent: React.FC<inactiveContentInterface> = (
   return (
     <>
       <div className={styles.inactivePlayerWrapper}>
-        <BroadcastIcon />
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <BroadcastIcon />
+          <OpenClosePlayerButton changeState={() => props.changeState()} />
+          <div style={{ width: "30px" }} />
+        </div>
         <div className={styles.inactivePlayerInner}>
           <PlayButtonContent
             currentPageState={PlayerWrapperState.Inactive}
@@ -351,7 +365,6 @@ const InActiveContent: React.FC<inactiveContentInterface> = (
             <ShareButtonContent onShare={props.onShare} />
           </div>
         </div>
-        <OpenClosePlayerButton changeState={() => props.changeState()} />
       </div>
     </>
   );
@@ -377,9 +390,9 @@ const RenderContent: React.FC<playerContentInterface> = (
         togglePlay={props.togglePlay}
         audioRef={props.audioRef}
         changeState={() => {
-			logFooterPlayerExpand({state: PlayerWrapperState.Inactive})
-			props.changeState(PlayerWrapperState.Inactive)
-		}}
+          logFooterPlayerExpand({ state: PlayerWrapperState.Inactive });
+          props.changeState(PlayerWrapperState.Inactive);
+        }}
         onShare={props.onShare}
       />
     );
@@ -390,9 +403,9 @@ const RenderContent: React.FC<playerContentInterface> = (
         togglePlay={props.togglePlay}
         audioRef={props.audioRef}
         changeState={() => {
-			logFooterPlayerExpand({state: PlayerWrapperState.Active})
-			props.changeState(PlayerWrapperState.Active)
-		}}
+          logFooterPlayerExpand({ state: PlayerWrapperState.Active });
+          props.changeState(PlayerWrapperState.Active);
+        }}
         onShare={props.onShare}
       />
     );
