@@ -3,8 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install $VERSION_NODE_14
-        - nvm use $VERSION_NODE_14
+        - nvm install $VERSION_NODE_16
+        - nvm use $VERSION_NODE_16
         - yarn install
     build:
       commands:
