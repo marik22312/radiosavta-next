@@ -13,24 +13,28 @@ import { NextSeo } from "next-seo";
 import { Seo } from "../components/seo/seo";
 import LoadingAnimated from "../components/PlayPauseButton/Button/LoadingAnimated.svg";
 import { Origins, logLandingPagePressOnEnterSite, logPlayLive, logNavbarNavigation } from '../api/Mixpanel.api';
+import { PlayPauseButton } from "../components/PlayPauseButton/PlayPauseButton";
+import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
+import { usePlayerState } from "../providers/PlayerProvider/usePlayerState";
 
 const LandingPage = () => {
   useNextCssRemovalPrevention();
   const { toggleLive } = useLivePlayer();
+  const {isPlaying, isLoading} = usePlayerState();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
 	router.prefetch(HOME_PAGE_URL);
   }, [router])
 
   const playLiveAndNavigateHome = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
 	logPlayLive({
 		origin: Origins.LANDING_PAGE
 	});
     await toggleLive();
-    router.push(HOME_PAGE_URL, undefined, { shallow: true });
+    // router.push(HOME_PAGE_URL, undefined, { shallow: true });
   };
 
   return (
@@ -70,7 +74,8 @@ const LandingPage = () => {
               className={styles.playWrapper}
               onClick={() => playLiveAndNavigateHome()}
             >
-              <img src={isLoading ? LoadingAnimated : Play} alt="Play Button" />
+              <PlayPauseButton isLoading={isLoading} isPlaying={isPlaying} />
+              {/* <img src={isLoading ? LoadingAnimated : Play} alt="Play Button" /> */}
               <span>לחצו לניגון</span>
             </div>
           </div>
@@ -83,13 +88,13 @@ const LandingPage = () => {
 			})
 			router.push(HOME_PAGE_URL);
 		  }}>
-              <span>
+              {/* <span>
                 <FontAwesomeIcon
                   style={{ transform: "rotate(180deg)" }}
                   icon={faPlay as any}
                 />{" "}
                 כניסה לאתר
-              </span>
+              </span> */}
           </div>
         </div>
       </motion.main>

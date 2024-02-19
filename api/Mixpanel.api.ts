@@ -3,12 +3,21 @@ import moment from "moment";
 import { Track } from "../domain/Player";
 import { Program } from "../domain/Program";
 
+const getDistinctId = () => {
+  try {
+    return mixpanel.get_distinct_id();
+  } catch (error) {
+    console.error("Error getting distinct id", error);
+    return "NA";
+  }
+}
+
 const log = (event: string, opts: any) => {
   if (process.env.NODE_ENV !== "production") {
     console.log(
       `Mixpanel log: ${event}, params: ${JSON.stringify(
         opts
-      )}, user: ${mixpanel.get_distinct_id()}`
+      )}, user: ${getDistinctId()}`
     );
     return;
   }
