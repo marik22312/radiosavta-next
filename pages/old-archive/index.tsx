@@ -193,10 +193,10 @@ const ProgramsPage: React.FC = (props) => {
               placeholder="סינון לפי תאריך העלאה"
             /> */}
           </div>
-          {recordedShows?.map((r) => {
+          {recordedShows?.map((r,i) => {
             if (!r.length) {
               return (
-                <div className={styles.noResultsWrapper}>
+                <div className={styles.noResultsWrapper} key={`recorded-show-empty-state-${i}`}>
                   <h5>לא מצאנו תוכנית בבוידעם שמתאימה לחיפוש זה</h5>
                   <p>אולי ננסה חיפוש אחר?</p>
                 </div>

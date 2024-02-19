@@ -8,11 +8,17 @@ const configWithImages = withImages({
 		disableStaticImages: true,
 	},
 	async redirects() {
-    		return [{
-        		source: '/archive',
-        		destination: '/programs',
-        		permanent: true,
-      		}]
+    		return [
+			// 	{
+        	// 	source: '/archive',
+        	// 	destination: '/programs',
+        	// 	permanent: true,
+      		// }, 
+			{
+				source: '/:any',
+				destination: '/',
+				permanent: false,
+			}]
   	},
 	webpack(config) {
 	  return config;

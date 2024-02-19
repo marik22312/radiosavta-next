@@ -15,13 +15,14 @@
     "registry": "https://registry.yarnpkg.com"
   },
   "dependencies": {
-    "@bit/mui-org.material-ui.slider": "^4.9.10",
-    "@bit/mui-org.material-ui.styles": "^4.9.10",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@madeinhaus/nextjs-page-transition": "^2.0.1",
+    "@mui/material": "^5.15.10",
     "@sentry/nextjs": "^7.21.1",
     "@svgr/webpack": "^5.5.0",
     "@types/react-modal": "^3.13.1",

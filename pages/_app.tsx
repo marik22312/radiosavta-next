@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient.current}>
       <AudioPlayerProvider>
         <Page>
+          {/* @ts-expect-error */}
           <NextNProgress color="#ded15b" />
           <Hydrate
             state={
@@ -62,11 +63,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             }
           >
             <AnimatePresence exitBeforeEnter initial={false}>
-                {getLayout ? (
-                  getLayout(<Component {...pageProps} key={key} />)
-                ) : (
-                  <Component {...pageProps} key={router.route} />
-                )}
+              {getLayout ? (
+                // @ts-expect-error
+                getLayout(<Component {...pageProps} key={key} />)
+              ) : (
+                // @ts-expect-error
+                <Component {...pageProps} key={router.route} />
+              )}
             </AnimatePresence>
             <PlayerWrapper />
           </Hydrate>

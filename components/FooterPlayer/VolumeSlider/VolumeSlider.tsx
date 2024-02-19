@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Slider from "@bit/mui-org.material-ui.slider";
-import { withStyles } from "@bit/mui-org.material-ui.styles";
+import { Slider, withStyles} from '@mui/material'
 
 import styles from "./VolumeSlider.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,38 +9,38 @@ import {
   faVolumeUp,
 } from "@fortawesome/free-solid-svg-icons";
 
-const OrangeSlider = withStyles({
-  root: {
-    color: "#CC9933 !important",
-    height: 15,
-    width: "4px !important",
-    display: "flex",
-    justifyContent: "center",
-  },
-  thumb: {
-    height: 15,
-    width: 15,
-    backgroundColor: "currentColor",
-    marginTop: -8,
-    marginLeft: "0 !important",
-    "&:focus, &:hover, &$active": {
-      boxShadow: "inherit",
-    },
-  },
-  valueLabel: {
-    left: "calc(-50% + 4px)",
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-    width: "4px !important",
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-    width: "4px !important",
-  },
-})(Slider);
+// const OrangeSlider = withStyles({
+//   root: {
+//     color: "#CC9933 !important",
+//     height: 15,
+//     width: "4px !important",
+//     display: "flex",
+//     justifyContent: "center",
+//   },
+//   thumb: {
+//     height: 15,
+//     width: 15,
+//     backgroundColor: "currentColor",
+//     marginTop: -8,
+//     marginLeft: "0 !important",
+//     "&:focus, &:hover, &$active": {
+//       boxShadow: "inherit",
+//     },
+//   },
+//   valueLabel: {
+//     left: "calc(-50% + 4px)",
+//   },
+//   track: {
+//     height: 8,
+//     borderRadius: 4,
+//     width: "4px !important",
+//   },
+//   rail: {
+//     height: 8,
+//     borderRadius: 4,
+//     width: "4px !important",
+//   },
+// })(Slider);
 
 interface VolumeSliderProps {
   volume: number;
@@ -77,7 +76,7 @@ const VolumeSlider: React.FC<VolumeSliderProps> = (
         height="20px"
       />
       <div className={styles.sliderContainer}>
-        <OrangeSlider
+        <Slider
           className={styles.slider}
           orientation="vertical"
           value={value}

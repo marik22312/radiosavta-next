@@ -1,6 +1,5 @@
 import React from "react";
-import Slider from "@bit/mui-org.material-ui.slider";
-import { withStyles } from "@bit/mui-org.material-ui.styles";
+import {Slider} from '@mui/material'
 
 function formatTime(seconds: any) {
   let minutes: string | number = Math.floor(seconds / 60);
@@ -16,36 +15,7 @@ interface SeekerProps {
   onSeek: (e: any) => void;
 }
 
-const SeekerSlider = withStyles({
-  root: {
-    color: "#8F8989",
-    height: 8,
-    padding: 0,
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    marginTop: -8,
-    marginLeft: -12,
-    "&:focus, &:hover, &$active": {
-      boxShadow: "inherit",
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50% + 4px)",
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-  },
-})(Slider);
+
 
 export const Seeker = React.forwardRef<any, SeekerProps>(function Seeker(
   props,
@@ -59,7 +29,7 @@ export const Seeker = React.forwardRef<any, SeekerProps>(function Seeker(
 
   return (
     <div>
-      <SeekerSlider
+      <Slider
         ref={ref}
         min={0}
         defaultValue={0}
