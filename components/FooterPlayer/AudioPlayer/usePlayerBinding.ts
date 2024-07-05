@@ -44,8 +44,14 @@ export const usePlayerBindings = (audioRef: RefObject<HTMLAudioElement>) => {
     };
 
     const onPlay = () => {
-      audioRef.current?.play();
-      animationRef.current = requestAnimationFrame(whilePlaying);
+      audioRef.current?.play()?.then(() => {
+        console.log("playing");
+        animationRef.current = requestAnimationFrame(whilePlaying);
+      }).catch((err) => {
+        if(err.name === 'AbortError') {
+          console.log('audio play aborted');
+        }
+      });
     };
     const onPause = () => {
       audioRef.current?.pause();

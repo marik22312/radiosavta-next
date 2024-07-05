@@ -14,7 +14,7 @@ export const useLivePlayer = () => {
   const [isLive, setIsLive] = useState(audioUrl === LIVE_STREAM_URL);
 
   const { songTitle, refetch, streamer } = useCurrentSongTitle({
-    enabled: isLive,
+    enabled: false,
     refetchInterval: 10000,
     onSuccess: (data) => setSongTitle(data.streamTitle),
   });
@@ -34,7 +34,7 @@ export const useLivePlayer = () => {
 		  metaData: {},
 		});
 		setIsLive(true);
-		refetch();
+		// refetch();
 		
       return;
     }
