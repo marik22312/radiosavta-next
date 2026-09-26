@@ -1,35 +1,24 @@
 import React, { useRef } from "react";
 import cn from "classnames";
-import { useLivePlayer } from "../../../hook/useLivePlayer";
-import { usePlayerState } from "../../../providers/PlayerProvider/usePlayerState";
-import { logPlayLive, Origins } from "../../../api/Mixpanel.api";
+import { Origins } from "../../../api/Mixpanel.api";
+import { useLiveToggle } from "../useLiveToggle";
+import { Equalizer } from "../Equalizer/Equalizer";
 import { useHeroFlight } from "./useHeroFlight";
 import styles from "./Hero.module.scss";
 
 export const Hero: React.FC = () => {
-  const { isLive, toggleLive } = useLivePlayer();
-  const { isPlaying, isLoading, isStopped } = usePlayerState();
+  const { isOn, isLoading, isPlaying, toggle } = useLiveToggle(Origins.HERO);
 
   const rootRef = useRef<HTMLElement>(null);
   const ringsRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   useHeroFlight({ root: rootRef, anchor: ringsRef, button: buttonRef });
 
-  const isOn = isLive && !isStopped;
-  const isLivePlaying = isLive && isPlaying;
-
   const label = !isOn
     ? "לחצו לניגון"
     : isLoading
     ? "מתחבר…"
     : "מנגן עכשיו";
-
-  const onToggle = () => {
-    if (!isOn) {
-      logPlayLive({ origin: Origins.HERO });
-    }
-    toggleLive();
-  };
 
   return (
     <section id="live" ref={rootRef} className={styles.hero}>
@@ -45,7 +34,7 @@ export const Hero: React.FC = () => {
       <div className={styles.playArea}>
         <div
           ref={ringsRef}
-          className={cn(styles.rings, { [styles.ringsOn]: isLivePlaying })}
+          className={cn(styles.rings, { [styles.ringsOn]: isPlaying })}
         >
           <div className={styles.ring} />
           <div className={styles.ring} />
@@ -54,7 +43,7 @@ export const Hero: React.FC = () => {
             ref={buttonRef}
             type="button"
             className={styles.play}
-            onClick={onToggle}
+            onClick={toggle}
             aria-label={isOn ? "השהיית השידור החי" : "ניגון השידור החי"}
           >
             {isOn ? (
@@ -71,13 +60,8 @@ export const Hero: React.FC = () => {
         </div>
 
         <div className={styles.status} aria-live="polite">
-          {isLivePlaying && (
-            <div className={styles.eq} aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
+          {isPlaying && (
+            <Equalizer className={styles.eq} />
           )}
           <span>{label}</span>
         </div>
