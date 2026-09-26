@@ -1,0 +1,280 @@
+/* Mobile-first. The desktop layout starts at 768px — keep in sync with
+   DESKTOP_MIN_WIDTH in components/v2/dockGeometry.ts. Sizes between the
+   breakpoints are fluid; the design's 390px and 1440px boards are the
+   endpoints.
+
+   Mobile stacks header → photo → body; desktop puts the photo in a sticky
+   column spanning both rows beside the header and body. */
+
+.story {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 56px var(--gutter) 64px;
+  color: var(--color-text);
+}
+
+.header,
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-red-light);
+}
+
+.title {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-wrap: balance;
+}
+
+.figure {
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Arch: the top corners are half the width round, so the vertical radius is
+   (width / 2) / height of the frame's aspect ratio. */
+.frame {
+  box-sizing: border-box;
+  width: min(326px, 100%);
+  aspect-ratio: 326 / 410;
+  border-radius: 50% 50% 12px 12px / 39.76% 39.76% 12px 12px;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px var(--color-green-deep), 0 0 0 10px var(--color-green),
+    0 0 0 13px var(--color-accent);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--color-text-muted);
+  background-color: var(--color-placeholder);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(243, 234, 217, 0.06) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+.placeholderIcon {
+  width: 34px;
+  height: 34px;
+}
+
+.caption {
+  padding-top: 6px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.lead {
+  margin: 12px 0 0;
+  max-width: 700px;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.paragraph {
+  margin: 0;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--color-text-body);
+}
+
+.ctaWrap {
+  align-self: flex-start;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 700;
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.cta:hover {
+  filter: brightness(1.06);
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+.quoteBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  padding-top: 16px;
+}
+
+.divider {
+  width: 72px;
+  height: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.divider span:nth-child(1) {
+  background: var(--color-red);
+}
+
+.divider span:nth-child(2) {
+  background: var(--color-accent);
+}
+
+.divider span:nth-child(3) {
+  background: var(--color-green);
+}
+
+.quote {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .story {
+    display: grid;
+    grid-template-columns: clamp(240px, 33.33vw, 480px) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(40px, 7.78vw, 112px);
+    row-gap: 44px;
+    align-items: start;
+    padding: clamp(96px, 11.11vw, 160px) var(--gutter) 120px;
+  }
+
+  .header {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 44px;
+    padding-top: 40px;
+  }
+
+  .body {
+    grid-column: 2;
+    grid-row: 2;
+    gap: 44px;
+    padding-bottom: 160px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .title {
+    font-size: clamp(56px, 7.78vw, 112px);
+    letter-spacing: -2px;
+  }
+
+  .figure {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: 130px;
+    margin: 0;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .frame {
+    width: 100%;
+    aspect-ratio: 480 / 620;
+    border-radius: 50% 50% 16px 16px / 38.71% 38.71% 16px 16px;
+    box-shadow: 0 0 0 4px var(--color-green-deep), 0 0 0 12px var(--color-green),
+      0 0 0 16px var(--color-accent);
+  }
+
+  .placeholder {
+    gap: 12px;
+    font-size: 17px;
+  }
+
+  .placeholderIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .caption {
+    padding-top: 8px;
+    font-size: 17px;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: clamp(24px, 2.22vw, 32px);
+  }
+
+  .paragraph {
+    font-size: clamp(17px, 1.46vw, 21px);
+    line-height: 1.85;
+  }
+
+  .cta {
+    height: 56px;
+    padding: 0 28px;
+    font-size: 19px;
+  }
+
+  .quoteBlock {
+    gap: 28px;
+    padding-top: 24px;
+  }
+
+  .divider {
+    width: 96px;
+  }
+
+  .quote {
+    font-size: clamp(28px, 3.06vw, 44px);
+    line-height: 1.35;
+  }
+}
