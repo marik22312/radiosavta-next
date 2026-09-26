@@ -44,30 +44,3 @@
   }
 
 }
-
-.navbarWrapper {
-  width: 100%;
-  height: var(--navbar-height);
-  background: linear-gradient(310.52deg, #141214 10.16%, #383324 63.78%);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: var(--navbar-margin);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
-  a {
-    font-size: 18px;
-    font-family: "Heebo";
-    color: #8f8989;
-    font-weight: 500;
-
-    &[data-current="true"] {
-      color: #333333;
-      background-color: #cc9933;
-      padding: 4px 9px;
-      border-radius: 6px;
-    }
-  }
-}
