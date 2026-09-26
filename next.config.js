@@ -1,9 +1,14 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 const { execSync } = require("child_process");
 
-// Amplify exposes the deployed commit as AWS_COMMIT_ID; fall back to git for local builds
+const SHA_PATTERN = /^[0-9a-f]{7,40}$/i;
+
+// Amplify exposes the deployed commit as AWS_COMMIT_ID, but on some builds
+// (manual deploys, some webhook triggers) it's the literal "HEAD". Only trust
+// it when it looks like a real SHA; otherwise resolve it from the clone.
 function getCommitSha() {
-	if (process.env.AWS_COMMIT_ID) return process.env.AWS_COMMIT_ID;
+	const awsCommitId = process.env.AWS_COMMIT_ID;
+	if (awsCommitId && SHA_PATTERN.test(awsCommitId)) return awsCommitId;
 	try {
 		return execSync("git rev-parse HEAD").toString().trim();
 	} catch {
