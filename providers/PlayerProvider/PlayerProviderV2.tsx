@@ -26,7 +26,7 @@ export interface AudioContext {
 
 export const PlayerContext = React.createContext<AudioContext | null>(null);
 
-export const AudioPlayerProvider: React.FC = (props) => {
+export const AudioPlayerProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [imageUrl, setImageUrl] = useState<string>(DEFAULT_PLAYER_IMAGE);
   const [songTitle, setSongTitle] = useState<string>("לחץ פליי לשידור חי");
   const [artist, setArtist] = useState<string>("רדיוסבתא");

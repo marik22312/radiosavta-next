@@ -8,7 +8,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { HOME_PAGE_URL } from '../../domain/Navigation';
 
-export const Page: React.FC = ({
+export const Page: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   return (
