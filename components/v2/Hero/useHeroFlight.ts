@@ -3,7 +3,9 @@ import {
   DESKTOP_MIN_WIDTH,
   DOCK_DESKTOP,
   DOCK_MOBILE,
+  DOCK_REVEAL_PROGRESS,
   dockButtonCenter,
+  flightProgress,
 } from "../dockGeometry";
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -41,7 +43,7 @@ export const useHeroFlight = ({
       }
 
       const dock = desktop.matches ? DOCK_DESKTOP : DOCK_MOBILE;
-      const p = clamp01(window.scrollY / dock.flightDistance);
+      const p = flightProgress(dock, window.scrollY);
       const e = smoothstep(p);
 
       const rect = anchorEl.getBoundingClientRect();
@@ -53,7 +55,10 @@ export const useHeroFlight = ({
 
       buttonEl.style.transform =
         p === 0 ? "" : `translate(${dx}px, ${dy}px) scale(${scale})`;
-      buttonEl.style.opacity = p < 0.9 ? "" : String((1 - p) / 0.1);
+      buttonEl.style.opacity =
+        p < DOCK_REVEAL_PROGRESS
+          ? ""
+          : String((1 - p) / (1 - DOCK_REVEAL_PROGRESS));
       buttonEl.style.visibility = p >= 1 ? "hidden" : "";
       rootEl.style.setProperty("--hero-fade", String(clamp01(1 - p * 2)));
     };

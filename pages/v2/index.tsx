@@ -3,6 +3,7 @@ import { NextSeo } from "next-seo";
 import { NextPageWithLayout } from "../../domain/AppProps";
 import { LiveAudio } from "../../components/v2/LiveAudio";
 import { Hero } from "../../components/v2/Hero/Hero";
+import { Dock } from "../../components/v2/Dock/Dock";
 import styles from "./V2.module.scss";
 
 // Redesign homepage (Website redesign milestone). Sections from the
@@ -18,6 +19,7 @@ const V2HomePage: NextPageWithLayout = () => {
             hero's scroll cue a target and the page room to scroll. */}
         <section id="story" className={styles.placeholder} />
       </main>
+      <Dock />
     </>
   );
 };
