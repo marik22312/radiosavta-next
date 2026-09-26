@@ -15,7 +15,7 @@ import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV
 import { useRouter } from "next/router";
 import { AppPropsWithLayout } from "../domain/AppProps";
 import PlayerWrapper from "../components/FooterPlayer/PlayerWrapper/PlayerWrapper";
-import { Page, Navbar } from "../components/ui/Page";
+import { Page } from "../components/ui/Page";
 import { AnimatePresence } from "framer-motion";
 
 import PageTransition, {
