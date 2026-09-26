@@ -39,28 +39,21 @@ const EmbeddedPlayerPage: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener("canplay", () => {
-        onCanPlay();
-      });
-
-      audioRef.current.addEventListener("ended", () => {
-		onEnded();
-      });
-
-	  audioRef.current.addEventListener("loadstart", () => {
-		onLoadStart();
-	  
-	  })
-	  audioRef.current.addEventListener("error", () => {
-		onError();
-	  })
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
     }
+
+    audio.addEventListener("canplay", onCanPlay);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("loadstart", onLoadStart);
+    audio.addEventListener("error", onError);
+
     return () => {
-      audioRef.current?.removeEventListener("canplay", () => null);
-      audioRef.current?.removeEventListener("ended", () => null);
-      audioRef.current?.removeEventListener("loadstart", () => null);
-      audioRef.current?.removeEventListener("error", () => null);
+      audio.removeEventListener("canplay", onCanPlay);
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("loadstart", onLoadStart);
+      audio.removeEventListener("error", onError);
     };
   }, [audioRef]);
   

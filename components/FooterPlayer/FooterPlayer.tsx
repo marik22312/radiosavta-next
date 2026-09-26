@@ -38,10 +38,19 @@ const FooterPlayer: React.FC<PlayerInterface> = (props: PlayerInterface) => {
   const { togglePlay: togglePlayerPlay } = useTogglePLay();
   const router = useRouter();
 
+  // Guards against StrictMode's double effect invocation in dev
+  const handledPlayingQuery = useRef(false);
+
   useEffect(() => {
-    if (router.query.playing && router.query.playing === "true") {
-      togglePlay(PlayerWrapperState.Active);
+    if (router.query.playing !== "true") {
+      handledPlayingQuery.current = false;
+      return;
     }
+    if (handledPlayingQuery.current) {
+      return;
+    }
+    handledPlayingQuery.current = true;
+    togglePlay(PlayerWrapperState.Active);
   }, [router.query.playing]);
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
