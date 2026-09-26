@@ -24,7 +24,8 @@ const nextConfig = {
         	// 	permanent: true,
       		// }, 
 			{
-				source: '/:any',
+				// Everything except the in-progress redesign page
+				source: '/:any((?!v2$)[^/]+)',
 				destination: '/',
 				permanent: false,
 			}]

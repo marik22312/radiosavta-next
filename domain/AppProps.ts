@@ -5,6 +5,8 @@ import { DehydratedState } from 'react-query';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
+  // Opts out of the mobile-framed <Page> shell and the footer player.
+  fullPage?: boolean;
 };
 
 export type AppPropsWithLayout = AppProps & {
