@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import { usePhotoCycle } from "./usePhotoCycle";
 import styles from "./Gallery.module.css";
 import motion from "../motion.module.css";
 
@@ -19,6 +20,8 @@ interface Slot {
 interface Layout {
   width: number;
   height: number;
+  // Length of one ghost cycle (fade in, hold, fade out), in seconds.
+  cycle: number;
   slots: Slot[];
 }
 
@@ -27,6 +30,7 @@ interface Layout {
 const DESKTOP: Layout = {
   width: 1280,
   height: 820,
+  cycle: 16,
   slots: [
     { x: 40, y: 80, w: 300, h: 380, rotate: -3, drift: "a" },
     { x: 300, y: 340, w: 360, h: 260, rotate: 2, drift: "c" },
@@ -41,6 +45,7 @@ const DESKTOP: Layout = {
 const MOBILE: Layout = {
   width: 358,
   height: 660,
+  cycle: 14,
   slots: [
     { x: 10, y: 40, w: 200, h: 250, rotate: -3, drift: "a" },
     { x: 200, y: 20, w: 150, h: 130, rotate: 3, drift: "b" },
@@ -80,49 +85,70 @@ interface CollageProps {
 }
 
 // Both collages are rendered and CSS shows the one for the breakpoint, so
-// the server markup matches the client whatever the viewport.
-const Collage: React.FC<CollageProps> = ({ layout, photos, className }) => (
-  <div
-    role="img"
-    aria-label="קולאז׳ תמונות מתחלף מהארכיון"
-    className={cn(styles.collage, className)}
-  >
-    {layout.slots.map((slot, i) => {
-      const photo = photos.length ? photos[i % photos.length] : null;
-      return (
-        <div
-          key={i}
-          className={styles.slot}
-          style={{
-            left: percent(slot.x, layout.width),
-            top: percent(slot.y, layout.height),
-            width: percent(slot.w, layout.width),
-            height: percent(slot.h, layout.height),
-          }}
-        >
+// the server markup matches the client whatever the viewport. The hidden one
+// is display: none, so its ghost animations and photo swaps don't run.
+const Collage: React.FC<CollageProps> = ({ layout, photos, className }) => {
+  const { photoFor, advance } = usePhotoCycle(photos, layout.slots.length);
+  const cycling = photos.length > 0;
+
+  return (
+    <div
+      role="img"
+      aria-label="קולאז׳ תמונות מתחלף מהארכיון"
+      className={cn(styles.collage, className)}
+    >
+      {layout.slots.map((slot, i) => {
+        const photo = photoFor(i);
+        return (
           <div
-            className={styles.tilt}
-            style={{ transform: `rotate(${slot.rotate}deg)` }}
+            key={i}
+            className={styles.slot}
+            style={{
+              left: percent(slot.x, layout.width),
+              top: percent(slot.y, layout.height),
+              width: percent(slot.w, layout.width),
+              height: percent(slot.h, layout.height),
+            }}
           >
-            <div className={styles.card}>
-              {photo ? (
-                <img
-                  className={styles.photo}
-                  src={photo}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <Placeholder label={`תמונה ${i + 1}`} />
-              )}
+            <div
+              className={styles.tilt}
+              style={{ transform: `rotate(${slot.rotate}deg)` }}
+            >
+              <div
+                className={cn(styles.card, cycling && styles.ghost)}
+                style={
+                  cycling
+                    ? {
+                        animationDuration: `${layout.cycle}s`,
+                        animationDelay: `${
+                          (i * layout.cycle) / layout.slots.length
+                        }s`,
+                      }
+                    : undefined
+                }
+                onAnimationIteration={(event) => {
+                  if (event.target === event.currentTarget) advance(i);
+                }}
+              >
+                {photo ? (
+                  <img
+                    className={styles.photo}
+                    src={photo}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <Placeholder label={`תמונה ${i + 1}`} />
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      );
-    })}
-  </div>
-);
+        );
+      })}
+    </div>
+  );
+};
 
 interface GalleryProps {
   photos: string[];

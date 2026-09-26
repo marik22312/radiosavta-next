@@ -84,6 +84,52 @@
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
 }
 
+/* Photo cycling (MAR-54): each card fades in, holds, and fades out on a
+   loop; the photo swaps at the loop boundary while it's hidden. Duration
+   and per-slot delay are set inline. Reduced motion: no cycling, the first
+   photos stay at a slightly dimmed opacity. */
+.ghost {
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ghost {
+    opacity: 0;
+    animation-name: ghost;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+}
+
+@keyframes ghost {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.97);
+  }
+  14% {
+    opacity: 0.92;
+    filter: blur(0);
+    transform: scale(1);
+  }
+  42% {
+    opacity: 0.92;
+    filter: blur(0);
+    transform: scale(1.005);
+  }
+  58% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.02);
+  }
+}
+
 .photo {
   display: block;
   width: 100%;
