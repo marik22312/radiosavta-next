@@ -3,6 +3,7 @@ import { NextSeo } from "next-seo";
 import { NextPageWithLayout } from "../../domain/AppProps";
 import { LiveAudio } from "../../components/v2/LiveAudio";
 import { Hero } from "../../components/v2/Hero/Hero";
+import { Story } from "../../components/v2/Story/Story";
 import { Dock } from "../../components/v2/Dock/Dock";
 import { Grain } from "../../components/v2/Grain/Grain";
 import styles from "./V2.module.css";
@@ -16,9 +17,7 @@ const V2HomePage: NextPageWithLayout = () => {
       <LiveAudio />
       <main className={styles.page}>
         <Hero />
-        {/* Placeholder until the story section (MAR-31) lands; gives the
-            hero's scroll cue a target and the page room to scroll. */}
-        <section id="story" className={styles.placeholder} />
+        <Story />
       </main>
       <Dock />
       <Grain />

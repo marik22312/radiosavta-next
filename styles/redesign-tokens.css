@@ -9,6 +9,9 @@
 	--color-green-deep: #0E3A1F;
 	--color-text: #F3EAD9;
 	--color-text-muted: #C3BBA8;
+	--color-text-body: #D9D1BF;
+	--color-red-light: #F0584C;
+	--color-placeholder: #22291F;
 
 	/* Layout (MAR-38). Content caps at 1440px and the side margins grow
 	   beyond it. The desktop breakpoint is 768px ($grid-breakpoints-sm);
