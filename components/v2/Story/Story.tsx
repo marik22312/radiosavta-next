@@ -4,12 +4,12 @@ import story from "../../../data/story.json";
 import styles from "./Story.module.css";
 import motion from "../motion.module.css";
 
-// Content decided in MAR-39/MAR-40. The birth year is still to come (MAR-55).
-// Without a photo URL the frame shows the design's hatched placeholder.
+// Content decided in MAR-39/MAR-40. The birth year is still to come; the
+// photo asset is still to come too (a Cloudinary URL) — until then the frame
+// shows the design's hatched placeholder.
 const NAME = "יעל קרן";
 const YEARS = "[שנה]–2014";
-const PHOTO_URL: string | null =
-  "https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,q_auto/v1790455016/radiosavta/assets/Yael%20Keren.jpg";
+const PHOTO_URL: string | null = null;
 const PULL_QUOTE = "הזרם הבלתי פוסק של מוזיקה ואהבה, כמו בסלון של סבתא.";
 const PATREON_URL = "https://www.patreon.com/radiosavta/";
 
@@ -29,13 +29,7 @@ export const Story: React.FC = () => (
     <figure className={styles.figure}>
       <div className={cn(styles.frame, motion.develop)}>
         {PHOTO_URL ? (
-          <img
-            className={styles.photo}
-            src={PHOTO_URL}
-            alt={`דיוקן של ${NAME}`}
-            loading="lazy"
-            decoding="async"
-          />
+          <img className={styles.photo} src={PHOTO_URL} alt={NAME} />
         ) : (
           <div className={styles.placeholder}>
             <svg
