@@ -43,30 +43,31 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       });
   }, [router.events]);
 
-  const { getLayout } = Component;
+  const { getLayout, fullPage } = Component;
 
   const key = useAsPathWithoutHash();
+
+  const content = (
+    <Hydrate
+      state={
+        pageProps.dehydratedState && FLATTED.parse(pageProps.dehydratedState)
+      }
+    >
+      <AnimatePresence exitBeforeEnter initial={false}>
+        {getLayout ? (
+          getLayout(<Component {...pageProps} key={key} />)
+        ) : (
+          <Component {...pageProps} key={router.route} />
+        )}
+      </AnimatePresence>
+      {!fullPage && <PlayerWrapper />}
+    </Hydrate>
+  );
 
   return (
     <QueryClientProvider client={queryClient.current}>
       <AudioPlayerProvider>
-        <Page>
-          <Hydrate
-            state={
-              pageProps.dehydratedState &&
-              FLATTED.parse(pageProps.dehydratedState)
-            }
-          >
-            <AnimatePresence exitBeforeEnter initial={false}>
-              {getLayout ? (
-                getLayout(<Component {...pageProps} key={key} />)
-              ) : (
-                <Component {...pageProps} key={router.route} />
-              )}
-            </AnimatePresence>
-            <PlayerWrapper />
-          </Hydrate>
-        </Page>
+        {fullPage ? content : <Page>{content}</Page>}
       </AudioPlayerProvider>
     </QueryClientProvider>
   );
