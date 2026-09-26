@@ -1,6 +1,6 @@
-// Design tokens for the site redesign (MAR-37). New redesign components
-// should use these instead of inline hex; legacy tokens stay in globals.scss
-// until the redesign replaces them.
+/* Design tokens for the site redesign (MAR-37). New redesign components
+   should use these instead of inline hex; legacy tokens stay in globals.scss
+   until the redesign replaces them. */
 :root {
 	--color-bg: #121712;
 	--color-accent: #F4CF2A;
@@ -9,10 +9,24 @@
 	--color-green-deep: #0E3A1F;
 	--color-text: #F3EAD9;
 	--color-text-muted: #C3BBA8;
+
+	/* Layout (MAR-38). Content caps at 1440px and the side margins grow
+	   beyond it. The desktop breakpoint is 768px ($grid-breakpoints-sm);
+	   custom properties can't be used in media queries, so each module
+	   repeats the literal, kept in sync with DESKTOP_MIN_WIDTH in
+	   components/v2/dockGeometry.ts. */
+	--layout-max-width: 1440px;
+	--gutter: 16px;
 }
 
-// Assistant is a variable font (weight axis 200-800), so one file per
-// subset covers every weight the mock uses (400/600/700).
+@media (min-width: 768px) {
+	:root {
+		--gutter: clamp(40px, 8.33vw, 120px);
+	}
+}
+
+/* Assistant is a variable font (weight axis 200-800), so one file per
+   subset covers every weight the mock uses (400/600/700). */
 @font-face {
 	font-family: 'Assistant';
 	font-style: normal;
@@ -31,8 +45,8 @@
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-// Frank Ruhl Libre is a variable font (weight axis 300-900), so one file
-// per subset covers every weight the mock uses (400/700/900).
+/* Frank Ruhl Libre is a variable font (weight axis 300-900), so one file
+   per subset covers every weight the mock uses (400/700/900). */
 @font-face {
 	font-family: 'Frank Ruhl Libre';
 	font-style: normal;

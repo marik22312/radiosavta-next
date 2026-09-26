@@ -1,0 +1,241 @@
+/* Mobile-first. The desktop layout starts at 768px — keep in sync with
+   DESKTOP_MIN_WIDTH in components/v2/dockGeometry.ts. Sizes between the
+   breakpoints are fluid; the design's 390px and 1440px boards are the
+   endpoints. */
+
+.hero {
+  --hero-fade: 1;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 48px var(--gutter) 72px;
+  color: var(--color-text);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kicker {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+}
+
+.headline {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: clamp(38px, 11.8vw, 72px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-wrap: balance;
+}
+
+.playArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 24px;
+}
+
+/* Ring insets are a share of the ring box so they scale with it
+   (34/300 on mobile, 50/460 on desktop in the design). */
+.rings {
+  --ring-step: 11.33%;
+  position: relative;
+  width: min(300px, 100%);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  opacity: var(--hero-fade);
+}
+
+.ring:nth-child(1) {
+  inset: 0;
+  border: 1px solid rgba(243, 234, 217, 0.12);
+}
+
+.ring:nth-child(2) {
+  inset: var(--ring-step);
+  border: 1px solid rgba(47, 160, 82, 0.35);
+}
+
+.ring:nth-child(3) {
+  inset: calc(var(--ring-step) * 2);
+  border: 1px solid rgba(244, 207, 42, 0.3);
+}
+
+.ringsOn .ring {
+  animation: pulse 2.4s ease-out infinite;
+}
+
+.ringsOn .ring:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.ringsOn .ring:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+.play {
+  position: relative;
+  z-index: 30;
+  width: 148px;
+  height: 148px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  cursor: pointer;
+  box-shadow: 0 0 0 5px var(--color-green-deep), 0 0 0 13px var(--color-green),
+    0 0 0 16px var(--color-accent), 0 24px 60px rgba(0, 0, 0, 0.5);
+  will-change: transform;
+}
+
+.play:hover {
+  filter: brightness(1.06);
+}
+
+.play:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 22px;
+}
+
+/* Icons are sized off the button (72/200 and 64/200 in the design) so they
+   follow its fluid size. */
+.playIcon {
+  width: 36%;
+  height: 36%;
+  /* Optical centering: the triangle's mass sits left of its box center. */
+  margin-left: 4%;
+}
+
+.pauseIcon {
+  width: 32%;
+  height: 32%;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 26px;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: var(--hero-fade);
+}
+
+/* Sizes the shared Equalizer component. */
+.eq {
+  --eq-height: 18px;
+}
+
+.scrollCue {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 5.56vw, 80px);
+    align-items: center;
+    min-height: clamp(640px, calc(100vh - 80px), 820px);
+    padding-block: 0;
+  }
+
+  .intro {
+    gap: 32px;
+  }
+
+  .kicker {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .headline {
+    font-size: clamp(44px, 7.2vw, 104px);
+    line-height: 1.02;
+    letter-spacing: -2px;
+  }
+
+  .playArea {
+    gap: 36px;
+    padding-top: 0;
+  }
+
+  .rings {
+    --ring-step: 10.87%;
+    width: min(460px, 100%);
+  }
+
+  .play {
+    width: clamp(148px, 13.9vw, 200px);
+    height: clamp(148px, 13.9vw, 200px);
+    box-shadow: 0 0 0 6px var(--color-green-deep), 0 0 0 16px var(--color-green),
+      0 0 0 20px var(--color-accent), 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  .status {
+    gap: 14px;
+    height: 28px;
+    font-size: 20px;
+  }
+
+  .eq {
+    --eq-height: 20px;
+  }
+
+  .scrollCue {
+    position: absolute;
+    bottom: 48px;
+    inset-inline-start: var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    font-size: 17px;
+    color: var(--color-text-muted);
+  }
+
+  .scrollCue:hover {
+    color: var(--color-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ringsOn .ring {
+    animation: none;
+  }
+}

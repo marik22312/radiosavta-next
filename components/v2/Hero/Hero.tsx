@@ -4,7 +4,7 @@ import { Origins } from "../../../api/Mixpanel.api";
 import { useLiveToggle } from "../useLiveToggle";
 import { Equalizer } from "../Equalizer/Equalizer";
 import { useHeroFlight } from "./useHeroFlight";
-import styles from "./Hero.module.scss";
+import styles from "./Hero.module.css";
 
 export const Hero: React.FC = () => {
   const { isOn, isLoading, isPlaying, toggle } = useLiveToggle(Origins.HERO);
