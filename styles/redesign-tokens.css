@@ -12,6 +12,7 @@
 	--color-text-body: #D9D1BF;
 	--color-red-light: #F0584C;
 	--color-placeholder: #22291F;
+	--color-polaroid: #EFE6D2;
 
 	/* Layout (MAR-38). Content caps at 1440px and the side margins grow
 	   beyond it. The desktop breakpoint is 768px ($grid-breakpoints-sm);

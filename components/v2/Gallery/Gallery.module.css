@@ -1,0 +1,174 @@
+/* Mobile-first. The desktop layout starts at 768px — keep in sync with
+   DESKTOP_MIN_WIDTH in components/v2/dockGeometry.ts. Sizes between the
+   breakpoints are fluid; the design's 390px and 1440px boards are the
+   endpoints.
+
+   Mobile stacks the heading over a 6-slot collage; desktop puts the heading
+   and description side by side over a 7-slot one. Each collage keeps the
+   board's aspect ratio and positions its slots in percentages, so it scales
+   with the content width. */
+
+.gallery {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px var(--gutter) 120px;
+  color: var(--color-text);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+}
+
+.title {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  text-wrap: balance;
+}
+
+.description {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 358 / 660;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+.slot {
+  position: absolute;
+}
+
+.tilt {
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 7px 7px 24px;
+  background: var(--color-polaroid);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.22) saturate(0.85) contrast(1.04);
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  background-color: var(--color-placeholder);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(243, 234, 217, 0.06) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+.placeholderIcon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    gap: 40px;
+    padding: 40px var(--gutter) 200px;
+  }
+
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .heading {
+    gap: 16px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .title {
+    font-size: clamp(44px, 5.56vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -1.5px;
+  }
+
+  .description {
+    max-width: 420px;
+    font-size: 19px;
+  }
+
+  .mobileOnly {
+    display: none;
+  }
+
+  .desktopOnly {
+    display: block;
+    aspect-ratio: 1280 / 820;
+  }
+
+  .card {
+    padding: 10px 10px 34px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .placeholder {
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .placeholderIcon {
+    width: 30px;
+    height: 30px;
+  }
+}

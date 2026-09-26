@@ -4,6 +4,7 @@ import { NextPageWithLayout } from "../../domain/AppProps";
 import { LiveAudio } from "../../components/v2/LiveAudio";
 import { Hero } from "../../components/v2/Hero/Hero";
 import { Story } from "../../components/v2/Story/Story";
+import { Gallery } from "../../components/v2/Gallery/Gallery";
 import { Dock } from "../../components/v2/Dock/Dock";
 import { Grain } from "../../components/v2/Grain/Grain";
 import styles from "./V2.module.css";
@@ -18,6 +19,7 @@ const V2HomePage: NextPageWithLayout = () => {
       <main className={styles.page}>
         <Hero />
         <Story />
+        <Gallery photos={[]} />
       </main>
       <Dock />
       <Grain />
