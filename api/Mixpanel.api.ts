@@ -55,6 +55,7 @@ export enum Origins {
   PROGRAM_PAGE = "PROGRAM_PAGE",
   ARCHIVE = "ARCHIVE",
   FOOTER_PLAYER = "FOOTER_PLAYER",
+  HERO = "HERO",
 }
 export const logPlayLive = ({
   streamerName,
