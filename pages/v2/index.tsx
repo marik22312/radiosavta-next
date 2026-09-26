@@ -4,6 +4,7 @@ import { NextPageWithLayout } from "../../domain/AppProps";
 import { LiveAudio } from "../../components/v2/LiveAudio";
 import { Hero } from "../../components/v2/Hero/Hero";
 import { Dock } from "../../components/v2/Dock/Dock";
+import { Grain } from "../../components/v2/Grain/Grain";
 import styles from "./V2.module.css";
 
 // Redesign homepage (Website redesign milestone). Sections from the
@@ -20,6 +21,7 @@ const V2HomePage: NextPageWithLayout = () => {
         <section id="story" className={styles.placeholder} />
       </main>
       <Dock />
+      <Grain />
     </>
   );
 };

@@ -1,19 +1,19 @@
-import { RefObject, useEffect } from "react";
+import { RefObject } from "react";
 import {
-  DESKTOP_MIN_WIDTH,
-  DOCK_DESKTOP,
-  DOCK_MOBILE,
   DOCK_REVEAL_PROGRESS,
+  currentDock,
   dockButtonCenter,
   flightProgress,
 } from "../dockGeometry";
+import { usePageScroll } from "../usePageScroll";
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const smoothstep = (p: number) => p * p * (3 - 2 * p);
 
 // Scroll-linked flight of the hero play button into the mini-player dock.
-// Uses a rAF-throttled scroll listener rather than CSS scroll timelines,
-// which Safari doesn't support. Styles are written straight to the DOM so
+// Driven by the shared page scroll listener rather than CSS scroll
+// timelines: the flight's end point depends on the viewport, which a
+// keyframe can't express. Styles are written straight to the DOM so
 // scrolling doesn't re-render React.
 //
 // `anchor` must be an untransformed element centered on the button (the
@@ -29,58 +29,32 @@ export const useHeroFlight = ({
   anchor: RefObject<HTMLElement>;
   button: RefObject<HTMLElement>;
 }) => {
-  useEffect(() => {
-    const desktop = window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`);
-    let frame: number | undefined;
+  usePageScroll(({ scrollY, viewportHeight }) => {
+    const rootEl = root.current;
+    const anchorEl = anchor.current;
+    const buttonEl = button.current;
+    if (!rootEl || !anchorEl || !buttonEl) {
+      return;
+    }
 
-    const update = () => {
-      frame = undefined;
-      const rootEl = root.current;
-      const anchorEl = anchor.current;
-      const buttonEl = button.current;
-      if (!rootEl || !anchorEl || !buttonEl) {
-        return;
-      }
+    const dock = currentDock();
+    const p = flightProgress(dock, scrollY);
+    const e = smoothstep(p);
 
-      const dock = desktop.matches ? DOCK_DESKTOP : DOCK_MOBILE;
-      const p = flightProgress(dock, window.scrollY);
-      const e = smoothstep(p);
+    const rect = anchorEl.getBoundingClientRect();
+    const target = dockButtonCenter(dock, viewportHeight);
+    const dx = (target.x - (rect.left + rect.width / 2)) * e;
+    const dy = (target.y - (rect.top + rect.height / 2)) * e;
+    const endScale = dock.buttonSize / buttonEl.offsetWidth;
+    const scale = 1 - (1 - endScale) * e;
 
-      const rect = anchorEl.getBoundingClientRect();
-      const target = dockButtonCenter(dock, window.innerHeight);
-      const dx = (target.x - (rect.left + rect.width / 2)) * e;
-      const dy = (target.y - (rect.top + rect.height / 2)) * e;
-      const endScale = dock.buttonSize / buttonEl.offsetWidth;
-      const scale = 1 - (1 - endScale) * e;
-
-      buttonEl.style.transform =
-        p === 0 ? "" : `translate(${dx}px, ${dy}px) scale(${scale})`;
-      buttonEl.style.opacity =
-        p < DOCK_REVEAL_PROGRESS
-          ? ""
-          : String((1 - p) / (1 - DOCK_REVEAL_PROGRESS));
-      buttonEl.style.visibility = p >= 1 ? "hidden" : "";
-      rootEl.style.setProperty("--hero-fade", String(clamp01(1 - p * 2)));
-    };
-
-    const schedule = () => {
-      if (frame === undefined) {
-        frame = requestAnimationFrame(update);
-      }
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    desktop.addEventListener("change", schedule);
-
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      desktop.removeEventListener("change", schedule);
-      if (frame !== undefined) {
-        cancelAnimationFrame(frame);
-      }
-    };
-  }, [root, anchor, button]);
+    buttonEl.style.transform =
+      p === 0 ? "" : `translate(${dx}px, ${dy}px) scale(${scale})`;
+    buttonEl.style.opacity =
+      p < DOCK_REVEAL_PROGRESS
+        ? ""
+        : String((1 - p) / (1 - DOCK_REVEAL_PROGRESS));
+    buttonEl.style.visibility = p >= 1 ? "hidden" : "";
+    rootEl.style.setProperty("--hero-fade", String(clamp01(1 - p * 2)));
+  });
 };

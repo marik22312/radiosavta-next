@@ -5,6 +5,7 @@ import { useLiveToggle } from "../useLiveToggle";
 import { Equalizer } from "../Equalizer/Equalizer";
 import { useHeroFlight } from "./useHeroFlight";
 import styles from "./Hero.module.css";
+import motion from "../motion.module.css";
 
 export const Hero: React.FC = () => {
   const { isOn, isLoading, isPlaying, toggle } = useLiveToggle(Origins.HERO);
@@ -22,7 +23,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="live" ref={rootRef} className={styles.hero}>
-      <div className={styles.intro}>
+      <div className={cn(styles.intro, motion.exit)}>
         <div className={styles.kicker}>
           תקשיבו לסבתא · קולקטיב רדיו אינטרנטי
         </div>
@@ -67,7 +68,7 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      <a href="#story" className={styles.scrollCue}>
+      <a href="#story" className={cn(styles.scrollCue, motion.exit)}>
         <span>הסיפור שלנו</span>
         <svg
           width="18"
