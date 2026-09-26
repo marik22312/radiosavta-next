@@ -5,6 +5,7 @@ import "keen-slider/keen-slider.min.css";
 
 import "../styles/reset.scss";
 import "../styles/globals.scss";
+import "../styles/redesign-tokens.css";
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";

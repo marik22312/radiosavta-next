@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "classnames";
-import styles from "./Equalizer.module.scss";
+import styles from "./Equalizer.module.css";
 
 // Animated four-bar equalizer. Size it from the parent's className by
 // setting --eq-height, --eq-bar and --eq-gap.

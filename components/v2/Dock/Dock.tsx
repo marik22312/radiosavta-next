@@ -7,10 +7,10 @@ import { Equalizer } from "../Equalizer/Equalizer";
 import { DOCK_DESKTOP, DOCK_MOBILE, DockGeometry } from "../dockGeometry";
 import { useDockVisible } from "./useDockVisible";
 import logo from "../../../public/assets/logo_round.png";
-import styles from "./Dock.module.scss";
+import styles from "./Dock.module.css";
 
 // Lays the dock out from dockGeometry so its play button sits exactly where
-// the hero button's flight ends. Dock.module.scss picks the set per breakpoint.
+// the hero button's flight ends. Dock.module.css picks the set per breakpoint.
 const geometryVars = (prefix: string, dock: DockGeometry) => ({
   [`--${prefix}-inset`]: `${dock.inset}px`,
   [`--${prefix}-height`]: `${dock.height}px`,

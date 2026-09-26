@@ -4,7 +4,7 @@ import { NextPageWithLayout } from "../../domain/AppProps";
 import { LiveAudio } from "../../components/v2/LiveAudio";
 import { Hero } from "../../components/v2/Hero/Hero";
 import { Dock } from "../../components/v2/Dock/Dock";
-import styles from "./V2.module.scss";
+import styles from "./V2.module.css";
 
 // Redesign homepage (Website redesign milestone). Sections from the
 // "Radio Savta — Homepage" prototype get built here until it replaces "/".

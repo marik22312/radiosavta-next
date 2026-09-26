@@ -1,8 +1,9 @@
 // Where the mini-player dock's play button sits, per breakpoint. The hero
 // play button flies here on scroll (MAR-30), and the dock (MAR-34) should be
 // laid out from the same numbers so the two line up.
-// Keep DESKTOP_MIN_WIDTH in sync with the breakpoint in the v2 SCSS modules.
-export const DESKTOP_MIN_WIDTH = 1024;
+// Keep DESKTOP_MIN_WIDTH in sync with the 768px breakpoint in the v2 CSS
+// modules and styles/redesign-tokens.css (MAR-38).
+export const DESKTOP_MIN_WIDTH = 768;
 
 export interface DockGeometry {
   // Dock offset from the viewport's left and bottom edges.
