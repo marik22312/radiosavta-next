@@ -31,6 +31,14 @@ export const DOCK_MOBILE: DockGeometry = {
   flightDistance: 460,
 };
 
+let desktopQuery: MediaQueryList | undefined;
+
+// The geometry for the current breakpoint. Client-only.
+export const currentDock = () => {
+  desktopQuery ??= window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`);
+  return desktopQuery.matches ? DOCK_DESKTOP : DOCK_MOBILE;
+};
+
 // Flight progress at which the hero button hands off to the dock: the dock
 // clips in while the hero button fades out over the rest of the flight.
 export const DOCK_REVEAL_PROGRESS = 0.9;

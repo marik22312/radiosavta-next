@@ -1,0 +1,180 @@
+/* Scroll-driven motion for the redesign (MAR-36). Compose these onto
+   section elements with classnames, e.g. cn(styles.title, motion.reveal).
+
+   Progressive enhancement: every effect runs on a CSS scroll timeline
+   (animation-timeline: view()) and only where the browser supports one.
+   Elsewhere, and with reduced motion, content renders static and fully
+   visible. JS-driven scroll effects (hero flight, dock, progress bar) live
+   in components/v2/usePageScroll.ts instead.
+
+   Mobile-first. Distances shrink on mobile; the desktop values start at
+   768px — keep in sync with DESKTOP_MIN_WIDTH in
+   components/v2/dockGeometry.ts. All keyframes run linear, fill both.
+
+   Don't compose these onto an element that sets its own transform, filter
+   or opacity — the animation overrides them. Wrap it instead. */
+
+.reveal,
+.exit,
+.develop,
+.bloom,
+.driftA,
+.driftB,
+.driftC {
+  --rise-distance: 40px;
+  --rise-blur: 5px;
+  --leave-distance: -60px;
+  --leave-blur: 8px;
+  --develop-blur: 14px;
+  --bloom-spacing: 8px;
+  --drift-a: 50px;
+  --drift-b: 100px;
+  --drift-c: 20px;
+}
+
+/* Put on the story section: on desktop its photo and caption develop over
+   the section's own entry rather than their own. */
+.storyTimeline {
+  view-timeline-name: --story;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Fades and rises in: story text, gallery heading, footer. */
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 30%;
+    }
+
+    /* Fades and lifts away as it leaves the top: hero headline, scroll cue. */
+    .exit {
+      animation: leave linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 85%;
+    }
+
+    /* Develops from a grey blur like a photo: story photo and caption. */
+    .develop {
+      animation: develop linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+
+    /* Scales in with collapsing letter-spacing: story heading. */
+    .bloom {
+      animation: bloom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+
+    /* Parallax at three depths: gallery slots. */
+    .driftA,
+    .driftB,
+    .driftC {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+
+    .driftA {
+      --drift: var(--drift-a);
+    }
+
+    .driftB {
+      --drift: var(--drift-b);
+    }
+
+    .driftC {
+      --drift: var(--drift-c);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .reveal,
+  .exit,
+  .develop,
+  .bloom,
+  .driftA,
+  .driftB,
+  .driftC {
+    --rise-distance: 56px;
+    --rise-blur: 6px;
+    --leave-distance: -80px;
+    --leave-blur: 10px;
+    --develop-blur: 16px;
+    --bloom-spacing: 12px;
+    --drift-a: 90px;
+    --drift-b: 180px;
+    --drift-c: 30px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation-range: entry 5% cover 32%;
+      }
+
+      .develop {
+        animation-timeline: --story;
+        animation-range: entry 10% entry 95%;
+      }
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise-distance));
+    filter: blur(var(--rise-blur));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes leave {
+  to {
+    opacity: 0;
+    transform: translateY(var(--leave-distance));
+    filter: blur(var(--leave-blur));
+  }
+}
+
+@keyframes develop {
+  from {
+    opacity: 0.1;
+    filter: grayscale(1) blur(var(--develop-blur)) contrast(0.6);
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes bloom {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    letter-spacing: var(--bloom-spacing);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(var(--drift));
+  }
+  to {
+    transform: translateY(calc(var(--drift) * -1));
+  }
+}

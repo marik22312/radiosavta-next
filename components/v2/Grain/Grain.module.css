@@ -1,0 +1,11 @@
+/* Above the dock (40) and the progress bar (45). */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
