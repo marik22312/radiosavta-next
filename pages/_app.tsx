@@ -10,7 +10,6 @@ import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import * as FLATTED from "flatted";
-import NextNProgress from "nextjs-progressbar";
 import { logWebVitals } from "../api/Mixpanel.api";
 import { AudioPlayerProvider } from "../providers/PlayerProvider/PlayerProviderV2";
 import { useRouter } from "next/router";
@@ -52,7 +51,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient.current}>
       <AudioPlayerProvider>
         <Page>
-          <NextNProgress color="#ded15b" />
           <Hydrate
             state={
               // @ts-expect-error
