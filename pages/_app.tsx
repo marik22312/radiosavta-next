@@ -53,9 +53,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <Page>
           <Hydrate
             state={
-              // @ts-expect-error
               pageProps.dehydratedState &&
-              // @ts-expect-error
               FLATTED.parse(pageProps.dehydratedState)
             }
           >
