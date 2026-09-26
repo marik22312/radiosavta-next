@@ -1,11 +1,9 @@
-const withImages = require('next-images');
 const { withSentryConfig } = require("@sentry/nextjs");
 
-const configWithImages = withImages({
+const nextConfig = {
 	reactStrictMode: true,
 	images: {
 		domains: ['res.cloudinary.com'],
-		disableStaticImages: true,
 	},
 	async redirects() {
     		return [
@@ -34,6 +32,6 @@ const configWithImages = withImages({
 		RECAPTCA_KEY: process.env.RECAPTCA_KEY,
 		SITE_OPEN_GRAPH_IMAGE: process.env.SITE_OPEN_GRAPH_IMAGE,
 	}
-  })
+  }
 
-  module.exports = withSentryConfig(configWithImages);
+  module.exports = withSentryConfig(nextConfig);

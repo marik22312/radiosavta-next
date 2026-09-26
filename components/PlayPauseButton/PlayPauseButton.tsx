@@ -18,7 +18,7 @@ export const PlayPauseButton: React.FC<{
   if (props.isLoading && props.displayLoader) {
     return (
       <img
-        src={LoadingAnimated}
+        src={LoadingAnimated.src}
         alt="Loading"
         className={cn(styles.loadingCircle, styles.playPauseImg)}
         style={props.style}
@@ -28,7 +28,7 @@ export const PlayPauseButton: React.FC<{
   if (props.isPlaying) {
     return (
       <img
-        src={Pause}
+        src={Pause.src}
         alt="Pause Button"
         onClick={(e) => props.onClick?.(e)}
         className={styles.playPauseImg}
@@ -38,7 +38,7 @@ export const PlayPauseButton: React.FC<{
   }
   return (
     <img
-      src={Play}
+      src={Play.src}
       alt="Play Button"
       onClick={props.onClick}
       className={styles.playPauseImg}

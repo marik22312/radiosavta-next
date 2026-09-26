@@ -3,14 +3,12 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import Play from "../components/PlayPauseButton/Button/Play.svg";
 import styles from "./lp/LandingPage.module.scss";
 import { useLivePlayer } from "../hook/useLivePlayer";
 import { useNextCssRemovalPrevention } from "@madeinhaus/nextjs-page-transition";
 import { HOME_PAGE_URL } from "../domain/Navigation";
 import { NextSeo } from "next-seo";
 import { Seo } from "../components/seo/seo";
-import LoadingAnimated from "../components/PlayPauseButton/Button/LoadingAnimated.svg";
 import { Origins, logLandingPagePressOnEnterSite, logPlayLive, logNavbarNavigation } from '../api/Mixpanel.api';
 import { PlayPauseButton } from "../components/PlayPauseButton/PlayPauseButton";
 import { usePlayerControls } from "../providers/PlayerProvider/usePlayerControls";
@@ -74,7 +72,6 @@ const LandingPage = () => {
               onClick={() => playLiveAndNavigateHome()}
             >
               <PlayPauseButton isLoading={isLoading} isPlaying={isPlaying} />
-              {/* <img src={isLoading ? LoadingAnimated : Play} alt="Play Button" /> */}
               <span>לחצו לניגון</span>
             </div>
           </div>

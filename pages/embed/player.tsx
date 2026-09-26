@@ -82,7 +82,7 @@ const EmbeddedPlayerPage: NextPageWithLayout = () => {
       <div className={style.playerWrapper}>
         <div className={style.playPauseButtonWrapper}>
           <img
-            src={playerState === PlayerState.PLAYING ? PauseIcon : PlayIcon}
+            src={playerState === PlayerState.PLAYING ? PauseIcon.src : PlayIcon.src}
             alt="Play"
             onClick={onPlay}
           />
@@ -97,7 +97,7 @@ const EmbeddedPlayerPage: NextPageWithLayout = () => {
         </div>
         <div className={style.volumeControlsWrapper}>
           <div className={style.volumeIconWrapper}>
-            <img src={VolumeIcon} alt="" />
+            <img src={VolumeIcon.src} alt="" />
           </div>
           <input
             className={style.volumeSlider}
@@ -110,7 +110,7 @@ const EmbeddedPlayerPage: NextPageWithLayout = () => {
           />
         </div>
         <div className={style.logoWrapper}>
-          <img src={Logo} alt="רדיוסבתא" />
+          <img src={Logo.src} alt="רדיוסבתא" />
         </div>
       </div>
       <audio ref={audioRef} src={audioUrl} />

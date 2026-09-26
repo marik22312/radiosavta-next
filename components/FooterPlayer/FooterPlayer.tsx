@@ -173,11 +173,11 @@ const BroadcastIcon: React.FC = () => {
     return <div style={style}></div>;
   }
   if (isLive) {
-    return <img src={isLiveIcon} alt="live streaming" style={style} />;
+    return <img src={isLiveIcon.src} alt="live streaming" style={style} />;
   }
   return (
     <img
-      src={isBroadcastIcon}
+      src={isBroadcastIcon.src}
       alt="pre recorder program"
       onClick={toggleLive}
       style={{ ...style, cursor: "pointer" }}
