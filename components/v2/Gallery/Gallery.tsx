@@ -56,6 +56,9 @@ const MOBILE: Layout = {
   ],
 };
 
+// Parallax depth per slot, from the MAR-36 motion classes.
+const DRIFT = { a: motion.driftA, b: motion.driftB, c: motion.driftC };
+
 const percent = (value: number, total: number) => `${(value / total) * 100}%`;
 
 const Placeholder: React.FC<{ label: string }> = ({ label }) => (
@@ -102,7 +105,7 @@ const Collage: React.FC<CollageProps> = ({ layout, photos, className }) => {
         return (
           <div
             key={i}
-            className={styles.slot}
+            className={cn(styles.slot, DRIFT[slot.drift])}
             style={{
               left: percent(slot.x, layout.width),
               top: percent(slot.y, layout.height),
