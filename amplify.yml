@@ -8,6 +8,10 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
+        # Amplify console env vars only exist at build time; the SSR runtime
+        # (ISR revalidation) doesn't see them. Next loads .env.production at
+        # runtime, so copy the server-only secrets there.
+        - env | grep -e ^CLOUDINARY_ >> .env.production
         - npm run build
 
     start:
