@@ -10,12 +10,13 @@ export interface PageScroll {
 type Listener = (scroll: PageScroll) => void;
 
 // The one scroll listener behind every JS scroll effect on /v2 (MAR-36):
-// hero flight, dock visibility and the progress bar. Reads the scroll
+// dock visibility and the progress bar. Reads the scroll
 // position once per animation frame and hands it to every subscriber, so
 // effects stay in step and scrolling doesn't re-render React.
 //
-// Effects that CSS can express (reveal, exit, drift…) use scroll timelines
-// instead, see components/v2/motion.module.css.
+// Effects that CSS can express (reveal, exit, drift, the hero flight…) use
+// scroll timelines instead, see components/v2/motion.module.css and
+// components/v2/Hero/Hero.module.css.
 const listeners = new Set<Listener>();
 let frame: number | undefined;
 let resizeObserver: ResizeObserver | undefined;
@@ -46,7 +47,7 @@ const start = () => {
   window.addEventListener("scroll", schedule, { passive: true });
   window.addEventListener("resize", schedule);
   // The page's height changes without a scroll or resize as sections and
-  // images load, which moves the progress and the hero's resting position.
+  // images load, which moves the progress.
   resizeObserver = new ResizeObserver(schedule);
   resizeObserver.observe(document.body);
 };

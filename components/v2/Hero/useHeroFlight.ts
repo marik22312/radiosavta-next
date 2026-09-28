@@ -1,25 +1,16 @@
-import { RefObject } from "react";
-import {
-  DOCK_REVEAL_PROGRESS,
-  currentDock,
-  dockButtonCenter,
-  flightProgress,
-} from "../dockGeometry";
-import { usePageScroll } from "../usePageScroll";
+import { RefObject, useEffect } from "react";
+import { currentDock } from "../dockGeometry";
 
-const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-const smoothstep = (p: number) => p * p * (3 - 2 * p);
-
-// Scroll-linked flight of the hero play button into the mini-player dock.
-// Driven by the shared page scroll listener rather than CSS scroll
-// timelines: the flight's end point depends on the viewport, which a
-// keyframe can't express. Styles are written straight to the DOM so
-// scrolling doesn't re-render React.
+// Measures what the hero play button's flight into the mini-player dock
+// needs from layout. The flight itself is a CSS scroll-driven animation
+// (see .play in Hero.module.css), so it runs off the main thread in step
+// with scrolling; this only re-measures when the layout changes.
 //
-// `anchor` must be an untransformed element centered on the button (the
-// rings container) so its rect gives the button's resting position.
-// `root` receives `--hero-fade` (1 → 0 over the first half of the flight)
-// for the rings and status label to fade with.
+// Writes to `root`:
+// - `--rest-x` / `--rest-y`: the button's resting center in page
+//   coordinates. `anchor` must be an untransformed element centered on the
+//   button (the rings container) so its rect isn't thrown off by the flight.
+// - `--end-scale`: the button's scale once it's docked.
 export const useHeroFlight = ({
   root,
   anchor,
@@ -29,32 +20,35 @@ export const useHeroFlight = ({
   anchor: RefObject<HTMLElement>;
   button: RefObject<HTMLElement>;
 }) => {
-  usePageScroll(({ scrollY, viewportHeight }) => {
-    const rootEl = root.current;
-    const anchorEl = anchor.current;
-    const buttonEl = button.current;
-    if (!rootEl || !anchorEl || !buttonEl) {
-      return;
-    }
+  useEffect(() => {
+    const measure = () => {
+      const rootEl = root.current;
+      const anchorEl = anchor.current;
+      const buttonEl = button.current;
+      if (!rootEl || !anchorEl || !buttonEl) {
+        return;
+      }
 
-    const dock = currentDock();
-    const p = flightProgress(dock, scrollY);
-    const e = smoothstep(p);
+      const rect = anchorEl.getBoundingClientRect();
+      const restX = rect.left + window.scrollX + rect.width / 2;
+      const restY = rect.top + window.scrollY + rect.height / 2;
+      const endScale = currentDock().buttonSize / buttonEl.offsetWidth;
 
-    const rect = anchorEl.getBoundingClientRect();
-    const target = dockButtonCenter(dock, viewportHeight);
-    const dx = (target.x - (rect.left + rect.width / 2)) * e;
-    const dy = (target.y - (rect.top + rect.height / 2)) * e;
-    const endScale = dock.buttonSize / buttonEl.offsetWidth;
-    const scale = 1 - (1 - endScale) * e;
+      rootEl.style.setProperty("--rest-x", `${restX}px`);
+      rootEl.style.setProperty("--rest-y", `${restY}px`);
+      rootEl.style.setProperty("--end-scale", String(endScale));
+    };
 
-    buttonEl.style.transform =
-      p === 0 ? "" : `translate(${dx}px, ${dy}px) scale(${scale})`;
-    buttonEl.style.opacity =
-      p < DOCK_REVEAL_PROGRESS
-        ? ""
-        : String((1 - p) / (1 - DOCK_REVEAL_PROGRESS));
-    buttonEl.style.visibility = p >= 1 ? "hidden" : "";
-    rootEl.style.setProperty("--hero-fade", String(clamp01(1 - p * 2)));
-  });
+    measure();
+    // The resting spot moves as fonts and images above it load, and on
+    // resize. Watching the body catches both.
+    const observer = new ResizeObserver(measure);
+    observer.observe(document.body);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [root, anchor, button]);
 };

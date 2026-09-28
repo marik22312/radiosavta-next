@@ -3,9 +3,13 @@ import cn from "classnames";
 import { Origins } from "../../../api/Mixpanel.api";
 import { useLiveToggle } from "../useLiveToggle";
 import { Equalizer } from "../Equalizer/Equalizer";
+import { dockGeometryVars } from "../dockGeometry";
 import { useHeroFlight } from "./useHeroFlight";
 import styles from "./Hero.module.css";
 import motion from "../motion.module.css";
+
+// Dock geometry for the flight's end point, see .hero in Hero.module.css.
+const heroStyle = dockGeometryVars();
 
 export const Hero: React.FC = () => {
   const { isOn, isLoading, isPlaying, toggle } = useLiveToggle(Origins.HERO);
@@ -22,7 +26,12 @@ export const Hero: React.FC = () => {
     : "מנגן עכשיו";
 
   return (
-    <section id="live" ref={rootRef} className={styles.hero}>
+    <section
+      id="live"
+      ref={rootRef}
+      className={styles.hero}
+      style={heroStyle}
+    >
       <div className={cn(styles.intro, motion.exit)}>
         <div className={styles.kicker}>
           תקשיבו לסבתא · קולקטיב רדיו אינטרנטי
@@ -37,9 +46,11 @@ export const Hero: React.FC = () => {
           ref={ringsRef}
           className={cn(styles.rings, { [styles.ringsOn]: isPlaying })}
         >
-          <div className={styles.ring} />
-          <div className={styles.ring} />
-          <div className={styles.ring} />
+          <div className={styles.ringsFade}>
+            <div className={styles.ring} />
+            <div className={styles.ring} />
+            <div className={styles.ring} />
+          </div>
           <button
             ref={buttonRef}
             type="button"
