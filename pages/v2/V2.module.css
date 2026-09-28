@@ -6,3 +6,11 @@
   font-family: "Assistant", "Arial Hebrew", sans-serif;
   font-size: 16px;
 }
+
+/* The old site's yellow page background (styles/globals.scss) shows past
+   the end of .page: in iOS overscroll bounce and under Safari's toolbar.
+   Paint the page dark too, only while this page is mounted. */
+:global(html):has(.page),
+:global(body):has(.page) {
+  background-color: var(--color-bg);
+}

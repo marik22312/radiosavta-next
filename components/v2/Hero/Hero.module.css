@@ -3,8 +3,16 @@
    breakpoints are fluid; the design's 390px and 1440px boards are the
    endpoints. */
 
+/* Dock geometry (--dock-*, --flight-distance) comes from dockGeometry via
+   inline --mobile-* / --desktop-* variables set by Hero.tsx; the flight's
+   start point (--rest-x, --rest-y, --end-scale) from useHeroFlight. */
 .hero {
-  --hero-fade: 1;
+  --dock-inset: var(--mobile-inset);
+  --dock-height: var(--mobile-height);
+  --dock-padding: var(--mobile-padding);
+  --dock-button: var(--mobile-button);
+  --flight-distance: var(--mobile-flight);
+
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -60,10 +68,16 @@
   justify-content: center;
 }
 
+/* Fades the rings with the flight. A wrapper, so the fade doesn't fight the
+   rings' own pulse animation. */
+.ringsFade {
+  position: absolute;
+  inset: 0;
+}
+
 .ring {
   position: absolute;
   border-radius: 50%;
-  opacity: var(--hero-fade);
 }
 
 .ring:nth-child(1) {
@@ -120,7 +134,6 @@
   cursor: pointer;
   box-shadow: 0 0 0 5px var(--color-green-deep), 0 0 0 13px var(--color-green),
     0 0 0 16px var(--color-accent), 0 24px 60px rgba(0, 0, 0, 0.5);
-  will-change: transform;
 }
 
 .play:hover {
@@ -153,7 +166,6 @@
   height: 26px;
   font-size: 18px;
   font-weight: 600;
-  opacity: var(--hero-fade);
 }
 
 /* Sizes the shared Equalizer component. */
@@ -167,6 +179,12 @@
 
 @media (min-width: 768px) {
   .hero {
+    --dock-inset: var(--desktop-inset);
+    --dock-height: var(--desktop-height);
+    --dock-padding: var(--desktop-padding);
+    --dock-button: var(--desktop-button);
+    --flight-distance: var(--desktop-flight);
+
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(32px, 5.56vw, 80px);
@@ -231,6 +249,159 @@
 
   .scrollCue:hover {
     color: var(--color-accent);
+  }
+}
+
+/* The play button flies into the mini-player dock as the page scrolls
+   through the first --flight-distance px (MAR-30), while the rings and
+   status fade out over the first half. Scroll-driven, so it runs in step
+   with the scroll instead of a frame behind it.
+
+   Progressive enhancement like motion.module.css: without scroll timelines,
+   or with reduced motion, the button stays in the hero and scrolls away
+   with it, and the dock appears on its own. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .play {
+      /* From the resting spot to the dock button's center (the dock hugs
+         the left edge, button first in RTL). The button scrolls with the
+         page, so the timeline's own scroll distance is folded into the
+         translate keyframes. dvh, since the dock is fixed to the bottom of
+         the dynamic viewport. */
+      --fly-x: calc(
+        var(--dock-inset) + var(--dock-padding) + var(--dock-button) / 2 -
+          var(--rest-x)
+      );
+      --fly-y: calc(
+        100dvh - var(--dock-inset) - var(--dock-height) / 2 - var(--rest-y)
+      );
+
+      animation: hero-fly linear both, hero-fly-scale linear both,
+        hero-handoff linear both;
+      /* Scale eases with smoothstep, which is exactly this curve. */
+      animation-timing-function: linear, cubic-bezier(0.333, 0, 0.667, 1),
+        linear;
+      animation-timeline: scroll(root);
+      /* Hands off to the dock over the last 10% of the flight, keep in
+         sync with DOCK_REVEAL_PROGRESS in dockGeometry.ts. */
+      animation-range: 0 var(--flight-distance), 0 var(--flight-distance),
+        calc(var(--flight-distance) * 0.9) var(--flight-distance);
+    }
+
+    .ringsFade,
+    .status {
+      animation: hero-fade linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 calc(var(--flight-distance) / 2);
+    }
+  }
+}
+
+/* Smoothstep-eased (3p² − 2p³) path toward the dock, plus the page scroll
+   so far (p × --flight-distance) to hold the button against it. The
+   scroll term makes the path a quartic that no timing function can
+   express, hence the stops. Generated, not hand-tuned. */
+@keyframes hero-fly {
+  0% {
+    translate: 0 0;
+  }
+  5% {
+    translate: calc(var(--fly-x) * 0.00725)
+      calc(var(--fly-y) * 0.00725 + var(--flight-distance) * 0.00036);
+  }
+  10% {
+    translate: calc(var(--fly-x) * 0.028)
+      calc(var(--fly-y) * 0.028 + var(--flight-distance) * 0.0028);
+  }
+  15% {
+    translate: calc(var(--fly-x) * 0.06075)
+      calc(var(--fly-y) * 0.06075 + var(--flight-distance) * 0.00911);
+  }
+  20% {
+    translate: calc(var(--fly-x) * 0.104)
+      calc(var(--fly-y) * 0.104 + var(--flight-distance) * 0.0208);
+  }
+  25% {
+    translate: calc(var(--fly-x) * 0.15625)
+      calc(var(--fly-y) * 0.15625 + var(--flight-distance) * 0.03906);
+  }
+  30% {
+    translate: calc(var(--fly-x) * 0.216)
+      calc(var(--fly-y) * 0.216 + var(--flight-distance) * 0.0648);
+  }
+  35% {
+    translate: calc(var(--fly-x) * 0.28175)
+      calc(var(--fly-y) * 0.28175 + var(--flight-distance) * 0.09861);
+  }
+  40% {
+    translate: calc(var(--fly-x) * 0.352)
+      calc(var(--fly-y) * 0.352 + var(--flight-distance) * 0.1408);
+  }
+  45% {
+    translate: calc(var(--fly-x) * 0.42525)
+      calc(var(--fly-y) * 0.42525 + var(--flight-distance) * 0.19136);
+  }
+  50% {
+    translate: calc(var(--fly-x) * 0.5)
+      calc(var(--fly-y) * 0.5 + var(--flight-distance) * 0.25);
+  }
+  55% {
+    translate: calc(var(--fly-x) * 0.57475)
+      calc(var(--fly-y) * 0.57475 + var(--flight-distance) * 0.31611);
+  }
+  60% {
+    translate: calc(var(--fly-x) * 0.648)
+      calc(var(--fly-y) * 0.648 + var(--flight-distance) * 0.3888);
+  }
+  65% {
+    translate: calc(var(--fly-x) * 0.71825)
+      calc(var(--fly-y) * 0.71825 + var(--flight-distance) * 0.46686);
+  }
+  70% {
+    translate: calc(var(--fly-x) * 0.784)
+      calc(var(--fly-y) * 0.784 + var(--flight-distance) * 0.5488);
+  }
+  75% {
+    translate: calc(var(--fly-x) * 0.84375)
+      calc(var(--fly-y) * 0.84375 + var(--flight-distance) * 0.63281);
+  }
+  80% {
+    translate: calc(var(--fly-x) * 0.896)
+      calc(var(--fly-y) * 0.896 + var(--flight-distance) * 0.7168);
+  }
+  85% {
+    translate: calc(var(--fly-x) * 0.93925)
+      calc(var(--fly-y) * 0.93925 + var(--flight-distance) * 0.79836);
+  }
+  90% {
+    translate: calc(var(--fly-x) * 0.972)
+      calc(var(--fly-y) * 0.972 + var(--flight-distance) * 0.8748);
+  }
+  95% {
+    translate: calc(var(--fly-x) * 0.99275)
+      calc(var(--fly-y) * 0.99275 + var(--flight-distance) * 0.94311);
+  }
+  100% {
+    translate: var(--fly-x) calc(var(--fly-y) + var(--flight-distance));
+  }
+}
+
+@keyframes hero-fly-scale {
+  to {
+    scale: var(--end-scale);
+  }
+}
+
+@keyframes hero-handoff {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes hero-fade {
+  to {
+    opacity: 0;
   }
 }
 

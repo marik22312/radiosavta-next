@@ -1,27 +1,17 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import Image from "next/image";
 import cn from "classnames";
 import { Origins } from "../../../api/Mixpanel.api";
 import { useLiveToggle } from "../useLiveToggle";
 import { Equalizer } from "../Equalizer/Equalizer";
-import { DOCK_DESKTOP, DOCK_MOBILE, DockGeometry } from "../dockGeometry";
+import { dockGeometryVars } from "../dockGeometry";
 import { useDockVisible } from "./useDockVisible";
 import logo from "../../../public/assets/logo_round.png";
 import styles from "./Dock.module.css";
 
 // Lays the dock out from dockGeometry so its play button sits exactly where
 // the hero button's flight ends. Dock.module.css picks the set per breakpoint.
-const geometryVars = (prefix: string, dock: DockGeometry) => ({
-  [`--${prefix}-inset`]: `${dock.inset}px`,
-  [`--${prefix}-height`]: `${dock.height}px`,
-  [`--${prefix}-padding`]: `${dock.padding}px`,
-  [`--${prefix}-button`]: `${dock.buttonSize}px`,
-});
-
-const dockStyle = {
-  ...geometryVars("mobile", DOCK_MOBILE),
-  ...geometryVars("desktop", DOCK_DESKTOP),
-} as CSSProperties;
+const dockStyle = dockGeometryVars();
 
 // Floating mini-player, shown once the hero has scrolled away (MAR-34).
 export const Dock: React.FC = () => {

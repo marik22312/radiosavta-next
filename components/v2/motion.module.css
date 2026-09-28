@@ -4,7 +4,7 @@
    Progressive enhancement: every effect runs on a CSS scroll timeline
    (animation-timeline: view()) and only where the browser supports one.
    Elsewhere, and with reduced motion, content renders static and fully
-   visible. JS-driven scroll effects (hero flight, dock, progress bar) live
+   visible. JS-driven scroll effects (dock, progress bar) live
    in components/v2/usePageScroll.ts instead.
 
    Mobile-first. Distances shrink on mobile; the desktop values start at
