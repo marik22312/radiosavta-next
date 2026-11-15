@@ -1,0 +1,95 @@
+/* Mobile-first. The desktop layout starts at 768px — keep in sync with
+   DESKTOP_MIN_WIDTH in components/v2/dockGeometry.ts. Sizes between the
+   breakpoints are fluid; the design's 390px and 1440px boards are the
+   endpoints.
+
+   The large bottom padding leaves room for the floating mini-player dock
+   (MAR-34) so it never covers the links. */
+
+.footer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px var(--gutter) 132px;
+  text-align: center;
+  font-family: "Assistant", "Arial Hebrew", sans-serif;
+  color: var(--color-text);
+}
+
+.logo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.tagline {
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.place {
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  color: var(--color-text);
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    gap: 20px;
+    padding: 40px var(--gutter) 160px;
+  }
+
+  .logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .tagline {
+    font-size: clamp(38px, 3.89vw, 56px);
+  }
+
+  .place {
+    font-size: 18px;
+  }
+
+  .nav {
+    gap: 36px;
+    padding-top: 12px;
+    font-size: 17px;
+  }
+
+  .link {
+    height: auto;
+  }
+}

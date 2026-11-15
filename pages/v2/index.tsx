@@ -4,10 +4,12 @@ import { NextSeo } from "next-seo";
 import { NextPageWithLayout } from "../../domain/AppProps";
 import { getGalleryPhotos } from "../../api/Gallery.api";
 import { LiveAudio } from "../../components/v2/LiveAudio";
+import { Header } from "../../components/v2/Header/Header";
 import { Hero } from "../../components/v2/Hero/Hero";
 import { Story } from "../../components/v2/Story/Story";
 import { Gallery } from "../../components/v2/Gallery/Gallery";
 import { Dock } from "../../components/v2/Dock/Dock";
+import { Footer } from "../../components/v2/Footer/Footer";
 import { ScrollProgress } from "../../components/v2/ScrollProgress/ScrollProgress";
 import styles from "./V2.module.css";
 
@@ -23,11 +25,13 @@ const V2HomePage: NextPageWithLayout<V2HomePageProps> = ({ galleryPhotos }) => {
       <NextSeo title="רדיוסבתא" noindex nofollow />
       <LiveAudio />
       <ScrollProgress />
+      <Header />
       <main className={styles.page}>
         <Hero />
         <Story />
         <Gallery photos={galleryPhotos} />
       </main>
+      <Footer />
       <Dock />
     </>
   );

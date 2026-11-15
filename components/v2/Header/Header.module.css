@@ -1,0 +1,237 @@
+/* Mobile-first. The desktop layout starts at 768px — keep in sync with
+   DESKTOP_MIN_WIDTH in components/v2/dockGeometry.ts. The design's 390px
+   and 1440px boards are the endpoints; side padding follows --gutter.
+
+   The 4px top padding leaves room for the scroll progress bar (MAR-35). */
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  height: 64px;
+  margin-inline: auto;
+  padding: 4px var(--gutter) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text);
+  font-family: "Assistant", "Arial Hebrew", sans-serif;
+}
+
+.header a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: var(--color-accent);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  display: block;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.place {
+  display: none;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.nav {
+  display: none;
+}
+
+.mobileActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.live {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(243, 234, 217, 0.25);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.liveDot {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.iconButton {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  color: var(--color-accent);
+}
+
+/* Full-screen mobile menu. Not in the design canvas: same links as the
+   desktop nav, set large in the display face. Above the dock (z-index 40). */
+.menu {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 4px var(--gutter) 48px;
+  background: var(--color-bg);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.menuOpen {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.menuBar {
+  flex-shrink: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 40px;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.menuLive .liveDot {
+  width: 10px;
+  height: 10px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    height: 96px;
+  }
+
+  .brand {
+    gap: 14px;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .name {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .place {
+    display: block;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .nav .live {
+    gap: 10px;
+    height: 44px;
+    padding: 0 20px;
+    font-size: inherit;
+  }
+
+  .nav .liveDot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mobileActions,
+  .menu {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liveDot {
+    animation: none;
+  }
+
+  .menu,
+  .menuOpen {
+    transition: none;
+  }
+}
