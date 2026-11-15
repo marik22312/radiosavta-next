@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import cn from "classnames";
 import { logNavbarNavigation } from "../../../api/Mixpanel.api";
 import { DESKTOP_MIN_WIDTH } from "../dockGeometry";
+import { onSectionLinkClick, scrollToSection } from "../scrollToSection";
 import logo from "../../../public/assets/logo_round.png";
 import styles from "./Header.module.css";
 
@@ -20,7 +21,7 @@ export const Header: React.FC = () => {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  // Hash to jump to once the menu has closed and the page scrolls again.
+  // Hash to scroll to once the menu has closed and the page scrolls again.
   const pendingHash = useRef<string | null>(null);
 
   const logNav = (href: string) =>
@@ -29,6 +30,14 @@ export const Header: React.FC = () => {
       currentUrl: router.asPath,
       targetUrl: href,
     });
+
+  const onNavLink = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    logNav(href);
+    onSectionLinkClick(event);
+  };
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
@@ -85,22 +94,21 @@ export const Header: React.FC = () => {
     };
   }, [menuOpen, closeMenu]);
 
-  // After a menu link closes the menu, jump to its section. Runs after the
-  // effect above has unlocked scrolling.
+  // After a menu link closes the menu, scroll to its section. Runs after the
+  // effect above has unlocked scrolling, so the scroll starts as the menu
+  // fades out.
   useEffect(() => {
     if (menuOpen || !pendingHash.current) return;
     const hash = pendingHash.current;
     pendingHash.current = null;
-    if (window.location.hash === hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView();
-    } else {
+    if (!scrollToSection(hash)) {
       window.location.hash = hash;
     }
   }, [menuOpen]);
 
   return (
     <header id="top" className={styles.header}>
-      <a href="#top" className={styles.brand} onClick={() => logNav("#top")}>
+      <a href="#top" className={styles.brand} onClick={(event) => onNavLink(event, "#top")}>
         <Image className={styles.logo} src={logo} alt="" />
         <span className={styles.wordmark}>
           <span className={styles.name}>רדיו סבתא</span>
@@ -109,16 +117,16 @@ export const Header: React.FC = () => {
       </a>
 
       <nav aria-label="ניווט ראשי" className={styles.nav}>
-        <a href={STORY} className={styles.link} onClick={() => logNav(STORY)}>
+        <a href={STORY} className={styles.link} onClick={(event) => onNavLink(event, STORY)}>
           הסיפור
         </a>
-        <a href={GALLERY} className={styles.link} onClick={() => logNav(GALLERY)}>
+        <a href={GALLERY} className={styles.link} onClick={(event) => onNavLink(event, GALLERY)}>
           מהאלבום
         </a>
         <a
           href={LIVE}
           className={cn(styles.link, styles.live)}
-          onClick={() => logNav(LIVE)}
+          onClick={(event) => onNavLink(event, LIVE)}
         >
           <span className={styles.liveDot} />
           <span>בשידור חי</span>
@@ -129,7 +137,7 @@ export const Header: React.FC = () => {
         <a
           href={LIVE}
           className={cn(styles.link, styles.live)}
-          onClick={() => logNav(LIVE)}
+          onClick={(event) => onNavLink(event, LIVE)}
           aria-label="בשידור חי"
         >
           <span className={styles.liveDot} />

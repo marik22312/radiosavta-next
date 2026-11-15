@@ -5,7 +5,8 @@
    (animation-timeline: view()) and only where the browser supports one.
    Elsewhere, and with reduced motion, content renders static and fully
    visible. JS-driven scroll effects (dock, progress bar) live
-   in components/v2/usePageScroll.ts instead.
+   in components/v2/usePageScroll.ts instead, and smooth in-page navigation
+   in components/v2/scrollToSection.ts.
 
    Mobile-first. Distances shrink on mobile; the desktop values start at
    768px — keep in sync with DESKTOP_MIN_WIDTH in

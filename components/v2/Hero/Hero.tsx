@@ -4,6 +4,7 @@ import { Origins } from "../../../api/Mixpanel.api";
 import { useLiveToggle } from "../useLiveToggle";
 import { Equalizer } from "../Equalizer/Equalizer";
 import { dockGeometryVars } from "../dockGeometry";
+import { onSectionLinkClick } from "../scrollToSection";
 import { useHeroFlight } from "./useHeroFlight";
 import styles from "./Hero.module.css";
 import motion from "../motion.module.css";
@@ -79,7 +80,11 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      <a href="#story" className={cn(styles.scrollCue, motion.exit)}>
+      <a
+        href="#story"
+        className={cn(styles.scrollCue, motion.exit)}
+        onClick={onSectionLinkClick}
+      >
         <span>הסיפור שלנו</span>
         <svg
           width="18"
