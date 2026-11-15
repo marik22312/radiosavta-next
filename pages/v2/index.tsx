@@ -4,6 +4,7 @@ import { NextSeo } from "next-seo";
 import { NextPageWithLayout } from "../../domain/AppProps";
 import { getGalleryPhotos } from "../../api/Gallery.api";
 import { LiveAudio } from "../../components/v2/LiveAudio";
+import { Header } from "../../components/v2/Header/Header";
 import { Hero } from "../../components/v2/Hero/Hero";
 import { Story } from "../../components/v2/Story/Story";
 import { Gallery } from "../../components/v2/Gallery/Gallery";
@@ -22,6 +23,7 @@ const V2HomePage: NextPageWithLayout<V2HomePageProps> = ({ galleryPhotos }) => {
     <>
       <NextSeo title="רדיוסבתא" noindex nofollow />
       <LiveAudio />
+      <Header />
       <main className={styles.page}>
         <Hero />
         <Story />
