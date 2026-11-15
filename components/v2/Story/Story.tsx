@@ -4,10 +4,10 @@ import story from "../../../data/story.json";
 import styles from "./Story.module.css";
 import motion from "../motion.module.css";
 
-// Content decided in MAR-39/MAR-40. The birth year is still to come (MAR-55).
+// Content decided in MAR-39/MAR-40; birth year (16.11.1944) added in MAR-55.
 // Without a photo URL the frame shows the design's hatched placeholder.
 const NAME = "יעל קרן";
-const YEARS = "[שנה]–2014";
+const YEARS = "1944–2014";
 const PHOTO_URL: string | null =
   "https://res.cloudinary.com/marik-shnitman/image/upload/f_auto,q_auto/v1790455016/radiosavta/assets/Yael%20Keren.jpg";
 const PULL_QUOTE = "הזרם הבלתי פוסק של מוזיקה ואהבה, כמו בסלון של סבתא.";
