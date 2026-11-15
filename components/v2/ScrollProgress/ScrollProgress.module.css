@@ -1,0 +1,42 @@
+/* 4px tricolor bar pinned to the top of the viewport (MAR-35). Above the
+   dock (z-index 40), below the grain overlay. */
+.bar {
+  position: fixed;
+  z-index: 45;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  pointer-events: none;
+}
+
+/* Equal thirds in document order: red · accent · green. The page is RTL,
+   so red sits on the right. */
+.strip {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.strip > span:nth-child(1) {
+  background: var(--color-red);
+}
+
+.strip > span:nth-child(2) {
+  background: var(--color-accent);
+}
+
+.strip > span:nth-child(3) {
+  background: var(--color-green);
+}
+
+.track {
+  opacity: 0.28;
+}
+
+/* Revealed from the right edge leftward as the page scrolls. ScrollProgress
+   sets the clip-path every frame; this is the unscrolled state. */
+.fill {
+  clip-path: inset(0 0 0 100%);
+}
