@@ -8,6 +8,7 @@ import { Hero } from "../../components/v2/Hero/Hero";
 import { Story } from "../../components/v2/Story/Story";
 import { Gallery } from "../../components/v2/Gallery/Gallery";
 import { Dock } from "../../components/v2/Dock/Dock";
+import { ScrollProgress } from "../../components/v2/ScrollProgress/ScrollProgress";
 import styles from "./V2.module.css";
 
 // Redesign homepage (Website redesign milestone). Sections from the
@@ -21,6 +22,7 @@ const V2HomePage: NextPageWithLayout<V2HomePageProps> = ({ galleryPhotos }) => {
     <>
       <NextSeo title="רדיוסבתא" noindex nofollow />
       <LiveAudio />
+      <ScrollProgress />
       <main className={styles.page}>
         <Hero />
         <Story />

@@ -27,7 +27,11 @@ const read = (): PageScroll => {
   return {
     scrollY,
     viewportHeight: window.innerHeight,
-    progress: Math.min(1, scrollY / Math.max(1, scrollHeight - clientHeight)),
+    // Clamped both ways: iOS overscroll bounce gives a negative scrollY.
+    progress: Math.min(
+      1,
+      Math.max(0, scrollY / Math.max(1, scrollHeight - clientHeight))
+    ),
   };
 };
 
