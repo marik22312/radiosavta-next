@@ -4,9 +4,10 @@ import cn from "classnames";
 import logo from "../../../public/assets/logo_round.png";
 import styles from "./Footer.module.css";
 import motion from "../motion.module.css";
+import { onSectionLinkClick } from "../scrollToSection";
 
-// "#top" has no matching id, so browsers scroll to the top of the page,
-// where the hero's play button is.
+// "#top" is the site header, at the top of the page by the hero's play
+// button.
 const LINKS = [
   { href: "#story", label: "הסיפור" },
   { href: "#gallery", label: "מהאלבום" },
@@ -30,7 +31,12 @@ export const Footer: React.FC = () => (
     <div className={styles.place}>רדיו סבתא · מצפה רמון</div>
     <nav aria-label="ניווט תחתון" className={styles.nav}>
       {LINKS.map(({ href, label }) => (
-        <a key={href} href={href} className={styles.link}>
+        <a
+          key={href}
+          href={href}
+          className={styles.link}
+          onClick={onSectionLinkClick}
+        >
           {label}
         </a>
       ))}
