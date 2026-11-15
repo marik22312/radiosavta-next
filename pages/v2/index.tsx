@@ -8,6 +8,7 @@ import { Hero } from "../../components/v2/Hero/Hero";
 import { Story } from "../../components/v2/Story/Story";
 import { Gallery } from "../../components/v2/Gallery/Gallery";
 import { Dock } from "../../components/v2/Dock/Dock";
+import { Footer } from "../../components/v2/Footer/Footer";
 import styles from "./V2.module.css";
 
 // Redesign homepage (Website redesign milestone). Sections from the
@@ -26,6 +27,7 @@ const V2HomePage: NextPageWithLayout<V2HomePageProps> = ({ galleryPhotos }) => {
         <Story />
         <Gallery photos={galleryPhotos} />
       </main>
+      <Footer />
       <Dock />
     </>
   );
